@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright 2012 International Business Machines Corp.
 
@@ -20,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.batch</groupId>
     <artifactId>tck-parent</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>tck-parent</name>
     <description>
@@ -123,9 +124,9 @@
         <batch.impl.version>1.0.1</batch.impl.version>
 
         <!-- This version of TCK -->
-        <batch.tck.version>1.1-SNAPSHOT</batch.tck.version>
-        <batch.tck.ann.version>1.1-SNAPSHOT</batch.tck.ann.version>
-        <batch.tck.ann.proc.version>1.1-SNAPSHOT</batch.tck.ann.proc.version>
+        <batch.tck.version>1.0.2-SNAPSHOT</batch.tck.version>
+        <batch.tck.ann.version>1.0.2-SNAPSHOT</batch.tck.ann.version>
+        <batch.tck.ann.proc.version>1.0.2-SNAPSHOT</batch.tck.ann.proc.version>
         <batch.spec.version>1.1</batch.spec.version>
 
         <!-- Convenience -->
@@ -179,51 +180,51 @@
                 <version>${batch.impl.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.ann</artifactId>
                 <version>${batch.tck.ann.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.ann.proc</artifactId>
                 <version>${batch.tck.ann.proc.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck</artifactId>
                 <version>${batch.tck.version}</version>
                 <classifier>sources</classifier>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck</artifactId>
                 <version>${batch.tck.version}</version>
                 <classifier>javadoc</classifier>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.spi</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.spi</artifactId>
                 <version>${batch.tck.version}</version>
                 <classifier>sources</classifier>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.spi</artifactId>
                 <version>${batch.tck.version}</version>
                 <classifier>javadoc</classifier>
             </dependency>
             <dependency>
-                <groupId>com.ibm.jbatch.tck</groupId>
+                <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.dist</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>

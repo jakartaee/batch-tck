@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright 2012,2019 International Business Machines Corp.
 
@@ -16,21 +17,20 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.ibm.jbatch.tck</groupId>
+        <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.ibm.jbatch.tck</groupId>
+    <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck.dist.exec</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>JSR 352 TCK Execution (using RI against TCK Distribution ZIP)</name>
 
     <build>
@@ -48,7 +48,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.ibm.jbatch.tck</groupId>
+                                    <groupId>jakarta.batch</groupId>
                                     <artifactId>com.ibm.jbatch.tck.dist</artifactId>
                                     <classifier>tck.dist</classifier>
                                     <!--  

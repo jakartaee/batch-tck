@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright 2012 International Business Machines Corp.
 
@@ -20,15 +21,15 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.ibm.jbatch.tck</groupId>
+        <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.ibm.jbatch.tck</groupId>
+    <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>JSR 352 TCK Core Test Artifacts</name>
 
     <dependencies>
@@ -52,17 +53,17 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.ibm.jbatch.tck</groupId>
+            <groupId>jakarta.batch</groupId>
             <artifactId>com.ibm.jbatch.tck.spi</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.ibm.jbatch.tck</groupId>
+            <groupId>jakarta.batch</groupId>
             <artifactId>com.ibm.jbatch.tck.ann</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.ibm.jbatch.tck</groupId>
+            <groupId>jakarta.batch</groupId>
             <artifactId>com.ibm.jbatch.tck.ann.proc</artifactId>
             <scope>compile</scope>
         </dependency>
