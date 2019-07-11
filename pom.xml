@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.batch</groupId>
     <artifactId>tck-parent</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>tck-parent</name>
     <description>
@@ -114,14 +114,19 @@
 
     <properties>
 
-        <!-- EDIT ME WHEN BUILDING A NEW VERSION -->
-        <batch.api.version>1.1-SNAPSHOT</batch.api.version>
-        <batch.impl.version>1.1-SNAPSHOT</batch.impl.version>
+        <!-- 
+             EDIT ME WHEN BUILDING A NEW VERSION 
+        -->
+
+        <!-- Run against latest version of RI -->
+        <batch.api.version>1.0.1</batch.api.version>
+        <batch.impl.version>1.0.1</batch.impl.version>
+
+        <!-- This version of TCK -->
         <batch.tck.version>1.1-SNAPSHOT</batch.tck.version>
         <batch.tck.ann.version>1.1-SNAPSHOT</batch.tck.ann.version>
         <batch.tck.ann.proc.version>1.1-SNAPSHOT</batch.tck.ann.proc.version>
         <batch.spec.version>1.1</batch.spec.version>
-        <non.final>false</non.final>
 
         <!-- Convenience -->
         <fs>${file.separator}</fs>
@@ -133,7 +138,8 @@
         <!-- Dependencies -->
         <version.javax.enterprise.cdi-api>1.1-20121030</version.javax.enterprise.cdi-api>
         <version.javax.inject.javax.inject>1</version.javax.inject.javax.inject>
-        <version.org.testng.testng>6.8</version.org.testng.testng>
+        <version.org.testng.testng>6.8.8</version.org.testng.testng>
+        <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
 
         <version.com.mycila.maven-license-plugin.maven-license-plugin>1.10.b1</version.com.mycila.maven-license-plugin.maven-license-plugin>
         <version.org.apache.maven.plugins.maven-antrun-plugin>1.8</version.org.apache.maven.plugins.maven-antrun-plugin>
@@ -146,27 +152,13 @@
         <version.org.apache.maven.plugins.maven-shade-plugin>2.1</version.org.apache.maven.plugins.maven-shade-plugin>
         <version.org.apache.maven.plugins.maven-source-plugin>2.2.1</version.org.apache.maven.plugins.maven-source-plugin>
         <version.org.apache.maven.plugins.maven-surefire-plugin>2.18</version.org.apache.maven.plugins.maven-surefire-plugin>
-        <version.org.codehaus.mojo.jaxb2-maven-plugin>1.6</version.org.codehaus.mojo.jaxb2-maven-plugin>
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
-
         <version.net.java.sigtest.sigtestdev>3.0-b12-v20140219</version.net.java.sigtest.sigtestdev>
     </properties>
-
-<!-- For releasing snapshots, will leave commented out until I understand the implications -->
-<!--
-    <repositories>
-      <repository>
-        <id>jvnet-nexus-snapshots</id>
-        <name>Maven Java Net Snapshots and Releases</name>
-        <url>https://maven.java.net/content/repositories/snapshots/</url>
-      </repository>
-    </repositories>
--->
 
     <modules>
         <module>com.ibm.jbatch.tck</module>
         <module>com.ibm.jbatch.tck.spi</module>
-        <module>com.ibm.jbatch.tck.cts</module>
         <module>com.ibm.jbatch.tck.exec</module>
         <module>com.ibm.jbatch.tck.dist</module>
         <module>com.ibm.jbatch.tck.dist.exec</module>
@@ -291,6 +283,11 @@
                 <version>${version.org.testng.testng}</version>
             </dependency>
             <dependency>
+                <groupId>com.beust</groupId>
+                <artifactId>jcommander</artifactId>
+                <version>${version.com.beust.jcommander}</version>
+            </dependency>
+            <dependency>
                 <groupId>xmlunit</groupId>
                 <artifactId>xmlunit</artifactId>
                 <version>1.1</version>
@@ -357,11 +354,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${version.org.apache.maven.plugins.maven-surefire-plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>jaxb2-maven-plugin</artifactId>
-                    <version>${version.org.codehaus.mojo.jaxb2-maven-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>

@@ -21,19 +21,19 @@
     <parent>
         <groupId>com.ibm.jbatch.tck</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.ibm.jbatch.tck</groupId>
     <artifactId>com.ibm.jbatch.tck.spi</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>JSR 352 TCK SPI</name>
 
     <dependencies>
         <dependency>
-            <groupId>javax.batch</groupId>
-            <artifactId>javax.batch-api</artifactId>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>jakarta.batch-api</artifactId>
         </dependency>
     </dependencies>
     <build>

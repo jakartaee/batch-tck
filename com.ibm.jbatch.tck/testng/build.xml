@@ -18,7 +18,12 @@
  -->
 <project name="jsr352_tck" default="run" basedir="">
 
-    <taskdef resource="testngtasks" classpath=".\lib\testng-@version.org.testng.testng@.jar"/>
+    <taskdef resource="testngtasks">
+        <classpath>
+            <pathelement location="lib/testng-@version.org.testng.testng@.jar"/>
+            <pathelement location="lib/jcommander-@version.com.beust.jcommander@.jar"/>
+        </classpath>
+    </taskdef>
     
     <description>
         JSR 352 TCK

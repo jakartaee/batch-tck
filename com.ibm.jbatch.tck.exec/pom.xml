@@ -24,13 +24,13 @@
     <parent>
         <groupId>com.ibm.jbatch.tck</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.ibm.jbatch.tck</groupId>
     <artifactId>com.ibm.jbatch.tck.exec</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>JSR 352 TCK Execution (using RI, against TCK Maven module)</name>
 
     <dependencies>
@@ -40,8 +40,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>javax.batch</groupId>
-            <artifactId>javax.batch-api</artifactId>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>jakarta.batch-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -128,16 +128,16 @@
                         <phase>pre-integration-test</phase>
                     </execution>
                 </executions>
-                <configuration>
-                    <artifactItems>
-                        <artifactItem>
-                            <groupId>com.ibm.jbatch.tck</groupId>
-                            <artifactId>com.ibm.jbatch.tck</artifactId>
-                            <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.ibm.jbatch.tck</groupId>
+                                    <artifactId>com.ibm.jbatch.tck</artifactId>
+                                    <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
                             <includes>testng/*</includes>
-                        </artifactItem>
-                    </artifactItems>
-                </configuration>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
