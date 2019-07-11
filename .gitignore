@@ -1,0 +1,39 @@
+# Maven
+**/target/
+
+# Eclipse
+/.metadata
+**/.classpath
+**/.project
+**/.settings/**
+.settings
+
+# IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+idea
+
+# VIM
+*.swp
+*~
+
+/com.ibm.jbatch.container/src/main/resources/META-INF/services/*.properties
+
+# TCK Output
+derby.log
+RUNTIMEDB
+
+# JDK locations for sigtest generation
+sigtest.properties
+
+# Test Properties
+test.properties
+
+# Generated Files
+com.ibm.jbatch.tck/testng/filtered.build.xml
+com.ibm.jbatch.tck/generate-sigtest/
+com.ibm.jbatch.tck.exec/testng.suite.xml
+
+

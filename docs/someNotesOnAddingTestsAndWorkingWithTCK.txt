@@ -1,0 +1,65 @@
+==================================================
+SOME NOTES ON ADDING TEST AND WORKING WITH THE TCK
+==================================================
+
+ADDING ARTIFACTS TO TCK:
+
+    For the tck.exec.dist (official execution) things are referenced through the batch.xml:
+
+    -add all artifacts for a test to one class in the specialized folder.
+    -add those artifacts to the com.ibm.jbatch.tck/src/main/resources/META-INF/batch.xml
+    -ensure that the file above matches the file in target/generated-tck/META-INF/batch.xml
+    -run mvn clean install -DbatchXML
+    (If it doesn't work, make sure the annotation name for your new class is correct)
+
+RUNNING LOGGER:
+
+    -make a file named 'my.log.config.txt' that includes:
+
+    handlers = java.util.logging.FileHandler, java.util.logging.ConsoleHandler
+    com.ibm.jbatch.container.level = FINER
+    com.ibm.jbatch.container.api.impl.level = FINE
+    com.ibm.jbatch.container.util.level = FINE
+    com.ibm.jbatch.tck.artifacts.level = FINER
+    com.ibm.jbatch.tck.polling.level=INFO
+    com.ibm.jbatch.tck.level=FINEST
+    java.util.logging.ConsoleHandler.level=ALL
+    java.util.logging.FileHandler.level=ALL
+    java.util.logging.FileHandler.count = 10
+    java.util.logging.FileHandler.pattern = tck.log.%g.txt  
+
+    -in tck.exec, run command: mvn clean install -Djava.util.logging.config.file=my.log.config.txt
+
+RUNNING SINGULAR TESTS:
+
+    -For running out of tck.exec, tck/src/main/resources/testng/jsr352-tck-impl-SE-suite.xml
+    -For running out of standards.jsr352.tck dir, change com.ibm.jbatch.tck/testng/jsr352-tck-impl-SE-suite.xml
+    -Follow the existing pattern in that file to specify packages, classes, or methods
+        -Comment out <packages> (this runs the full suite of tests)
+        -Uncomment <classes> and specify which classes/ subset of methods (tests) within a class you wish to run
+
+
+TO MAKE A NEW TEST
+1. Make a new function in a src/main/java/...tests.java file, label the function @test
+2. Make new xml file in .tck/src/main/resources/meta-inf/batch-jobs
+3. Add a new class (referenced in xml) in tck/source/main/java/<one of the artifacts>
+4. Add the artifact to .tck/src/main/resources/META-INF/batch.xml
+5. Then, run the build from the top directory, not from the exec directory    
+    
+HOW TO DEBUG
+1. In Windows CMD, at the top level directory of TCK, run "mvnDebug -DforkCount=0 install"
+2. Make sure you see "listening for transport dt_socket at address: 8000"
+3. In Eclipse, go to run -> debug configurations
+4. Make a new remote java application
+5. Give it a name and make sure the port is set to 8000
+6. Press "Debug". Output should appear in the command window, and breakpoints should appear in the eclipse debug perspective
+7. The batch job has a default timeout, so don't wait on breakpoints too long or the build will fail.
+        -To allow longer timeout, go to file com.ibm.jbatch.tck\src\main\java\com\ibm\jbatch\tck\utils\JobOperatorBridge.java
+        -In line 48, set the timeout value to something much higher
+        
+LOGGING
+The reporter is used mostly for test start and completions; for output from the test classes.
+Use the logger for information coming out of the artifacts; for output from the classes being tested.
+
+==============================================================================================
+
