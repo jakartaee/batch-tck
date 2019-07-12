@@ -73,11 +73,11 @@
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testng/jsr352-tck-impl-SE-suite.xml</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-SE-suite.xml</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testng/jsr352-tck-impl-EE-suite.xml</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-EE-suite.xml</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
@@ -91,11 +91,11 @@
             <destName>sigtest.build.xml</destName>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/sigtest/jsr352-sigtest-tck.properties</source>
+            <source>../com.ibm.jbatch.tck/sigtest/batch-sigtest-tck.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/testng/jsr352-tck.properties</source>
+            <source>../com.ibm.jbatch.tck/testng/batch-tck.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
     </files>

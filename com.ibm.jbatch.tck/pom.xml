@@ -30,7 +30,7 @@
     <artifactId>com.ibm.jbatch.tck</artifactId>
     <packaging>jar</packaging>
     <version>1.0.2-SNAPSHOT</version>
-    <name>JSR 352 TCK Core Test Artifacts</name>
+    <name>Jakarta Batch TCK Core Test Artifacts</name>
 
     <dependencies>
         <dependency>
@@ -174,8 +174,8 @@
                                     <condition property="jdk" value="8">
                                         <contains string="${ant.java.version}" substring="1.8"/>
                                     </condition>
-                                    <property name="old.sig.file" value="${project.basedir}${fs}sigtest${fs}jsr352-api-sigtest-java${jdk}.sig"/>
-                                    <property name="new.sig.file" value="${project.basedir}${fs}generate-sigtest${fs}jsr352-api-sigtest-java${jdk}.sig"/>
+                                    <property name="old.sig.file" value="${project.basedir}${fs}sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
+                                    <property name="new.sig.file" value="${project.basedir}${fs}generate-sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
                                     <mkdir dir="${project.basedir}${fs}generate-sigtest"/>
                                     <taskdef name="setup" classname="com.sun.tdk.signaturetest.ant.ASetup" classpathref="maven.plugin.classpath"/>
                                     <echo message="Generating Java ${jdk} SigTest files for batch"/>

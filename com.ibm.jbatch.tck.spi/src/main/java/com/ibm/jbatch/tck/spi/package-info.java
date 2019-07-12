@@ -21,18 +21,18 @@
  * TCK (which the typical implementation will NOT need to implement).  
  * 
  * This provides a way for the TCK to determine test execution results
- * in a more convenient manner than if we had to only rely on the JSR 352 
+ * in a more convenient manner than if we had to only rely on the Jakarta Batch 
  * specification-defined APIs.
  * 
  * <p>
  * The TCK itself ships with a default implementation of this SPI (using polling).
- * The expectation therefore is that the typical JSR 352 implementation will not need
+ * The expectation therefore is that the typical Jakarta Batch implementation will not need
  * to implement this SPI, but will use the default implementation.
  * 
  * <p>
  * For more details, see the documentation in the TCK Reference Guide.
  *  
- * @see <a href="https://java.net/projects/jbatch/downloads/download/jsr352-tck-reference-guide.pdf">TCK Reference Guide</a> 
+ * @see <a href="https://java.net/projects/jbatch/downloads/download/batch-tck-reference-guide.pdf">TCK Reference Guide</a> 
  * 
  */
 package com.ibm.jbatch.tck.spi;

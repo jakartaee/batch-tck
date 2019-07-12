@@ -32,8 +32,8 @@ RUNNING LOGGER:
 
 RUNNING SINGULAR TESTS:
 
-    -For running out of tck.exec, tck/src/main/resources/testng/jsr352-tck-impl-SE-suite.xml
-    -For running out of standards.jsr352.tck dir, change com.ibm.jbatch.tck/testng/jsr352-tck-impl-SE-suite.xml
+    -For running out of tck.exec, tck/src/main/resources/testng/batch-tck-impl-SE-suite.xml
+    -For running out of the tck repo home directory, change com.ibm.jbatch.tck/testng/batch-tck-impl-SE-suite.xml
     -Follow the existing pattern in that file to specify packages, classes, or methods
         -Comment out <packages> (this runs the full suite of tests)
         -Uncomment <classes> and specify which classes/ subset of methods (tests) within a class you wish to run

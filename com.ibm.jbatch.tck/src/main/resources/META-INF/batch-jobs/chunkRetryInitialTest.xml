@@ -50,7 +50,6 @@
 		</retryable-exception-classes>
 		<no-rollback-exception-classes>
 			<include class="com.ibm.jbatch.tck.artifacts.reusable.MyParentException"/>
-			<!-- <exclude class="jsr352.tck.reusable.MyChildException"/> -->
 		</no-rollback-exception-classes>
 		</chunk>	
 	</step>

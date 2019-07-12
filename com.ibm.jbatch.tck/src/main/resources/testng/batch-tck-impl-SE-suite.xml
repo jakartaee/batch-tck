@@ -18,12 +18,15 @@
  -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="JSR352 TCK" verbose="0"  >
-   <test name="JSR352 TCK">
-      <packages>
-         <package name="com.ibm.jbatch.tck.tests.*" />
-      </packages>
-      <classes>
+<suite name="Jakarta Batch TCK SE" verbose="2">
+    <test name="Jakarta Batch TCK SE">
+
+        <!--  The official SE TCK test suite is the full set of tests in test classes with classname:
+              com.ibm.jbatch.tck.tests.jslxml.*, (minus tests removed from execution via an @Ignore annotation). -->
+        <packages>
+            <package name="com.ibm.jbatch.tck.tests.jslxml" />
+        </packages>
+        <classes>
             <class name="com.ibm.jbatch.tck.tests.jslxml.ListenerOnErrorTests">
                 <methods>
                     <exclude name=".*" />
@@ -39,6 +42,21 @@
                     <exclude name=".*" />
                 </methods>
             </class>
-      </classes>
-   </test>
+        </classes>
+
+        <!--  Below is a sample syntax for debugging either an implementation or the TCK itself.  Note that modifying this 
+              results in a run which is something less than an "official" execution, since of course this would constitute 
+              a run of a different set of test cases than the official TCK test suite. -->
+
+        <!-- Just execute a single method within this test class.  -->
+        <!--
+        <classes>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.ChunkTests">
+                <methods>
+                    <include name="testChunkRestartChunk5"/> 
+                </methods>
+            </class> 
+        </classes>
+        -->
+    </test>
 </suite>

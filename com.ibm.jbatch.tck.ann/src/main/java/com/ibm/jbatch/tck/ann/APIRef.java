@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Reference to a JSR 352 API that specifies a particular behavior.
+ * Reference to a Jakarta Batch API that specifies a particular behavior.
  * <br><br>
  * <span style='font-weight: bold;'> Required Attributes </span>
  * <br>

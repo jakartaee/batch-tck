@@ -29,7 +29,7 @@ public interface JobExecutionWaiter {
 	 * 
 	 * <p>
 	 * This method blocks and only returns when the JobExecution reaches one of these states,
-	 * which we refer to here as a 'final' state (By 'state' we mean "batch status").  The JSR 352 
+	 * which we refer to here as a 'final' state (By 'state' we mean "batch status").  The Jakarta Batch 
 	 * specification doesn't formally define a set of 'final' states or use this term explicitly, so 
 	 * we list here what we consider to be the 'final' states for the TCK purposes.  
 	 * 

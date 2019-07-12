@@ -31,7 +31,7 @@
     <artifactId>com.ibm.jbatch.tck.dist</artifactId>
     <packaging>pom</packaging>
     <version>1.0.2-SNAPSHOT</version>
-    <name>JSR 352 TCK Distribution ZIP</name>
+    <name>Jakarta Batch TCK Distribution ZIP</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

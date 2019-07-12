@@ -25,7 +25,7 @@
     <version>1.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>com.ibm.jbatch.tck.ann.proc</artifactId>
-  <name>JSR 352 TCK Annotation Processor</name>
+  <name>Jakarta Batch TCK Annotation Processor</name>
   
   <build>
     <plugins>

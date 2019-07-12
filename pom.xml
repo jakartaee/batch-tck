@@ -415,8 +415,8 @@
                         <exclude>**/*.html</exclude>
                         <exclude>**/*.css</exclude>
                         <exclude>**/*.ddl</exclude>
-                        <exclude>**/jsr352-tck.properties</exclude>
-                        <exclude>**/jsr352-tck-impl-*.xml</exclude>
+                        <exclude>**/batch-tck.properties</exclude>
+                        <exclude>**/batch-tck-impl-*.xml</exclude>
                         <exclude>**/testng-class.xml</exclude>
                         <exclude>**/testng-method.xml</exclude>
                         <exclude>**/beans.xml</exclude>

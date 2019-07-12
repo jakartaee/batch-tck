@@ -139,7 +139,7 @@ public class TCKAnnotationProcessor extends AbstractProcessor {
 			writeEndSection(writer);
 			
 			//Section for Spec References
-			writeBeginSectionWithTitle(writer, "JSR 352 Reference(s)", 2);
+			writeBeginSectionWithTitle(writer, "Jakarta Batch Reference(s)", 2);
 			writeSpecRefTable(writer, annotation);
 			writeEndSection(writer);
 			

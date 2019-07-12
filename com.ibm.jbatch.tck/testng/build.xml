@@ -16,7 +16,7 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<project name="jsr352_tck" default="run" basedir="">
+<project name="batch_tck" default="run" basedir="">
 
     <taskdef resource="testngtasks">
         <classpath>
@@ -26,7 +26,7 @@
     </taskdef>
     
     <description>
-        JSR 352 TCK
+        Jakarta Batch TCK
     </description>
     
     <!-- Modify this property to contain the location of the extracted TCK source -->
@@ -41,7 +41,7 @@
     <!-- Override with value "EE" to run TestNG EE tests. -->
     <property name="tck.type" value="SE" />
 
-    <target name="compile" depends="init" description="Compile the JSR352 TCK source code" >
+    <target name="compile" depends="init" description="Compile the Jakarta Batch TCK source code" >
         <mkdir dir="${build}"/>
         
         <!-- compile test artifacts -->
@@ -59,7 +59,7 @@
     </target>
 
     <target name="init">
-         <loadproperties srcFile="jsr352-tck.properties"/>
+         <loadproperties srcFile="batch-tck.properties"/>
     </target>
 
     <target name="clean">
@@ -67,8 +67,8 @@
         <delete dir="${results}"/>
     </target>
 
-    <target name="run" depends="init" description="Runs the TestNG suite portion of the JSR352 TCK ">
-        <path id="jsr352.tck.classpath">
+    <target name="run" depends="init" description="Runs the TestNG suite portion of the Jakarta Batch TCK ">
+        <path id="batch.tck.classpath">
             <fileset dir="lib">
                 <include name="**/*.jar"/>
             </fileset>
@@ -79,9 +79,9 @@
             <pathelement path="${batch.impl.classes}"/>
         </path>
     
-        <testng mode="testng" classpathref="jsr352.tck.classpath" dumpCommand="true" workingDir="." haltonfailure="true" outputdir="${results}">
+        <testng mode="testng" classpathref="batch.tck.classpath" dumpCommand="true" workingDir="." haltonfailure="true" outputdir="${results}">
             
-            <xmlfileset dir="." includes="artifacts/jsr352-tck-impl-${tck.type}-suite.xml"/>
+            <xmlfileset dir="." includes="artifacts/batch-tck-impl-${tck.type}-suite.xml"/>
             
             <!-- user specified JVM arguments -->
             <jvmarg line="${jvm.options}"/>

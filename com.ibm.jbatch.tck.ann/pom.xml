@@ -25,5 +25,5 @@
     <version>1.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>com.ibm.jbatch.tck.ann</artifactId>
-  <name>JSR 352 TCK Annotations</name>
+  <name>Jakarta Batch TCK Annotations</name>
 </project>

@@ -51,10 +51,10 @@ public @interface TCKTest {
 	/** The behaviors being tested */
 	String[] assertions();
 	
-	/** References to the JSR 352 sections that specify the behavior being tested */
+	/** References to the Jakarta Batch sections that specify the behavior being tested */
 	SpecRef[] specRefs();
 	
-	/** References to the JSR 352 APIs being tested */
+	/** References to the Jakarta Batch APIs being tested */
 	APIRef[] apiRefs() default {};
 	
 	/** URLs referencing bugs the test was added for */

@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Reference to a JSR 352 section that specifies a particular behavior.
+ * Reference to a Jakarta Batch section that specifies a particular behavior.
  * <br><br>
  * <span style='font-weight:bold;'> Required Attributes: </span> version, section
  * <br>
@@ -37,7 +37,7 @@ import java.lang.annotation.Target;
 public @interface SpecRef {
 
 	/** 
-	 * Version of JSR 352 where the behavior was first introduced or most recently clarified
+	 * Version of Jakarta Batch where the behavior was first introduced or most recently clarified
 	 * <br><br>
 	 * List of valid values:
 	 * <ul>
@@ -48,7 +48,7 @@ public @interface SpecRef {
 	 */
 	String version();
 	
-	/** JSR 352 section where the behavior is specified */
+	/** Jakarta Batch section where the behavior is specified */
 	String section() default "";
 	
 	/** Relevant quotations from the section */
