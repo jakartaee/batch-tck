@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright 2012,2019 International Business Machines Corp.
 
@@ -16,7 +17,6 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<?xml version="1.0" encoding="UTF-8"?>
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
@@ -32,12 +32,12 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>com.ibm.jbatch.tck:com.ibm.jbatch.tck.spi</include>
-                <include>com.ibm.jbatch.tck:com.ibm.jbatch.tck.spi:jar:sources</include>
-                <include>com.ibm.jbatch.tck:com.ibm.jbatch.tck.spi:jar:javadoc</include>
-                <include>com.ibm.jbatch.tck:com.ibm.jbatch.tck</include>
-                <include>com.ibm.jbatch.tck:com.ibm.jbatch.tck:jar:sources</include>
-                <include>com.ibm.jbatch.tck:com.ibm.jbatch.tck:jar:javadoc</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck.spi</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck.spi:jar:sources</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck.spi:jar:javadoc</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck:jar:sources</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck:jar:javadoc</include>
             </includes>
             <outputDirectory>artifacts</outputDirectory>
         </dependencySet>
@@ -70,14 +70,6 @@
     <files>
         <file>
             <source>otherFiles/readme.txt</source>
-            <outputDirectory>/</outputDirectory>
-        </file>
-        <file>
-            <source>../LICENSE.txt</source>
-            <outputDirectory>/</outputDirectory>
-        </file>
-        <file>
-            <source>../NOTICE.txt</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
