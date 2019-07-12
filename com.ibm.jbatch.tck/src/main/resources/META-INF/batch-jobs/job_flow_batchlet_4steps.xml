@@ -33,7 +33,6 @@
 		</step>	
 		<step id="step4" >
 			<batchlet ref="myBatchletImpl" />
-			<end on="VERY GOOD INVOCATION" exit-status="STEP 4 COMPLETED"/>
 		</step>
 	</flow>
 </job>

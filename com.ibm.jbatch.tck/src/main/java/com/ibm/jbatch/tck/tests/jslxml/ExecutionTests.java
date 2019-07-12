@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 International Business Machines Corp.
+ * Copyright 2012 International Business Machines Corp.
  * 
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License, 
@@ -20,12 +20,13 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 
+
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.ann.*;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 import org.junit.BeforeClass;
@@ -36,6 +37,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ExecutionTests {
+
+	private final static Logger logger = Logger.getLogger(ExecutionTests.class.getName());
 
 	private static JobOperatorBridge jobOp;
 
@@ -82,8 +85,6 @@ public class ExecutionTests {
 
 			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
 			assertObjEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus());
-			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-			assertObjEquals("STEP 1 COMPLETED", jobExec.getExitStatus());
 		} catch (Exception e) {
 			handleException(METHOD, e);
 		}
@@ -108,8 +109,6 @@ public class ExecutionTests {
 
 			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
 			assertObjEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus());
-			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-			assertObjEquals("STEP 2 COMPLETED", jobExec.getExitStatus());
 		} catch (Exception e) {
 			handleException(METHOD, e);
 		}
@@ -134,8 +133,6 @@ public class ExecutionTests {
 
 			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
 			assertObjEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus());
-			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-			assertObjEquals("STEP 3 COMPLETED", jobExec.getExitStatus());
 		} catch (Exception e) {
 			handleException(METHOD, e);
 		}
@@ -143,9 +140,8 @@ public class ExecutionTests {
 
 	/*
 	 * @testName: testInvokeJobWithNextElement
-	 * @assertion: job will finish successfully as COMPLETED
-	 * @test_Strategy: The job is written with a Next Element to control a step transition. The status of the second step is checked
-	 * 		for completion, to prove that the step was properly called from the Next Element.
+	 * @assertion: FIXME
+	 * @test_Strategy: FIXME
 	 */
 	@Test
 	@org.junit.Test  
@@ -161,54 +157,10 @@ public class ExecutionTests {
 
 			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
 			assertObjEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus());
-			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-			assertObjEquals("STEP 2 COMPLETED", jobExec.getExitStatus());
 		} catch (Exception e) {
 			handleException(METHOD, e);
 		}
 	}
-	
-	
-   	/*
-   	 * @testName: testJobWithNoMatchingTransitionElement
-   	 * @assertion: job will finish successfully with an exit status set to "nullUnusedExitStatusForPartitions"
-   	 * @test_Strategy: The job is written with no transitions elements in the first step, and no next attribute for step1.
-   	 * 					With no clear next step, the job should finish on step 1. The test ensures that step 2 is not run.
-   	 */   	
-   	@TCKTest(
-   		versions="1.1.WORKING",
-   		assertions={"Step 2 does not execute"},
-   		specRefs={
-   			@SpecRef(
-   				version="1.0", section="8.9.2", 
-   				citations={
-   					"If a match is not found among the transition elements [...] If execution ended normally, and the execution element whose execution "
-   					+ "is completing does not contain a ‘next’ attribute, then the job ends normally (with COMPLETED batch status)."
-   				}
-   			)
-   		}
-   	)
-   	@Test
-   	@org.junit.Test  
-   	public void testJobWithNoMatchingTransitionElement() throws Exception {
-   		String METHOD = "testJobWithNoMatchingTransitionElement";
-   		begin(METHOD);
-   
-   		try {
-   			Reporter.log("Locate job XML file: job_batchlet_no_matching_element.xml<p>");
-   
-   			Reporter.log("Invoking startJobAndWaitForResult for Execution #1<p>");
-   			JobExecution jobExec = jobOp.startJobAndWaitForResult("job_batchlet_no_matching_element");
-   
-   			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
-   			assertObjEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus());
-   			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-   			final String expectedExitStatus="nullUnusedExitStatusForPartitions";
-   			assertObjEquals(expectedExitStatus, jobExec.getExitStatus());
-   		} catch (Exception e) {
-   			handleException(METHOD, e);
-   		}
-   	}
 
 	/*
 	 * @testName: testInvokeJobWithFailElement
@@ -238,9 +190,8 @@ public class ExecutionTests {
 
 	/*
 	 * @testName: testInvokeJobWithStopElement
-	 * @assertion: job will finish successfully as STOPPED after the first step
-	 * @test_Strategy: A Stop Element is used to terminate the job after the first step. If the job continues, a different status is returned,
-	 * 	and the test fails.
+	 * @assertion: FIXME
+	 * @test_Strategy: FIXME
 	 */
 	@Test
 	@org.junit.Test  
@@ -256,8 +207,6 @@ public class ExecutionTests {
 
 			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
 			assertObjEquals(BatchStatus.STOPPED, jobExec.getBatchStatus());
-			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-			assertObjEquals("TEST_STOPPED", jobExec.getExitStatus());
 		} catch (Exception e) {
 			handleException(METHOD, e);
 		}
@@ -291,9 +240,8 @@ public class ExecutionTests {
 
 	/*
 	 * @testName: testInvokeJobSimpleChunk
-	 * @assertion: job will finish successfully as COMPLETED
-	 * @test_Strategy: A small chunk is run with a reader, processor, and writer. If all items are read, processed, and written
-	 * 	without failure, then the exit status will be good and the test will pass.
+	 * @assertion: FIXME
+	 * @test_Strategy: FIXME
 	 */
 	@Test
 	@org.junit.Test
@@ -309,8 +257,6 @@ public class ExecutionTests {
 
 			Reporter.log("execution #1 JobExecution getBatchStatus()="+jobExec.getBatchStatus()+"<p>");
 			assertObjEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus());
-			Reporter.log("execution #1 JobExecution getExitStatus()="+jobExec.getExitStatus()+"<p>");
-			assertObjEquals("STEP 2 COMPLETED", jobExec.getExitStatus());
 		} catch (Exception e) {
 			handleException(METHOD, e);
 		}

@@ -109,7 +109,7 @@ public class ContextAndListenerTests {
 
 		try {
 
-			Reporter.log("Locate job XML file: oneArtifactIsJobAndStepListener.xml<p>");
+			Reporter.log("Locate job XML file: StepContextTestBatchlet.xml<p>");
 
 			Reporter.log("Create job parameters for execution #1:<p>");
 			Properties jobParams = new Properties();
@@ -188,7 +188,7 @@ public class ContextAndListenerTests {
 		try {
 			String expectedStr = "MyChunkListener: found instanceof MyParentException";
 
-			Reporter.log("Locate job XML file: oneArtifactIsJobAndStepListener.xml<p>");
+			Reporter.log("Locate job XML file: job_chunk_getException.xml<p>");
 
 			Reporter.log("Create job parameters for execution #1:<p>");
 			Properties jobParams = new Properties();
@@ -222,7 +222,7 @@ public class ContextAndListenerTests {
 		try {
 			String expectedStr = "MyChunkListener: found instanceof MyParentException";
 
-			Reporter.log("Locate job XML file: oneArtifactIsJobAndStepListener.xml<p>");
+			Reporter.log("Locate job XML file: job_chunk_getExceptionListeners.xml<p>");
 
 			Reporter.log("Create job parameters for execution #1:<p>");
 			Properties jobParams = new Properties();

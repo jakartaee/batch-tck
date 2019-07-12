@@ -16,6 +16,7 @@
   limitations under the License.
 
   SPDX-License-Identifier: Apache-2.0
+
 -->
 <job id="job_chunk_simple" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
 	<step id="step1" next="step2">
@@ -27,6 +28,5 @@
 		 <processor ref="doSomethingItemProcessorImpl"/>
 		 <writer ref="doSomethingItemWriterImpl"></writer>
 		 </chunk> 	
-		 <end on="COMPLETED" exit-status="STEP 2 COMPLETED"/>
 	</step>
 </job>

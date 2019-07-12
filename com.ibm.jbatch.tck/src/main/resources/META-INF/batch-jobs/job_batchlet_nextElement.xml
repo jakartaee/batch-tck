@@ -21,13 +21,12 @@
 <job id="job_batchlet_nextElement" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
 	<step id="step1">
 		<batchlet ref="myBatchletImpl" />
-		<next on="VERY GOOD INVOCATION" to="step2"/>
+		<next on="COMPLETED" to="step2"/>
 		<fail on="FAILED" exit-status="TEST_FAIL"/>
 		<end on="ENDED" exit-status="TEST_ENDED"/>
 		<stop on="STOPPED" exit-status="TEST_STOPPED"/>
 	</step>
 	<step id="step2" >
 		<batchlet ref="myBatchletImpl" />
-		<end on="VERY GOOD INVOCATION" exit-status="STEP 2 COMPLETED"/>
 	</step>
 </job>

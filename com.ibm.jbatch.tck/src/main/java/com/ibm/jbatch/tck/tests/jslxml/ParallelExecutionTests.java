@@ -37,7 +37,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.ibm.jbatch.tck.ann.*;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
@@ -595,72 +594,6 @@ public class ParallelExecutionTests {
             JobExecution execution2 = jobOp.restartJobAndWaitForResult(execution.getExecutionId(), jobParams);
             Reporter.log("Execution exit status = " +  execution2.getExitStatus()+"<p>");
             assertObjEquals("nullBeginCACACARollbackAfter", execution2.getExitStatus());
-            
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-    
-    @TCKTest(
-    	versions = {"1.1.WORKING"},
-    	assertions = {"Each partition of a partitioned step has its own unique Persistent User Data."},
-    	specRefs = {
-    		@SpecRef(
-    				version = "1.0RevA", section = "9.4.1.1",
-    				citations = "For a partitioned step, there is one StepContext for the parent step/thread; there is a distinct StepContext for each sub-thread "
-    						  + "and each StepContext has its own distinct persistent user data for each sub-thread.",
-    				notes = "See 2. StepContext"
-    			),
-    		@SpecRef(
-    			version = "1.0", section = "10.9.2",
-    			citations = "The setPersistentUserData method stores a persistent data object into the current step. [...] This data is saved as part of a step's "
-    					  + "checkpoint. [...] It is available upon restart.",
-    			notes = "APIRef for StepContext"
-    		)
-    	},
-    	apiRefs = {	@APIRef(className="javax.batch.runtime.context.StepContext", methodNames={"setPersistentUserData", "getPersistentUserData"}) },
-    	issueRefs = {"https://github.com/WASdev/standards.jsr352.tck/issues/18"},
-    	strategy = "See comments in the code for this test"
-    )
-    @Test
-    @org.junit.Test
-    public void testPartitionedStepPersistentUserData() throws Exception {
-        String METHOD = "testPartitionedStepPersistentUserData";
-        begin(METHOD);
-
-        try {
-            /* Test Strategy:
-             * - Job is made up of one chunk step, split into two partitions
-             * - Each partition will process 3 items
-             * - The item-count for the step is set to 1, so each partition should checkpoint after each
-             *   item it reads.
-             * 
-             * - During Job Execution #1, set the PUD for each partition while reading item 1
-             *   fail on purpose while reading item 2 (now that the partitions have already check-pointed)
-             * - During Job Execution #2, check that the PUD has been persisted from previous job execution
-             * - We also check that the partition level PUDs do not bubble up into the top-level of the step
-             *   by setting and verifying a top-level PUD with the PartitionReducer
-             */        	
-            
-            Properties jobParams = new Properties();
-            
-            //Job Execution #1
-            jobParams.setProperty("execution.number", "1");
-            jobParams.setProperty("number.of.items.to.be.read", "3");
-            jobParams.setProperty("throw.reader.exception.for.these.items", "1"); //The second item
-                    	
-            Reporter.log("Locate job XML file: partitioned_step_persistent_user_data.xml<p>");
-            Reporter.log("Invoke startJobAndWaitForResult<p>");
-            JobExecution jobExec1 = jobOp.startJobAndWaitForResult("partitioned_step_persistent_user_data", jobParams);
-            assertWithMessage("Expected job execution 1 to fail", BatchStatus.FAILED, jobExec1.getBatchStatus());
-            
-            //Job Execution #2
-            jobParams.setProperty("execution.number", "2");
-            jobParams.setProperty("throw.reader.exception.for.these.items", "");
-            
-            Reporter.log("Invoke restartJobAndWaitForResult<p>");
-            JobExecution jobExec2 = jobOp.restartJobAndWaitForResult(jobExec1.getExecutionId(), jobParams);
-            assertWithMessage("Expected job execution 2 to complete", BatchStatus.COMPLETED, jobExec2.getBatchStatus());
             
         } catch (Exception e) {
             handleException(METHOD, e);

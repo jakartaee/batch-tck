@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 International Business Machines Corp.
+ * Copyright 2012 International Business Machines Corp.
  * 
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License, 
@@ -29,7 +29,6 @@ import javax.batch.runtime.JobInstance;
 import javax.batch.runtime.Metric;
 import javax.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.ann.*;
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentRestartUserData;
 import com.ibm.jbatch.tck.artifacts.specialized.MyItemProcessListenerImpl;
 import com.ibm.jbatch.tck.artifacts.specialized.MyItemReadListenerImpl;
@@ -38,7 +37,6 @@ import com.ibm.jbatch.tck.artifacts.specialized.MyMultipleExceptionsRetryReadLis
 import com.ibm.jbatch.tck.artifacts.specialized.MySkipProcessListener;
 import com.ibm.jbatch.tck.artifacts.specialized.MySkipReadListener;
 import com.ibm.jbatch.tck.artifacts.specialized.MySkipWriteListener;
-import com.ibm.jbatch.tck.artifacts.specialized.VerifySkipWriteListener;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
@@ -86,7 +84,6 @@ public class ChunkTests {
      *                 Batch artifact checks that the checkpointing occurs at the default item-count (10). Test that the 
      *                 job completes successfully. 
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkNoProcessorDefined() throws Exception {
@@ -130,7 +127,6 @@ public class ChunkTests {
      *                 Batch artifact checks that the checkpointing occurs at the default item-count (10). Test that the 
      *                 job completes successfully. 
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkNullCheckpointInfo() throws Exception {
@@ -167,7 +163,6 @@ public class ChunkTests {
     *                 the listeners are being produced by the runtime. Test finishes in COMPLETED state and
     *                 the before/after lifecycle of each listener is contained in the  exit status.
     */
-    //TODO Add @TCKTest Annotation
    @Test
    @org.junit.Test
    public void testChunkArtifactInstanceUniqueness() throws Exception {
@@ -202,20 +197,19 @@ public class ChunkTests {
      * @assertion: Test will finish in FAILED status, with the onError chunk listener invoked
      * 
      * @test_Strategy: Test that the ChunkListener.onError method is driven for an exception occurring
-     *         during the read-write-process batch loop
+     * 		during the read-write-process batch loop
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkOnErrorListener() throws Exception {
-        
-        String METHOD = "testChunkOnErrorListener";
-        
-        try {
-            Reporter.log("Create job parameters for execution #1:<p>");
-            Properties jobParams = new Properties();
-            
-            Reporter.log("execution.number=1<p>");
+    	
+    	String METHOD = "testChunkOnErrorListener";
+    	
+    	try {
+    		Reporter.log("Create job parameters for execution #1:<p>");
+    		Properties jobParams = new Properties();
+    		
+    		Reporter.log("execution.number=1<p>");
             Reporter.log("readrecord.fail=5<p>");
             Reporter.log("app.arraysize=30<p>");
             jobParams.put("execution.number", "1");
@@ -251,7 +245,6 @@ public class ChunkTests {
      * @test_Strategy: start a job configured to a item-count of 7 configured to fail on the 12 item read. Restart job and 
      *                 test that the processing begins at last recorded check point (item 7) prior to previous failure
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRestartItemCount7() throws Exception {
@@ -324,7 +317,6 @@ public class ChunkTests {
      * @test_Strategy: start a job configured to a item-count of 10 configured to fail on the 12 item read. Restart job and 
      *                 test that the processing begins at last recorded check point (item 10) prior to previous failure
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRestartItemCount10() throws Exception {
@@ -397,7 +389,6 @@ public class ChunkTests {
      * @test_Strategy: start a job configured to a item-count of 5 configured to fail on the 12 item read. Restart job and 
      *                 test that the processing begins at last recorded check point (item 10) prior to previous failure
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRestartChunk5() throws Exception {
@@ -469,7 +460,6 @@ public class ChunkTests {
      *                 Batch artifact checks that the checkpointing occurs at the default item-count (10). Test that the 
      *                 job completes successfully. 
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkDefaultItemCount() throws Exception {
@@ -516,7 +506,6 @@ public class ChunkTests {
      *                  reading/writing resumes at last good custom defined checkpoint.
      *                  test that the job completes successfully.
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRestartCustomCheckpoint() throws Exception {
@@ -589,7 +578,6 @@ public class ChunkTests {
      *                  Batch artifact enforces that the checkpointing occurs at the default time-limit boundary (10 seconds) .
      *                  test that the job completes successfully.     
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkTimeBasedDefaultCheckpoint() throws Exception {
@@ -616,7 +604,7 @@ public class ChunkTests {
             Reporter.log("execution #1 JobExecution getExitStatus()=" + execution1.getExitStatus() + "<p>");
             assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
             String exitStatus = execution1.getExitStatus();
-            assertWithMessage("Testing execution #1", (exitStatus.equals("TRUE: 0") || exitStatus.equals("TRUE: 1")));
+	        assertWithMessage("Testing execution #1", (exitStatus.equals("TRUE: 0") || exitStatus.equals("TRUE: 1")));
         } catch (Exception e) {
             handleException(METHOD, e);
         }
@@ -635,7 +623,6 @@ public class ChunkTests {
      *                  Batch artifact enforces that the checkpointing occurs at the default time-limit boundary (10 seconds) .
      *                  test that the job completes successfully.     
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkTimeBasedTimeLimit0() throws Exception {
@@ -663,8 +650,8 @@ public class ChunkTests {
             Reporter.log("execution #1 JobExecution getExitStatus()=" + execution1.getExitStatus() + "<p>");
             assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
             String exitStatus = execution1.getExitStatus();
-            assertWithMessage("Testing execution #1", (exitStatus.equals("TRUE: 0") || exitStatus.equals("TRUE: 1")));
-    
+	        assertWithMessage("Testing execution #1", (exitStatus.equals("TRUE: 0") || exitStatus.equals("TRUE: 1")));
+	
         } catch (Exception e) {
             handleException(METHOD, e);
         }
@@ -685,30 +672,29 @@ public class ChunkTests {
      *                  reading/writing resumes at last good checkpoint.
      *                  test that the job completes successfully.     
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkTimeBased10Seconds() throws Exception {
-        
-         String METHOD = "testChunkTimeBased10Seconds";
-         
-         String DEFAULT_SLEEP_TIME = "500";
+    	
+    	 String METHOD = "testChunkTimeBased10Seconds";
+    	 
+    	 String DEFAULT_SLEEP_TIME = "500";
 
-        try {
-            Properties jobParams = new Properties();
-            jobParams.put("execution.number", "1");
-            jobParams.put("readrecord.fail", "31");
-            jobParams.put("app.arraysize", "30");
-            jobParams.put("app.sleeptime", System.getProperty("ChunkTests.testChunkTimeBased10Seconds.sleep",DEFAULT_SLEEP_TIME));
-    
-    
-            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkTimeBasedCheckpoint", jobParams);
-            assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
-            String exitStatus = execution1.getExitStatus();
-            assertWithMessage("Testing execution #1", (exitStatus.equals("TRUE: 9") || exitStatus.equals("TRUE: 10") || exitStatus.equals("TRUE: 11")));
-    
-            Reporter.log("exit status = " + execution1.getExitStatus() + "<p>");
-         } catch (Exception e) {
+    	try {
+	        Properties jobParams = new Properties();
+	        jobParams.put("execution.number", "1");
+	        jobParams.put("readrecord.fail", "31");
+	        jobParams.put("app.arraysize", "30");
+	        jobParams.put("app.sleeptime", System.getProperty("ChunkTests.testChunkTimeBased10Seconds.sleep",DEFAULT_SLEEP_TIME));
+	
+	
+	        JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkTimeBasedCheckpoint", jobParams);
+	        assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
+	        String exitStatus = execution1.getExitStatus();
+	        assertWithMessage("Testing execution #1", (exitStatus.equals("TRUE: 9") || exitStatus.equals("TRUE: 10") || exitStatus.equals("TRUE: 11")));
+	
+	        Reporter.log("exit status = " + execution1.getExitStatus() + "<p>");
+    	 } catch (Exception e) {
              handleException(METHOD, e);
          }
     }
@@ -729,7 +715,6 @@ public class ChunkTests {
      *                  reading/writing resumes at last good checkpoint.
      *                  test that the job completes successfully.     
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRestartTimeBasedCheckpoint() throws Exception {
@@ -771,8 +756,8 @@ public class ChunkTests {
                 Reporter.log("execution #2 Job instance id=" + exec.getInstanceId() + "<p>");
                 assertWithMessage("Testing execution #2", BatchStatus.COMPLETED, exec.getBatchStatus());
                 String exitStatus = exec.getExitStatus();
-                assertWithMessage("Testing execution #2", (exitStatus.equals("TRUE: 9") || exitStatus.equals("TRUE: 10") || exitStatus.equals("TRUE: 11")));
-        
+    	        assertWithMessage("Testing execution #2", (exitStatus.equals("TRUE: 9") || exitStatus.equals("TRUE: 10") || exitStatus.equals("TRUE: 11")));
+    	
                 assertWithMessage("Testing execution #2", jobInstanceId, exec.getInstanceId());
             }
         } catch (Exception e) {
@@ -797,7 +782,6 @@ public class ChunkTests {
      *                  reading/writing resumes at last good checkpoint.
      *                  test that the job completes successfully.     
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRestartTimeBasedDefaultCheckpoint() throws Exception {
@@ -869,10 +853,9 @@ public class ChunkTests {
      *                  test that the job completes fails and that the application recognized the skippable exception 
      *                  that extends the unskippable is not treated as skippable.     
      */
-    //TODO Add @TCKTest Annotation
     @org.junit.Test
-    @Test(enabled=false) // Disabling per Bug 5403
-    @Ignore("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
+	@Test(enabled=false) // Disabling per Bug 5403
+	@Ignore("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
     public void testChunkSkipMultipleExceptions() throws Exception {
 
         String METHOD = "testChunkSkipRead";
@@ -900,39 +883,21 @@ public class ChunkTests {
 
     }
     
-    @TCKTest(
-        versions = {"1.0"},
-        assertions = {
-        	"Configured, skippable exceptions thrown by an ItemReader can be skipped",
-        	"Subclasses of configured, skippable exceptions are also skippable",
-        	"A SkipReadListener receives control when a skippable exception is thrown by an ItemReader"
-        },
-        specRefs = {
-        	@SpecRef(
-        		version = "1.0", section = "8.2.1.4.1",
-        		citations = {
-        			"The skippable-exception-classes element specifies a set of exceptions that chunk processing will skip [...] "
-        		  + "It applies to exceptions thrown from the reader, processor, and writer batch artifacts of a chunk type step.",
-        		    "A given exception will be skipped if it \"matches\" an include child element of the skippable-exception-classes "
-        		  + "element [...] in this context, \"matches\" means the following: For an include (or exclude) element C with @class "
-        		  + "attribute value T, an exception E \"matches\" C when either E is of type T or E's type is a subclass of T."
-        		}
-        	),
-        	@SpecRef(
-            	version = "1.0", section = "9.2.7",
-            	citations = {
-            		"The onSkipReadItem method receives control when a skippable exception is thrown from an ItemReader readItem method. "
-            	  + "This method receives the exception as an input.",
-            	},
-            	notes = {"API for SkipReadListener"}
-            )
-        },
-        apiRefs = { @APIRef(className = "javax.batch.api.chunk.listener.SkipReadListener", methodNames={"onSkipReadItem"}) },
-        strategy = "Issue a job with no skip-limit and a configured skippable exception. On JobExecution1, throw both the skippable "
-        		 + "exception and a subclass of the skippable exception from the ItemReader. Also configure a SkipReadListener that "
-        		 + "sets the job exit status based on the exception it receives. Verify that the job completes and that the exit "
-        		 + "status is set by the listener."
-    )
+    /*
+     * @testName: testChunkSkipRead
+     * @assertion: job will finish successfully as COMPLETED and skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified at 3.  
+     *                  Application is configured to encounter an error on two separate reads, at which point
+     *                  a skippable exception is thrown by the application. Batch Application enforces that the exceptions
+     *                  were recognized as skippable.
+     *                  test that the job completes successfully and that the application recognized the exceptions as skippable     
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipRead() throws Exception {
@@ -962,33 +927,22 @@ public class ChunkTests {
 
     }
 
-    @TCKTest(
-    	versions = {"1.0"},
-    	assertions = {
-    		"Configured, skippable exceptions thrown by an ItemProcessor can be skipped",
-    		"A SkipProcessListener receives control when a skippable exception is thrown by an ItemProcessor"
-    	},
-    	specRefs = {
-    		@SpecRef(
-    			version = "1.0", section = "8.2.1.4.1",
-    			citations = {
-    				"The skippable-exception-classes element specifies a set of exceptions that chunk processing will skip [...] "
-    			  + "It applies to exceptions thrown from the reader, processor, and writer batch artifacts of a chunk type step."
-    			}
-    		),
-    		@SpecRef(
-    			version = "1.0", section = "9.2.7",
-    			citations = {
-    				"The onSkipProcessItem method receives control when a skippable exception is thrown from an ItemProcess processItem method."
-    			},
-    			notes = {"API for SkipProcessListener"}
-    		)
-    	},
-    	apiRefs = { @APIRef(className = "javax.batch.api.chunk.listener.SkipProcessListener", methodNames={"onSkipProcessItem"}) },
-    	strategy = "Issue a job with no skip-limit and a configured skippable exception. On JobExecution1, throw the skippable "
-    			 + "exception from the ItemReader. Also configure a SkipProcessListener that sets the job exit status based on the "
-    			 + "exceptions it receives. Verify that the job completes and that the exit status is set by the listener."
-    )
+    /*
+     * @testName: testChunkSkipProcess
+     * @assertion: job will finish successfully as COMPLETED and skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified as 3. skip-limit is set to 1000.
+     *                  Application is configured to encounter an error on two separate processing actions, at which point
+     *                  a skippable exception is thrown by the application. Batch Application enforces that the exceptions
+     *                  were recognized as skippable. Batch Application also ensures that the item being processed is passed to the skip listener.
+     *                  test that the job completes successfully and that the application recognized the exception as skippable 
+     *                  and that the item was passed to the skip listener.     
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipProcess() throws Exception {
@@ -1016,33 +970,22 @@ public class ChunkTests {
         }
     }
 
-    @TCKTest(
-        versions = {"1.0"},
-        assertions = {
-        	"Configured, skippable exceptions thrown by an ItemWriter can be skipped",
-        	"A SkipWriteListener receives control when a skippable exception is thrown by an ItemWriter"
-        },
-        specRefs = {
-        	@SpecRef(
-        		version = "1.0", section = "8.2.1.4.1",
-        		citations = {
-        			"The skippable-exception-classes element specifies a set of exceptions that chunk processing will skip [...] "
-        		  + "It applies to exceptions thrown from the reader, processor, and writer batch artifacts of a chunk type step."
-        		}
-        	),
-        	@SpecRef(
-        		version = "1.0", section = "9.2.7",
-        		citations = {
-        			"The onSkipWriteItem method receives control when a skippable exception is thrown from an ItemWriter writeItems method."
-        		},
-        		notes = {"API for SkipWriteListener"}
-        	)
-        },
-        apiRefs = { @APIRef(className = "javax.batch.api.chunk.listener.SkipWriteListener", methodNames={"onSkipWriteItem"}) },
-        strategy = "Issue a job with no skip-limit and a configured skippable exception. On JobExecution1, throw the skippable "
-        		 + "exception from the ItemWriter. Also configure a SkipWriteListener that sets the job exit status based on the "
-        		 + "exceptions it receives. Verify that the job completes and that the exit status is set by the listener."
-    )
+    /*
+     * @testName: testChunkSkipWrite
+     * @assertion: job will finish successfully as COMPLETED and skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified as 3. skip-limit set to 1000  
+     *                  Application is configured to encounter an error on two separate writes, at which point
+     *                  a skippable exception is thrown by the application. Batch Application enforces that the exceptions
+     *                  were recognized as skippable. Batch Application also ensures that the item being processed is passed to the skip listener.
+     *                  test that the job completes successfully and that the application recognized the exceptions as skippable
+     *                  and that the item was passed to the skip listener.
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipWrite() throws Exception {
@@ -1087,7 +1030,6 @@ public class ChunkTests {
      *                  were recognized as skippable.
      *                  test that the job completes successfully and that the application recognized the exceptions as skippable     
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkSkipOnError() throws Exception {
@@ -1170,7 +1112,6 @@ public class ChunkTests {
      *                  were recognized as retryable and that the listener's onError method is coalled correctly.
      *                  test that the job completes successfully and that the listener's onError method is called by the runtime.    
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRetryOnError() throws Exception {
@@ -1238,28 +1179,21 @@ public class ChunkTests {
 
     }
     
-    @TCKTest(
-        versions = {"1.0"},
-        assertions = {
-           	"When the number of skippable exceptions thrown by an ItemReader exceeds the skip-limit, the job ends with a batch status of FAILED."
-        },
-        specRefs = {
-        	@SpecRef(
-            	version = "1.0", section = "8.2.1",
-            	citations = {"skip-limit: Specifies the number of exceptions a step will skip if any configured skippable exceptions are thrown"}
-            ),
-           	@SpecRef(
-           		version = "1.0", section = "8.2.1.4",
-           		citations = {
-           			"By default, when any batch artifact that is part of a chunk type step throws an exception to the Batch Runtime, "
-           		  + "the job execution ends with a batch status of FAILED. The default behavior can be overridden for a reader, "
-           		  + "processor, or writer artifact by configuring exceptions to skip or to retry."
-           		}
-           	),
-        },
-        strategy = "Issue a job with a skip-limit of 1. On JobExecution1, throw 2 skippable exceptions from the ItemReader, and "
-        		 + "verify that the job fails."
-    )
+    /*
+     * @testName: testChunkSkipReadExceedSkip
+     * @assertion: job will finish as FAILED and exceeded skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified at a value greater than the read data set and skip-limit set to 1.  
+     *                  Application is configured to encounter an error on two separate reads, at which point
+     *                  a skippable exception is thrown by the application. Batch Application enforces that the exceptions
+     *                  were recognized as skippable and that the second exception exceeded the skip-limit
+     *                  test that the job fails but the skip-limit was recognized.     
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipReadExceedSkip() throws Exception {
@@ -1269,7 +1203,7 @@ public class ChunkTests {
             Reporter.log("Create job parameters for execution #1:<p>");
             Properties jobParams = new Properties();
             Reporter.log("execution.number=1<p>");
-            Reporter.log("readrecord.fail=1,2<p>");
+            Reporter.log("processrecord.fail=1,2<p>");
             Reporter.log("app.arraysize=30<p>");
             jobParams.put("execution.number", "1");
             jobParams.put("readrecord.fail", "1,2");
@@ -1290,28 +1224,21 @@ public class ChunkTests {
 
     }
 
-    @TCKTest(
-        versions = {"1.0"},
-        assertions = {
-           	"When the number of skippable exceptions thrown by an ItemProcessor exceeds the skip-limit, the job ends with a batch status of FAILED."
-        },
-        specRefs = {
-        	@SpecRef(
-            	version = "1.0", section = "8.2.1",
-               	citations = {"skip-limit: Specifies the number of exceptions a step will skip if any configured skippable exceptions are thrown"}
-            ),
-           	@SpecRef(
-           		version = "1.0", section = "8.2.1.4",
-           		citations = {
-           			"By default, when any batch artifact that is part of a chunk type step throws an exception to the Batch Runtime, "
-            	  + "the job execution ends with a batch status of FAILED. The default behavior can be overridden for a reader, "
-               	  + "processor, or writer artifact by configuring exceptions to skip or to retry."
-               	}
-            ),
-        },
-        strategy = "Issue a job with a skip-limit of 1. On JobExecution1, throw 2 skippable exceptions from the ItemProcessor, and "
-        		 + "verify that the job fails."
-    )
+    /*
+     * @testName: testChunkSkipProcessExceedSkip
+     * @assertion: job will finish as FAILED and exceeded skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified at a value greater than the read data set and skip-limit set to 1.  
+     *                  Application is configured to encounter an error on two processing actions, at which point
+     *                  a skippable exception is thrown by the application. Batch Application enforces that the exceptions
+     *                  were recognized as skippable and that the second exception exceeded the skip-limit
+     *                  test that the job fails but the skip-limit was recognized.     
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipProcessExceedSkip() throws Exception {
@@ -1343,28 +1270,21 @@ public class ChunkTests {
 
     }
 
-    @TCKTest(
-        versions = {"1.0"},
-        assertions = {
-           	"When the number of skippable exceptions thrown by an ItemWriter exceeds the skip-limit, the job ends with a batch status of FAILED."
-        },
-        specRefs = {
-           	@SpecRef(
-               	version = "1.0", section = "8.2.1",
-               	citations = {"skip-limit: Specifies the number of exceptions a step will skip if any configured skippable exceptions are thrown"}
-            ),
-           	@SpecRef(
-            	version = "1.0", section = "8.2.1.4",
-            	citations = {
-            		"By default, when any batch artifact that is part of a chunk type step throws an exception to the Batch Runtime, "
-            	  + "the job execution ends with a batch status of FAILED. The default behavior can be overridden for a reader, "
-            	  + "processor, or writer artifact by configuring exceptions to skip or to retry."
-            	}
-            ),
-        },
-        strategy = "Issue a job with a skip-limit of 1. On JobExecution1, throw 2 skippable exceptions from the ItemWriter, and "
-        		 + "verify that the job fails."
-    )
+    /*
+     * @testName: testChunkSkipWriteExceedSkip
+     * @assertion: job will finish as FAILED and exceeded skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified at a value greater than the read data set and skip-limit set to 1.  
+     *                  Application is configured to encounter an error on two separate writes, at which point
+     *                  a skippable exception is thrown by the application. Batch Application enforces that the exceptions
+     *                  were recognized as skippable and that the second exception exceeded the skip-limit
+     *                  test that the job fails but the skip-limit was recognized.     
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipWriteExceedSkip() throws Exception {
@@ -1395,162 +1315,22 @@ public class ChunkTests {
 
     }
 
-    @TCKTest(
-    	versions = {"1.1.WORKING"},
-    	assertions = {"A chunk step with a skip-limit of 0 will not skip any exceptions."},
-    	specRefs = {
-    		@SpecRef(
-    			version = "1.0", section = "8.2.1",
-    			citations = {"skip-limit: Specifies the number of exceptions a step will skip if any configured skippable exceptions are thrown"}
-    		),
-            @SpecRef(
-               	version = "1.0", section = "8.2.1.4.1",
-               	citations = {"The total number of skips is set by the skip-limit attribute on the chunk element."}
-            )
-        },
-        issueRefs = {"https://github.com/WASdev/standards.jsr352.tck/issues/19"},
-        strategy = "Issue a job with a skip-limit of 0 and a configured skippable exception. "
-        		 + "On JobExecution1, throw the skippable exception once and verify that the job fails.",
-        notes = {"For some JSL attributes, a value of 0 means no limit (see start-limit and time-limit). This is NOT the case for skip-limit."}
-    )
-    @Test
-    @org.junit.Test
-    public void testChunkSkipLimit0() throws Exception {
-    	String METHOD = "testChunkSkipLimit0";
-        try {
-        	Reporter.log("Create job parameters for execution #1:<p>");
-            Properties jobParams = new Properties();
-            jobParams.put("skip.limit", "0");
-            jobParams.put("throw.reader.exception.for.these.items", "0");
-
-            Reporter.log("Locate job XML file: chunkSkipLimitTest.xml<p>");
-            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
-            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkSkipLimitTest", jobParams);
-
-            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
-            assertWithMessage("Testing execution #1", BatchStatus.FAILED, execution1.getBatchStatus());
-            assertWithMessage("retry-limit was exceeded by the correct exception", "BasicReaderException:Item#0", execution1.getExitStatus());
-        } catch (Exception e) {
-        	handleException(METHOD, e);
-        }
-    }
-    
-    @TCKTest(
-        versions = {"1.1.WORKING"},
-        assertions = {"Skippable exceptions thrown from multiple batch artifacts within the same step all count towards that step's skip-limit"},
-        specRefs = {
-        	@SpecRef(
-        		version = "1.0", section = "8.2.1",
-        		citations = {"skip-limit: Specifies the number of exceptions a step will skip if any configured skippable exceptions are thrown"}
-        	),
-            @SpecRef(
-               	version = "1.0", section = "8.2.1.4.1",
-                citations = {"The skippable-exception-classes element specifies a set of exceptions that chunk processing will skip. [...] "
-                		   + "It applies to exceptions thrown from the reader, processor, writer batch artifacts of a chunk type step. ",
-                		     "The total number of skips is set by the skip-limit attribute on the chunk element."}
-            )
-        },
-        issueRefs = {"https://github.com/WASdev/standards.jsr352.tck/issues/19"},
-        strategy = "Issue a job with a skip-limit of 2 and a configured skippable exception. On JobExecution1, throw the skippable exception "
-        		 + "once from each of the Reader, Processor, and Writer (3 exceptions thrown in total). Verify that the job fails."
-    )
-    @Test
-    @org.junit.Test
-    public void testChunkSkipLimitExceededByRPWCombo() throws Exception {
-    	String METHOD = "testChunkSkipLimitExceededByRPWCombo";
-        try {
-        	Reporter.log("Create job parameters for execution #1:<p>");
-            Properties jobParams = new Properties();
-            jobParams.put("skip.limit", "2");
-            jobParams.put("throw.reader.exception.for.these.items", "0");
-            jobParams.put("throw.processor.exception.for.these.items", "1");
-            jobParams.put("throw.writer.exception.for.these.items", "2");
-
-            Reporter.log("Locate job XML file: chunkSkipLimitTest.xml<p>");
-            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
-            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkSkipLimitTest", jobParams);
-
-            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
-            assertWithMessage("Testing execution #1", BatchStatus.FAILED, execution1.getBatchStatus());
-            assertWithMessage("retry-limit was exceeded by the correct exception", "BasicWriterException:Item#2", execution1.getExitStatus());
-        } catch (Exception e) {
-        	handleException(METHOD, e);
-        }
-    }
-    
-    @TCKTest(
-    	versions={"1.1.WORKING"},
-    	assertions = {"A SkipWriteListener is passed the list of items (the chunk) being written by an ItemWriter when a skippable exception is thrown."},
-    	specRefs={
-    		@SpecRef(
-    			version="1.0", section="8.2.1.4.1",
-    			citations={"A Skip Listener receives control after a skippable exception is thrown by the reader, processor, or writer."}
-    		),
-    		@SpecRef(version="1.0", section="9.1.1.3", notes={"API for ItemWriter"}),
-    		@SpecRef(
-        		version="1.0", section="9.2.7",
-        		citations={"The onSkipWriteItems method receives control when a skippable exception is thrown from an ItemWriter writeItems method. "
-        				 + "This method receives the exception and the items that were skipped as an input."},
-        		notes={"API for SkipWriteListener"}
-        	),
-        },
-        apiRefs={
-            @APIRef(className="javax.batch.api.chunk.ItemWriter", methodNames={"writeItems"}),
-            @APIRef(className="javax.batch.api.chunk.listener.SkipWriteListener", methodNames={"onSkipWriteItem"})
-        },
-        issueRefs={"https://github.com/WASdev/standards.jsr352.tck/issues/5","https://java.net/bugzilla/show_bug.cgi?id=5655"},
-        strategy="Set up a chunk step with 30 hard-coded items to be read/ processed/ written, broken down into 10 chunks of size 3. "
-        	   + "Force the ItemWriter to throw a skippable exception in some of the chunks. Verify that the SkipWriteListener receives "
-        	   + "the correct number of items, and more specifically that the items received are the correct ones (it should receive all "
-        	   + "of the items from each chunk where an exception was thrown). Finally, check that the job completes."
-    )    
-    @Test
-    @org.junit.Test
-    public void testChunkSkipWriteVerify() throws Exception {
-        String METHOD = "testChunkSkipWriteVerify";
-        try {
-            Reporter.log("Create job parameters for execution #1:<p>");
-            Properties jobParams = new Properties();
-            Reporter.log("app.arraysize=30<p>");
-            jobParams.put("app.arraysize", "30");
-
-            Reporter.log("Locate job XML file: chunkSkipVerifyTest.xml<p>");
-
-            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
-            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkSkipVerifyTest", jobParams);
-
-            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
-            Reporter.log("execution #1 JobExecution getExitStatus()=" + execution1.getExitStatus() + "<p>");
-            assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
-            assertWithMessage("Testing execution #1", VerifySkipWriteListener.GOOD_EXIT_STATUS, execution1.getExitStatus());
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-
-    }
-
-    
-    @TCKTest(
-        versions = {"1.0"},
-        assertions = {
-            "When a batch artifact throws an excluded skippable-exception-class, the job ends with a batch status of FAILED."
-        },
-        specRefs = {
-           	@SpecRef(
-            	version = "1.0", section = "8.2.1.4.1",
-            	citations = {
-            		"By default, when any batch artifact that is part of a chunk type step throws an exception to the Batch Runtime, "
-            	  + "the job execution ends with a batch status of FAILED.",
-            	    "When an exception E \"matches\" both one or more include and one or more exclude elements, then there will be "
-            	  + "one type T1 among all the matching include/exclude elements such that all other distinct matching element types "
-            	  + "are superclasses of T1 (because of Java's single inheritance). [...] If T1 appears in a matching exclude element "
-            	  + "(even if it also appears in a matching include element), then exclude (don't skip) this exception."
-            	}
-            ),
-        },
-        strategy = "Issue a job with no skip-limit, an included skippable-exception class, and an excluded skippable-exception-class "
-        		 + "that is a subclass of the included exception. Throw the excluded exception and verify that the job fails."
-    )
+    /*
+     * @testName: testChunkSkipReadNoSkipChildEx
+     * @assertion: job will finish as FAILED and excluded skippable exceptions will be recognized 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count, skip-limit
+     *             5.2.1.4 - Exception Handling - skippable-exception-classes
+     * 
+     * @test_Strategy: start a job with item-count specified at a value greater than the read data set and skip-limit set to 1000.  
+     *                  Application is configured to encounter an error on three separate reads.On the first two fails, the application
+     *                  throws a skippable exception. On the third fail, the application throws a non-skippable exception.
+     *                  The Batch Application enforces that the final exception is non-skippable.
+     *                  were recognized as skippable and that the second exception exceeded the skip-limit
+     *                  test that the job fails but the final exception was non skippable was recognized.     
+     */
     @Test
     @org.junit.Test
     public void testChunkSkipReadNoSkipChildEx() throws Exception {
@@ -1560,7 +1340,7 @@ public class ChunkTests {
             Reporter.log("Create job parameters for execution #1:<p>");
             Properties jobParams = new Properties();
             Reporter.log("execution.number=1<p>");
-            Reporter.log("readrecord.fail=1,2,3<p>");
+            Reporter.log("writerecord.fail=1,2,3<p>");
             Reporter.log("app.arraysize=30<p>");
             jobParams.put("execution.number", "1");
             jobParams.put("readrecord.fail", "1,2,3");
@@ -1584,7 +1364,7 @@ public class ChunkTests {
     /*
      * @testName: testChunkRetryRead
      * @assertion: job will finish successfully as COMPLETED and retryable skippable exceptions will be recognized 
-     *                5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     * 			   5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
      *             5.2.1.2 - Processor
      *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
      *             5.2.1 - Chunk, item-count, retry-limit
@@ -1596,7 +1376,6 @@ public class ChunkTests {
      *                  were recognized as retryable and that the processing retrys the execution.
      *                  test that the job succeeds.    
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkRetryRead() throws Exception {
@@ -1643,10 +1422,9 @@ public class ChunkTests {
      *                  as unretryable itself.
      *                  test that the job completes fails and that the application recognized the retryable exception that extends the unretryable is not treated as retryable.  
      */
-    //TODO Add @TCKTest Annotation
     @org.junit.Test
-    @Test(enabled=false) // Disabling per Bug 5403
-    @Ignore("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
+	@Test(enabled=false) // Disabling per Bug 5403
+	@Ignore("Bug 5403.  Decided to exclude this test. Hopefully will introduce a modified version in 1.1")
     public void testChunkRetryMultipleExceptions() throws Exception {
 
         String METHOD = "testChunkRetryMultipleExceptions";
@@ -1674,94 +1452,11 @@ public class ChunkTests {
 
     }
 
-    @TCKTest(
-       	versions = {"1.1.WORKING"},
-       	assertions = {"A chunk step with a retry-limit of 0 will not retry any exceptions."},
-       	specRefs = {
-       		@SpecRef(
-       			version = "1.0", section = "8.2.1",
-       			citations = {"retry-limit: Specifies the number of times a step will retry if any configured retryable exceptions are thrown"}
-       		),
-            @SpecRef(
-               	version = "1.0", section = "8.2.1.4.2",
-               	citations = {"The total number of retry attempts is set by the retry-limit attribute on the chunk element."}
-            )
-        },
-        issueRefs = {"https://github.com/WASdev/standards.jsr352.tck/issues/19"},
-        strategy = "Issue a job with a retry-limit of 0 and a configured retryable exception. "
-        		 + "On JobExecution1, throw the retryable exception once and verify that the job fails.",
-        notes = {"For some JSL attributes, a value of 0 means no limit (see start-limit and time-limit). This is NOT the case for retry-limit."}
-    )
-    @Test
-    @org.junit.Test
-    public void testChunkRetryLimit0() throws Exception {
-    	String METHOD = "testChunkRetryLimit0";
-        try {
-        	Reporter.log("Create job parameters for execution #1:<p>");
-            Properties jobParams = new Properties();
-            jobParams.put("retry.limit", "0");
-            jobParams.put("throw.reader.exception.for.these.items", "0");
-
-            Reporter.log("Locate job XML file: chunkRetryLimitTest.xml<p>");
-            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
-            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkRetryLimitTest", jobParams);
-
-            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
-            assertWithMessage("Testing execution #1", BatchStatus.FAILED, execution1.getBatchStatus());
-            assertWithMessage("retry-limit was exceeded by the correct exception", "BasicReaderException:Item#0", execution1.getExitStatus());
-        } catch (Exception e) {
-        	handleException(METHOD, e);
-        }
-    }
-    
-    @TCKTest(
-        versions = {"1.1.WORKING"},
-        assertions = {"Retryable exceptions thrown from multiple batch artifacts within the same step all count towards that step's retry-limit"},
-        specRefs = {
-        	@SpecRef(
-        		version = "1.0", section = "8.2.1",
-        		citations = {"retry-limit: Specifies the number of times a step will retry if any configured retryable exceptions are thrown"}
-        	),
-            @SpecRef(
-               	version = "1.0", section = "8.2.1.4.2",
-                citations = {"The retryable-exception-classes element specifies a set of exceptions that chunk processing will retry. [...] "
-                		   + "It applies to exceptions thrown from the reader, processor, or writer batch artifacts of a chunk type step. ",
-                		     "The total number of retry attempts is set by the retry-limit attribute on the chunk element."}
-            )
-        },
-        issueRefs = {"https://github.com/WASdev/standards.jsr352.tck/issues/23"},
-        strategy = "Issue a job with a retry-limit of 2 and a configured retryable exception. On JobExecution1, throw the retryable exception "
-        		 + "once from each of the Reader, Processor, and Writer (3 exceptions thrown in total). Verify that the job fails."
-    )
-    @Test
-    @org.junit.Test
-    public void testChunkRetryLimitExceededByRPWCombo() throws Exception {
-    	String METHOD = "testChunkRetryLimitExceededByRPWCombo";
-        try {
-        	Reporter.log("Create job parameters for execution #1:<p>");
-            Properties jobParams = new Properties();
-            jobParams.put("retry.limit", "2");
-            jobParams.put("throw.reader.exception.for.these.items", "0");
-            jobParams.put("throw.processor.exception.for.these.items", "1");
-            jobParams.put("throw.writer.exception.for.these.items", "2");
-
-            Reporter.log("Locate job XML file: chunkRetryLimitTest.xml<p>");
-            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
-            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkRetryLimitTest", jobParams);
-
-            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
-            assertWithMessage("Testing execution #1", BatchStatus.FAILED, execution1.getBatchStatus());
-            assertWithMessage("retry-limit was exceeded by the correct exception", "BasicWriterException:Item#2", execution1.getExitStatus());
-        } catch (Exception e) {
-        	handleException(METHOD, e);
-        }
-    }
-    
     /*
      * @testName: testChunkItemListeners
      * @assertion: each job will finish successfully as COMPLETED and the invocation of each type of item listener
      *             will be recognized 
-     *                5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     * 			   5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
      *             5.2.1.2 - Processor, 5.2.2.1 - Processor Properties
      *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
      *             5.2.1 - Chunk, item-count, retry-limit
@@ -1776,7 +1471,6 @@ public class ChunkTests {
      *                  The Batch Artifact enforces that each listener has been called correctly by the runtime.
      *                  test that each job succeeds and that the appropriate listener was called.    
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkItemListeners() throws Exception {
@@ -1858,7 +1552,7 @@ public class ChunkTests {
      * @testName: testChunkItemListenersOnError
      * @assertion: each job will finish successfully as COMPLETED and the invocation of each type of item listener
      *             will be recognized 
-     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     * 			   5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
      *             5.2.1.2 - Processor, 5.2.2.1 - Processor Properties
      *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
      *             5.2.1 - Chunk, item-count, retry-limit
@@ -1872,7 +1566,6 @@ public class ChunkTests {
      *                  batch artifact. The Batch artifact is configured to raise an exception on the read, process and write in that order.
      *                  The Batch Artifact enforces that each listener (read, process and write) onError() methods are been called correctly by the runtime.    
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testChunkItemListenersOnError() throws Exception {
@@ -1940,7 +1633,6 @@ public class ChunkTests {
      * @test_Strategy: start a job configured to a item-count of 10 configured to fail on the 12 item read.  
      *                 Verify that persisted step data is available even if step did not complete.
      */
-    //TODO Add @TCKTest Annotation
     @Test
     @org.junit.Test
     public void testUserDataIsPersistedAfterCheckpoint() throws Exception {

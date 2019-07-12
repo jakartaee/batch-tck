@@ -22,12 +22,11 @@
 	<properties>
 		<property name="myprop1" value="step2" />
 		<property name="myprop2" value="#{jobProperties['myprop1']}" />
-		<property name="batchletPropVal" value="JOB_OVERRIDE" />
-		<property name="parentProp" value="SHOULD_BE_OUT_OF_SCOPE_OF_@INJECT_@BATCHLETPROPERTY" />
+		<property name="batchletProp" value="JOB_OVERRIDE" />
 	</properties>
 	<step id="step1" next="#{jobProperties['myprop1']}">
 	    <properties>
-	    	<property name="batchletPropVal" value="STEP_OVERRIDE" />
+	    	<property name="batchletProp" value="STEP_OVERRIDE" />
 		</properties>
 		<batchlet ref="myBatchletWithPropertiesImpl">
 			<properties>
@@ -35,7 +34,7 @@
 				<property name="myProperty2" value="value2" />
 				<property name="myProperty4" value="value4" />
 				<property name="mySubmittedProp" value="#{jobParameters['mySubmittedProp']}" />
-				<property name="batchletProp" value="#{jobProperties['batchletPropVal']}" />
+				<property name="batchletProp" value="batchletPropValue" />
 				<property name="defaultPropName1" value="#{jobParameters['infile.name']}?:myfile1.txt;" />
 				<property name="defaultPropName2" value="#{jobParameters['unresolving.prop']}?:#{systemProperties['file.separator']};#{jobParameters['infile.name']}?:#{systemProperties['file.name.junit']};.txt" />
 				<property name="myConcatProp" value="#{jobParameters['myFilename']}.txt" />

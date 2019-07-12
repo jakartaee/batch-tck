@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * 
  * SPDX-License-Identifier: Apache-2.0
 */
 package com.ibm.jbatch.tck.artifacts.specialized;
@@ -45,10 +45,6 @@ public class MyBatchletWithPropertiesImpl extends AbstractBatchlet {
     @Inject    
     @BatchProperty
     public String myDefaultProp1 = "Should get overwritten by default value";
-    
-    @Inject    
-    @BatchProperty (name="parentProp")
-    public String parentProp;
     
     @Inject    
     @BatchProperty

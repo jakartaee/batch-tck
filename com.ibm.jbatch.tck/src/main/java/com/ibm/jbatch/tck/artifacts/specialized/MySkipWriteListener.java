@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
- */
+*/
 package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.List;
@@ -47,33 +47,26 @@ public class MySkipWriteListener implements SkipWriteListener {
     public static final String BAD_EXIT_STATUS = "MySkipWriteListener: BAD STATUS";
 
     @Override
-    public void onSkipWriteItem(List items, Exception e) throws Exception {
+    public void onSkipWriteItem(List items, Exception e) {
         Reporter.log("In onSkipWriteItem()" + e + "<p>");
         ReadRecord input = null;
         boolean inputOK = false;
         
         for (Object obj : items) {
-            input = (ReadRecord)obj;
+        	input = (ReadRecord)obj;
             
-            if (obj != null){
-                logger.finer("In onSkipProcessItem(), item count = " + input.getCount());
-                inputOK = true;
-            }
+    		if (obj != null){
+    			logger.finer("In onSkipProcessItem(), item count = " + input.getCount());
+    			inputOK = true;
+    		}
         }
 
         if (e instanceof MyParentException && inputOK) {
-            Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is an instance of: MyParentException<p>");
+        	Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is an instance of: MyParentException<p>");
             jobCtx.setExitStatus(GOOD_EXIT_STATUS);
         } else {
-            Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is NOT an instance of: MyParentException<p>");
+        	Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is NOT an instance of: MyParentException<p>");
             jobCtx.setExitStatus(BAD_EXIT_STATUS);
-            throw new Exception(); /*
-            This artifact's method of failing the test is not valid. Setting the exit status to BAD_EXIT_STATUS only works if that status
-            is immediately asserted to be wrong. In practice, this artifact is called multiple times in one job. Each iteration will overwrite
-            the previous exit status. So, if on iteration fails, but the last one succeeds, then the successful exit status of the last one is the
-            status used by the test assertion, and the test will pass. To be valid, the test must fail immediately upon a bad status. The addition
-            of this throw statement ensures that, and so the test will not pass when it shouldn't. 
-            */
         }
     }
 }
