@@ -23,5 +23,22 @@
       <packages>
          <package name="com.ibm.jbatch.tck.tests.*" />
       </packages>
+      <classes>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.ListenerOnErrorTests">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.ParallelContextPropagationTests">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.PartitionRerunTests">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+      </classes>
    </test>
 </suite>

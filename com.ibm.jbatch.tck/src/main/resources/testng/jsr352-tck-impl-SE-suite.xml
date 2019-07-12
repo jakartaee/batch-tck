@@ -26,7 +26,23 @@
         <packages>
             <package name="com.ibm.jbatch.tck.tests.jslxml" />
         </packages>
-
+        <classes>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.ListenerOnErrorTests">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.ParallelContextPropagationTests">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="com.ibm.jbatch.tck.tests.jslxml.PartitionRerunTests">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+        </classes>
 
         <!--  Below is a sample syntax for debugging either an implementation or the TCK itself.  Note that modifying this 
               results in a run which is something less than an "official" execution, since of course this would constitute 
