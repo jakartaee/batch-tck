@@ -46,9 +46,10 @@
         </license>
     </licenses>
     <scm>
-        <url>git://github.com/eclipse-ee4j/batch-tck</url>
-        <connection>scm:git://github.com/eclipse-ee4j/batch-tck</connection>
-        <developerConnection>scm:git://github.com/eclipse-ee4j/batch-tck</developerConnection>
+        <connection>scm:git:https://github.com/eclipse-ee4j/batch-tck.git</connection>
+        <developerConnection>scm:git:https://github.com/eclipse-ee4j/batch-tck.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/batch-tck</url>
+        <tag>master</tag>
     </scm>
     <parent>
         <groupId>net.java</groupId>
