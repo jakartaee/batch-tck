@@ -1,0 +1,119 @@
+= Jakarta Batch TCK instructions
+
+This branch verifies the staging repository (staged release) of the artifact:
+
+    jakarta.batch:jakarta.batch-api:1.0.2
+
+using the former 'jbatch' Reference Implementation (*com.ibm.jbatch.**) used currently in Eclipse Glassfish.
+
+== Interim Form for Jakarta EE 8
+
+Note this _jakarta.batch_ TCK project represents an interim form of the batch TCK first developed for https://www.jcp.org/en/jsr/detail?id=352[JSR 352] and most recently hosted https://github.com/WASdev/standards.jsr352.tck/[here].
+
+This is why we include these README instructions in this branch, only, and not in _master_.
+
+We expect to continue transitioning the project structure wrapping the core tests, so that the vehicle within they execute conforms more to the patterns used with other Jakarta EE technologies in other EE4J projects.
+
+== What Is Tested
+
+=== Batch API 
+
+Signature tests of *jakarta.batch:jakarta.batch-api:1.0.2*, found in the *com.ibm.jbatch.tck.dist.exec* module 
+
+=== Batch API + Implementation
+
+A Test NG suite of tests of the  *jakarta.batch:jakarta.batch-api:1.0.2* API plus an implementation (this project is configured to use the 'jbatch' former reference implementation, which uses *com.ibm.jbatch.** packages).
+
+These tests are found in the modules:
+
+* *com.ibm.jbatch.tck.exec* 
+* *com.ibm.jbatch.tck.dist.exec* 
+
+== Recorded Execution Instructions
+
+This is how this TCK execution was actually performed, with a reference to the staged artifacts:
+jakarta.batch:jakarta.batch-api:1.0.2 (plus related spec + parent POMs) implemented with this in the top-level pom.xml https://github.com/eclipse-ee4j/batch-tck/blob/f845e1283a47f35f475ff9cfc18df568cf01d58c/pom.xml#L77-L83[here].
+
+    <!-- Temporary used for execution against staging release of 1.0.2 API --> 
+    <repositories>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/jakartabatch-1007/</url>
+        </repository>
+    </repositories>
+
+.  Use Open JDK + HotSpot JVM
++
+    export JAVA_HOME=/path/to/OpenJDK-HotSpotVM
+
+.  Run TCK
++
+    git clone git@github.com:eclipse-ee4j/batch-tck.git; cd batch-tck
+    git checkout 1.0.2-api-tck-execution
+    rm -rf ~/.m2/repository/jakarta/batch  # probably not necessary
+    mvn clean install   
+
+This runs both a suite of signature tests against the API plus a TestNG test suite against the Batch implementation.
+
+== Later Duplication Instructions
+
+Since a staged repository is not permanent, we include this list of instructions to duplicate the TCK run used for the approval ballot.
+
+.  Use Open JDK + HotSpot JVM
+
+    export JAVA_HOME=/path/to/OpenJDK-HotSpotVM
+
+. Checkout and build API project
++
+    git clone git@github.com:eclipse-ee4j/batch-api.git; cd batch-api
+    git checkout jakartabatch-1007
+    mvn clean install; cd ..
+
+.  Run TCK
++
+    git clone git@github.com:eclipse-ee4j/batch-tck.git; cd batch-tck
+    git checkout  ee4j-8-master
+    mvn clean install
+
+*Note:*  Assuming the API is released to Maven, there'd be no need to build it yourself locally as step 2. immediately above.   I include it to "debug" or record the process used here, not because it'd be how you do things in the future.
+
+== Additional Verification
+
+Since the signature test libraries are unlike more typical unit tests of Java code, it is nice to be able to force an error to ensure that the code is really being tested.
+
+. Switch to *dist.exec* dir
++
+    cd com.ibm.jbatch.tck.dist.exec
+
+. Edit pom.xml, and remove copying of the cdi API JAR
++
+    <!--
+      <artifactItem>
+          <groupId>javax.enterprise</groupId>
+           <artifactId>cdi-api</artifactId>
+           <outputDirectory>${project.build.directory}/executeTCK/runSigTest</outputDirectory>
+           <destFileName>cdi-api.jar</destFileName>
+       </artifactItem>
+    -->
+
+. Run again
+    mvn clean install -DskipTests
+. You should now see a single failure, like:
+
+```
+Added Annotations
+-----------------
+
+javax.batch.api.BatchProperty:          name():anno 0 javax.enterprise.util.Nonbinding()
+
+```
+
+Note the API is still tested with `mvn clean install -DskipTests`, which skips the TestNG test suite against the Batch implementation but still runs the signature tests.
+
+
+== References
+
+1. See: link:/CONTRIBUTING[CONTRIBUTING] for full project information (mailing list, etc.).
+1. The current TCK execution in particular, was assembled by: mailto:skurz@us.ibm.com[skurz@us.ibm.com] 
+
+
