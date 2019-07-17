@@ -70,7 +70,16 @@
 
     <files>
         <file>
-            <source>otherFiles/readme.txt</source>
+            <!-- EFTL LICENSE for the distributed TCK, not the development of the TCK source, which is Apache V2.0 -->
+            <source>otherFiles/LICENSE.txt</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>otherFiles/NOTICE.txt</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>otherFiles/README.txt</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
