@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.batch</groupId>
     <artifactId>tck-parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <name>tck-parent</name>
     <description>
@@ -125,10 +125,9 @@
         <batch.impl.version>1.0.1</batch.impl.version>
 
         <!-- This version of TCK -->
-        <batch.tck.version>1.0.2-SNAPSHOT</batch.tck.version>
-        <batch.tck.ann.version>1.0.2-SNAPSHOT</batch.tck.ann.version>
-        <batch.tck.ann.proc.version>1.0.2-SNAPSHOT</batch.tck.ann.proc.version>
-        <batch.spec.version>1.1</batch.spec.version>
+        <batch.tck.version>1.0.2</batch.tck.version>
+        <batch.tck.ann.version>1.0.2</batch.tck.ann.version>
+        <batch.tck.ann.proc.version>1.0.2</batch.tck.ann.proc.version>
 
         <!-- Convenience -->
         <fs>${file.separator}</fs>

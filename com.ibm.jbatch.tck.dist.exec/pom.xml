@@ -24,14 +24,14 @@
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck.dist.exec</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-SNAPSHOT</version>
-    <name>Jakarta Batch TCK Execution (using JBatch, the former RI, against TCK Distribution ZIP)</name>
+    <version>1.0.2</version>
+    <name>Jakarta Batch TCK Execution (testingJBatch, the former RI, plus the new Jakarta Batch API, both against TCK Distribution ZIP)</name>
 
     <build>
         <plugins>
@@ -57,7 +57,7 @@
                                          Still, a hack to run against a subset of tests:
                                          1) Do a full 'mvn install'
                                          2) WITHOUT doing a clean, edit
-                                             com.ibm.jbatch.tck.dist.exec/target/executeTCK/com.ibm.jbatch.tck-1.1-SNAPSHOT/artifacts/batch-tck-impl-SE-suite.xml
+                                             com.ibm.jbatch.tck.dist.exec/target/executeTCK/com.ibm.jbatch.tck-1.0.2/artifacts/batch-tck-impl-SE-suite.xml
                                             defining the individual test or subset
                                          3)  Replace 
                                     <overWrite>true</overWrite>

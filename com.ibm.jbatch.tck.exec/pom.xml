@@ -24,13 +24,13 @@
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck.exec</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <name>Jakarta Batch TCK Execution (using JBatch, the former RI, against TCK Maven module)</name>
 
     <dependencies>
