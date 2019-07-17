@@ -112,18 +112,6 @@
                                     <outputDirectory>${project.build.directory}/executeTCK/runSigTest</outputDirectory>
                                     <destFileName>sigtestdev.jar</destFileName>
                                 </artifactItem>
-                                <artifactItem>
-                                    <groupId>javax.inject</groupId>
-                                    <artifactId>javax.inject</artifactId>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runSigTest</outputDirectory>
-                                    <destFileName>javax.inject.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>javax.enterprise</groupId>
-                                    <artifactId>cdi-api</artifactId>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runSigTest</outputDirectory>
-                                    <destFileName>cdi-api.jar</destFileName>
-                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>                    
