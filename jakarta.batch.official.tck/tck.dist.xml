@@ -44,7 +44,6 @@
         <dependencySet>
             <includes>
                 <include>javax.inject:javax.inject</include>
-                <include>junit:junit</include>
                 <include>org.testng:testng</include>
                 <include>com.beust:jcommander</include>
                 <include>xmlunit:xmlunit</include>
@@ -79,7 +78,7 @@
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>otherFiles/README.txt</source>
+            <source>otherFiles/README.md</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
