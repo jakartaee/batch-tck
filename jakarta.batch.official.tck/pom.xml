@@ -28,10 +28,10 @@
     </parent>
 
     <groupId>jakarta.batch</groupId>
-    <artifactId>com.ibm.jbatch.tck.dist</artifactId>
+    <artifactId>jakarta.batch.official.tck</artifactId>
     <packaging>pom</packaging>
     <version>1.0.2</version>
-    <name>Jakarta Batch TCK Distribution ZIP</name>
+    <name>Jakarta Batch Official TCK Distribution ZIP</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -107,8 +107,8 @@
                             <descriptors>
                                 <descriptor>tck.dist.xml</descriptor>
                             </descriptors>
-                            <finalName>com.ibm.jbatch.tck-${project.version}</finalName>
-                            <appendAssemblyId>true</appendAssemblyId>
+                            <finalName>${batch.tck.archive.root}</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
                             <outputDirectory>${project.build.directory}</outputDirectory>
                             <workDirectory>${project.build.directory}/assembly/work</workDirectory>
                             <tarLongFileMode>gnu</tarLongFileMode>

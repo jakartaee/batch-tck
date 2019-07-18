@@ -27,7 +27,7 @@
     </formats>
 
     <includeBaseDirectory>true</includeBaseDirectory>
-    <baseDirectory>com.ibm.jbatch.tck-${project.version}</baseDirectory>
+    <baseDirectory>${batch.tck.archive.root}</baseDirectory>
 
     <dependencySets>
         <dependencySet>

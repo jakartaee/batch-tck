@@ -25,8 +25,8 @@ The Jakarta Batch TCK tests implementations of the Jakarta Batch specification, 
 
 As an overview, note in order to pass the Jakarta Batch TCK you must run against your implementation, passing 100% of both the:
 
-•	Signature Tests
-•	TestNG Test Suite
+* Signature Tests
+* TestNG Test Suite
 
 The two types of tests are not encapsulated in a single execution task or command; they must be executed separately from each other and each must be executed separately for each version of Java tested (e.g. Java 8, etc.). 
 
@@ -62,7 +62,7 @@ The Jakarta Batch TCK is distributed as a zip file, which contains the TCK artif
 ===	The TCK Environment
 The software can simply be extracted from the ZIP file. Once the TCK is extracted, you'll see the following structure:
 
- com.ibm.jbatch.tck-1.0.2/
+ jakarta.batch.official.tck-x.y.z/
      artifacts/ 
      doc/
      lib/ 
@@ -92,7 +92,7 @@ In more detail:
 The TCK test methods are contained in a number of test classes in the `com.ibm.jbatch.tck.tests` package.	Each test method is flagged as a TestNG test using the `@org.testng.annotations.Test` annotation.
  
 ===TCK test artifacts
-Besides the test classes themselves, the Jakarta Batch TCK is comprised of a number of test artifact classes located in the `com.ibm.jbatch.tck.artifacts` package. These are the batch artifacts that have been implemented based on the Jakarta Batch API, and which are used by the individual test methods. The final set of test artifacts is the set of test JSL (XML) files, which are packaged in the `META-INF/batch-jobs` directory within `artifacts/com.ibm.jbatch.tck-1.0.2.jar`
+Besides the test classes themselves, the Jakarta Batch TCK is comprised of a number of test artifact classes located in the `com.ibm.jbatch.tck.artifacts` package. These are the batch artifacts that have been implemented based on the Jakarta Batch API, and which are used by the individual test methods. The final set of test artifacts is the set of test JSL (XML) files, which are packaged in the `META-INF/batch-jobs` directory within `artifacts/com.ibm.jbatch.tck-x.y.z.jar`
 
 The basic test flow simply involves a TestNG test method using the JobOperator API to start (and possibly restart) one or more job instances of jobs defined via one of the test JSLs, making use of some number of `com.ibm.jbatch.tck.artifacts` Java artifacts. The JobOperator is wrapped by a thin layer which blocks waiting for the job to finish executing (more on this in the discussion of the *porting package SPI* later in the document).
 
@@ -125,9 +125,9 @@ These values can be adjusted if timing issues are seen in the implementation bei
 
 ===	Porting Package SPI
 
-The Jakarta Batch TCK relies on an implementation of a “porting package” SPI to function, in order to verify test execution results. The reason is that the Jakarta Batch specification API alone does not provide a convenient-enough mechanism to check results.
+The Jakarta Batch TCK relies on an implementation of a "porting package" SPI to function, in order to verify test execution results. The reason is that the Jakarta Batch specification API alone does not provide a convenient-enough mechanism to check results.
  
-A default, “polling” implementation of this SPI is shipped within the TCK itself. The expectation is that the typical Jakarta Batch implementation will be content to use the TCK-provided, default implementation of the porting package SPI.
+A default, "polling"� implementation of this SPI is shipped within the TCK itself. The expectation is that the typical Jakarta Batch implementation will be content to use the TCK-provided, default implementation of the porting package SPI.
 
 Further detail on the porting package is provided later in this document, in case you wish to provide your own, different implementation.
 
@@ -208,7 +208,7 @@ It assumes:
 
 So to be clear, the directory structure looks like
 
-    com.ibm.jbatch.tck-1.0.2/
+    jakarta.batch.official.tck-x.y.z/
         artifacts/ 
         doc/
         ...

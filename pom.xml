@@ -128,6 +128,8 @@
         <batch.tck.version>1.0.2</batch.tck.version>
         <batch.tck.ann.version>1.0.2</batch.tck.ann.version>
         <batch.tck.ann.proc.version>1.0.2</batch.tck.ann.proc.version>
+        <!-- Named after the module since I'm not sure how to install a different name -->
+        <batch.tck.archive.root>jakarta.batch.official.tck-${batch.tck.version}</batch.tck.archive.root>
 
         <!-- Convenience -->
         <fs>${file.separator}</fs>
@@ -162,7 +164,7 @@
         <module>com.ibm.jbatch.tck</module>
         <module>com.ibm.jbatch.tck.spi</module>
         <module>com.ibm.jbatch.tck.exec</module>
-        <module>com.ibm.jbatch.tck.dist</module>
+        <module>jakarta.batch.official.tck</module>
         <module>com.ibm.jbatch.tck.dist.exec</module>
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
@@ -226,7 +228,7 @@
             </dependency>
             <dependency>
                 <groupId>jakarta.batch</groupId>
-                <artifactId>com.ibm.jbatch.tck.dist</artifactId>
+                <artifactId>jakarta.batch.official.tck</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>
             <dependency>
