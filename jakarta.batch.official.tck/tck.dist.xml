@@ -83,6 +83,10 @@
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
+            <source>otherFiles/CoverageStatement.txt</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
             <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-SE-suite.xml</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
