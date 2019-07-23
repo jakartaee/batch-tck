@@ -2,6 +2,17 @@
 SOME NOTES ON ADDING TEST AND WORKING WITH THE TCK
 ==================================================
 
+##################
+# WARNING !!::
+#
+# July 23, 2019
+#
+# Some of this is probably out of date in the move to Jakarta.  Will leave
+# here in case it's helpful for reference.
+##################
+
+
+
 ADDING ARTIFACTS TO TCK:
 
     For the tck.exec.dist (official execution) things are referenced through the batch.xml:
