@@ -72,7 +72,7 @@ java -version
 # Run SigTest
 java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/javax.inject-1.jar:lib/cdi-api-1.1-20121030.jar
+-classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/javax.inject-1.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 #
 # Run SigTest forcing error

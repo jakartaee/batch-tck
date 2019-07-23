@@ -201,9 +201,9 @@
                     </executions>
                     <dependencies>
                         <dependency>
-                            <groupId>javax.enterprise</groupId>
-                            <artifactId>cdi-api</artifactId>
-                            <version>${version.javax.enterprise.cdi-api}</version>
+                            <groupId>jakarta.enterprise</groupId>
+                            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+                            <version>${version.jakarta.enterprise.jakarta.enterprise.cdi-api}</version>
                         </dependency>
                     </dependencies>
                 </plugin>

@@ -122,7 +122,7 @@
 
         <!-- Run against latest version of RI -->
         <batch.api.version>1.0.2</batch.api.version>
-        <batch.impl.version>1.0.1</batch.impl.version>
+        <batch.impl.version>1.0.3</batch.impl.version>
 
         <!-- This version of TCK -->
         <batch.tck.version>1.0.2</batch.tck.version>
@@ -139,7 +139,7 @@
         <version.java>1.6</version.java>
 
         <!-- Dependencies -->
-        <version.javax.enterprise.cdi-api>1.1-20121030</version.javax.enterprise.cdi-api>
+        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>2.0.1</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
         <version.javax.inject.javax.inject>1</version.javax.inject.javax.inject>
         <version.org.testng.testng>6.8.8</version.org.testng.testng>
         <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
@@ -237,9 +237,9 @@
                 <version>${batch.impl.version}</version>
             </dependency>
             <dependency>
-                <groupId>javax.enterprise</groupId>
-                <artifactId>cdi-api</artifactId>
-                <version>${version.javax.enterprise.cdi-api}</version>
+                <groupId>jakarta.enterprise</groupId>
+                <artifactId>jakarta.enterprise.cdi-api</artifactId>
+                <version>${version.jakarta.enterprise.jakarta.enterprise.cdi-api}</version>
             </dependency>
             <dependency>
                 <groupId>javax.inject</groupId>

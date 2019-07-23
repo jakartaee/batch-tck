@@ -47,7 +47,7 @@
                 <include>org.testng:testng</include>
                 <include>com.beust:jcommander</include>
                 <include>xmlunit:xmlunit</include>
-                <include>javax.enterprise:cdi-api</include>
+                <include>jakarta.enterprise:jakarta.enterprise.cdi-api</include>
             </includes>
             <outputDirectory>lib</outputDirectory>
         </dependencySet>
