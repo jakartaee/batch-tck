@@ -112,6 +112,22 @@
                 </plugins>
             </build>
         </profile>
+        <!-- Activate with `mvn ... install -DtestStagedAPI` -->
+        <profile>
+            <id>test-staged-api</id>
+            <activation>
+                <property>
+                    <name>testStagedAPI</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/staging/</url>
+                </repository>
+            </repositories>
+        </profile>
     </profiles>
 
     <properties>
