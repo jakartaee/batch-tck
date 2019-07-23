@@ -16,8 +16,17 @@ set -x
 # 1. Point to JAVA_HOME so that the signature test command below can find the runtime JAR (rt.jar):
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/jre/
 
-# 2. For now, assume you get TCK from an EE4J download, "out of band" or external to this script, and you manually by whatever means copy it into your home directory:
-TCK_ZIP_LOCATION=~/jakarta.batch.official.tck-1.0.2.tar.gz
+###
+# 2. Prime your local Maven repository, ensuring it is populated with contents mentioned below in "Copy from Local Maven Repository".
+#
+#  Since these are Maven coordinates of already-released artifacts, we take the shortcut of copying them locally
+#
+# One way of doing this is to clone the TCK project from https://github.com/eclipse-ee4j/batch-tck and run `mvn install -DskipTests=true  -DtestStagedAPI`.
+###
+
+# 3. Parameterize locations of API under test, and TCK (you might have to change the extract scripts if you were to, say, download them before running this script).
+BATCH_API_STAGING_REPO_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch-api/1.0.2/jakarta.batch-api-1.0.2.jar
+BATCH_TCK_STAGING_REPO_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/1.0.2/jakarta.batch.official.tck-1.0.2.tar.gz
 
 #-------------------------------------------------------------------------------
 # You can skip this section.
@@ -36,31 +45,39 @@ TCK_ZIP_LOCATION=~/jakarta.batch.official.tck-1.0.2.tar.gz
 # Don't change the rest 
 #######################
 
-# Variables like this just here for readability
-BATCH_API_STAGING_REPO_URL=https://oss.sonatype.org/service/local/repositories/jakartabatch-1007/content/jakarta/batch/jakarta.batch-api/1.0.2/jakarta.batch-api-1.0.2.jar
-
 # Basic info
 uname -a
-# Echo contents
+# Echo contents (should be empty)
 ls -la .
+wget $BATCH_TCK_STAGING_REPO_URL
+mkdir tckdir; cd tckdir
 
-# Since these are Maven coordinates of already-released artifacts, we take the shortcut of copying them locally
+####################################
+# Copy from Local Maven Repository #
+####################################
 cp ~/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar .
 cp ~/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/1.0.3/com.ibm.jbatch.container-1.0.3.jar .
 cp ~/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/1.0.3/com.ibm.jbatch.spi-1.0.3.jar .
 cp ~/.m2/repository/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar ./sigtestdev.jar
 
-chmod +rx *.jar
-
 # Get API JAR under test from staging repo
 wget $BATCH_API_STAGING_REPO_URL
+
+chmod +rx *.jar
 
 # Echo contents
 ls -la .
 
-#  unzip new from peer to 'batch-tck'
-tar xzvf  $TCK_ZIP_LOCATION
+#  wget then extract TCK as peer
+tar xzvf ../jakarta.batch.official.tck-1.0.2.tar.gz
+
 cd jakarta.batch.official.tck-1.0.2
+
+
+#------------------------------------------
+# Everything's copied into place, just echo
+# some detail about the JDK/JRE in use.
+#------------------------------------------
 
 # Show java
 ls -l $(which java) $(which javac)
@@ -68,6 +85,10 @@ ls -l /etc/alternatives/java*    # Help navigate links
 echo $JAVA_HOME
 ls -l $JAVA_HOME/lib/rt.jar
 java -version
+
+#------------------------------------------
+# Done setting things up, time to run tests
+#------------------------------------------
 
 # Run SigTest
 java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
