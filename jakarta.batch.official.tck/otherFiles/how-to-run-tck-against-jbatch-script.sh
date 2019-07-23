@@ -2,7 +2,7 @@
 set -x
 
 ####
-# Running Jakarta Batch TCK Version 1.0.2 against com.ibm.jbatch V1.0.1
+# Running Jakarta Batch TCK Version 1.0.2 against com.ibm.jbatch V1.0.3
 ####
 
 # This is a documented script that can be used to execute the Jakarta Batch TCK against the com.ibm.jbatch implementation.  By using "set -x" we allow the 'script' command to be used
@@ -46,8 +46,8 @@ ls -la .
 
 # Since these are Maven coordinates of already-released artifacts, we take the shortcut of copying them locally
 cp ~/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar .
-cp ~/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/1.0.1/com.ibm.jbatch.container-1.0.1.jar .
-cp ~/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/1.0.1/com.ibm.jbatch.spi-1.0.1.jar .
+cp ~/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/1.0.3/com.ibm.jbatch.container-1.0.3.jar .
+cp ~/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/1.0.3/com.ibm.jbatch.spi-1.0.3.jar .
 cp ~/.m2/repository/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar ./sigtestdev.jar
 
 chmod +rx *.jar
@@ -93,4 +93,4 @@ echo
 
 # Run TestNG bucket with properties to configure com.ibm.jbatch implementation
 
-ant -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-1.0.2.jar:../com.ibm.jbatch.container-1.0.1.jar:../com.ibm.jbatch.spi-1.0.1.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
+ant -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-1.0.2.jar:../com.ibm.jbatch.container-1.0.3.jar:../com.ibm.jbatch.spi-1.0.3.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
