@@ -70,9 +70,9 @@ The software can simply be extracted from the ZIP file. Once the TCK is extracte
      sigtest.build.xml
      batch-tck.properties 
      batch-sigtest-tck.properties
-     LICENSE.txt
-     NOTICE.txt
-     README.txt
+     LICENSE_EFTL.md
+     NOTICE.md
+     README.md
 
 In more detail:
 

@@ -21,24 +21,15 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/jr
 #
 #  Since these are Maven coordinates of already-released artifacts, we take the shortcut of copying them locally
 #
-# One way of doing this is to clone the TCK project from https://github.com/eclipse-ee4j/batch-tck and run `mvn install -DskipTests=true  -DtestStagedAPI`.
+# One way of doing this is to clone and execute the TCK project like:
+#
+#   git clone git@github.com:eclipse-ee4j/batch-tck.git; cd batch-tck
+#   mvn clean install -DskipTests=true  -DskipSigTests=true -DtestStagedAPI
 ###
 
 # 3. Parameterize locations of API under test, and TCK (you might have to change the extract scripts if you were to, say, download them before running this script).
 BATCH_API_STAGING_REPO_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch-api/1.0.2/jakarta.batch-api-1.0.2.jar
-BATCH_TCK_STAGING_REPO_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/1.0.2/jakarta.batch.official.tck-1.0.2.tar.gz
-
-#-------------------------------------------------------------------------------
-# You can skip this section.
-#
-# It may help to leave in how we would build the official TCK archive informally in a local build:
-#
-# TCK_EXECUTION_BRANCH=1.0.2-api-tck-execution
-# git clone git@github.com:eclipse-ee4j/batch-tck.git; cd batch-tck
-# git checkout $TCK_EXECUTION_BRANCH
-# mvn clean install -DskipTests=true  -DskipSigTests=true
-# TCK_ZIP_LOCATION=~/.m2/repository/jakarta/batch/jakarta.batch.official.tck/1.0.2/jakarta.batch.official.tck-1.0.2.tar.gz
-#-------------------------------------------------------------------------------
+BATCH_TCK_STAGING_REPO_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/1.0.2/jakarta.batch.official.tck-1.0.2.zip
 
 
 #######################
@@ -68,8 +59,8 @@ chmod +rx *.jar
 # Echo contents
 ls -la .
 
-#  wget then extract TCK as peer
-tar xzvf ../jakarta.batch.official.tck-1.0.2.tar.gz
+# extract TCK in peer directory 
+jar xvf ../jakarta.batch.official.tck-1.0.2.zip
 
 cd jakarta.batch.official.tck-1.0.2
 

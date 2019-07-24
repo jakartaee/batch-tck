@@ -23,7 +23,6 @@
     <id>tck.dist</id>
     <formats>
         <format>zip</format>
-        <format>tar.gz</format>
     </formats>
 
     <includeBaseDirectory>true</includeBaseDirectory>
@@ -70,11 +69,11 @@
     <files>
         <file>
             <!-- EFTL LICENSE for the distributed TCK, not the development of the TCK source, which is Apache V2.0 -->
-            <source>otherFiles/LICENSE.txt</source>
+            <source>otherFiles/LICENSE_EFTL.md</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>otherFiles/NOTICE.txt</source>
+            <source>otherFiles/NOTICE.md</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
@@ -82,7 +81,7 @@
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>otherFiles/CoverageStatement.txt</source>
+            <source>otherFiles/CoverageStatement.md</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>

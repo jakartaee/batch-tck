@@ -5,7 +5,7 @@ This is the Technology Compatibility Kit (TCK) for Jakarta Batch.
 The Jakarta Batch specification describes the job specification language,
 Java programming model, and runtime environment for Jakarta Batch applications.
 
-This distribution, as a whole, is licensed under the terms of the Eclipse Foundation Technology Compatibility Kit License - v 1.0 (see LICENSE.txt).
+This distribution, as a whole, is licensed under the terms of the Eclipse Foundation Technology Compatibility Kit License - v 1.0 (see LICENSE_EFTL.md).
 
 ## Key Documenation Within
 

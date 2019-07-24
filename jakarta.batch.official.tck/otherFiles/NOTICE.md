@@ -1,16 +1,14 @@
+# NOTICES AND INFORMATION for Jakarta Batch TCK
 
-========================================================================================
-NOTICES AND INFORMATION for Jakarta Batch TCK
-========================================================================================
-
-Apache 2.0 NOTICES AND INFORMATION
+## Apache 2.0 NOTICES AND INFORMATION
 The Program includes the following, which were also obtained under the terms and conditions of the Apache 2.0 license: 
 
-TestNG v6.8.8
-JCommander v1.60
-Java Inject v1
-CDI (Contexts and Dependency Injection for Java) APIs v1.1-20121030
+* TestNG v6.8.8
+* JCommander v1.60
+* Java Inject v1
+* CDI (Contexts and Dependency Injection for Java) APIs v1.1-20121030
 
+```
 Apache License
 Version 2.0, January 2004
 http://www.apache.org/licenses/
@@ -65,18 +63,17 @@ You may add Your own copyright statement to Your modifications and may provide a
 8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.
 
 9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.
-
+```
 
 END OF APACHE NOTICES AND INFORMATION
 
-========================================================================================
+## XML Unit NOTICES AND INFORMATION
 
-XML Unit NOTICES AND INFORMATION
-
-XML Unit v1.3
+### XML Unit v1.3
 
 The Program includes XML Unit which was obtained under the terms and conditions of the following license: 
 
+```
 Copyright (c) 2007-2008, Jeff Martin, Tim Bacon
 All rights reserved.
 
@@ -107,8 +104,8 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
+```
 
 End of XML Unit NOTICES AND INFORMATION
-===========================================================================================
 
 End of Jakarta Batch TCK NOTICES AND INFORMATION 
