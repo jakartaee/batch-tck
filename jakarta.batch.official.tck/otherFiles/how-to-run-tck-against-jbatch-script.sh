@@ -24,7 +24,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/jr
 # One way of doing this is to clone and execute the TCK project like:
 #
 #   git clone git@github.com:eclipse-ee4j/batch-tck.git; cd batch-tck
-#   mvn clean install -DskipTests=true  -DskipSigTests=true -DtestStagedAPI
+#   mvn clean install -DskipTests=true  -DskipSigTests=true -DtestStagedDependencies
 ###
 
 # 3. Parameterize locations of API under test, and TCK (you might have to change the extract scripts if you were to, say, download them before running this script).
@@ -84,7 +84,7 @@ java -version
 # Run SigTest
 java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/javax.inject-1.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
+-classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 #
 # Run SigTest forcing error
@@ -96,7 +96,7 @@ echo ---------------------------------------------------
 echo 
 java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/javax.inject-1.jar
+-classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 echo 
 echo ---------------------------------------------------
 echo --- done expecting failure,tests should work now---

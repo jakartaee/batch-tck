@@ -42,7 +42,7 @@
         </dependencySet>
         <dependencySet>
             <includes>
-                <include>javax.inject:javax.inject</include>
+                <include>jakarta.inject:jakarta.inject-api</include>
                 <include>org.testng:testng</include>
                 <include>com.beust:jcommander</include>
                 <include>xmlunit:xmlunit</include>

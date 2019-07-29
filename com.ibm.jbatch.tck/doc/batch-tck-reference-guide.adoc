@@ -204,7 +204,7 @@ It assumes:
 
     java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
-    -classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/jre/lib/rt.jar:lib/javax.inject-1.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
+    -classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 So to be clear, the directory structure looks like
 
@@ -232,7 +232,7 @@ For additional confirmation that the signature test is working correctly, a fail
 
     java -jar sigtestdev.jar SignatureTest -static -package javax.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
-    -classpath jakarta.batch-api.jar:$JAVA_HOME/jre/lib/rt.jar:lib/javax.inject-1.jar
+    -classpath jakarta.batch-api.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 
 
 You will see a failure like:
