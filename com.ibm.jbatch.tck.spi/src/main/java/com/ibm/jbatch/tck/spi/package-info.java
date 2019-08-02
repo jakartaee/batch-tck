@@ -30,9 +30,9 @@
  * to implement this SPI, but will use the default implementation.
  * 
  * <p>
- * For more details, see the documentation in the TCK Reference Guide.
+ * For more details, see the documentation in the Jakarta Batch TCK Reference Guide, included within the TCK binary.
  *  
- * @see <a href="https://java.net/projects/jbatch/downloads/download/batch-tck-reference-guide.pdf">TCK Reference Guide</a> 
+ * @see <a href=" https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-1.0.2.zip">TCK binary</a> 
  * 
  */
 package com.ibm.jbatch.tck.spi;

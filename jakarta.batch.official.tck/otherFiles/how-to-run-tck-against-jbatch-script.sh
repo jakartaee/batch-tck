@@ -82,6 +82,7 @@ ls -la .
 # Show SHA 256 of everything so far.  Validation should be done manually, since this script
 # is part of the TCK zip
 #
+openssl version
 openssl dgst -sha256 *.jar
 openssl dgst -sha256 ../*.zip
 

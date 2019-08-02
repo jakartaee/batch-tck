@@ -1,4 +1,4 @@
-= Jakarta Batch TCK Reference Guide
+﻿= Jakarta Batch TCK Reference Guide
 :toc:
 :sectnums:
 
@@ -31,7 +31,7 @@ As an overview, note in order to pass the Jakarta Batch TCK you must run against
 The two types of tests are not encapsulated in a single execution task or command; they must be executed separately from each other and each must be executed separately for each version of Java tested (e.g. Java 8, etc.). 
 
 == TCK Challenges/Appeals Process
-The *Jakarta EE TCK Process 1.0* will govern all process details used for challenges to the Jakarta Batch TCK.    
+The https://github.com/jakartaee/specification-committee/blob/master/process.adoc[Jakarta EE TCK Process 1.0] will govern all process details used for challenges to the Jakarta Batch TCK.    
 
 Except from the *Jakarta EE TCK Process 1.0*:
 
@@ -39,7 +39,12 @@ Except from the *Jakarta EE TCK Process 1.0*:
 > 
 > Requests for tests to be excluded are referred to as Challenges.  This section identifies who can make challenges to the TCK, what challenges to the TCK may be submitted, how these challenges are submitted, how and to whom challenges are addressed.
 
-Here is a https://docs.google.com/document/d/1Et3LtK-2SUuAoOV56t8R8fKnRWhbWqg9SLgm-VhbDPY/edit#heading=h.m0w944vn2kbp[link] to the [underline]#Challenges# section within the *Jakarta EE TCK Process 1.0*.
+=== Links
+Here is a https://github.com/jakartaee/specification-committee/blob/master/process.adoc#challenges[link] to the [underline]#Challenges# section within the *Jakarta EE TCK Process 1.0*.
+
+Challenges will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository. 
+
+As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.0* you can click https://github.com/eclipse-ee4j/batch-api/issues/new?labels=challenge[here], though it is recommended that you read through the challenge process to understand it in detail.
 
 == Certification of Compatibility
 The *Jakarta EE TCK Process 1.0* will define the core process details used to certify compatibility with the Jakarta Batch specification, through execution of the Jakarta Batch TCK.   
@@ -48,7 +53,12 @@ Except from the *Jakarta EE TCK Process 1.0*:
 
 > Jakarta EE is a self-certification ecosystem. If you wish to have your implementation listed on the official https://jakarta.ee implementations page for the given specification, a certification request as defined in this section is required.
 
-Here is a https://docs.google.com/document/d/1Et3LtK-2SUuAoOV56t8R8fKnRWhbWqg9SLgm-VhbDPY/edit#heading=h.jancgi3rd7xs[link] to the [underline]#Certification of Compatibility# section within the *Jakarta EE TCK Process 1.0*.
+=== Links
+Here is a https://github.com/jakartaee/specification-committee/blob/master/process.adoc#certification-of-compatibility[link] to the [underline]#Certification of Compatibility# section within the *Jakarta EE TCK Process 1.0*.
+
+Certifications will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository.
+
+As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.0* you can click https://github.com/eclipse-ee4j/batch-api/issues/new?labels=certification[here], though it is recommended that you read through the certification process to understand it in detail.
 
 ==	Installation
 
@@ -127,7 +137,7 @@ These values can be adjusted if timing issues are seen in the implementation bei
 
 The Jakarta Batch TCK relies on an implementation of a "porting package" SPI to function, in order to verify test execution results. The reason is that the Jakarta Batch specification API alone does not provide a convenient-enough mechanism to check results.
  
-A default, "polling"� implementation of this SPI is shipped within the TCK itself. The expectation is that the typical Jakarta Batch implementation will be content to use the TCK-provided, default implementation of the porting package SPI.
+A default, "polling" implementation of this SPI is shipped within the TCK itself. The expectation is that the typical Jakarta Batch implementation will be content to use the TCK-provided, default implementation of the porting package SPI.
 
 Further detail on the porting package is provided later in this document, in case you wish to provide your own, different implementation.
 
@@ -285,13 +295,13 @@ The JobOperatorBridge is a utility/helper class in the Jakarta Batch TCK which m
 
 using a default value of `900000` (900 seconds). 
 
-The intention here is that the test should not wait forever if something catastrophic occurs causing the job to never complete (or if the porting package SPI “waiter” is never notified for some reason). The test also can't end too soon, causing a test failure because the wait was not long enough.
+The intention here is that the test should not wait forever if something catastrophic occurs causing the job to never complete (or if the porting package SPI â€œwaiterâ€ is never notified for some reason). The test also can't end too soon, causing a test failure because the wait was not long enough.
 
 This timeout value can be customized (say, to increase when debugging or decrease to force a faster failure in some cases).
 
 Note that some of the tests (e.g. the chunk tests involving time-based checkpointing) will take at least 15-25 seconds to run on any hardware, so any value less than that for the whole TCK will cause some test failures simply due to timing (and not because of any failure in the underlying Jakarta Batch implementation).
 
-The 900 seconds value, then, was chosen to avoid falsely reporting an error because of timing out too soon, allowing plenty of leeway.	It also facilitates debugging.	It does not, however, provide “fast failure” in case of a hang or runaway thread.
+The 900 seconds value, then, was chosen to avoid falsely reporting an error because of timing out too soon, allowing plenty of leeway.	It also facilitates debugging.	It does not, however, provide â€œfast failureâ€ in case of a hang or runaway thread.
 
 ===	Building the TCK (optional, for reference):
 The TCK tests can be optionally built from source. However, note that for an implementation to pass the TCK, it must run against the shipped TCK test suite binary as-is (and not against a modified TCK). Still it may be convenient to be able to build the TCK from source for debugging purposes.

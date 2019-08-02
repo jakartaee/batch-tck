@@ -60,10 +60,6 @@
                 <include>*.sig</include>
             </includes>
         </fileSet>
-        <fileSet>
-            <directory>../com.ibm.jbatch.tck/doc</directory>
-            <outputDirectory>/doc</outputDirectory>
-        </fileSet>
     </fileSets>
 
     <files>
@@ -86,7 +82,15 @@
         </file>
         <file>
             <source>otherFiles/how-to-run-tck-against-jbatch-script.sh</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>/doc</outputDirectory>
+        </file>
+        <file>
+            <source>target/generated-docs/batch-tck-reference-guide-${project.version}.html</source>
+            <outputDirectory>/doc</outputDirectory>
+        </file>
+        <file>
+            <source>target/generated-docs/batch-tck-reference-guide-${project.version}.pdf</source>
+            <outputDirectory>/doc</outputDirectory>
         </file>
         <file>
             <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-SE-suite.xml</source>
