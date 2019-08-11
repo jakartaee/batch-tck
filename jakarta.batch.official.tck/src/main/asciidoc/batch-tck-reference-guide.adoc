@@ -14,9 +14,9 @@ The Jakarta Batch TCK is provided under the
 This guide is for implementers of the Jakarta Batch specification, to assist in running the test suite that verifies the compatibility of their implementation.
 
 === Before You Read This Guide
-Before reading this guide, you should familiarize yourself with the Jakarta Batch specification.
+Before reading this guide, you should familiarize yourself with the Jakarta Batch Version 1.0 specification, which can be found at https://jakarta.ee/specifications/batch/1.0/.
 
-Information about the specification, including links to the specification documents, can be found on the Jakarta Batch project home page [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home  [https://github.com/eclipse-ee4j/batch-api].
+Other useful information and links can be found on the eclipse.org project home page for the Jakarta Batch project [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home for the specification project [https://github.com/eclipse-ee4j/batch-api].
 
 == Introduction
 The Jakarta Batch TCK tests implementations of the Jakarta Batch specification, which describes the job specification language, Java programming model, and runtime environment for Jakarta Batch applications.
