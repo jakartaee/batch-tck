@@ -54,12 +54,24 @@ echo $JAVA_HOME
 ls -l $JAVA_HOME/lib/rt.jar
 java -version
 
+#############################################
+# DON'T CHANGE
+# (except when testing a staged copy of TCK)
+#############################################
+
+#
+# STAGED
+#
+#TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-1.0.2.zip
+
+#
+# OFFICIAL
+#
+TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/1.0/eclipse-batch-tck-1.0.2.zip
+
 ################
 # DON'T CHANGE
 ################
-
-TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-1.0.2.zip
-
 cd $TCK_HOME_DIR
 
 #
