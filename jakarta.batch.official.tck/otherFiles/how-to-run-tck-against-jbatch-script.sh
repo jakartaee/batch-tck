@@ -56,13 +56,14 @@ java -version
 
 #############################################
 # DON'T CHANGE
-# (except when testing a staged copy of TCK)
+# (except comment out official URL override
+#  when testing a staged copy of TCK)
 #############################################
 
 #
 # STAGED
 #
-#TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-1.0.2.zip
+TCK_DOWNLOAD_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/1.0.2/jakarta.batch.official.tck-1.0.2.zip
 
 #
 # OFFICIAL
