@@ -1033,7 +1033,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
 
             // Sleep to give the runtime the chance to start the job.  The job has a delay built into the stepListener afterStep()
             // so we aren't worried about the job finishing early leaving zero running executions.
-            int sleepTime = Integer.parseInt(System.getProperty("ExecutionTests.testJobOperatorGetRunningJobExecutions.sleep", DEFAULT_SLEEP_TIME));
+            int sleepTime = Integer.parseInt(System.getProperty("JobOperatorTests.testJobOperatorGetRunningJobExecutions.sleep", DEFAULT_SLEEP_TIME));
             Reporter.log("Thread.sleep(" + sleepTime + ")<p>");
             Thread.sleep(sleepTime);
 
