@@ -59,10 +59,7 @@
     </target>
 
     <target name="init">
-        <loadproperties srcFile="batch-tck-testng.properties"/>
-        <echo message="ant.java.version=${ant.java.version}"/>
-        <echo message="java.version=${java.version}"/>
-        <echo message="batch.impl.testng.path=${batch.impl.testng.path}"/>
+         <loadproperties srcFile="../src/main/resources/testng/batch-tck.properties"/>
     </target>
 
     <target name="clean">
