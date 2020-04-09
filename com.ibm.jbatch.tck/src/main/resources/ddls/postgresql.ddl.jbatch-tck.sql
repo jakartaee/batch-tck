@@ -2,23 +2,27 @@ DROP TABLE Numbers;
 DROP TABLE Orders;
 DROP TABLE Inventory;
 
-CREATE TABLE Numbers (
-  item  	INT,
-  quantity  INT
+CREATE TABLE Numbers
+(
+    item     INT,
+    quantity INT
 );
 
-CREATE TABLE Orders (
-  orderID	INT PRIMARY KEY,
-  itemID	INT,
-  quantity  INT
+CREATE TABLE Orders
+(
+    orderID  INT PRIMARY KEY,
+    itemID   INT,
+    quantity INT
 );
 
-CREATE TABLE Inventory(
-  itemID	INT NOT NULL PRIMARY KEY,
-  quantity	INT NOT NULL
+CREATE TABLE Inventory
+(
+    itemID   INT NOT NULL PRIMARY KEY,
+    quantity INT NOT NULL
 );
 
-INSERT INTO Inventory VALUES (1, 100);
+INSERT INTO Inventory
+VALUES (1, 100);
 
 INSERT INTO Numbers
 VALUES (1, 10);

@@ -35,84 +35,87 @@ import javax.inject.Named;
 
 public class ListenerOnErrorArtifacts {
 
-	private static int failOn = 8;
-	private static int max = 10;
+    private static int failOn = 8;
+    private static int max = 10;
 
-	@Named("ListenerOnErrorArtifacts.R")
-	public static class R extends AbstractItemReader  {
+    @Named("ListenerOnErrorArtifacts.R")
+    public static class R extends AbstractItemReader {
 
-		int i = 0;
+        int i = 0;
 
-		@Override
-		public Object readItem() throws Exception {
-			if (i < max) {
-				return i++;
-			} else {
-				return null;
-			}
-		}
-	}
+        @Override
+        public Object readItem() throws Exception {
+            if (i < max) {
+                return i++;
+            } else {
+                return null;
+            }
+        }
+    }
 
-	@Named("ListenerOnErrorArtifacts.P")
-	public static class P implements ItemProcessor {
+    @Named("ListenerOnErrorArtifacts.P")
+    public static class P implements ItemProcessor {
 
-		@Inject    
-		@BatchProperty(name="process.fail")
-		String failString;
+        @Inject
+        @BatchProperty(name = "process.fail")
+        String failString;
 
-		@Override
-		public Object processItem(Object item) throws Exception {
+        @Override
+        public Object processItem(Object item) throws Exception {
 
-			int itemNum = (Integer)item;
+            int itemNum = (Integer) item;
 
-			if (Boolean.parseBoolean(failString)) {
-				if (itemNum == failOn) {
-					throw new Exception("process fail immediate");
-				}
-			}
+            if (Boolean.parseBoolean(failString)) {
+                if (itemNum == failOn) {
+                    throw new Exception("process fail immediate");
+                }
+            }
 
-			return 2 * itemNum;			
-		}
-	}
+            return 2 * itemNum;
+        }
+    }
 
-	@Named("ListenerOnErrorArtifacts.W")
-	public static class W extends AbstractItemWriter {
+    @Named("ListenerOnErrorArtifacts.W")
+    public static class W extends AbstractItemWriter {
 
-		int writeCount = 0;
-		
-		@Inject @BatchProperty(name="write.fail")
-		String failString;
+        int writeCount = 0;
 
-		@Override
-		public void writeItems(List<Object> items) throws Exception {	
-			writeCount += items.size();
-			
-			// Throw if reached threshold
-			if (writeCount >= failOn) {
-				throw new Exception("process fail immediate");
-			}
-			
-			// No writing actually done here
-		}
-	}		
+        @Inject
+        @BatchProperty(name = "write.fail")
+        String failString;
 
-	@Named("ListenerOnErrorArtifacts.WL")
-	public static class WL extends AbstractItemWriteListener {
-		@Inject JobContext jobCtx;
+        @Override
+        public void writeItems(List<Object> items) throws Exception {
+            writeCount += items.size();
 
-		@Override
-		public void onWriteError(List<Object> items, Exception e) throws Exception {
-			jobCtx.setExitStatus(items.toString());
-		}		
-	}
+            // Throw if reached threshold
+            if (writeCount >= failOn) {
+                throw new Exception("process fail immediate");
+            }
 
-	@Named("ListenerOnErrorArtifacts.PL")
-	public static class PL extends AbstractItemProcessListener {
-		@Inject JobContext jobCtx;
+            // No writing actually done here
+        }
+    }
 
-		@Override
-		public void onProcessError(Object item, Exception ex) throws Exception {
-			jobCtx.setExitStatus(item.toString());
-		}	
-	}
+    @Named("ListenerOnErrorArtifacts.WL")
+    public static class WL extends AbstractItemWriteListener {
+        @Inject
+        JobContext jobCtx;
+
+        @Override
+        public void onWriteError(List<Object> items, Exception e) throws Exception {
+            jobCtx.setExitStatus(items.toString());
+        }
+    }
+
+    @Named("ListenerOnErrorArtifacts.PL")
+    public static class PL extends AbstractItemProcessListener {
+        @Inject
+        JobContext jobCtx;
+
+        @Override
+        public void onProcessError(Object item, Exception ex) throws Exception {
+            jobCtx.setExitStatus(item.toString());
+        }
+    }
 }

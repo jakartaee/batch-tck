@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,48 +33,48 @@ import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 @javax.inject.Named("simpleCustomItemReader")
 public class SimpleCustomItemReader extends AbstractItemReader {
 
-	private final static Logger logger = Logger.getLogger(SimpleCustomItemReader.class.getName());
-	
-	@Inject    
-	@BatchProperty(name="fail.immediate")
-	String failImmediateString;
-	
-	@Inject    
-	@BatchProperty(name="app.arraysize")
-	String appArraySize;
+    private final static Logger logger = Logger.getLogger(SimpleCustomItemReader.class.getName());
 
-	boolean failThrowEx = false;
-	int arraySize=0;
+    @Inject
+    @BatchProperty(name = "fail.immediate")
+    String failImmediateString;
 
-	private int count = 0;
+    @Inject
+    @BatchProperty(name = "app.arraysize")
+    String appArraySize;
 
-	@Override
-	public void open(Serializable cpd) {
-		logger.fine("DoSomethingItemReaderImpl.openMe, count should be 0, actual value = " + count);
-		if (failImmediateString!=null){
-			failThrowEx = Boolean.parseBoolean(failImmediateString);
-		}
-		if (appArraySize!=null){
-			arraySize = Integer.parseInt(appArraySize);
-		}
-	}
+    boolean failThrowEx = false;
+    int arraySize = 0;
 
-	@Override
-	public ReadRecord readItem() throws Exception {
-		if (failThrowEx){
-			throw new MyParentException("Testing getException");
-		}
+    private int count = 0;
 
-		count = count + 1;
-		if (count >= arraySize) {
-			return null;
-		}
-		return new ReadRecord(count);
-	}
+    @Override
+    public void open(Serializable cpd) {
+        logger.fine("DoSomethingItemReaderImpl.openMe, count should be 0, actual value = " + count);
+        if (failImmediateString != null) {
+            failThrowEx = Boolean.parseBoolean(failImmediateString);
+        }
+        if (appArraySize != null) {
+            arraySize = Integer.parseInt(appArraySize);
+        }
+    }
 
-	@Override
-	public CheckpointData checkpointInfo() {
-		return new CheckpointData();
-	}
+    @Override
+    public ReadRecord readItem() throws Exception {
+        if (failThrowEx) {
+            throw new MyParentException("Testing getException");
+        }
+
+        count = count + 1;
+        if (count >= arraySize) {
+            return null;
+        }
+        return new ReadRecord(count);
+    }
+
+    @Override
+    public CheckpointData checkpointInfo() {
+        return new CheckpointData();
+    }
 
 }

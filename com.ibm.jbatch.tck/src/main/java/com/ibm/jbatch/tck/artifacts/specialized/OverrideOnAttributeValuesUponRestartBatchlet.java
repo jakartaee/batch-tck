@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
@@ -27,7 +27,7 @@ import javax.batch.runtime.context.StepContext;
 import javax.inject.Inject;
 
 @javax.inject.Named("overrideOnAttributeValuesUponRestartBatchlet")
-public class OverrideOnAttributeValuesUponRestartBatchlet extends AbstractBatchlet{
+public class OverrideOnAttributeValuesUponRestartBatchlet extends AbstractBatchlet {
 
     private final static String sourceClass = OverrideOnAttributeValuesUponRestartBatchlet.class.getName();
     private final static Logger logger = Logger.getLogger(sourceClass);
@@ -37,48 +37,54 @@ public class OverrideOnAttributeValuesUponRestartBatchlet extends AbstractBatchl
 
     @Inject
     JobContext jobCtx;
-    
-    @Inject    
-    @BatchProperty(name="execution.number")
+
+    @Inject
+    @BatchProperty(name = "execution.number")
     String executionNumberString;
 
     int execNum;
     String stepName;
-    
+
     /*
      * Appends "intended.exit.status" property to the current Job-level ExitStatus
      */
     @Override
     public String process() throws Exception {
-    	execNum = Integer.parseInt(executionNumberString);
-    	stepName = stepCtx.getStepName();
-        
+        execNum = Integer.parseInt(executionNumberString);
+        stepName = stepCtx.getStepName();
+
         logger.fine("execution # = " + execNum + ", step = " + stepName);
-        
+
         String exitStatus = calculateExitStatus();
-        
+
         logger.fine("Exiting with exitStatus = " + exitStatus);
         return exitStatus;
     }
-    
+
     private String calculateExitStatus() {
         /*
          * Tests that stop @on and end @on don't result in re-running already completed steps.
          */
         if (stepName.equals("step1")) {
             switch (execNum) {
-                case 1: return "ES.STEP1";
-                default: return "ILLEGAL.STATE";
+                case 1:
+                    return "ES.STEP1";
+                default:
+                    return "ILLEGAL.STATE";
             }
         } else if (stepName.equals("step2")) {
             switch (execNum) {
-                case 2: return "ES.STEP2";
-                default: return "ILLEGAL.STATE";
+                case 2:
+                    return "ES.STEP2";
+                default:
+                    return "ILLEGAL.STATE";
             }
         } else if (stepName.equals("step3")) {
             switch (execNum) {
-                case 3: return "ES.STEP3";
-                default: return "ILLEGAL.STATE";
+                case 3:
+                    return "ES.STEP3";
+                default:
+                    return "ILLEGAL.STATE";
             }
         } else {
             return "ILLEGAL.STATE";
@@ -88,7 +94,7 @@ public class OverrideOnAttributeValuesUponRestartBatchlet extends AbstractBatchl
     @Override
     public void stop() throws Exception {
         // Do nothing since this is too quick to bother canceling.
-        logger.fine(sourceClass + ".cancel()");		
+        logger.fine(sourceClass + ".cancel()");
     }
 
 }

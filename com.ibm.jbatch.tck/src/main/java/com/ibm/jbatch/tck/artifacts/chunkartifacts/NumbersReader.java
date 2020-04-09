@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 package com.ibm.jbatch.tck.artifacts.chunkartifacts;
 
 import java.io.Serializable;
@@ -43,115 +43,113 @@ import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 @javax.inject.Named("numbersReader")
 public class NumbersReader extends AbstractItemReader {
 
-	private static final String CLASSNAME = NumbersReader.class.getName();
-	private final static Logger logger = Logger.getLogger(CLASSNAME);
-	
+    private static final String CLASSNAME = NumbersReader.class.getName();
+    private final static Logger logger = Logger.getLogger(CLASSNAME);
 
-	protected DataSource dataSource = null;
-	
-	private static final int STATE_NORMAL = 0;
-	private static final int STATE_RETRY = 1;
-	private int testState = STATE_NORMAL;
-	
+
+    protected DataSource dataSource = null;
+
+    private static final int STATE_NORMAL = 0;
+    private static final int STATE_RETRY = 1;
+    private int testState = STATE_NORMAL;
+
     @Inject
     StepContext stepCtx;
-    
-    @Inject    
-    @BatchProperty(name="forced.fail.count.read")
-	String forcedFailCountProp;
 
-	int forcedFailCount, dummyDelay, expectedReaderChkp = -1;
+    @Inject
+    @BatchProperty(name = "forced.fail.count.read")
+    String forcedFailCountProp;
 
-	int readerIndex = 1;
-	
-	int failindex = 0;
-	
-	NumbersCheckpointData numbersCheckpoint = new NumbersCheckpointData();
-	
-	public void open(Serializable cpd) throws NamingException {
-		
-	    NumbersCheckpointData numbersCheckpointData = (NumbersCheckpointData)cpd;
-	    
-		forcedFailCount = Integer.parseInt(forcedFailCountProp);
-		
-		InitialContext ctx = new InitialContext();
-		dataSource = (DataSource) ctx.lookup(RetryConnectionHelper.jndiName);
-		
-		
-		if (cpd != null) {
-			forcedFailCount = 0;
-			this.readerIndex = numbersCheckpointData.getCount();
-			stepCtx.getProperties().setProperty("init.checkpoint", this.readerIndex + "");
-		} 	
-	}
+    int forcedFailCount, dummyDelay, expectedReaderChkp = -1;
 
-	@Override
-	public NumbersRecord readItem() throws Exception {
-		int i = readerIndex;
-		
-		// Throw an exception when forcedFailCount is reached
-		if (forcedFailCount != 0 && readerIndex >= forcedFailCount) {
-			    forcedFailCount = 0;
-			    failindex = readerIndex;
-			    testState = STATE_RETRY;
-			    Reporter.log("Fail on purpose NumbersRecord.readItem<p>");
-				throw new MyParentException("Fail on purpose in NumbersRecord.readItem()");	
-		} 
-		
-		if (testState == STATE_RETRY)
-		{
-			if(stepCtx.getProperties().getProperty("retry.read.exception.invoked") != "true") {
-				Reporter.log("onRetryReadException not invoked<p>");
-				throw new Exception("onRetryReadException not invoked");
-			}
-			
-			if(stepCtx.getProperties().getProperty("retry.read.exception.match") != "true") {
-				Reporter.log("retryable exception does not match");
-				throw new Exception("retryable exception does not match");
-			}
-			
-			testState = STATE_NORMAL;
-		}
+    int readerIndex = 1;
 
-		if (readerIndex > 5) {
-			return null;
-		}
+    int failindex = 0;
 
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet rs = null;
-		
-		try {
-			connection = RetryConnectionHelper.getConnection(dataSource);
+    NumbersCheckpointData numbersCheckpoint = new NumbersCheckpointData();
 
-			statement = connection.prepareStatement(RetryConnectionHelper.SELECT_NUMBERS);
-			statement.setInt(1, readerIndex);
-			rs = statement.executeQuery();
+    public void open(Serializable cpd) throws NamingException {
 
-			int quantity = -1;
-			while (rs.next()) {
-				quantity = rs.getInt("quantity");
-			}
-					
-			readerIndex++;
-			
-			return new NumbersRecord(i, quantity);
-		} catch (SQLException e) {
-			throw e;
-		} finally {
-			RetryConnectionHelper.cleanupConnection(connection, rs, statement);
-		}
+        NumbersCheckpointData numbersCheckpointData = (NumbersCheckpointData) cpd;
 
-	}
+        forcedFailCount = Integer.parseInt(forcedFailCountProp);
 
-	@Override
-	 public Serializable checkpointInfo() throws Exception {
-		 NumbersCheckpointData _chkptData = new  NumbersCheckpointData();
-		_chkptData.setCount(readerIndex);
-		stepCtx.getProperties().setProperty("checkpoint.index", Integer.toString(readerIndex));
-		return _chkptData; 
-	}
+        InitialContext ctx = new InitialContext();
+        dataSource = (DataSource) ctx.lookup(RetryConnectionHelper.jndiName);
 
+
+        if (cpd != null) {
+            forcedFailCount = 0;
+            this.readerIndex = numbersCheckpointData.getCount();
+            stepCtx.getProperties().setProperty("init.checkpoint", this.readerIndex + "");
+        }
+    }
+
+    @Override
+    public NumbersRecord readItem() throws Exception {
+        int i = readerIndex;
+
+        // Throw an exception when forcedFailCount is reached
+        if (forcedFailCount != 0 && readerIndex >= forcedFailCount) {
+            forcedFailCount = 0;
+            failindex = readerIndex;
+            testState = STATE_RETRY;
+            Reporter.log("Fail on purpose NumbersRecord.readItem<p>");
+            throw new MyParentException("Fail on purpose in NumbersRecord.readItem()");
+        }
+
+        if (testState == STATE_RETRY) {
+            if (stepCtx.getProperties().getProperty("retry.read.exception.invoked") != "true") {
+                Reporter.log("onRetryReadException not invoked<p>");
+                throw new Exception("onRetryReadException not invoked");
+            }
+
+            if (stepCtx.getProperties().getProperty("retry.read.exception.match") != "true") {
+                Reporter.log("retryable exception does not match");
+                throw new Exception("retryable exception does not match");
+            }
+
+            testState = STATE_NORMAL;
+        }
+
+        if (readerIndex > 5) {
+            return null;
+        }
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+
+        try {
+            connection = RetryConnectionHelper.getConnection(dataSource);
+
+            statement = connection.prepareStatement(RetryConnectionHelper.SELECT_NUMBERS);
+            statement.setInt(1, readerIndex);
+            rs = statement.executeQuery();
+
+            int quantity = -1;
+            while (rs.next()) {
+                quantity = rs.getInt("quantity");
+            }
+
+            readerIndex++;
+
+            return new NumbersRecord(i, quantity);
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            RetryConnectionHelper.cleanupConnection(connection, rs, statement);
+        }
+
+    }
+
+    @Override
+    public Serializable checkpointInfo() throws Exception {
+        NumbersCheckpointData _chkptData = new NumbersCheckpointData();
+        _chkptData.setCount(readerIndex);
+        stepCtx.getProperties().setProperty("checkpoint.index", Integer.toString(readerIndex));
+        return _chkptData;
+    }
 
 
 }

@@ -24,26 +24,26 @@
             <pathelement location="lib/jcommander-@version.com.beust.jcommander@.jar"/>
         </classpath>
     </taskdef>
-    
+
     <description>
         Jakarta Batch TCK
     </description>
-    
+
     <!-- Modify this property to contain the location of the extracted TCK source -->
     <property name="src" location=""/>
-    
+
     <!-- This location will contain the TCK class files after running the compile target -->
     <property name="build" location="build"/>
-    
+
     <!-- Directory which will contain the TestNG report after running the TCK -->
     <property name="results" location="results"/>
 
     <!-- Override with value "EE" to run TestNG EE tests. -->
-    <property name="tck.type" value="SE" />
+    <property name="tck.type" value="SE"/>
 
-    <target name="compile" depends="init" description="Compile the Jakarta Batch TCK source code" >
+    <target name="compile" depends="init" description="Compile the Jakarta Batch TCK source code">
         <mkdir dir="${build}"/>
-        
+
         <!-- compile test artifacts -->
         <javac srcdir="${src}" destdir="${build}">
             <classpath>
@@ -59,7 +59,7 @@
     </target>
 
     <target name="init">
-         <loadproperties srcFile="batch-tck.properties"/>
+        <loadproperties srcFile="batch-tck.properties"/>
     </target>
 
     <target name="clean">
@@ -78,14 +78,15 @@
             </fileset>
             <pathelement path="${batch.impl.classes}"/>
         </path>
-    
-        <testng mode="testng" classpathref="batch.tck.classpath" dumpCommand="true" workingDir="." haltonfailure="true" outputdir="${results}">
-            
+
+        <testng mode="testng" classpathref="batch.tck.classpath" dumpCommand="true" workingDir="." haltonfailure="true"
+                outputdir="${results}">
+
             <xmlfileset dir="." includes="artifacts/batch-tck-impl-${tck.type}-suite.xml"/>
-            
+
             <!-- user specified JVM arguments -->
             <jvmarg line="${jvm.options}"/>
-            
+
             <!-- TCK test sleep property definitions -->
             <jvmarg value="-Dtck.execution.waiter.timeout=900000"/>
             <jvmarg value="-DExecutionTests.testInvokeJobWithUserStop.sleep=${ExecutionTests.testInvokeJobWithUserStop.sleep}"/>

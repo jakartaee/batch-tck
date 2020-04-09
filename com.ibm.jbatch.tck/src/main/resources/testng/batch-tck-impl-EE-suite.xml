@@ -18,27 +18,27 @@
  -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Jakarta Batch TCK" verbose="0"  >
-   <test name="Jakarta Batch TCK">
-      <packages>
-         <package name="com.ibm.jbatch.tck.tests.*" />
-      </packages>
-      <classes>
+<suite name="Jakarta Batch TCK" verbose="0">
+    <test name="Jakarta Batch TCK">
+        <packages>
+            <package name="com.ibm.jbatch.tck.tests.*"/>
+        </packages>
+        <classes>
             <class name="com.ibm.jbatch.tck.tests.jslxml.ListenerOnErrorTests">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
             <class name="com.ibm.jbatch.tck.tests.jslxml.ParallelContextPropagationTests">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
             <class name="com.ibm.jbatch.tck.tests.jslxml.PartitionRerunTests">
                 <methods>
-                    <exclude name=".*" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
-      </classes>
-   </test>
+        </classes>
+    </test>
 </suite>

@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -49,7 +49,7 @@ public class ArtifactInstanceTestStepListener implements StepListener {
 
     boolean uniqueInstance1 = false;
     boolean uniqueInstance2 = false;
-    
+
     private boolean saw2Listeners = false;
 
 
@@ -57,15 +57,15 @@ public class ArtifactInstanceTestStepListener implements StepListener {
 
     @Override
     public void beforeStep() throws Exception {
-        
-        synchronized(stepCtx) {
+
+        synchronized (stepCtx) {
             if (stepCtx.getTransientUserData() == null) {
                 Map<String, Boolean> dataMap = new ConcurrentHashMap<String, Boolean>();
                 dataMap.put("sawProp1", false);
                 dataMap.put("sawProp2", false);
-                
-                //init the chunk listener props here too. We init here because we know we 
-                //are the first listener since the transient data is null. 
+
+                //init the chunk listener props here too. We init here because we know we
+                //are the first listener since the transient data is null.
                 dataMap.put("sawChunkProp1", false);
                 dataMap.put("sawChunkProp2", false);
 
@@ -108,13 +108,13 @@ public class ArtifactInstanceTestStepListener implements StepListener {
         if (currentStatus != null && currentStatus.equals("BAD")) {
             return;
         }
-        
+
         if (saw2Listeners && (uniqueInstance1 ^ uniqueInstance2)) {
             jobCtx.setExitStatus(jobCtx.getExitStatus() + "StepListener");
         } else {
             jobCtx.setExitStatus("STEP_BAD");
         }
-        
+
     }
 
 }

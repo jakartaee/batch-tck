@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.List;
@@ -51,21 +51,21 @@ public class MySkipWriteListener implements SkipWriteListener {
         Reporter.log("In onSkipWriteItem()" + e + "<p>");
         ReadRecord input = null;
         boolean inputOK = false;
-        
+
         for (Object obj : items) {
-        	input = (ReadRecord)obj;
-            
-    		if (obj != null){
-    			logger.finer("In onSkipProcessItem(), item count = " + input.getCount());
-    			inputOK = true;
-    		}
+            input = (ReadRecord) obj;
+
+            if (obj != null) {
+                logger.finer("In onSkipProcessItem(), item count = " + input.getCount());
+                inputOK = true;
+            }
         }
 
         if (e instanceof MyParentException && inputOK) {
-        	Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is an instance of: MyParentException<p>");
+            Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is an instance of: MyParentException<p>");
             jobCtx.setExitStatus(GOOD_EXIT_STATUS);
         } else {
-        	Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is NOT an instance of: MyParentException<p>");
+            Reporter.log("SKIPLISTENER: onSkipWriteItem, exception is NOT an instance of: MyParentException<p>");
             jobCtx.setExitStatus(BAD_EXIT_STATUS);
         }
     }

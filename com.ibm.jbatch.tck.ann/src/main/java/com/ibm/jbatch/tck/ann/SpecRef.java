@@ -1,13 +1,13 @@
 /*
  * Copyright 2015 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,29 +31,35 @@ import java.lang.annotation.Target;
  * <br>
  * Optional Attributes: citations, notes
  */
-@Target({ElementType.METHOD}) 
-@Documented  
+@Target({ElementType.METHOD})
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpecRef {
 
-	/** 
-	 * Version of Jakarta Batch where the behavior was first introduced or most recently clarified
-	 * <br><br>
-	 * List of valid values:
-	 * <ul>
-	 *   <li>1.0</li>
-	 *   <li>1.0RevA</li>
-	 *   <li>1.1</li>
-	 * </ul>
-	 */
-	String version();
-	
-	/** Jakarta Batch section where the behavior is specified */
-	String section() default "";
-	
-	/** Relevant quotations from the section */
-	String[] citations() default{};
-	
-	/** Other comments about the SpecRef */
-	String[] notes() default {};	
+    /**
+     * Version of Jakarta Batch where the behavior was first introduced or most recently clarified
+     * <br><br>
+     * List of valid values:
+     * <ul>
+     *   <li>1.0</li>
+     *   <li>1.0RevA</li>
+     *   <li>1.1</li>
+     * </ul>
+     */
+    String version();
+
+    /**
+     * Jakarta Batch section where the behavior is specified
+     */
+    String section() default "";
+
+    /**
+     * Relevant quotations from the section
+     */
+    String[] citations() default {};
+
+    /**
+     * Other comments about the SpecRef
+     */
+    String[] notes() default {};
 }

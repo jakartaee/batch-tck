@@ -31,104 +31,114 @@ import static org.junit.Assert.assertEquals;
 
 public class ParallelContextPropagationArtifacts {
 
-public static String GOOD_EXIT_STATUS = "VERY GOOD INVOCATION";
-	
-	@javax.inject.Named("PCPSplitFlowBatchlet")
-	public static class PCPSplitFlowBatchlet extends AbstractBatchlet {
+    public static String GOOD_EXIT_STATUS = "VERY GOOD INVOCATION";
 
-		@Inject JobContext jobCtx;
-		@Inject StepContext stepCtx;
+    @javax.inject.Named("PCPSplitFlowBatchlet")
+    public static class PCPSplitFlowBatchlet extends AbstractBatchlet {
 
-		@Override
-		public String process() throws Exception {
+        @Inject
+        JobContext jobCtx;
+        @Inject
+        StepContext stepCtx;
 
-			// Check job properties
-			/*
-			 * <property name="topLevelJobProperty" value="topLevelJobProperty.value" />
-			 */
-			String propVal = jobCtx.getProperties().getProperty("topLevelJobProperty");
-			String expectedPropVal = "topLevelJobProperty.value";
+        @Override
+        public String process() throws Exception {
 
-			if (propVal == null || (!propVal.equals(expectedPropVal))) {
-				throw new Exception("Expected propVal of " + expectedPropVal + ", but found: " + propVal);
-			}
+            // Check job properties
+            /*
+             * <property name="topLevelJobProperty" value="topLevelJobProperty.value" />
+             */
+            String propVal = jobCtx.getProperties().getProperty("topLevelJobProperty");
+            String expectedPropVal = "topLevelJobProperty.value";
 
-			// Check job name
-			String jobName = jobCtx.getJobName();
-			String expectedJobName = "splitFlowCtxPropagation";
-			if (!jobName.equals(expectedJobName)) {
-				throw new Exception("Expected jobName of " + expectedJobName + ", but found: " + jobName);
-			}
+            if (propVal == null || (!propVal.equals(expectedPropVal))) {
+                throw new Exception("Expected propVal of " + expectedPropVal + ", but found: " + propVal);
+            }
 
-			String data = stepExitStatus();
-			return (stepCtx.getExitStatus() + data);
-		}
+            // Check job name
+            String jobName = jobCtx.getJobName();
+            String expectedJobName = "splitFlowCtxPropagation";
+            if (!jobName.equals(expectedJobName)) {
+                throw new Exception("Expected jobName of " + expectedJobName + ", but found: " + jobName);
+            }
 
-		private String stepExitStatus() {
-			long execId = jobCtx.getExecutionId();
-			long instanceId = jobCtx.getInstanceId();
-			long stepExecId = stepCtx.getStepExecutionId();
+            String data = stepExitStatus();
+            return (stepCtx.getExitStatus() + data);
+        }
 
-			return ":J" + execId + "I" + instanceId + "S" + stepExecId;
-		}
-	}
+        private String stepExitStatus() {
+            long execId = jobCtx.getExecutionId();
+            long instanceId = jobCtx.getInstanceId();
+            long stepExecId = stepCtx.getStepExecutionId();
 
-	@javax.inject.Named("PCPPartitionBatchlet")
-	public static class PCPPartitionBatchlet extends AbstractBatchlet {
+            return ":J" + execId + "I" + instanceId + "S" + stepExecId;
+        }
+    }
 
-		@Inject JobContext jobCtx; @Inject StepContext stepCtx;
+    @javax.inject.Named("PCPPartitionBatchlet")
+    public static class PCPPartitionBatchlet extends AbstractBatchlet {
 
-		@Override
-		public String process() throws Exception {
+        @Inject
+        JobContext jobCtx;
+        @Inject
+        StepContext stepCtx;
 
-			// Check job properties
+        @Override
+        public String process() throws Exception {
 
-			/*
-			 * <property name="topLevelJobProperty" value="topLevelJobProperty.value" />
-			 */
-			String propVal = jobCtx.getProperties().getProperty("topLevelJobProperty");
-			assertEquals("Job Property comparison", "topLevelJobProperty.value", propVal);
-			
-			propVal = stepCtx.getProperties().getProperty("topLevelStepProperty");
-			assertEquals("Step Property comparison", "topLevelStepProperty.value", propVal);
-			
-			assertEquals("Job name", "partitionCtxPropagation", jobCtx.getJobName());
+            // Check job properties
 
-			assertEquals("Step name", "step1", stepCtx.getStepName());
+            /*
+             * <property name="topLevelJobProperty" value="topLevelJobProperty.value" />
+             */
+            String propVal = jobCtx.getProperties().getProperty("topLevelJobProperty");
+            assertEquals("Job Property comparison", "topLevelJobProperty.value", propVal);
 
-			return GOOD_EXIT_STATUS;
-		}
+            propVal = stepCtx.getProperties().getProperty("topLevelStepProperty");
+            assertEquals("Step Property comparison", "topLevelStepProperty.value", propVal);
 
-		@Override
-		public void stop() throws Exception {}
-	}
+            assertEquals("Job name", "partitionCtxPropagation", jobCtx.getJobName());
 
-	@javax.inject.Named("PCPCollector")
-	public static class PCPCollector implements PartitionCollector {
+            assertEquals("Step name", "step1", stepCtx.getStepName());
 
-		@Inject JobContext jobCtx; @Inject StepContext stepCtx;
+            return GOOD_EXIT_STATUS;
+        }
 
-		@Override
-		public String collectPartitionData() throws Exception {
+        @Override
+        public void stop() throws Exception {
+        }
+    }
 
-			assertEquals("step name", "step1", stepCtx.getStepName());
+    @javax.inject.Named("PCPCollector")
+    public static class PCPCollector implements PartitionCollector {
 
-			long jobid = jobCtx.getExecutionId();
-			long instanceid = jobCtx.getInstanceId();
-			long stepid = stepCtx.getStepExecutionId();
+        @Inject
+        JobContext jobCtx;
+        @Inject
+        StepContext stepCtx;
 
-			return ":J" + jobid + "I" + instanceid + "S" + stepid;
-		}
-	}
+        @Override
+        public String collectPartitionData() throws Exception {
 
-	@javax.inject.Named("PCPAnalyzer")
-	public static class PCPAnalyzer extends AbstractPartitionAnalyzer {
+            assertEquals("step name", "step1", stepCtx.getStepName());
 
-		@Inject JobContext jobCtx;
+            long jobid = jobCtx.getExecutionId();
+            long instanceid = jobCtx.getInstanceId();
+            long stepid = stepCtx.getStepExecutionId();
 
-		@Override
-		public void analyzeCollectorData(Serializable data) throws Exception {
-			jobCtx.setExitStatus(jobCtx.getExitStatus() + data);
-		}
-	}
+            return ":J" + jobid + "I" + instanceid + "S" + stepid;
+        }
+    }
+
+    @javax.inject.Named("PCPAnalyzer")
+    public static class PCPAnalyzer extends AbstractPartitionAnalyzer {
+
+        @Inject
+        JobContext jobCtx;
+
+        @Override
+        public void analyzeCollectorData(Serializable data) throws Exception {
+            jobCtx.setExitStatus(jobCtx.getExitStatus() + data);
+        }
+    }
 }

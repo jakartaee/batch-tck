@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +18,7 @@
  */
 
 package com.ibm.jbatch.tck.artifacts.reusable;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -25,21 +26,21 @@ import java.util.List;
 
 public class StopOnBulletinBoardTestData implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	List<Long> threadIdArrayList = new ArrayList<Long>();
+    List<Long> threadIdArrayList = new ArrayList<Long>();
 
-	public StopOnBulletinBoardTestData() {
-		super();
-	}
+    public StopOnBulletinBoardTestData() {
+        super();
+    }
 
 
-	public List<Long> getThreadIdArrayList() {
-		return threadIdArrayList;
-	}
+    public List<Long> getThreadIdArrayList() {
+        return threadIdArrayList;
+    }
 
-	public void addThreadIdToList(long id) {
-		threadIdArrayList.add(id);
-	}
+    public void addThreadIdToList(long id) {
+        threadIdArrayList.add(id);
+    }
 
 }

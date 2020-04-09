@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,8 +34,8 @@ import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 @javax.inject.Named("skipReaderMultipleExceptions")
 public class SkipReaderMultipleExceptions extends AbstractItemReader {
 
-	private final static Logger logger = Logger.getLogger(SkipReaderMultipleExceptions.class.getName());
-	
+    private final static Logger logger = Logger.getLogger(SkipReaderMultipleExceptions.class.getName());
+
     private int count = 0;
     private int exceptionCount = 0;
     private int[] readerDataArray;
@@ -44,15 +44,15 @@ public class SkipReaderMultipleExceptions extends AbstractItemReader {
     boolean throwChildEx = false;
     ArrayIndexCheckpointData _cpd = new ArrayIndexCheckpointData();
 
-    @Inject    
+    @Inject
     @BatchProperty(name = "readrecord.fail")
     String readrecordfailNumberString = null;
 
-    @Inject    
+    @Inject
     @BatchProperty(name = "execution.number")
     String executionNumberString;
 
-    @Inject    
+    @Inject
     @BatchProperty(name = "app.arraysize")
     String appArraySizeString;
 
@@ -94,7 +94,7 @@ public class SkipReaderMultipleExceptions extends AbstractItemReader {
             idx = 0;
         } else {
             // position at index held in the cpd
-            idx = ((ArrayIndexCheckpointData)cpd).getCurrentIndex() + 1;
+            idx = ((ArrayIndexCheckpointData) cpd).getCurrentIndex() + 1;
         }
         logger.fine("READ: starting at index: " + idx);
     }
@@ -123,10 +123,9 @@ public class SkipReaderMultipleExceptions extends AbstractItemReader {
             threwSkipException = true;
             if (exceptionCount == 0) {
                 throw new MyParentException("fail on purpose with MyParentException");
-            } else if (exceptionCount == 1){
-            	throw new MyGrandchildException("fail on purpose with MyGrandchildException");
-            }
-            else {
+            } else if (exceptionCount == 1) {
+                throw new MyGrandchildException("fail on purpose with MyGrandchildException");
+            } else {
                 throw new MyChildException("fail on purpose with MyChildException");
             }
         }

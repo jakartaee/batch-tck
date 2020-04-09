@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2016 International Business Machines Corp. See the NOTICE file distributed with this work 
-	for additional information regarding copyright ownership. Licensed under the Apache License, Version 
-	2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain 
-	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law 
-	or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT 
-	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
-	governing permissions and limitations under the License. 
-	
+<!-- Copyright 2016 International Business Machines Corp. See the NOTICE file distributed with this work
+	for additional information regarding copyright ownership. Licensed under the Apache License, Version
+	2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain
+	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+	or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+	governing permissions and limitations under the License.
+
 	SPDX-License-Identifier: Apache-2.0
-	
+
 -->
 <job id="decider_receives_correct_step_executions_after_split" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
-	<split id="split1" next="decider1">
-		<flow id="split1flow1">
-			<step id="split1flow1step1" allow-start-if-complete="#{jobParameters['split1flow1step1.allow.start.if.complete']}">
-				<batchlet ref="doNothingBatchlet"/>
-			</step>
-		</flow>
-		<flow id="split1flow2">
-			<step id="split1flow2step1" allow-start-if-complete="#{jobParameters['split1flow2step1.allow.start.if.complete']}">
-				<batchlet ref="doNothingBatchlet"/>
-			</step>
-		</flow>
-	</split>
-	<decision id="decider1" ref="deciderReceivesCorrectStepExecutionsDecider">
-		<properties>
-			<property name="expected.number.of.step.executions" value="2"/>
-		</properties>
-		<stop on="#{jobParameters['decider.stop.on']}"/>
-		<next on="*" to="step2"/>
-	</decision>
-	<step id="step2">
-		<batchlet ref="doNothingBatchlet"/>
-		<end on="*"/>
-	</step>
+    <split id="split1" next="decider1">
+        <flow id="split1flow1">
+            <step id="split1flow1step1"
+                  allow-start-if-complete="#{jobParameters['split1flow1step1.allow.start.if.complete']}">
+                <batchlet ref="doNothingBatchlet"/>
+            </step>
+        </flow>
+        <flow id="split1flow2">
+            <step id="split1flow2step1"
+                  allow-start-if-complete="#{jobParameters['split1flow2step1.allow.start.if.complete']}">
+                <batchlet ref="doNothingBatchlet"/>
+            </step>
+        </flow>
+    </split>
+    <decision id="decider1" ref="deciderReceivesCorrectStepExecutionsDecider">
+        <properties>
+            <property name="expected.number.of.step.executions" value="2"/>
+        </properties>
+        <stop on="#{jobParameters['decider.stop.on']}"/>
+        <next on="*" to="step2"/>
+    </decision>
+    <step id="step2">
+        <batchlet ref="doNothingBatchlet"/>
+        <end on="*"/>
+    </step>
 </job>

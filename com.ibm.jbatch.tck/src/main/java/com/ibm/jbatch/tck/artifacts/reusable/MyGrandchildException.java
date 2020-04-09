@@ -19,11 +19,11 @@ package com.ibm.jbatch.tck.artifacts.reusable;
 
 public class MyGrandchildException extends MyChildException {
 
-	public MyGrandchildException(){
-		super();
-	}
-	
-	public MyGrandchildException(String s){
-		super(s);
-	}
+    public MyGrandchildException() {
+        super();
+    }
+
+    public MyGrandchildException(String s) {
+        super(s);
+    }
 }
