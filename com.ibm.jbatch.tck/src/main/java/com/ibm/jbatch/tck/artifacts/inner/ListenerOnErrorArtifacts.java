@@ -22,16 +22,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.batch.api.chunk.ItemProcessor;
-import javax.batch.api.chunk.listener.AbstractItemProcessListener;
-import javax.batch.api.chunk.listener.AbstractItemWriteListener;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.batch.api.chunk.ItemProcessor;
+import jakarta.batch.api.chunk.listener.AbstractItemProcessListener;
+import jakarta.batch.api.chunk.listener.AbstractItemWriteListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 public class ListenerOnErrorArtifacts {
 

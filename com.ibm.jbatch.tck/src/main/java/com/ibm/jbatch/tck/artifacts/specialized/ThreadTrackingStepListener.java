@@ -18,10 +18,10 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.listener.AbstractStepListener;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.batch.api.listener.AbstractStepListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class ThreadTrackingStepListener extends AbstractStepListener {

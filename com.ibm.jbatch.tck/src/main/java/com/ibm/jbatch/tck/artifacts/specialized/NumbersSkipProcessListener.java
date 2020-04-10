@@ -21,15 +21,15 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import javax.batch.api.chunk.listener.SkipProcessListener;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.chunk.listener.SkipProcessListener;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import org.testng.Reporter;
 
 import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 
-@javax.inject.Named("numbersSkipProcessListener")
+@jakarta.inject.Named("numbersSkipProcessListener")
 public class NumbersSkipProcessListener implements SkipProcessListener {
 
     @Inject

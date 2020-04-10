@@ -25,18 +25,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
+import jakarta.naming.InitialContext;
+import jakarta.naming.NamingException;
+import jakarta.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.InventoryCheckpointData;
 import com.ibm.jbatch.tck.artifacts.chunktypes.InventoryRecord;
 
-@javax.inject.Named("inventoryReader")
+@jakarta.inject.Named("inventoryReader")
 public class InventoryReader extends AbstractItemReader {
 
     private static final String CLASSNAME = InventoryReader.class.getName();

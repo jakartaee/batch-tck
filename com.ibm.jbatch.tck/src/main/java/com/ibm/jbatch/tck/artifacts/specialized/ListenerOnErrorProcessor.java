@@ -18,10 +18,10 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.ItemProcessor;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.ItemProcessor;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.ReadRecord;
 

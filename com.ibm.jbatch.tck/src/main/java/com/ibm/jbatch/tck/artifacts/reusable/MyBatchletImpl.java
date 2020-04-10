@@ -20,12 +20,12 @@ package com.ibm.jbatch.tck.artifacts.reusable;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
 
-@javax.inject.Named("myBatchletImpl")
+@jakarta.inject.Named("myBatchletImpl")
 public class MyBatchletImpl extends AbstractBatchlet {
     private final static Logger logger = Logger.getLogger(MyBatchletImpl.class.getName());
 

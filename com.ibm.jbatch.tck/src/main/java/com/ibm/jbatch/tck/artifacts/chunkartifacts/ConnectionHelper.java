@@ -25,7 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-import javax.sql.DataSource;
+import jakarta.sql.DataSource;
 
 public class ConnectionHelper {
 

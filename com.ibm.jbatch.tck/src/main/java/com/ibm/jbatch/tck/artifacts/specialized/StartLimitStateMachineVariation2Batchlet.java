@@ -21,13 +21,13 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("startLimitStateMachineVariation2Batchlet")
+@jakarta.inject.Named("startLimitStateMachineVariation2Batchlet")
 public class StartLimitStateMachineVariation2Batchlet extends AbstractBatchlet {
 
     private final static String sourceClass = StartLimitStateMachineVariation2Batchlet.class.getName();

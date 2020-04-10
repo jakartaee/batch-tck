@@ -20,14 +20,14 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.listener.AbstractItemReadListener;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.listener.AbstractItemReadListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.ReadRecord;
 
-@javax.inject.Named("myItemReadListenerImpl")
+@jakarta.inject.Named("myItemReadListenerImpl")
 public class MyItemReadListenerImpl extends AbstractItemReadListener {
 
     private final static String sourceClass = MyItemReadListenerImpl.class.getName();

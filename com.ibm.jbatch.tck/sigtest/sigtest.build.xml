@@ -48,12 +48,12 @@
         <echo message="Validating Java level = ${javaLevel} using signature file: ${sigFile}"/>
 
         <sigtest failonerror="true" filename="${sigFile}">
-            <package name="javax.batch"/>
+            <package name="jakarta.batch"/>
             <classpath>
                 <pathelement location="${java.home}/lib/rt.jar"/>
                 <pathelement location="${batch.api.classes}"/>
-                <pathelement location="${javax.inject.classes}"/>
-                <pathelement location="${javax.enterprise.util.classes}"/>
+                <pathelement location="${jakarta.inject.classes}"/>
+                <pathelement location="${jakarta.enterprise.util.classes}"/>
             </classpath>
         </sigtest>
     </target>

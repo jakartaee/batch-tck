@@ -21,13 +21,13 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.listener.JobListener;
-import javax.batch.api.listener.StepListener;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.listener.JobListener;
+import jakarta.batch.api.listener.StepListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("myUniversalListener")
+@jakarta.inject.Named("myUniversalListener")
 public class MyUniversalListener implements JobListener, StepListener {
 
     private final static Logger logger = Logger.getLogger(MyUniversalListener.class.getName());

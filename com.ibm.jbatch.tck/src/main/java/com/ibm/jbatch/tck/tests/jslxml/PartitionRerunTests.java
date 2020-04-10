@@ -23,9 +23,9 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 import java.util.List;
 import java.util.Properties;
 
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.JobExecution;
-import javax.batch.runtime.StepExecution;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.JobExecution;
+import jakarta.batch.runtime.StepExecution;
 
 import org.junit.Before;
 import org.testng.Reporter;

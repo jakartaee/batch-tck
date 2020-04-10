@@ -20,13 +20,13 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.chunk.listener.RetryReadListener;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.chunk.listener.RetryReadListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
 import org.testng.Reporter;
 
-@javax.inject.Named("myRetryReadListener")
+@jakarta.inject.Named("myRetryReadListener")
 public class MyRetryReadListener implements RetryReadListener {
     private final static String sourceClass = MyRetryReadListener.class.getName();
     private final static Logger logger = Logger.getLogger(sourceClass);

@@ -18,13 +18,13 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.Decider;
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.StepExecution;
+import jakarta.batch.api.Decider;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 
-@javax.inject.Named
+@jakarta.inject.Named
 public class FlowTransitionToDecisionTestDecider implements Decider, StatusConstants {
 
     public final static String DECIDER_EXIT_STATUS = "DECIDER_EXIT_STATUS";

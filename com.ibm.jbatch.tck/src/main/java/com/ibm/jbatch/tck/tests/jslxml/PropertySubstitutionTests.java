@@ -23,7 +23,7 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 import java.io.File;
 import java.util.Properties;
 
-import javax.batch.runtime.JobExecution;
+import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 

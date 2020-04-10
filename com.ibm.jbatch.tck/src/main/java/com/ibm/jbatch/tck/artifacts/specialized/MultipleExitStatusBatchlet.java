@@ -18,12 +18,12 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("multipleExitStatusBatchlet")
+@jakarta.inject.Named("multipleExitStatusBatchlet")
 public class MultipleExitStatusBatchlet extends AbstractBatchlet {
 
     @Inject

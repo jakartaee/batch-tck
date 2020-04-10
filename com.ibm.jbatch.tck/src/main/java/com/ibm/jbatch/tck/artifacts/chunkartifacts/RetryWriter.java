@@ -25,13 +25,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
+import jakarta.naming.InitialContext;
+import jakarta.naming.NamingException;
+import jakarta.sql.DataSource;
 
 import org.testng.Reporter;
 
@@ -39,7 +39,7 @@ import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;
 import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 
 
-@javax.inject.Named("retryWriter")
+@jakarta.inject.Named("retryWriter")
 public class RetryWriter extends AbstractItemWriter {
 
 

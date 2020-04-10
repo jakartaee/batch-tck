@@ -18,11 +18,11 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.partition.AbstractPartitionReducer;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.partition.AbstractPartitionReducer;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("PUDPartitionReducer")
+@jakarta.inject.Named("PUDPartitionReducer")
 public class PUDPartitionReducer extends AbstractPartitionReducer {
 
     @Inject

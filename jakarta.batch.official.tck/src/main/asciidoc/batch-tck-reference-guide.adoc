@@ -200,8 +200,8 @@ Note also that informal runs against certain JDK/JRE distributions may fail, sim
 
 The other prereqs needed for the signature tests are included by the TCK distribution:
 
-* an implementation of class javax.enterprise.util.Nonbinding - provided by the CDI API JAR.
-* the `javax.inject.*`` classes
+* an implementation of class jakarta.enterprise.util.Nonbinding - provided by the CDI API JAR.
+* the `jakarta.inject.*`` classes
 
 === Running the Signature Tests
 
@@ -209,9 +209,9 @@ The TCK package contains signature files (e.g. `batch-api-sigtest-java8.sig`) in
 
 Run the signature test by executing a command like the following:
 
-    java -jar $SIGTEST_DEV_JAR SignatureTest -static -package javax.batch \
+    java -jar $SIGTEST_DEV_JAR SignatureTest -static -package jakarta.batch \
     -filename batch-api-sigtest-java8.sig -classpath \
-    $JAVA_RUNTIME_JAR:$JAVAX_INJECT_JAR:$JAVAX_ENTERPRISE_UTIL_JAR: \
+    $JAVA_RUNTIME_JAR:$jakarta_INJECT_JAR:$jakarta_ENTERPRISE_UTIL_JAR: \
     $MY_BATCH_API_JAR
 
 Note the four dependencies plus JDK/JRE here, the locations of which you may need to modify:
@@ -219,8 +219,8 @@ Note the four dependencies plus JDK/JRE here, the locations of which you may nee
 * JAVA_RUNTIME_JAR: the location of the `rt.jar` from your JDK/JRE running the 'java' executable here.
 (It may be `$JAVA_HOME/lib/rt.jar` or `$JAVA_HOME/jre/lib/rt.jar`)
 * SIGTEST_DEV_JAR: the location of 'sigtestdev.jar' from your sigtest download.
-* JAVAX_INJECT_JAR: (for class javax.inject.Qualifier, shipped with TCK)
-* JAVAX_ENTERPRISE_UTIL_JAR: (for class javax.enterprise.util.Nonbinding, shipped with TCK)
+* jakarta_INJECT_JAR: (for class jakarta.inject.Qualifier, shipped with TCK)
+* jakarta_ENTERPRISE_UTIL_JAR: (for class jakarta.enterprise.util.Nonbinding, shipped with TCK)
 * MY_BATCH_API_JAR: Your own API JAR from your own implementation, which you are running the signature test against.
 
 ==== Example Execution
@@ -236,7 +236,7 @@ It assumes:
 . Your JRE distribution has the runtime JAR `rt.jar` at location `$JAVA_HOME/jre/lib/rt.jar`.
 . Your 'java' executable and your 'rt.jar' come from a Java 8 JDK/JRE, since in the example you are running against the Java 8 signature file (based on the -filename argument)
 
-    java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
+    java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
     -classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
@@ -265,18 +265,18 @@ Again, in order to pass the Jakarta Batch TCK you have to make sure that your AP
 
 For additional confirmation that the signature test is working correctly, a failure can be forced by removing the last classpath entry and instead doing:
 
-    java -jar sigtestdev.jar SignatureTest -static -package javax.batch \
+    java -jar sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
     -classpath jakarta.batch-api.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 
 You will see a failure like:
 
-    Warning: Not found annotation type javax.enterprise.util.Nonbinding
+    Warning: Not found annotation type jakarta.enterprise.util.Nonbinding
 
     Added Annotations
     -----------------
 
-    javax.batch.api.BatchProperty:          name():anno 0 javax.enterprise.util.Nonbinding()
+    jakarta.batch.api.BatchProperty:          name():anno 0 jakarta.enterprise.util.Nonbinding()
 
     STATUS:Failed.1 errors
 

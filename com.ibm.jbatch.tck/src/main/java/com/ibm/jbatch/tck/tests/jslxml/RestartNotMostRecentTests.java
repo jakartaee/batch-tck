@@ -22,8 +22,8 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
 import java.util.Properties;
 
-import javax.batch.operations.JobExecutionNotMostRecentException;
-import javax.batch.runtime.JobExecution;
+import jakarta.batch.operations.JobExecutionNotMostRecentException;
+import jakarta.batch.runtime.JobExecution;
 
 import org.junit.Before;
 import org.testng.Reporter;

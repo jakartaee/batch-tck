@@ -24,8 +24,8 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.JobExecution;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 

@@ -18,11 +18,11 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("contextsGetIdJobContextTestBatchlet")
+@jakarta.inject.Named("contextsGetIdJobContextTestBatchlet")
 public class ContextsGetIdJobContextTestBatchlet extends AbstractBatchlet {
 
     public static String GOOD_EXIT_STATUS = "VERY GOOD INVOCATION";

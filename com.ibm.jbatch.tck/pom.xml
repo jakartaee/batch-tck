@@ -189,7 +189,7 @@
                                              classpathref="maven.plugin.classpath"/>
                                     <echo message="Generating Java ${jdk} SigTest files for batch"/>
                                     <setup failonerror="true" filename="${new.sig.file}"
-                                           package="javax.batch">
+                                           package="jakarta.batch">
                                         <classpath refid="maven.compile.classpath"/>
                                         <classpath refid="maven.plugin.classpath"/>
                                         <classpath>

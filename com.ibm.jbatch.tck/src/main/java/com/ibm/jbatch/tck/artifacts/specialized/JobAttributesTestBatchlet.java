@@ -20,11 +20,11 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("jobAttributesTestBatchlet")
+@jakarta.inject.Named("jobAttributesTestBatchlet")
 public class JobAttributesTestBatchlet extends AbstractBatchlet {
 
     private final static String sourceClass = JobAttributesTestBatchlet.class.getName();

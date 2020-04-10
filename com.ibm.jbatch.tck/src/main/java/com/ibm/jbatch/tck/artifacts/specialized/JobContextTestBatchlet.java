@@ -18,11 +18,11 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.Batchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.Batchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("jobContextTestBatchlet")
+@jakarta.inject.Named("jobContextTestBatchlet")
 public class JobContextTestBatchlet implements Batchlet {
 
     @Inject

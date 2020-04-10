@@ -22,14 +22,14 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractCheckpointAlgorithm;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractCheckpointAlgorithm;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentRestartUserData;
 
-@javax.inject.Named("myCustomCheckpointAlgorithm")
+@jakarta.inject.Named("myCustomCheckpointAlgorithm")
 public class MyCustomCheckpointAlgorithm extends AbstractCheckpointAlgorithm {
 
     private static final String className = MyCustomCheckpointAlgorithm.class.getName();

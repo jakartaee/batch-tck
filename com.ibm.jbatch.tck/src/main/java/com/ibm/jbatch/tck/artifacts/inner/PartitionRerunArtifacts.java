@@ -21,21 +21,21 @@ package com.ibm.jbatch.tck.artifacts.inner;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.batch.api.partition.AbstractPartitionAnalyzer;
-import javax.batch.api.partition.PartitionCollector;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.batch.api.partition.AbstractPartitionAnalyzer;
+import jakarta.batch.api.partition.PartitionCollector;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 
 public class PartitionRerunArtifacts {
 
     //Reader that force fails when needed
-    @javax.inject.Named("PartitionRerunArtifacts.R")
+    @jakarta.inject.Named("PartitionRerunArtifacts.R")
     public static class Reader extends AbstractItemReader {
 
         @Inject
@@ -59,7 +59,7 @@ public class PartitionRerunArtifacts {
     }
 
     //dummy writer
-    @javax.inject.Named("PartitionRerunArtifacts.W")
+    @jakarta.inject.Named("PartitionRerunArtifacts.W")
     public static class Writer extends AbstractItemWriter {
         @Override
         public void writeItems(List<Object> items) {
@@ -67,7 +67,7 @@ public class PartitionRerunArtifacts {
     }
 
     //Collects all execution ids from partitions
-    @javax.inject.Named("PartitionRerunArtifacts.C")
+    @jakarta.inject.Named("PartitionRerunArtifacts.C")
     public static class Collector implements PartitionCollector {
         //@Inject JobContext jobCtx;
         @Inject
@@ -80,7 +80,7 @@ public class PartitionRerunArtifacts {
     }
 
     //Checks ids to make sure they are the same in the same run of the job
-    @javax.inject.Named("PartitionRerunArtifacts.A")
+    @jakarta.inject.Named("PartitionRerunArtifacts.A")
     public static class Analyzer extends AbstractPartitionAnalyzer {
         @Inject
         JobContext jobCtx;
@@ -95,7 +95,7 @@ public class PartitionRerunArtifacts {
     }
 
     //Simple batchlet that fails when forceFailure2 flag is set
-    @javax.inject.Named("PartitionRerunArtifacts.B")
+    @jakarta.inject.Named("PartitionRerunArtifacts.B")
     public static class Batchlet extends AbstractBatchlet {
         @Inject
         @BatchProperty(name = "force.failure2")

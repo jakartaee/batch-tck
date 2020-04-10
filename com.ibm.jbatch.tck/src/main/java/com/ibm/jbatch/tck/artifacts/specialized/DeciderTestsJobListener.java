@@ -18,13 +18,13 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.listener.AbstractJobListener;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.listener.AbstractJobListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 
-@javax.inject.Named
+@jakarta.inject.Named
 public class DeciderTestsJobListener extends AbstractJobListener implements StatusConstants {
 
     public static final String SUCCESS = "SUCCESS";

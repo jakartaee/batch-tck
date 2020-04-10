@@ -18,7 +18,7 @@
  */
 package com.ibm.jbatch.tck.artifacts.chunktypes;
 
-@javax.inject.Named("writeRecord")
+@jakarta.inject.Named("writeRecord")
 public class WriteRecord {
     private int count = 0;
 

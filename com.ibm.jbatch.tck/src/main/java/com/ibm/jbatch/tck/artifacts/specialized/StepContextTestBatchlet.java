@@ -18,12 +18,12 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.Batchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.Batchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("stepContextTestBatchlet")
+@jakarta.inject.Named("stepContextTestBatchlet")
 public class StepContextTestBatchlet implements Batchlet {
 
     @Inject

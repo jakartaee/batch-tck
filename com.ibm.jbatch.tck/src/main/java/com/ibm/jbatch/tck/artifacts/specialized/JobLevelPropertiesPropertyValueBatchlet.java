@@ -20,11 +20,11 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.Properties;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("jobLevelPropertiesPropertyValueBatchlet")
+@jakarta.inject.Named("jobLevelPropertiesPropertyValueBatchlet")
 public class JobLevelPropertiesPropertyValueBatchlet extends AbstractBatchlet {
 
     @Inject

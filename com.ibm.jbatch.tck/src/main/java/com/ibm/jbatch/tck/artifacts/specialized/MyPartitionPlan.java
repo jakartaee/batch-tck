@@ -18,9 +18,9 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.partition.PartitionPlanImpl;
+import jakarta.batch.api.partition.PartitionPlanImpl;
 
-@javax.inject.Named("myPartitionPlan")
+@jakarta.inject.Named("myPartitionPlan")
 public class MyPartitionPlan extends PartitionPlanImpl {
 
 

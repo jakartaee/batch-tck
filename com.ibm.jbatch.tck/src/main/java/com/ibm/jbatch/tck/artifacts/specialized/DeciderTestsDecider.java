@@ -18,16 +18,16 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.Decider;
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.StepExecution;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.Decider;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.StepExecution;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 
-@javax.inject.Named
+@jakarta.inject.Named
 public class DeciderTestsDecider implements Decider, StatusConstants {
 
     public final static String SPECIAL_EXIT_STATUS = "SpecialExitStatus";

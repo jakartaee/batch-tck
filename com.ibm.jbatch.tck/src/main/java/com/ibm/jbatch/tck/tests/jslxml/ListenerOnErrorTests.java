@@ -22,8 +22,8 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
 import java.util.Properties;
 
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.JobExecution;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.JobExecution;
 
 import org.junit.BeforeClass;
 import org.testng.Reporter;
@@ -59,8 +59,8 @@ public class ListenerOnErrorTests {
                     ),
             },
             apiRefs = {
-                    @APIRef(className = "javax.batch.api.chunk.ItemWriter", methodNames = {"writeItems"}),
-                    @APIRef(className = "javax.batch.api.chunk.listener.ItemWriteListener", methodNames = {"onWriteError"}),
+                    @APIRef(className = "jakarta.batch.api.chunk.ItemWriter", methodNames = {"writeItems"}),
+                    @APIRef(className = "jakarta.batch.api.chunk.listener.ItemWriteListener", methodNames = {"onWriteError"}),
             },
             issueRefs = {"https://java.net/bugzilla/show_bug.cgi?id=5431"},
             strategy = "Intentionally fail writer at a specific record number. Take the items passed as input parameter to onWriteError, "
@@ -103,8 +103,8 @@ public class ListenerOnErrorTests {
                     ),
             },
             apiRefs = {
-                    @APIRef(className = "javax.batch.api.chunk.ItemProcessor", methodNames = {"processItem"}),
-                    @APIRef(className = "javax.batch.api.chunk.listener.ItemProcessListener", methodNames = {"onProcessError"}),
+                    @APIRef(className = "jakarta.batch.api.chunk.ItemProcessor", methodNames = {"processItem"}),
+                    @APIRef(className = "jakarta.batch.api.chunk.listener.ItemProcessListener", methodNames = {"onProcessError"}),
             },
             issueRefs = {"https://java.net/bugzilla/show_bug.cgi?id=5431"},
             strategy = "Intentionally fail processor at a specific record number. Take the item passed as input parameter to onProcessError, "

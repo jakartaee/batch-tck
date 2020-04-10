@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 /**
  * This class is not needed at all by the executor of the TCK.   It
@@ -153,7 +153,7 @@ public class BatchXMLGenerator {
             return isBatchArtifact(artifactClass.getSuperclass());
         }
         for (Class interfaze : interfaces) {
-            if (interfaze.getCanonicalName().startsWith("javax.batch")) {
+            if (interfaze.getCanonicalName().startsWith("jakarta.batch")) {
                 logger.fine("Found a batch interface found for class: " + artifactClass.getCanonicalName() + ".  Continuing to add this entry to batch.xml");
                 return true;
             }

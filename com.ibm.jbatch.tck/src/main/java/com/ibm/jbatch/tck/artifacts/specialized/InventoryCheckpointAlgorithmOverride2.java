@@ -21,9 +21,9 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractCheckpointAlgorithm;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractCheckpointAlgorithm;
+import jakarta.inject.Inject;
 
 /*
  * Copyright 2012 International Business Machines Corp.
@@ -43,7 +43,7 @@ import javax.inject.Inject;
  */
 
 
-@javax.inject.Named("inventoryCheckpointAlgorithmOverride2")
+@jakarta.inject.Named("inventoryCheckpointAlgorithmOverride2")
 public class InventoryCheckpointAlgorithmOverride2 extends AbstractCheckpointAlgorithm {
 
     private static final String className = InventoryCheckpointAlgorithmNoOverride.class.getName();

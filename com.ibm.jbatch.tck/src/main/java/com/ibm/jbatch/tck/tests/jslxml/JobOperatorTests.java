@@ -25,15 +25,15 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import javax.batch.operations.JobExecutionAlreadyCompleteException;
-import javax.batch.operations.JobExecutionIsRunningException;
-import javax.batch.operations.JobRestartException;
-import javax.batch.operations.NoSuchJobException;
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.JobExecution;
-import javax.batch.runtime.JobInstance;
-import javax.batch.runtime.Metric;
-import javax.batch.runtime.StepExecution;
+import jakarta.batch.operations.JobExecutionAlreadyCompleteException;
+import jakarta.batch.operations.JobExecutionIsRunningException;
+import jakarta.batch.operations.JobRestartException;
+import jakarta.batch.operations.NoSuchJobException;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.JobExecution;
+import jakarta.batch.runtime.JobInstance;
+import jakarta.batch.runtime.Metric;
+import jakarta.batch.runtime.StepExecution;
 
 import org.junit.BeforeClass;
 import org.testng.Reporter;

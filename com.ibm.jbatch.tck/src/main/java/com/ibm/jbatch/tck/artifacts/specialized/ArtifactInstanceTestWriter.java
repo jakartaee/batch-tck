@@ -21,9 +21,9 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.batch.api.chunk.ItemWriter;
+import jakarta.batch.api.chunk.ItemWriter;
 
-@javax.inject.Named("artifactInstanceTestWriter")
+@jakarta.inject.Named("artifactInstanceTestWriter")
 public class ArtifactInstanceTestWriter implements ItemWriter {
 
     @Override

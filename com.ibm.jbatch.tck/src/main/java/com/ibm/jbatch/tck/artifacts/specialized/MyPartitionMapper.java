@@ -20,14 +20,14 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.Properties;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.partition.PartitionMapper;
-import javax.batch.api.partition.PartitionPlan;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.partition.PartitionMapper;
+import jakarta.batch.api.partition.PartitionPlan;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.specialized.MyPartitionPlan;
 
-@javax.inject.Named
+@jakarta.inject.Named
 public class MyPartitionMapper implements PartitionMapper {
 
 

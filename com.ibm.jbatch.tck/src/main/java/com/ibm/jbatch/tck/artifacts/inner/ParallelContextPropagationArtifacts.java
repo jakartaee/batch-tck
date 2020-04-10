@@ -20,12 +20,12 @@ package com.ibm.jbatch.tck.artifacts.inner;
 
 import java.io.Serializable;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.partition.AbstractPartitionAnalyzer;
-import javax.batch.api.partition.PartitionCollector;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.partition.AbstractPartitionAnalyzer;
+import jakarta.batch.api.partition.PartitionCollector;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,7 +33,7 @@ public class ParallelContextPropagationArtifacts {
 
     public static String GOOD_EXIT_STATUS = "VERY GOOD INVOCATION";
 
-    @javax.inject.Named("PCPSplitFlowBatchlet")
+    @jakarta.inject.Named("PCPSplitFlowBatchlet")
     public static class PCPSplitFlowBatchlet extends AbstractBatchlet {
 
         @Inject
@@ -75,7 +75,7 @@ public class ParallelContextPropagationArtifacts {
         }
     }
 
-    @javax.inject.Named("PCPPartitionBatchlet")
+    @jakarta.inject.Named("PCPPartitionBatchlet")
     public static class PCPPartitionBatchlet extends AbstractBatchlet {
 
         @Inject
@@ -109,7 +109,7 @@ public class ParallelContextPropagationArtifacts {
         }
     }
 
-    @javax.inject.Named("PCPCollector")
+    @jakarta.inject.Named("PCPCollector")
     public static class PCPCollector implements PartitionCollector {
 
         @Inject
@@ -130,7 +130,7 @@ public class ParallelContextPropagationArtifacts {
         }
     }
 
-    @javax.inject.Named("PCPAnalyzer")
+    @jakarta.inject.Named("PCPAnalyzer")
     public static class PCPAnalyzer extends AbstractPartitionAnalyzer {
 
         @Inject

@@ -20,7 +20,7 @@ package com.ibm.jbatch.tck.artifacts.chunktypes;
 
 import java.util.logging.Logger;
 
-@javax.inject.Named("readRecord")
+@jakarta.inject.Named("readRecord")
 public class ReadRecord {
 
     private final static Logger logger = Logger.getLogger(ReadRecord.class.getName());

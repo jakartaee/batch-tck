@@ -18,7 +18,7 @@
  */
 package com.ibm.jbatch.tck.spi;
 
-import javax.batch.runtime.JobExecution;
+import jakarta.batch.runtime.JobExecution;
 
 /**
  * Waiter to wait for a JobExecution to reach a "final" state, (i.e. to block until it does).

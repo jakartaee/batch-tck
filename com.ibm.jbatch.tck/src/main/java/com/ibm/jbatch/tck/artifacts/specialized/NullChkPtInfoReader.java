@@ -21,11 +21,11 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
-import javax.batch.api.chunk.ItemReader;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.chunk.ItemReader;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("nullChkPtInfoReader")
+@jakarta.inject.Named("nullChkPtInfoReader")
 public class NullChkPtInfoReader implements ItemReader {
 
     private final static Logger logger = Logger.getLogger(DoSomethingSimpleArrayWriter.class.getName());

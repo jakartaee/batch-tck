@@ -20,14 +20,14 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.listener.AbstractStepListener;
-import javax.batch.runtime.Metric;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.listener.AbstractStepListener;
+import jakarta.batch.runtime.Metric;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("metricsStepListener")
+@jakarta.inject.Named("metricsStepListener")
 public class MetricsStepListener extends AbstractStepListener {
 
     @Inject

@@ -20,12 +20,12 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.Properties;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("stepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet")
+@jakarta.inject.Named("stepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet")
 public class StepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet extends AbstractBatchlet {
     @Inject
     JobContext JobCtx;

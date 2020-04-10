@@ -18,7 +18,7 @@
  */
 package com.ibm.jbatch.tck.spi;
 
-import javax.batch.operations.JobOperator;
+import jakarta.batch.operations.JobOperator;
 
 /**
  * Factory class for JobExecutionWaiter

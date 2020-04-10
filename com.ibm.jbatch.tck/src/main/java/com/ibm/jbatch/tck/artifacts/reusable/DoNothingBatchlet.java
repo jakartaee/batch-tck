@@ -18,12 +18,12 @@
  */
 package com.ibm.jbatch.tck.artifacts.reusable;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("doNothingBatchlet")
+@jakarta.inject.Named("doNothingBatchlet")
 public class DoNothingBatchlet extends AbstractBatchlet {
 
     @Override

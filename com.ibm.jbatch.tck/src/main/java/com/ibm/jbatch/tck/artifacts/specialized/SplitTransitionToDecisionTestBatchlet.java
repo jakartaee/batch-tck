@@ -18,9 +18,9 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.AbstractBatchlet;
+import jakarta.batch.api.AbstractBatchlet;
 
-@javax.inject.Named("splitTransitionToDecisionTestBatchlet")
+@jakarta.inject.Named("splitTransitionToDecisionTestBatchlet")
 public class SplitTransitionToDecisionTestBatchlet extends AbstractBatchlet {
 
     public static String GOOD_EXIT_STATUS = "VERY GOOD INVOCATION";

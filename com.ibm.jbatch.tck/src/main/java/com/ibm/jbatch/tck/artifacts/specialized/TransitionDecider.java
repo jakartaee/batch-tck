@@ -18,13 +18,13 @@
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.Decider;
-import javax.batch.runtime.StepExecution;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.Decider;
+import jakarta.batch.runtime.StepExecution;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("transitionDecider")
+@jakarta.inject.Named("transitionDecider")
 public class TransitionDecider implements Decider {
 
     @Inject

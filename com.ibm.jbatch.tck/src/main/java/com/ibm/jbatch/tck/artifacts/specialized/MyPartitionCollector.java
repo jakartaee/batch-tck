@@ -21,13 +21,13 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.io.Externalizable;
 
-import javax.batch.api.partition.PartitionCollector;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.partition.PartitionCollector;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.reusable.ExternalizableString;
 
-@javax.inject.Named
+@jakarta.inject.Named
 public class MyPartitionCollector implements PartitionCollector {
 
     @Inject

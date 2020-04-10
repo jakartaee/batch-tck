@@ -21,13 +21,13 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.Decider;
-import javax.batch.runtime.StepExecution;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.Decider;
+import jakarta.batch.runtime.StepExecution;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("deciderReceivesCorrectStepExecutionsDecider")
+@jakarta.inject.Named("deciderReceivesCorrectStepExecutionsDecider")
 public class DeciderReceivesCorrectStepExecutionsDecider implements Decider {
 
     @Inject

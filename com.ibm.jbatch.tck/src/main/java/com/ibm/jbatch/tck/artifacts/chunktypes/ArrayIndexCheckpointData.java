@@ -24,7 +24,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.logging.Logger;
 
-@javax.inject.Named("arrayIndexCheckpointData")
+@jakarta.inject.Named("arrayIndexCheckpointData")
 public class ArrayIndexCheckpointData implements Externalizable {
 
     private final static Logger logger = Logger.getLogger(ArrayIndexCheckpointData.class.getName());

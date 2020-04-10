@@ -22,16 +22,16 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.ArrayIndexCheckpointData;
 import com.ibm.jbatch.tck.artifacts.chunktypes.ReadRecord;
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentRestartUserData;
 
-@javax.inject.Named("doSomethingSimpleArrayWriter")
+@jakarta.inject.Named("doSomethingSimpleArrayWriter")
 public class DoSomethingSimpleArrayWriter extends AbstractItemWriter {
 
     private final static Logger logger = Logger.getLogger(DoSomethingSimpleArrayWriter.class.getName());

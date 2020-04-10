@@ -20,9 +20,9 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.io.Serializable;
 
-import javax.batch.api.chunk.ItemReader;
+import jakarta.batch.api.chunk.ItemReader;
 
-@javax.inject.Named("artifactInstanceTestReader")
+@jakarta.inject.Named("artifactInstanceTestReader")
 public class ArtifactInstanceTestReader implements ItemReader {
 
     @Override

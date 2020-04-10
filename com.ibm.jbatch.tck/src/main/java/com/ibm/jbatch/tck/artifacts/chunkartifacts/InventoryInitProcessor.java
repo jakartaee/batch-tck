@@ -18,14 +18,14 @@
  */
 package com.ibm.jbatch.tck.artifacts.chunkartifacts;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.ItemProcessor;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.ItemProcessor;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.InventoryRecord;
 
 
-@javax.inject.Named("inventoryInitProcessor")
+@jakarta.inject.Named("inventoryInitProcessor")
 public class InventoryInitProcessor implements ItemProcessor {
 
 

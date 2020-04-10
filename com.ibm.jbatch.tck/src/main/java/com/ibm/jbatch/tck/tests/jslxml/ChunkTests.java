@@ -23,11 +23,11 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 import java.util.List;
 import java.util.Properties;
 
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.JobExecution;
-import javax.batch.runtime.JobInstance;
-import javax.batch.runtime.Metric;
-import javax.batch.runtime.StepExecution;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.JobExecution;
+import jakarta.batch.runtime.JobInstance;
+import jakarta.batch.runtime.Metric;
+import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentRestartUserData;
 import com.ibm.jbatch.tck.artifacts.specialized.MyItemProcessListenerImpl;

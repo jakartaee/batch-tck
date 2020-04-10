@@ -25,14 +25,14 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import javax.tools.FileObject;
-import javax.tools.StandardLocation;
+import jakarta.annotation.processing.AbstractProcessor;
+import jakarta.annotation.processing.RoundEnvironment;
+import jakarta.annotation.processing.SupportedAnnotationTypes;
+import jakarta.lang.model.SourceVersion;
+import jakarta.lang.model.element.Element;
+import jakarta.lang.model.element.TypeElement;
+import jakarta.tools.FileObject;
+import jakarta.tools.StandardLocation;
 
 import com.ibm.jbatch.tck.ann.*;
 

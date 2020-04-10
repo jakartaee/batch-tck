@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-@javax.inject.Named("checkpointData")
+@jakarta.inject.Named("checkpointData")
 public class CheckpointData implements Externalizable {
 
     private final static long serialVersionUID = 1L;

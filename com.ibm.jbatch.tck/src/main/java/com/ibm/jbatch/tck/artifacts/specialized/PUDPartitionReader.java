@@ -20,16 +20,16 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.io.Serializable;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.basicchunk.BasicItem;
 
 /*NOTE: Code for this class is taken substantially from basicchunk.BasicReader*/
-@javax.inject.Named("PUDPartitionReader")
+@jakarta.inject.Named("PUDPartitionReader")
 public class PUDPartitionReader extends AbstractItemReader {
 
     @Inject

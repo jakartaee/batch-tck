@@ -21,16 +21,16 @@ package com.ibm.jbatch.tck.artifacts.reusable;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.CheckpointData;
 import com.ibm.jbatch.tck.artifacts.chunktypes.ReadRecord;
 import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 
 
-@javax.inject.Named("simpleCustomItemReader")
+@jakarta.inject.Named("simpleCustomItemReader")
 public class SimpleCustomItemReader extends AbstractItemReader {
 
     private final static Logger logger = Logger.getLogger(SimpleCustomItemReader.class.getName());

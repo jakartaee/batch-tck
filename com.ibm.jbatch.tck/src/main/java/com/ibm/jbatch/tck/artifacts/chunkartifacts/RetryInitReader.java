@@ -24,15 +24,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.naming.InitialContext;
+import jakarta.naming.NamingException;
+import jakarta.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersCheckpointData;
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;
 
-@javax.inject.Named("retryInitReader")
+@jakarta.inject.Named("retryInitReader")
 public class RetryInitReader extends AbstractItemReader {
 
     protected DataSource dataSource = null;

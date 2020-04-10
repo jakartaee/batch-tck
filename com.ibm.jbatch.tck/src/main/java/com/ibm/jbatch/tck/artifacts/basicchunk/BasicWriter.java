@@ -21,12 +21,12 @@ package com.ibm.jbatch.tck.artifacts.basicchunk;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("basicWriter")
+@jakarta.inject.Named("basicWriter")
 public class BasicWriter extends AbstractItemWriter {
 
     @Inject

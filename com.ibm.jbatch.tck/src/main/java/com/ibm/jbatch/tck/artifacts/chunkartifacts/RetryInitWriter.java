@@ -24,14 +24,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.naming.InitialContext;
+import jakarta.naming.NamingException;
+import jakarta.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;
 
-@javax.inject.Named("retryInitWriter")
+@jakarta.inject.Named("retryInitWriter")
 public class RetryInitWriter extends AbstractItemWriter {
 
 

@@ -20,12 +20,12 @@ package com.ibm.jbatch.tck.artifacts.basicchunk;
 
 import java.io.Serializable;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemReader;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemReader;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("basicReader")
+@jakarta.inject.Named("basicReader")
 public class BasicReader extends AbstractItemReader {
 
     @Inject

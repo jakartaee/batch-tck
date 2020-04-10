@@ -108,7 +108,7 @@ cd jakarta.batch.official.tck-1.0.2
 #------------------------------------------
 
 # Run SigTest
-java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package javax.batch \
+java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package jakarta.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
 -classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
@@ -122,7 +122,7 @@ echo -------------------------------------------
 echo expecting failure to show tests are working
 echo -------------------------------------------
 echo
-java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package javax.batch \
+java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package jakarta.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
 -classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 echo

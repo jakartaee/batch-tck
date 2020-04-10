@@ -21,14 +21,14 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.util.logging.Logger;
 import java.util.List;
 
-import javax.batch.api.chunk.listener.RetryWriteListener;
-import javax.batch.runtime.context.JobContext;
-import javax.inject.Inject;
+import jakarta.batch.api.chunk.listener.RetryWriteListener;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.inject.Inject;
 
 import org.testng.Reporter;
 
 
-@javax.inject.Named("myRetryWriteListener")
+@jakarta.inject.Named("myRetryWriteListener")
 public class MyRetryWriteListener implements RetryWriteListener {
     private final static String sourceClass = MyRetryWriteListener.class.getName();
     private final static Logger logger = Logger.getLogger(sourceClass);

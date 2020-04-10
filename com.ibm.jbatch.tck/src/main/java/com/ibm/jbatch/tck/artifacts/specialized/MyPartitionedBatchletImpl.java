@@ -20,13 +20,13 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("myPartitionedBatchletImpl")
+@jakarta.inject.Named("myPartitionedBatchletImpl")
 public class MyPartitionedBatchletImpl extends AbstractBatchlet {
 
     private final static Logger logger = Logger.getLogger(MyPartitionedBatchletImpl.class.getName());

@@ -23,8 +23,8 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.*;
 import java.util.List;
 import java.util.Properties;
 
-import javax.batch.runtime.JobExecution;
-import javax.batch.runtime.StepExecution;
+import jakarta.batch.runtime.JobExecution;
+import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.ann.*;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
@@ -48,8 +48,8 @@ public class ParallelContextPropagationTests {
                     @SpecRef(version = "1.0", section = "10.9.2", notes = {"API for StepContext"}),
             },
             apiRefs = {
-                    @APIRef(className = "javax.batch.runtime.context.JobContext", methodNames = {"getProperties", "getJobName", "getExecutionId", "getInstanceId"}),
-                    @APIRef(className = "javax.batch.runtime.context.StepContext", methodNames = {"getStepExecutionId", "getProperties"}),
+                    @APIRef(className = "jakarta.batch.runtime.context.JobContext", methodNames = {"getProperties", "getJobName", "getExecutionId", "getInstanceId"}),
+                    @APIRef(className = "jakarta.batch.runtime.context.StepContext", methodNames = {"getStepExecutionId", "getProperties"}),
             },
             issueRefs = {"https://java.net/bugzilla/show_bug.cgi?id=5164"},
             strategy = "First, certain JobContext and StepContext values (properties, names, ids, etc.) are checked against hard-coded values "
@@ -111,8 +111,8 @@ public class ParallelContextPropagationTests {
                     @SpecRef(version = "1.0", section = "10.9.2", notes = {"API for StepContext"}),
             },
             apiRefs = {
-                    @APIRef(className = "javax.batch.runtime.context.JobContext", methodNames = {"getProperties", "getJobName", "getExecutionId", "getInstanceId"}),
-                    @APIRef(className = "javax.batch.runtime.context.StepContext", methodNames = {"getStepExecutionId"}),
+                    @APIRef(className = "jakarta.batch.runtime.context.JobContext", methodNames = {"getProperties", "getJobName", "getExecutionId", "getInstanceId"}),
+                    @APIRef(className = "jakarta.batch.runtime.context.StepContext", methodNames = {"getStepExecutionId"}),
             },
             issueRefs = {"https://java.net/bugzilla/show_bug.cgi?id=5164"},
             strategy = "First, certain JobContext and StepContext values (properties, names, ids, etc.) are checked against hard-coded values "

@@ -20,10 +20,10 @@ package com.ibm.jbatch.tck.artifacts.chunkartifacts;
 
 import java.util.Properties;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.ItemProcessor;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.ItemProcessor;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import org.testng.Reporter;
 
@@ -31,7 +31,7 @@ import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;
 import com.ibm.jbatch.tck.artifacts.reusable.MyParentException;
 
 
-@javax.inject.Named("retryProcessor")
+@jakarta.inject.Named("retryProcessor")
 public class RetryProcessor implements ItemProcessor {
 
 

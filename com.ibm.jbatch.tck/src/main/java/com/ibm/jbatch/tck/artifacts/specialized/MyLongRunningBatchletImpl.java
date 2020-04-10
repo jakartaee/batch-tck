@@ -21,17 +21,17 @@ package com.ibm.jbatch.tck.artifacts.specialized;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.reusable.StopOnBulletinBoardTestData;
 
 // NOTE:  We do NOT use the default @Named value in this special case, like we usually do.
 // Be careful generating the batch.xml !!
-@javax.inject.Named("myLongRunningBatchlet")
+@jakarta.inject.Named("myLongRunningBatchlet")
 public class MyLongRunningBatchletImpl extends AbstractBatchlet {
 
     @Inject
