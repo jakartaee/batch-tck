@@ -16,7 +16,7 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<batch-artifacts xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+<batch-artifacts xmlns="https://jakarta.ee/xml/ns/jakartaee">
     <ref id="basicProcessor" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicProcessor"/>
     <ref id="basicReader" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicReader"/>
     <ref id="basicWriter" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicWriter"/>

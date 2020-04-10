@@ -12,7 +12,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="job_decider_next_special" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+<job id="job_decider_next_special" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
     <listeners>
         <listener ref="deciderTestsJobListener"/>
     </listeners>

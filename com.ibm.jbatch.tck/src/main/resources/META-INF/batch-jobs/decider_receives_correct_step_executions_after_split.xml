@@ -10,7 +10,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="decider_receives_correct_step_executions_after_split" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+<job id="decider_receives_correct_step_executions_after_split" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
     <split id="split1" next="decider1">
         <flow id="split1flow1">
             <step id="split1flow1step1"

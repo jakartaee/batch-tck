@@ -18,7 +18,7 @@
   SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="partitionCtxPropagation" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+<job id="partitionCtxPropagation" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
     <properties>
         <property name="topLevelJobProperty" value="topLevelJobProperty.value"/>
     </properties>

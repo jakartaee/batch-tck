@@ -10,7 +10,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="decider_transitions_on_restart" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+<job id="decider_transitions_on_restart" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
     <step id="step1" next="decider1" allow-start-if-complete="#{jobParameters['allow.start.if.complete']}">
         <batchlet ref="multipleExitStatusBatchlet">
             <properties>

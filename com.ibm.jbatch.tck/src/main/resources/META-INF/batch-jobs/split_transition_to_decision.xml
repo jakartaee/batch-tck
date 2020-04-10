@@ -18,7 +18,7 @@
   SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="splitTransitionToDecision" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+<job id="splitTransitionToDecision" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
 
     <split id="split1" next="decider1">
         <flow id="flow1">
