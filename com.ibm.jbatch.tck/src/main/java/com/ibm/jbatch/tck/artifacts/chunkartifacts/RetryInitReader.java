@@ -25,9 +25,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import jakarta.batch.api.chunk.AbstractItemReader;
-import jakarta.naming.InitialContext;
-import jakarta.naming.NamingException;
-import jakarta.sql.DataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersCheckpointData;
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;

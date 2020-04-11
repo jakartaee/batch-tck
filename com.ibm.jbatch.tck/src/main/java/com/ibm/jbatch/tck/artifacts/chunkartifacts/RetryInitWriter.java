@@ -25,9 +25,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import jakarta.batch.api.chunk.AbstractItemWriter;
-import jakarta.naming.InitialContext;
-import jakarta.naming.NamingException;
-import jakarta.sql.DataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;
 
