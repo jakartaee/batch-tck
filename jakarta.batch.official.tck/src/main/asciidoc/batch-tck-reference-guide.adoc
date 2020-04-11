@@ -331,7 +331,7 @@ Note that some of the tests (e.g. the chunk tests involving time-based checkpoin
 
 The 900 seconds value, then, was chosen to avoid falsely reporting an error because of timing out too soon, allowing plenty of leeway.
 It also facilitates debugging.
-It does not, however, provide â€œfast failureâ€ in case of a hang or runaway thread.
+It does not, however, provide "fast failure" in case of a hang or runaway thread.
 
 ===	Building the TCK (optional, for reference):
 

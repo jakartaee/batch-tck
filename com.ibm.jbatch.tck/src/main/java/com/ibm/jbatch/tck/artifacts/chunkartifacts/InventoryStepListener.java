@@ -28,9 +28,9 @@ import jakarta.batch.api.listener.AbstractStepListener;
 import jakarta.batch.runtime.context.JobContext;
 import jakarta.batch.runtime.context.StepContext;
 import jakarta.inject.Inject;
-import jakarta.naming.InitialContext;
-import jakarta.naming.NamingException;
-import jakarta.sql.DataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 

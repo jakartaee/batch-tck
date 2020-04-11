@@ -29,9 +29,9 @@ import jakarta.batch.api.BatchProperty;
 import jakarta.batch.api.chunk.AbstractItemWriter;
 import jakarta.batch.runtime.context.StepContext;
 import jakarta.inject.Inject;
-import jakarta.naming.InitialContext;
-import jakarta.naming.NamingException;
-import jakarta.sql.DataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import org.testng.Reporter;
 
