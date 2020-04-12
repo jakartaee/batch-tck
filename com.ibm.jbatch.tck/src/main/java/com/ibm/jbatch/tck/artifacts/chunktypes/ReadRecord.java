@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,33 +15,34 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 package com.ibm.jbatch.tck.artifacts.chunktypes;
 
 import java.util.logging.Logger;
 
-@javax.inject.Named("readRecord")
+@jakarta.inject.Named("readRecord")
 public class ReadRecord {
-	
-	private final static Logger logger = Logger.getLogger(ReadRecord.class.getName());
-	
-	private int count = 0;
-	
-	public ReadRecord() {
-		//logger.fine("AJM: in ReadRecord ctor");
-	}
-	
-	public ReadRecord(int in) {
-		count = in;
-		logger.fine("AJM: in ReadRecord ctor (int), count = " + count);
 
-	}
-	public int getCount() {
-		return count;
-	}
-	
-	public void  setRecord(int i) {
-		//logger.fine("AJM: in setRecord");
-		count = i;
-	}
+    private final static Logger logger = Logger.getLogger(ReadRecord.class.getName());
+
+    private int count = 0;
+
+    public ReadRecord() {
+        //logger.fine("AJM: in ReadRecord ctor");
+    }
+
+    public ReadRecord(int in) {
+        count = in;
+        logger.fine("AJM: in ReadRecord ctor (int), count = " + count);
+
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setRecord(int i) {
+        //logger.fine("AJM: in setRecord");
+        count = i;
+    }
 }

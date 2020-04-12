@@ -1,13 +1,13 @@
 /*
  * Copyright 2012 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,50 +15,49 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
 import java.util.logging.Logger;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.runtime.BatchStatus;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.runtime.BatchStatus;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentUserData;
 
-@javax.inject.Named("batchletUsingStepContextImpl")
-public class BatchletUsingStepContextImpl extends AbstractBatchlet{
+@jakarta.inject.Named("batchletUsingStepContextImpl")
+public class BatchletUsingStepContextImpl extends AbstractBatchlet {
 
-	private final static Logger logger = Logger.getLogger(BatchletUsingStepContextImpl.class.getName());
-	
-    @Inject 
-    private StepContext stepCtx = null; 
+    private final static Logger logger = Logger.getLogger(BatchletUsingStepContextImpl.class.getName());
 
-    @Inject 
-    private JobContext jobCtx = null; 
-    
+    @Inject
+    private StepContext stepCtx = null;
+
+    @Inject
+    private JobContext jobCtx = null;
+
     private String BEGAN = "MadeItToBegin";
     private String CANCEL = "Cancelled";
     private String PROCESSED = "Processed";
-    
-    
-    @Inject    
-    @BatchProperty(name="force.failure")
+
+
+    @Inject
+    @BatchProperty(name = "force.failure")
     String forceFailureProp;
     private boolean forceFailure = false;
-    
-        
-    
+
+
     private void begin() throws Exception {
         logger.fine("BatchletUsingStepContextImpl - @BeginStep");
-        assert stepCtx.getExitStatus()==null;
+        assert stepCtx.getExitStatus() == null;
         stepCtx.setExitStatus(BEGAN);
-        
+
         if ("true".equalsIgnoreCase(forceFailureProp)) {
-        	forceFailure = true;
+            forceFailure = true;
         }
     }
 
@@ -67,56 +66,56 @@ public class BatchletUsingStepContextImpl extends AbstractBatchlet{
 
     @Override
     public String process() throws Exception {
-    	this.begin();   	
-    	
-        logger.fine("BatchletUsingStepContextImpl - @Process");		
+        this.begin();
+
+        logger.fine("BatchletUsingStepContextImpl - @Process");
         assert stepCtx.getExitStatus().equals(BEGAN);
-        
+
         MyPersistentUserData myData = null;
-        if ((myData = (MyPersistentUserData)stepCtx.getPersistentUserData()) != null) {
-        	if (forceFailure){
-        		forceFailure = false;
-        		stepCtx.setPersistentUserData(new MyPersistentUserData(myData.getData() + 1, forceFailure));
-        	}
-        } else {        
-        	if (forceFailure){
-        		stepCtx.setPersistentUserData(new MyPersistentUserData(4, forceFailure));
-        	}
+        if ((myData = (MyPersistentUserData) stepCtx.getPersistentUserData()) != null) {
+            if (forceFailure) {
+                forceFailure = false;
+                stepCtx.setPersistentUserData(new MyPersistentUserData(myData.getData() + 1, forceFailure));
+            }
+        } else {
+            if (forceFailure) {
+                stepCtx.setPersistentUserData(new MyPersistentUserData(4, forceFailure));
+            }
         }
         stepCtx.setTransientUserData(new MyTransient(3));
         stepCtx.setExitStatus(PROCESSED);
         end();
-        
+
         if (forceFailure) {
-        	throw new Exception("Fail on purpose in BatchletUsingStepContextImpl.process()");
+            throw new Exception("Fail on purpose in BatchletUsingStepContextImpl.process()");
         }
-        
+
         return BatchStatus.COMPLETED.name();
     }
 
     @Override
     public void stop() throws Exception {
-        logger.fine("BatchletUsingStepContextImpl - @Cancel");		
+        logger.fine("BatchletUsingStepContextImpl - @Cancel");
         stepCtx.setExitStatus(CANCEL);
     }
 
     private void end() throws Exception {
         logger.fine("BatchletUsingStepContextImpl - formerly @EndStep");
-        MyPersistentUserData p = (MyPersistentUserData)stepCtx.getPersistentUserData();
-        MyTransient t = (MyTransient)stepCtx.getTransientUserData();
-        
+        MyPersistentUserData p = (MyPersistentUserData) stepCtx.getPersistentUserData();
+        MyTransient t = (MyTransient) stepCtx.getTransientUserData();
+
         assert stepCtx.getExitStatus().equals(PROCESSED);
         stepCtx.setExitStatus(GOOD_STEP_EXIT_STATUS);
         jobCtx.setExitStatus(GOOD_JOB_EXIT_STATUS);
     }
-    
+
     private class MyTransient {
         int data = 0;
+
         MyTransient(int x) {
             data = x;
-        }   
+        }
     }
-    
 
 
 }

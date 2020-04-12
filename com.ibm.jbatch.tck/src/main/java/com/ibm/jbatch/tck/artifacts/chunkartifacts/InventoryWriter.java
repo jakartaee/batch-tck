@@ -1,19 +1,19 @@
 /**
  * Copyright 2012 International Business Machines Corp.
- *
+ * <p>
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.ibm.jbatch.tck.artifacts.chunkartifacts;
@@ -24,16 +24,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.batch.api.BatchProperty;
-import javax.batch.api.chunk.AbstractItemWriter;
-import javax.inject.Inject;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.api.chunk.AbstractItemWriter;
+import jakarta.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.InventoryRecord;
 
-@javax.inject.Named("inventoryWriter")
+@jakarta.inject.Named("inventoryWriter")
 public class InventoryWriter extends AbstractItemWriter {
 
     protected DataSource dataSource = null;
@@ -75,8 +75,8 @@ public class InventoryWriter extends AbstractItemWriter {
             connection = ConnectionHelper.getConnection(dataSource);
 
             for (Object record : records) {
-                itemID = ((InventoryRecord)record).getItemID();
-                quantity = ((InventoryRecord)record).getQuantity();
+                itemID = ((InventoryRecord) record).getItemID();
+                quantity = ((InventoryRecord) record).getQuantity();
 
                 statement = connection.prepareStatement(ConnectionHelper.INSERT_ORDER);
                 statement.setInt(1, itemID);
@@ -84,12 +84,12 @@ public class InventoryWriter extends AbstractItemWriter {
                 int rs = statement.executeUpdate();
 
                 writerIndex++;
-                
+
                 if (forcedFailCount != 0 && writerIndex >= forcedFailCount) {
                     // after writing up to the forced fail number force a dummy delay
                     if (dummyDelay > 0) {
                         Thread.sleep(dummyDelay); // sleep for dummyDelay seconds to
-                                                  // force a tran timeout - or to show that one does not hit?
+                        // force a tran timeout - or to show that one does not hit?
                         forcedFailCount = 0;
                         dummyDelay = 0;
                     } else {

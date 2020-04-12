@@ -1,13 +1,13 @@
 /*
  * Copyright 2016 International Business Machines Corp.
- * 
+ *
  * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership. Licensed under the Apache License, 
+ * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,20 +15,20 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
-*/
+ */
 package com.ibm.jbatch.tck.artifacts.reusable;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.runtime.context.JobContext;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("doNothingBatchlet")
+@jakarta.inject.Named("doNothingBatchlet")
 public class DoNothingBatchlet extends AbstractBatchlet {
 
     @Override
     public String process() {
-    	return "The DoNothingBatchlet COMPLETED Without Incident";
+        return "The DoNothingBatchlet COMPLETED Without Incident";
     }
-    
+
 }

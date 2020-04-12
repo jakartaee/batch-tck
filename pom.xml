@@ -17,7 +17,8 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
@@ -126,8 +127,8 @@
         -->
 
         <!-- Run against latest version of RI -->
-        <batch.api.version>1.0.2</batch.api.version>
-        <batch.impl.version>1.0.3</batch.impl.version>
+        <batch.api.version>2.0.0-M1</batch.api.version>
+        <batch.impl.version>2.0.0-M1</batch.impl.version>
 
         <!-- This version of TCK -->
         <batch.tck.version>1.0.2</batch.tck.version>
@@ -144,8 +145,8 @@
         <version.java>1.8</version.java>
 
         <!-- Dependencies -->
-        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>2.0.1</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
-        <version.jakarta.inject.jakarta.inject-api>1.0</version.jakarta.inject.jakarta.inject-api>
+        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>3.0.0-M2</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
+        <version.jakarta.inject.jakarta.inject-api>2.0.0.RC1</version.jakarta.inject.jakarta.inject-api>
         <version.org.testng.testng>6.8.8</version.org.testng.testng>
         <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
         <version.org.sonatype.plugins.nexus-staging-maven-plugin>1.6.6</version.org.sonatype.plugins.nexus-staging-maven-plugin>
@@ -253,7 +254,7 @@
                 <version>${version.jakarta.inject.jakarta.inject-api}</version>
             </dependency>
             <dependency>
-                <groupId>javax.transaction</groupId>
+                <groupId>jakarta.transaction</groupId>
                 <artifactId>jta</artifactId>
                 <version>1.1</version>
             </dependency>
@@ -318,13 +319,13 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-antrun-plugin</artifactId>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
                     <version>${version.org.apache.maven.plugins.maven-antrun-plugin}</version>
                 </plugin>
                 <plugin>
-                     <groupId>org.apache.maven.plugins</groupId>
-                     <artifactId>maven-failsafe-plugin</artifactId>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${version.org.apache.maven.plugins.maven-failsafe-plugin}</version>
                 </plugin>
                 <plugin>
@@ -336,6 +337,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${version.org.apache.maven.plugins.maven-javadoc-plugin}</version>
+                    <configuration>
+                        <!-- xjc uses > rather than &gt for closing tags in a generated classes javadoc -->
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                        <source>8</source>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -385,7 +391,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
                     <bottom>
-                    <![CDATA[
+                        <![CDATA[
                     <p align="left">&#169; Copyright IBM Corp. 2015<br>Licensed under the Apache License, Version 2.0
                     ]]>
                     </bottom>
@@ -433,15 +439,15 @@
                     </includes>
                 </configuration>
                 <executions>
-                <!--
-                    <execution>
-                        <id>check-headers</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                        -->
+                    <!--
+                        <execution>
+                            <id>check-headers</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                            -->
                 </executions>
             </plugin>
         </plugins>

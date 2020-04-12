@@ -31,7 +31,9 @@
     <artifactId>com.ibm.jbatch.tck.dist.exec</artifactId>
     <packaging>pom</packaging>
     <version>1.0.2</version>
-    <name>Jakarta Batch TCK Execution (testingJBatch, the former RI, plus the new Jakarta Batch API, both against TCK Distribution ZIP)</name>
+    <name>Jakarta Batch TCK Execution (testingJBatch, the former RI, plus the new Jakarta Batch API, both against TCK
+        Distribution ZIP)
+    </name>
 
     <build>
         <plugins>
@@ -50,7 +52,7 @@
                                 <artifactItem>
                                     <groupId>jakarta.batch</groupId>
                                     <artifactId>jakarta.batch.official.tck</artifactId>
-                                    <!--  
+                                    <!--
                                          This entire project/module is designed to run against the official TCK so it's a bit harder to tweak in Maven, and this is by design.
 
                                          Still, a hack to run against a subset of tests:
@@ -58,7 +60,7 @@
                                          2) WITHOUT doing a clean, edit
                                              com.ibm.jbatch.tck.dist.exec/target/executeTCK/jakarta.batch.official.tck-1.0.2/artifacts/batch-tck-impl-SE-suite.xml
                                             defining the individual test or subset
-                                         3)  Replace 
+                                         3)  Replace
                                     <overWrite>true</overWrite>
                                            below with:
                                     <overWrite>false</overWrite>
@@ -82,27 +84,31 @@
                                     <groupId>jakarta.batch</groupId>
                                     <artifactId>jakarta.batch-api</artifactId>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    </outputDirectory>
                                     <destFileName>jakarta.batch-api.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.ibm.jbatch</groupId>
                                     <artifactId>com.ibm.jbatch.container</artifactId>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    </outputDirectory>
                                     <destFileName>com.ibm.jbatch.container.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.ibm.jbatch</groupId>
                                     <artifactId>com.ibm.jbatch.spi</artifactId>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    </outputDirectory>
                                     <destFileName>com.ibm.jbatch.spi.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.apache.derby</groupId>
                                     <artifactId>derby</artifactId>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    </outputDirectory>
                                     <destFileName>derby.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
@@ -113,10 +119,10 @@
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
-                    </execution>                    
+                    </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
@@ -151,8 +157,8 @@
                                 <ant dir="target${fs}executeTCK${fs}${batch.tck.archive.root}" target="run"/>
                             </target>
                         </configuration>
-                     </execution>
-                     <execution>
+                    </execution>
+                    <execution>
                         <id>tckSignatureTest</id>
                         <goals>
                             <goal>run</goal>
@@ -161,11 +167,12 @@
                         <configuration>
                             <skip>${skipSigTests}</skip>
                             <target>
-                                <ant dir="target${fs}executeTCK${fs}${batch.tck.archive.root}" antfile="sigtest.build.xml" target="runSigTest"/>
+                                <ant dir="target${fs}executeTCK${fs}${batch.tck.archive.root}"
+                                     antfile="sigtest.build.xml" target="runSigTest"/>
                             </target>
                         </configuration>
-                     </execution>
- 
+                    </execution>
+
                 </executions>
             </plugin>
         </plugins>

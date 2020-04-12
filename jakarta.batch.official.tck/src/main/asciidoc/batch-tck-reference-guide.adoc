@@ -7,53 +7,62 @@
 This guide describes how to download, install, configure, and run the Technology Compatibility Kit (TCK) used to verify the compatibility of an implementation of the Jakarta Batch specification.
 
 === Licensing
-The Jakarta Batch TCK is provided under the 
-*Eclipse Foundation Technology Compatibility Kit License - v 1.0* [https://www.eclipse.org/legal/tck.php].
+
+The Jakarta Batch TCK is provided under the *Eclipse Foundation Technology Compatibility Kit License - v 1.0* [https://www.eclipse.org/legal/tck.php].
 
 === Who Should Use This Guide
+
 This guide is for implementers of the Jakarta Batch specification, to assist in running the test suite that verifies the compatibility of their implementation.
 
 === Before You Read This Guide
+
 Before reading this guide, you should familiarize yourself with the Jakarta Batch Version 1.0 specification, which can be found at https://jakarta.ee/specifications/batch/1.0/.
 
 Other useful information and links can be found on the eclipse.org project home page for the Jakarta Batch project [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home for the specification project [https://github.com/eclipse-ee4j/batch-api].
 
 == Introduction
+
 The Jakarta Batch TCK tests implementations of the Jakarta Batch specification, which describes the job specification language, Java programming model, and runtime environment for Jakarta Batch applications.
 
-=== What Tests Do I Need To Pass (to pass the TCK)?  
+=== What Tests Do I Need To Pass (to pass the TCK)?
 
 As an overview, note in order to pass the Jakarta Batch TCK you must run against your implementation, passing 100% of both the:
 
 * Signature Tests
 * TestNG Test Suite
 
-The two types of tests are not encapsulated in a single execution task or command; they must be executed separately from each other and each must be executed separately for each version of Java tested (e.g. Java 8, etc.). 
+The two types of tests are not encapsulated in a single execution task or command; they must be executed separately from each other and each must be executed separately for each version of Java tested (e.g. Java 8, etc.).
 
 == TCK Challenges/Appeals Process
-The https://github.com/jakartaee/specification-committee/blob/master/process.adoc[Jakarta EE TCK Process 1.0] will govern all process details used for challenges to the Jakarta Batch TCK.    
+
+The https://github.com/jakartaee/specification-committee/blob/master/process.adoc[Jakarta EE TCK Process 1.0] will govern all process details used for challenges to the Jakarta Batch TCK.
 
 Except from the *Jakarta EE TCK Process 1.0*:
 
-> Specifications are the sole source of truth and considered overruling to the TCK in all senses. In the course of implementing a specification and attempting to pass the TCK, implementations may come to the conclusion that one or more tests or assertions do not conform to the specification and therefore MUST be excluded from the certification requirements.
-> 
-> Requests for tests to be excluded are referred to as Challenges.  This section identifies who can make challenges to the TCK, what challenges to the TCK may be submitted, how these challenges are submitted, how and to whom challenges are addressed.
+> Specifications are the sole source of truth and considered overruling to the TCK in all senses.
+In the course of implementing a specification and attempting to pass the TCK, implementations may come to the conclusion that one or more tests or assertions do not conform to the specification and therefore MUST be excluded from the certification requirements.
+> > Requests for tests to be excluded are referred to as Challenges.
+This section identifies who can make challenges to the TCK, what challenges to the TCK may be submitted, how these challenges are submitted, how and to whom challenges are addressed.
 
 === Links
+
 Here is a https://github.com/jakartaee/specification-committee/blob/master/process.adoc#challenges[link] to the [underline]#Challenges# section within the *Jakarta EE TCK Process 1.0*.
 
-Challenges will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository. 
+Challenges will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository.
 
 As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.0* you can click https://github.com/eclipse-ee4j/batch-api/issues/new?labels=challenge[here], though it is recommended that you read through the challenge process to understand it in detail.
 
 == Certification of Compatibility
-The *Jakarta EE TCK Process 1.0* will define the core process details used to certify compatibility with the Jakarta Batch specification, through execution of the Jakarta Batch TCK.   
+
+The *Jakarta EE TCK Process 1.0* will define the core process details used to certify compatibility with the Jakarta Batch specification, through execution of the Jakarta Batch TCK.
 
 Except from the *Jakarta EE TCK Process 1.0*:
 
-> Jakarta EE is a self-certification ecosystem. If you wish to have your implementation listed on the official https://jakarta.ee implementations page for the given specification, a certification request as defined in this section is required.
+> Jakarta EE is a self-certification ecosystem.
+If you wish to have your implementation listed on the official https://jakarta.ee implementations page for the given specification, a certification request as defined in this section is required.
 
 === Links
+
 Here is a https://github.com/jakartaee/specification-committee/blob/master/process.adoc#certification-of-compatibility[link] to the [underline]#Certification of Compatibility# section within the *Jakarta EE TCK Process 1.0*.
 
 Certifications will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository.
@@ -67,18 +76,21 @@ This section explains how to obtain the TCK and provides recommendations for how
 ===	Obtaining the Software
 
 The Jakarta Batch TCK is distributed as a zip file, which contains the TCK artifacts (the test suite binary and source, porting package SPI binary and source, the test suite descriptor) in
- `/artifacts`, the TCK library dependencies in `/lib` and documentation in `/doc`.  You can  download the current source code from the Git repository: https://github.com/eclipse-ee4j/batch-tck.
+`/artifacts`, the TCK library dependencies in `/lib` and documentation in `/doc`.
+You can download the current source code from the Git repository: https://github.com/eclipse-ee4j/batch-tck.
 
 ===	The TCK Environment
-The software can simply be extracted from the ZIP file. Once the TCK is extracted, you'll see the following structure:
+
+The software can simply be extracted from the ZIP file.
+Once the TCK is extracted, you'll see the following structure:
 
  jakarta.batch.official.tck-x.y.z/
-     artifacts/ 
+     artifacts/
      doc/
-     lib/ 
+     lib/
      build.xml
      sigtest.build.xml
-     batch-tck.properties 
+     batch-tck.properties
      batch-sigtest-tck.properties
      LICENSE_EFTL.md
      NOTICE.md
@@ -99,76 +111,88 @@ In more detail:
 (And the remaining text files are self-explanatory.)
 
 ===	TCK test classes
-The TCK test methods are contained in a number of test classes in the `com.ibm.jbatch.tck.tests` package.	Each test method is flagged as a TestNG test using the `@org.testng.annotations.Test` annotation.
- 
-===TCK test artifacts
-Besides the test classes themselves, the Jakarta Batch TCK is comprised of a number of test artifact classes located in the `com.ibm.jbatch.tck.artifacts` package. These are the batch artifacts that have been implemented based on the Jakarta Batch API, and which are used by the individual test methods. The final set of test artifacts is the set of test JSL (XML) files, which are packaged in the `META-INF/batch-jobs` directory within `artifacts/com.ibm.jbatch.tck-x.y.z.jar`
 
-The basic test flow simply involves a TestNG test method using the JobOperator API to start (and possibly restart) one or more job instances of jobs defined via one of the test JSLs, making use of some number of `com.ibm.jbatch.tck.artifacts` Java artifacts. The JobOperator is wrapped by a thin layer which blocks waiting for the job to finish executing (more on this in the discussion of the *porting package SPI* later in the document).
+The TCK test methods are contained in a number of test classes in the `com.ibm.jbatch.tck.tests` package.
+Each test method is flagged as a TestNG test using the `@org.testng.annotations.Test` annotation.
+
+===TCK test artifacts Besides the test classes themselves, the Jakarta Batch TCK is comprised of a number of test artifact classes located in the `com.ibm.jbatch.tck.artifacts` package.
+These are the batch artifacts that have been implemented based on the Jakarta Batch API, and which are used by the individual test methods.
+The final set of test artifacts is the set of test JSL (XML) files, which are packaged in the `META-INF/batch-jobs` directory within `artifacts/com.ibm.jbatch.tck-x.y.z.jar`
+
+The basic test flow simply involves a TestNG test method using the JobOperator API to start (and possibly restart) one or more job instances of jobs defined via one of the test JSLs, making use of some number of `com.ibm.jbatch.tck.artifacts` Java artifacts.
+The JobOperator is wrapped by a thin layer which blocks waiting for the job to finish executing (more on this in the discussion of the *porting package SPI* later in the document).
 
 ==	Configuration
 
 ===	TCK Properties
+
 In order to run the TCK, you must define a property pointing to the Jakarta Batch runtime implementation that you are running the TCK against.
 
 ==== Required Properties
+
 You will need to set one required property, *batch.impl.classes* prior to running the Jakarta Batch TCK. This property is defined in the `batch-tck.properties` as follows:
 
 Example:
 
     # Edit this property to contain a classpath listing of the directories and jars for the SE Jakarta Batch runtime implementation (that you're running the TCK against)
-    # For example: 
-   
+    # For example:
+
     batch.impl.classes=$HOME/foo/lib/classes:$HOME/foo/lib/foo.jar:$HOME/foo/lib/batch-api.jar
 
 ==== Optional JVM Argument Property
 
-An optional property with name *jvm.options* is provided to specify JVM arguments using the `TestNG <jvmarg line=""/>`` function:	This property value should list the JVM arguments, separated by spaces.
+An optional property with name *jvm.options* is provided to specify JVM arguments using the `TestNG <jvmarg line=""/>`` function: This property value should list the JVM arguments, separated by spaces.
 
 ==== Optional Properties for Tuning Wait Times
 
-Finally, some of the TCK tests sleep for a short period of time to allow an operation to complete or to force a timeout.  These wait times are defaulted via properties that are also specified in batch-tck.properties.  
+Finally, some of the TCK tests sleep for a short period of time to allow an operation to complete or to force a timeout.
+These wait times are defaulted via properties that are also specified in batch-tck.properties.
 
 As with many typical decisions regarding timeout values, we attempt to strike a good balance between failing quickly when appropriate but allowing legitimate work to complete.
 
-These values can be adjusted if timing issues are seen in the implementation being tested. Refer to the documentation for a specific test (i.e. the comments in the test source) as to how the time value is used for that test.
+These values can be adjusted if timing issues are seen in the implementation being tested.
+Refer to the documentation for a specific test (i.e. the comments in the test source) as to how the time value is used for that test.
 
 ===	Porting Package SPI
 
-The Jakarta Batch TCK relies on an implementation of a "porting package" SPI to function, in order to verify test execution results. The reason is that the Jakarta Batch specification API alone does not provide a convenient-enough mechanism to check results.
- 
-A default, "polling" implementation of this SPI is shipped within the TCK itself. The expectation is that the typical Jakarta Batch implementation will be content to use the TCK-provided, default implementation of the porting package SPI.
+The Jakarta Batch TCK relies on an implementation of a "porting package" SPI to function, in order to verify test execution results.
+The reason is that the Jakarta Batch specification API alone does not provide a convenient-enough mechanism to check results.
+
+A default, "polling" implementation of this SPI is shipped within the TCK itself.
+The expectation is that the typical Jakarta Batch implementation will be content to use the TCK-provided, default implementation of the porting package SPI.
 
 Further detail on the porting package is provided later in this document, in case you wish to provide your own, different implementation.
 
-
 === Configuring TestNG to run the TCK
 
-TestNG is responsible for selecting the tests to execute, the order of execution, and reporting the results. Detailed TestNG documentation can be found at testng.org [http://testng.org/doc/documentation-main.html].   One reason TestNG was chosen was the ability to use a single XML file to hold excludes from a set of compiled tests, and to easily add to this exclude list in the event of TCK challenges.
+TestNG is responsible for selecting the tests to execute, the order of execution, and reporting the results.
+Detailed TestNG documentation can be found at testng.org [http://testng.org/doc/documentation-main.html].
+One reason TestNG was chosen was the ability to use a single XML file to hold excludes from a set of compiled tests, and to easily add to this exclude list in the event of TCK challenges.
 
-The `artifacts/batch-tck-impl-SE-suite.xml` artifact provided in the TCK distribution must be run by TestNG 6.8.8 (described by the TestNG documentation as "with a testng.xml file")  [underline]#unmodified# for an implementation to pass the TCK. 
+The `artifacts/batch-tck-impl-SE-suite.xml` artifact provided in the TCK distribution must be run by TestNG 6.8.8 (described by the TestNG documentation as "with a testng.xml file")  [underline]#unmodified# for an implementation to pass the TCK.
 
 (*Note:* for debugging purposes, however, it may be convenient to use this file to allow tests to be excluded from a run, e.g. to run a single test method.).
 
 ==	Executing Signature Tests
 
-One of the requirements of an implementation passing the TCK is for it to pass the signature test. This section describes how to run the signature test against your implementation.
+One of the requirements of an implementation passing the TCK is for it to pass the signature test.
+This section describes how to run the signature test against your implementation.
 
-=== Obtaining a signature test tool 
+=== Obtaining a signature test tool
 
-We do not prescribe a certain version/distribution of signature test library.  In testing the TCK (*in the com.ibm.jbatch.tck.dist.exec module*), we use the version of `sigtestdev.jar`  released  to Maven Central under coordinates *net.java.sigtest:sigtestdev:3.0-b12-v20140219* (the JAR is https://repo1.maven.org/maven2/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar[here]), in spite of the fact that the POM comments mention that this is an "unofficial" release.
+We do not prescribe a certain version/distribution of signature test library.
+In testing the TCK (*in the com.ibm.jbatch.tck.dist.exec module*), we use the version of `sigtestdev.jar`  released to Maven Central under coordinates *net.java.sigtest:sigtestdev:3.0-b12-v20140219* (the JAR is https://repo1.maven.org/maven2/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar[here]), in spite of the fact that the POM comments mention that this is an "unofficial" release.
 
 Some alternate suggestions:
 
 . The https://github.com/eclipse-ee4j/jakartaee-tck/blob/master/lib/sigtestdev.jar[sigtestdev.jar] version used by the Jakarta EE TCK project.
-. A distribution from the https://wiki.openjdk.java.net/display/CodeTools/sigtest[sigtest project], an OpenJDK project. 
+. A distribution from the https://wiki.openjdk.java.net/display/CodeTools/sigtest[sigtest project], an OpenJDK project.
 
 It is assumed all these options will give similar results.
 
-
 ===	JDK/JRE prerequisite
 
-The official run of the signature tests must be performed with an Open JDK with HotSpot VM, using a distribution matching the Java version being tested (e.g. Java 8). 
+The official run of the signature tests must be performed with an Open JDK with HotSpot VM, using a distribution matching the Java version being tested (e.g. Java 8).
 
 Note also that informal runs against certain JDK/JRE distributions may fail, simply because the layout of the JVM internals differs from what the sigtest tooling expects, (and not because of a signature mismatch or other Java language issue).
 
@@ -176,8 +200,8 @@ Note also that informal runs against certain JDK/JRE distributions may fail, sim
 
 The other prereqs needed for the signature tests are included by the TCK distribution:
 
-* an implementation of class javax.enterprise.util.Nonbinding - provided by the CDI API JAR.
-* the `javax.inject.*`` classes 
+* an implementation of class jakarta.enterprise.util.Nonbinding - provided by the CDI API JAR.
+* the `jakarta.inject.*`` classes
 
 === Running the Signature Tests
 
@@ -185,18 +209,18 @@ The TCK package contains signature files (e.g. `batch-api-sigtest-java8.sig`) in
 
 Run the signature test by executing a command like the following:
 
-    java -jar $SIGTEST_DEV_JAR SignatureTest -static -package javax.batch \
+    java -jar $SIGTEST_DEV_JAR SignatureTest -static -package jakarta.batch \
     -filename batch-api-sigtest-java8.sig -classpath \
-    $JAVA_RUNTIME_JAR:$JAVAX_INJECT_JAR:$JAVAX_ENTERPRISE_UTIL_JAR: \
+    $JAVA_RUNTIME_JAR:$jakarta_INJECT_JAR:$jakarta_ENTERPRISE_UTIL_JAR: \
     $MY_BATCH_API_JAR
-
 
 Note the four dependencies plus JDK/JRE here, the locations of which you may need to modify:
 
-* JAVA_RUNTIME_JAR:   the location of the `rt.jar` from your JDK/JRE running the 'java' executable here.  (It may be `$JAVA_HOME/lib/rt.jar` or `$JAVA_HOME/jre/lib/rt.jar`)
-* SIGTEST_DEV_JAR:	the location of 'sigtestdev.jar' from your sigtest download.
-* JAVAX_INJECT_JAR:	(for class javax.inject.Qualifier, shipped with TCK)
-* JAVAX_ENTERPRISE_UTIL_JAR: (for class javax.enterprise.util.Nonbinding,  shipped with TCK)
+* JAVA_RUNTIME_JAR: the location of the `rt.jar` from your JDK/JRE running the 'java' executable here.
+(It may be `$JAVA_HOME/lib/rt.jar` or `$JAVA_HOME/jre/lib/rt.jar`)
+* SIGTEST_DEV_JAR: the location of 'sigtestdev.jar' from your sigtest download.
+* jakarta_INJECT_JAR: (for class jakarta.inject.Qualifier, shipped with TCK)
+* jakarta_ENTERPRISE_UTIL_JAR: (for class jakarta.enterprise.util.Nonbinding, shipped with TCK)
 * MY_BATCH_API_JAR: Your own API JAR from your own implementation, which you are running the signature test against.
 
 ==== Example Execution
@@ -212,56 +236,56 @@ It assumes:
 . Your JRE distribution has the runtime JAR `rt.jar` at location `$JAVA_HOME/jre/lib/rt.jar`.
 . Your 'java' executable and your 'rt.jar' come from a Java 8 JDK/JRE, since in the example you are running against the Java 8 signature file (based on the -filename argument)
 
-    java -jar ../sigtestdev.jar SignatureTest -static -package javax.batch \
+    java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
     -classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 So to be clear, the directory structure looks like
 
     jakarta.batch.official.tck-x.y.z/
-        artifacts/ 
+        artifacts/
         doc/
         ...
         ... as detailed above ...
         ...
     jakarta.batch-api-1.0.2.jar
-    sigtestdev.jar 
+    sigtestdev.jar
 
 Again, be sure to choose the correct version of the signature file depending on your the Java version (e.g V8) of your JDK/JRE.
- 
+
 === Determining success
 
 The output of your execution should include, at the very end:
 
     STATUS:Passed
-    
+
 Again, in order to pass the Jakarta Batch TCK you have to make sure that your API passes the signature tests.
 
 ===	Forcing a Signature Test failure (optional)
+
 For additional confirmation that the signature test is working correctly, a failure can be forced by removing the last classpath entry and instead doing:
 
-    java -jar sigtestdev.jar SignatureTest -static -package javax.batch \
+    java -jar sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
     -classpath jakarta.batch-api.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 
-
 You will see a failure like:
 
-    Warning: Not found annotation type javax.enterprise.util.Nonbinding
+    Warning: Not found annotation type jakarta.enterprise.util.Nonbinding
 
     Added Annotations
     -----------------
 
-    javax.batch.api.BatchProperty:          name():anno 0 javax.enterprise.util.Nonbinding()
-
+    jakarta.batch.api.BatchProperty:          name():anno 0 jakarta.enterprise.util.Nonbinding()
 
     STATUS:Failed.1 errors
 
 === Ant script (optional)
 
-We also provide a `sigtest.build.xml` which should typically do a good job encapsulating the `java` execution described above.   It uses the `batch-sigtest-tck.properties` file to supply the four classpath entries detailed above.    
+We also provide a `sigtest.build.xml` which should typically do a good job encapsulating the `java` execution described above.
+It uses the `batch-sigtest-tck.properties` file to supply the four classpath entries detailed above.
 
-We list the above approach as the "official" one but this may be helpful as a convenience, and with such a thin wrapper it should be obvious enough whether results should apply.   
+We list the above approach as the "official" one but this may be helpful as a convenience, and with such a thin wrapper it should be obvious enough whether results should apply.
 
 === Gotchas
 
@@ -270,16 +294,18 @@ The differing location of `rt.jar` in different JDK/JRE distributions has been a
 ==	Executing TestNG Test Suite
 
 The build.xml file is used for running the test suite in standalone mode with ant.
-The default target, run, will invoke TestNG, running the tests specified in the suite xml file at
-artifacts/batch-tck-impl-SE-suite.xml (described
-by the TestNG documentation as "with a testng.xml file"). A report will be generated by TestNG in the results directory.
- 
-The list of test cases to run can be customized (for debugging) by modifying the the TestNG suite xml file at artifacts/batch-tck-impl-suite.xml. (Note that an implementation must run against that provided suite.xml file as-is, to pass the TCK.
+The default target, run, will invoke TestNG, running the tests specified in the suite xml file at artifacts/batch-tck-impl-SE-suite.xml (described by the TestNG documentation as "with a testng.xml file").
+A report will be generated by TestNG in the results directory.
+
+The list of test cases to run can be customized (for debugging) by modifying the the TestNG suite xml file at artifacts/batch-tck-impl-suite.xml.
+(Note that an implementation must run against that provided suite.xml file as-is, to pass the TCK.
 
 === Steps
 
-. Edit `batch-tck.properties` to point to your Jakarta Batch API and implementation.  Read the comments within this file to understand what values to set.
-. Run via `ant -f build.xml`.  Look for results like:
+. Edit `batch-tck.properties` to point to your Jakarta Batch API and implementation.
+Read the comments within this file to understand what values to set.
+. Run via `ant -f build.xml`.
+Look for results like:
 +
    [testng] ===============================================
    [testng] Jakarta Batch TCK SE
@@ -289,34 +315,42 @@ The list of test cases to run can be customized (for debugging) by modifying the
 *Note*: there are many forced failure scenarios tested by the TCK, so typically the log will show a lot of exception stack traces during a normal, successful execution even.
 
 ===	Timeouts
+
 The JobOperatorBridge is a utility/helper class in the Jakarta Batch TCK which makes use of the following system property:
 
     tck.execution.waiter.timeout
 
-using a default value of `900000` (900 seconds). 
+using a default value of `900000` (900 seconds).
 
-The intention here is that the test should not wait forever if something catastrophic occurs causing the job to never complete (or if the porting package SPI â€œwaiterâ€ is never notified for some reason). The test also can't end too soon, causing a test failure because the wait was not long enough.
+The intention here is that the test should not wait forever if something catastrophic occurs causing the job to never complete (or if the porting package SPI â€œwaiterâ€ is never notified for some reason).
+The test also can't end too soon, causing a test failure because the wait was not long enough.
 
 This timeout value can be customized (say, to increase when debugging or decrease to force a faster failure in some cases).
 
 Note that some of the tests (e.g. the chunk tests involving time-based checkpointing) will take at least 15-25 seconds to run on any hardware, so any value less than that for the whole TCK will cause some test failures simply due to timing (and not because of any failure in the underlying Jakarta Batch implementation).
 
-The 900 seconds value, then, was chosen to avoid falsely reporting an error because of timing out too soon, allowing plenty of leeway.	It also facilitates debugging.	It does not, however, provide â€œfast failureâ€ in case of a hang or runaway thread.
+The 900 seconds value, then, was chosen to avoid falsely reporting an error because of timing out too soon, allowing plenty of leeway.
+It also facilitates debugging.
+It does not, however, provide "fast failure" in case of a hang or runaway thread.
 
 ===	Building the TCK (optional, for reference):
-The TCK tests can be optionally built from source. However, note that for an implementation to pass the TCK, it must run against the shipped TCK test suite binary as-is (and not against a modified TCK). Still it may be convenient to be able to build the TCK from source for debugging purposes.
 
-== Working with TCK source (debugging, etc.) 
+The TCK tests can be optionally built from source.
+However, note that for an implementation to pass the TCK, it must run against the shipped TCK test suite binary as-is (and not against a modified TCK).
+Still it may be convenient to be able to build the TCK from source for debugging purposes.
+
+== Working with TCK source (debugging, etc.)
 
 For most development/debug use cases it is recommended to refer to the source in the Jakarta Batch TCK] GitHub repository [https://github.com/eclipse-ee4j/batch-tck], and to leverage the Maven automation and artifacts there using the associated documentation.
 
 It should be documented how to use tags/releases, etc. to match the official level tested in the TCK distribution.
 
-It is also possible to use the TestNG `build.xml` script's *compile* target, after setting the *src* property appropriately.   We have paid less attention to this more recently and instead focused on the Maven approach.
+It is also possible to use the TestNG `build.xml` script's *compile* target, after setting the *src* property appropriately.
+We have paid less attention to this more recently and instead focused on the Maven approach.
 
 == Note on TCK guide format
 
-The Jakarta Batch TCK evolved out of the earlier JSR 352 TCK (for more detail see https://www.jcp.org/en/jsr/detail?id=352[JSR 352: Batch Applications for the Java Platform]) and most likely will continue to evolve.   
+The Jakarta Batch TCK evolved out of the earlier JSR 352 TCK (for more detail see https://www.jcp.org/en/jsr/detail?id=352[JSR 352: Batch Applications for the Java Platform]) and most likely will continue to evolve.
 
 Since there are still some details in the previous JSR 352 TCK reference guide that could possibly be helpful to someone workin with the Jakarta Batch TCK project not yet "ported" to this new guide, we include a link to the  https://github.com/WASdev/standards.jsr352.tck/blob/master/com.ibm.jbatch.tck/doc/jsr352-tck-reference-guide.pdf[old, former JSR 352 reference guide] in case it is of use.
 
@@ -326,8 +360,8 @@ Since there are still some details in the previous JSR 352 TCK reference guide t
 * Jakarta Batch specification/API repository - https://github.com/eclipse-ee4j/batch-api
 * Jakarta Batch project home page - https://projects.eclipse.org/projects/ee4j.jakartabatch
 
-
 == Change History
 
 === Initial Release
+
 * July 17, 2019

@@ -8,6 +8,6 @@ Implementation-Version: 1.0
 Specification-Title: Jakarta Batch
 Specification-Vendor: IBM
 Specification-Version: 1.0
-Import-Package: javax.batch.operations,
- javax.batch.runtime
+Import-Package: jakarta.batch.operations,
+ jakarta.batch.runtime
 Export-Package: com.ibm.jbatch.tck.spi

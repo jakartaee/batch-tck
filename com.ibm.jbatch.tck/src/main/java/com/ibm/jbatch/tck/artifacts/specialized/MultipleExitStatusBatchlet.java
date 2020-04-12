@@ -1,29 +1,29 @@
 /**
  * Copyright 2013 International Business Machines Corp.
- *
+ * <p>
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.ibm.jbatch.tck.artifacts.specialized;
 
-import javax.batch.api.AbstractBatchlet;
-import javax.batch.api.BatchProperty;
-import javax.batch.runtime.context.StepContext;
-import javax.inject.Inject;
+import jakarta.batch.api.AbstractBatchlet;
+import jakarta.batch.api.BatchProperty;
+import jakarta.batch.runtime.context.StepContext;
+import jakarta.inject.Inject;
 
-@javax.inject.Named("multipleExitStatusBatchlet")
+@jakarta.inject.Named("multipleExitStatusBatchlet")
 public class MultipleExitStatusBatchlet extends AbstractBatchlet {
 
     @Inject
@@ -54,7 +54,7 @@ public class MultipleExitStatusBatchlet extends AbstractBatchlet {
 
         if (stepCtx.getStepName().equalsIgnoreCase(stop_job_after_this_step)
                 || stepCtx.getStepName().equalsIgnoreCase(stop_job_after_this_step2)) {
-            
+
             stepCtx.setExitStatus(step_complete_but_force_job_stopped_status);
             return step_complete_but_force_job_stopped_status;
         }

@@ -18,18 +18,18 @@
  -->
 <project name="batch_tck_sigtest" default="runSigTest" basedir="">
 
-    
+
     <description>
         Jakarta Batch TCK SigTest
     </description>
-    
+
     <target name="init">
-         <loadproperties srcFile="batch-sigtest-tck.properties"/>
+        <loadproperties srcFile="batch-sigtest-tck.properties"/>
     </target>
 
     <target name="runSigTest" depends="init" description="Runs the SigTest portion of the Jakarta Batch TCK ">
 
-        <taskdef name="sigtest"  classname="com.sun.tdk.signaturetest.ant.ATest"  classpath="${sigtestdev.classes}"/>
+        <taskdef name="sigtest" classname="com.sun.tdk.signaturetest.ant.ATest" classpath="${sigtestdev.classes}"/>
 
         <echo message="Running SigTest with Ant version = ${ant.java.version}"/>
 
@@ -48,13 +48,13 @@
         <echo message="Validating Java level = ${javaLevel} using signature file: ${sigFile}"/>
 
         <sigtest failonerror="true" filename="${sigFile}">
-           <package name="javax.batch"/>
-           <classpath>
-               <pathelement location="${java.home}/lib/rt.jar"/>
-               <pathelement location="${batch.api.classes}"/>
-               <pathelement location="${javax.inject.classes}"/>
-               <pathelement location="${javax.enterprise.util.classes}"/>
-           </classpath>
+            <package name="jakarta.batch"/>
+            <classpath>
+                <pathelement location="${java.home}/lib/rt.jar"/>
+                <pathelement location="${batch.api.classes}"/>
+                <pathelement location="${jakarta.inject.classes}"/>
+                <pathelement location="${jakarta.enterprise.util.classes}"/>
+            </classpath>
         </sigtest>
     </target>
 

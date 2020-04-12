@@ -18,7 +18,7 @@
    SPDX-License-Identifier: Apache-2.0
  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jakarta.batch</groupId>
@@ -105,16 +105,18 @@
                                           filtering="true"
                                           overwrite="true">
                                         <filterset>
-                                            <filter token="project.version" value="${project.version}" />
-                                            <filter token="version.org.testng.testng" value="${version.org.testng.testng}" />
-                                            <filter token="version.com.beust.jcommander" value="${version.com.beust.jcommander}" />
+                                            <filter token="project.version" value="${project.version}"/>
+                                            <filter token="version.org.testng.testng"
+                                                    value="${version.org.testng.testng}"/>
+                                            <filter token="version.com.beust.jcommander"
+                                                    value="${version.com.beust.jcommander}"/>
                                         </filterset>
                                     </copy>
                                 </target>
                             </configuration>
                         </execution>
                         <!-- By failing when the newly-generated batch.xml changes, we force someone to review
-                             the changes.   We purposely don't want to make it too easy to introduce a change here, 
+                             the changes.   We purposely don't want to make it too easy to introduce a change here,
                              since this will ultimately affect the pass/failing of implementations' runs against the TCK.
                              This will add as a guard that the person who would make the update knows what they're doing. -->
                         <execution>
@@ -125,8 +127,10 @@
                             <phase>none</phase>
                             <configuration>
                                 <target>
-                                    <property name="original.batch.xml" value="${project.basedir}${fs}src${fs}main${fs}resources${fs}META-INF${fs}batch.xml"/>
-                                    <property name="generate.batch.xml.dir" value="${project.basedir}${fs}target${fs}generate-tck"/>
+                                    <property name="original.batch.xml"
+                                              value="${project.basedir}${fs}src${fs}main${fs}resources${fs}META-INF${fs}batch.xml"/>
+                                    <property name="generate.batch.xml.dir"
+                                              value="${project.basedir}${fs}target${fs}generate-tck"/>
                                     <mkdir dir="${generate.batch.xml.dir}"/>
                                     <echo message="building ${generate.batch.xml.dir}/batch.xml"/>
                                     <java classname="com.ibm.jbatch.tck.utils.BatchXMLGenerator">
@@ -144,14 +148,16 @@
                                     <fail message="Newly-generated ${generate.batch.xml.dir}${fs}batch.xml does not exactly match previous batch.xml at location: ${original.batch.xml}.  Review carefully and if this is correct, then overwrite the old ${original.batch.xml} file with the newly-generated copy of batch.xml">
                                         <condition>
                                             <not>
-                                                <filesmatch file1="${original.batch.xml}" file2="${generate.batch.xml.dir}${fs}batch.xml" textfile="true"/>
+                                                <filesmatch file1="${original.batch.xml}"
+                                                            file2="${generate.batch.xml.dir}${fs}batch.xml"
+                                                            textfile="true"/>
                                             </not>
                                         </condition>
                                     </fail>
                                 </target>
                             </configuration>
                         </execution>
-                        <!-- Updating the signature files should not be done lightly.  This changes the specified, public API. 
+                        <!-- Updating the signature files should not be done lightly.  This changes the specified, public API.
                              We purposely make this fail by default when a signature is changed, to ensure
                              that the person who would make the update knows what they're doing. -->
                         <execution>
@@ -163,7 +169,7 @@
                             <configuration>
                                 <target>
                                     <!-- Note this simply uses the JRE level of the JRE executing Maven and generates the correspondng .sig file.
-                                         So to generate the Java 6, 7, 8 .sig files you have to actually run Maven using Java 6, 7, 8, respectively, 
+                                         So to generate the Java 6, 7, 8 .sig files you have to actually run Maven using Java 6, 7, 8, respectively,
                                          once for each.  You can't just generate them all at once. -->
                                     <condition property="jdk" value="6">
                                         <contains string="${ant.java.version}" substring="1.6"/>
@@ -174,13 +180,16 @@
                                     <condition property="jdk" value="8">
                                         <contains string="${ant.java.version}" substring="1.8"/>
                                     </condition>
-                                    <property name="old.sig.file" value="${project.basedir}${fs}sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
-                                    <property name="new.sig.file" value="${project.basedir}${fs}generate-sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
+                                    <property name="old.sig.file"
+                                              value="${project.basedir}${fs}sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
+                                    <property name="new.sig.file"
+                                              value="${project.basedir}${fs}generate-sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
                                     <mkdir dir="${project.basedir}${fs}generate-sigtest"/>
-                                    <taskdef name="setup" classname="com.sun.tdk.signaturetest.ant.ASetup" classpathref="maven.plugin.classpath"/>
+                                    <taskdef name="setup" classname="com.sun.tdk.signaturetest.ant.ASetup"
+                                             classpathref="maven.plugin.classpath"/>
                                     <echo message="Generating Java ${jdk} SigTest files for batch"/>
                                     <setup failonerror="true" filename="${new.sig.file}"
-                                           package="javax.batch">
+                                           package="jakarta.batch">
                                         <classpath refid="maven.compile.classpath"/>
                                         <classpath refid="maven.plugin.classpath"/>
                                         <classpath>
@@ -191,7 +200,8 @@
                                     <fail message="Fail on purpose to ensure that any changes to the public API signature are truly intended.  They should not be done just to get the Maven build to complete.  Newly-generated ${new.sig.file} does not exactly match previous sig test file at location: ${old.sig.file}.  Review carefully and if this is correct, then overwrite the old ${old.sig.file} file with the newly-generated copy of the sig test file">
                                         <condition>
                                             <not>
-                                                <filesmatch file1="${old.sig.file}" file2="${new.sig.file}" textfile="true"/>
+                                                <filesmatch file1="${old.sig.file}" file2="${new.sig.file}"
+                                                            textfile="true"/>
                                             </not>
                                         </condition>
                                     </fail>
@@ -237,40 +247,23 @@
                     </archive>
                 </configuration>
             </plugin>
-              <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                      <skipTests>true</skipTests>
+                    <skipTests>true</skipTests>
                 </configuration>
-              </plugin>
+            </plugin>
         </plugins>
     </build>
     <profiles>
         <profile>
-            <id>jdk8</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <!-- xjc uses > rather than &gt for closing tags in a generated classes javadoc -->
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>batchXML</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
-                <property><name>batchXML</name></property>
+                <property>
+                    <name>batchXML</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -286,12 +279,14 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>        
+        </profile>
         <profile>
             <id>sigtest</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
-                <property><name>sigtest</name></property>
+                <property>
+                    <name>sigtest</name>
+                </property>
             </activation>
             <build>
                 <plugins>

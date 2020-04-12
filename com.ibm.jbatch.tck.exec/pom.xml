@@ -152,7 +152,9 @@
                         <configuration>
                             <suiteXmlFiles>
                                 <!-- Not sure how to reference the suite XML file within the dependency artifact, so rely on an unpacking first.-->
-                                <suiteXmlFile>${project.build.directory}/test-classes/testng/batch-tck-impl-SE-suite.xml</suiteXmlFile>
+                                <suiteXmlFile>
+                                    ${project.build.directory}/test-classes/testng/batch-tck-impl-SE-suite.xml
+                                </suiteXmlFile>
                                 <!-- For debugging -->
                                 <!--
                                 <suiteXmlFile>${project.basedir}/testng.suite.xml</suiteXmlFile>
