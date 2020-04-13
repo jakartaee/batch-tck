@@ -145,8 +145,11 @@
         <version.java>1.8</version.java>
 
         <!-- Dependencies -->
+        <version.jakarta.activation.jakarta.activation-api>2.0.0-RC3</version.jakarta.activation.jakarta.activation-api>
         <version.jakarta.enterprise.jakarta.enterprise.cdi-api>3.0.0-M2</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
         <version.jakarta.inject.jakarta.inject-api>2.0.0.RC1</version.jakarta.inject.jakarta.inject-api>
+        <version.jakarta.xml.bind.jakarta.xml.bind-api>3.0.0-RC3</version.jakarta.xml.bind.jakarta.xml.bind-api>
+
         <version.org.testng.testng>6.8.8</version.org.testng.testng>
         <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
         <version.org.sonatype.plugins.nexus-staging-maven-plugin>1.6.6</version.org.sonatype.plugins.nexus-staging-maven-plugin>
@@ -163,7 +166,7 @@
         <version.org.apache.maven.plugins.maven-surefire-plugin>2.18</version.org.apache.maven.plugins.maven-surefire-plugin>
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
         <version.net.java.sigtest.sigtestdev>3.0-b12-v20140219</version.net.java.sigtest.sigtestdev>
-        <version.org.jboss.weld.se.weld-se>2.4.8.Final</version.org.jboss.weld.se.weld-se>
+        <version.org.jboss.weld.se.weld-se-core>4.0.0-SNAPSHOT</version.org.jboss.weld.se.weld-se-core>
         <version.xmlunit>1.3</version.xmlunit>
     </properties>
 
@@ -244,6 +247,27 @@
                 <version>${batch.impl.version}</version>
             </dependency>
             <dependency>
+                 <groupId>jakarta.activation</groupId>
+                 <artifactId>jakarta.activation-api</artifactId>
+                 <version>${version.jakarta.activation.jakarta.activation-api}</version>
+             </dependency>
+            <dependency>
+                 <groupId>jakarta.xml.bind</groupId>
+                 <artifactId>jakarta.xml.bind-api</artifactId>
+                 <version>${version.jakarta.xml.bind.jakarta.xml.bind-api}</version>
+                 <exclusions>
+                     <exclusion>
+                         <groupId>jakarta.activation</groupId>
+                         <artifactId>jakarta.activation-api</artifactId>
+                     </exclusion>
+                 </exclusions>
+            </dependency>
+            <dependency>
+                 <groupId>com.sun.xml.bind</groupId>
+                 <artifactId>jaxb-impl</artifactId>
+                 <version>3.0.0-M1</version>
+            </dependency>
+            <dependency>
                 <groupId>jakarta.enterprise</groupId>
                 <artifactId>jakarta.enterprise.cdi-api</artifactId>
                 <version>${version.jakarta.enterprise.jakarta.enterprise.cdi-api}</version>
@@ -280,8 +304,8 @@
             </dependency>
             <dependency>
                 <groupId>org.jboss.weld.se</groupId>
-                <artifactId>weld-se</artifactId>
-                <version>${version.org.jboss.weld.se.weld-se}</version>
+                <artifactId>weld-se-core</artifactId>
+                <version>${version.org.jboss.weld.se.weld-se-core}</version>
             </dependency>
             <dependency>
                 <groupId>org.testng</groupId>
