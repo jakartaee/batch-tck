@@ -416,7 +416,7 @@
                 <configuration>
                     <bottom>
                         <![CDATA[
-                    <p align="left">&#169; Copyright IBM Corp. 2015<br>Licensed under the Apache License, Version 2.0
+                    <p align="left">&#169; Copyright 2013, 2020 International Business Machines Corp. and others<br>Licensed under the Apache License, Version 2.0
                     ]]>
                     </bottom>
                 </configuration>
