@@ -166,7 +166,7 @@
         <version.org.apache.maven.plugins.maven-surefire-plugin>2.18</version.org.apache.maven.plugins.maven-surefire-plugin>
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
         <version.net.java.sigtest.sigtestdev>3.0-b12-v20140219</version.net.java.sigtest.sigtestdev>
-        <version.org.jboss.weld.se.weld-se-core>4.0.0-SNAPSHOT</version.org.jboss.weld.se.weld-se-core>
+        <version.org.jboss.weld.se.weld-se-core>4.0.0.Alpha1</version.org.jboss.weld.se.weld-se-core>
         <version.xmlunit>1.3</version.xmlunit>
     </properties>
 
