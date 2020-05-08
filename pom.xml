@@ -127,8 +127,8 @@
         -->
 
         <!-- Run against latest version of RI -->
-        <batch.api.version>2.0.0-M1</batch.api.version>
-        <batch.impl.version>2.0.0-M1</batch.impl.version>
+        <batch.api.version>2.0.0-M2</batch.api.version>
+        <batch.impl.version>2.0.0-M2</batch.impl.version>
 
         <!-- This version of TCK -->
         <batch.tck.version>1.0.2</batch.tck.version>
@@ -398,6 +398,27 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[11.0,12.0)</version>
+                                    <message> ! You need JDK11 !</message>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
