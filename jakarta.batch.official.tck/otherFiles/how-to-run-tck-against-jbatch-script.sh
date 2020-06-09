@@ -3,7 +3,7 @@ set -x
 
 
 #------------------------------------------------------------------------------
-# Running Jakarta Batch TCK Version 1.0.2 against com.ibm.jbatch V1.0.3
+# Running Jakarta Batch TCK Version 2.0.0-M1 against com.ibm.jbatch 2.0.0-M3
 #
 # This is a documented script that can be used to execute the Jakarta Batch TCK
 # against the com.ibm.jbatch implementation.  By using "set -x" we allow the
@@ -35,10 +35,10 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/jr
 # 3. Copy required JARs obtained via other mechanisms
 REQUIRED_JARS="\
  /home/ibmadmin/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar \
- /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/1.0.3/com.ibm.jbatch.container-1.0.3.jar \
- /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/1.0.3/com.ibm.jbatch.spi-1.0.3.jar \
+ /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/2.0.0-M3/com.ibm.jbatch.container-2.0.0-M3.jar \
+ /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/2.0.0-M3/com.ibm.jbatch.spi-2.0.0-M3.jar \
  /home/ibmadmin/.m2/repository/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar \
- /home/ibmadmin/.m2/repository/jakarta/batch/jakarta.batch-api/1.0.2/jakarta.batch-api-1.0.2.jar \
+ /home/ibmadmin/.m2/repository/jakarta/batch/jakarta.batch-api/2.0.0-M2/jakarta.batch-api-2.0.0-M2.jar \
 "
 
 #--------------------------------------------------
@@ -63,12 +63,12 @@ java -version
 #
 # STAGED
 #
-TCK_DOWNLOAD_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/1.0.2/jakarta.batch.official.tck-1.0.2.zip
+TCK_DOWNLOAD_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/2.0.0-M1/jakarta.batch.official.tck-2.0.0-M1.zip
 
 #
 # OFFICIAL
 #
-TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/1.0/eclipse-batch-tck-1.0.2.zip
+TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/1.0/eclipse-batch-tck-2.0.0-M1.zip
 
 ################
 # DON'T CHANGE
@@ -100,8 +100,8 @@ openssl dgst -sha256 *.jar
 openssl dgst -sha256 ../*.zip
 
 # extract TCK in peer directory
-jar xvf ../jakarta.batch.official.tck-1.0.2.zip
-cd jakarta.batch.official.tck-1.0.2
+jar xvf ../jakarta.batch.official.tck-2.0.0-M1.zip
+cd jakarta.batch.official.tck-2.0.0-M1
 
 #------------------------------------------
 # Done setting things up, time to run tests
@@ -110,7 +110,7 @@ cd jakarta.batch.official.tck-1.0.2
 # Run SigTest
 java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package jakarta.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
+-classpath ../jakarta.batch-api-2.0.0-M2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 
 #------------------------------------------
@@ -124,7 +124,7 @@ echo -------------------------------------------
 echo
 java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package jakarta.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-1.0.2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
+-classpath ../jakarta.batch-api-2.0.0-M2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 echo
 echo --------------------------------------------
 echo done expecting failure,tests should work now
@@ -136,4 +136,4 @@ echo
 # com.ibm.jbatch implementation
 #------------------------------------------------
 
-ant -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-1.0.2.jar:../com.ibm.jbatch.container-1.0.3.jar:../com.ibm.jbatch.spi-1.0.3.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
+ant -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-2.0.0-M2.jar:../com.ibm.jbatch.container-2.0.0-M3.jar:../com.ibm.jbatch.spi-2.0.0-M3.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"

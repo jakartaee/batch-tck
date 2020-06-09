@@ -13,7 +13,7 @@ Two important components to note are each located in the **doc/** subdirectory:
 
 1. **Jakarta Batch TCK Reference Guide**
 
-    This document, e.g. **batch-tck-reference-guide-1.0.2.pdf/html**, describes the components of the TCK in more detail and also more explicitly enumerates the steps required to pass the TCK, claim compatibility, as well as other processes like how to file a challenge against the TCK for a test that you believe to be invalid.
+    This document, e.g. **batch-tck-reference-guide-2.0.0-M1.pdf/html**, describes the components of the TCK in more detail and also more explicitly enumerates the steps required to pass the TCK, claim compatibility, as well as other processes like how to file a challenge against the TCK for a test that you believe to be invalid.
 
 2.  **Execution of TCK against jbatch as compatible implementation**
 

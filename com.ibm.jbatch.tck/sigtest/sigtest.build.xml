@@ -31,16 +31,13 @@
 
         <taskdef name="sigtest" classname="com.sun.tdk.signaturetest.ant.ATest" classpath="${sigtestdev.classes}"/>
 
-        <echo message="Running SigTest with Ant version = ${ant.java.version}"/>
+        <echo message="Running SigTest with Java version = ${java.vm.specification.version}"/>
 
-        <condition property="javaLevel" value="6">
-            <contains string="${ant.java.version}" substring="1.6"/>
-        </condition>
-        <condition property="javaLevel" value="7">
-            <contains string="${ant.java.version}" substring="1.7"/>
-        </condition>
         <condition property="javaLevel" value="8">
-            <contains string="${ant.java.version}" substring="1.8"/>
+            <matches string="${java.vm.specification.version}" pattern="^1.8"/>
+        </condition>
+        <condition property="javaLevel" value="11">
+            <matches string="${java.vm.specification.version}" pattern="^11"/>
         </condition>
 
         <property name="sigFile" value="${basedir}/artifacts/batch-api-sigtest-java${javaLevel}.sig"/>
