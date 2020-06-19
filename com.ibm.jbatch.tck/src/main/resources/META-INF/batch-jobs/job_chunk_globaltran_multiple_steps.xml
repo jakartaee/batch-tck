@@ -12,7 +12,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="job_chunk_globaltran" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
+<job id="job_chunk_globaltran" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <properties>
         <!--  This is irrelevant.  Only the step-level property matters. -->
         <property name="jakarta.transaction.global.timeout" value="1"/>

@@ -12,7 +12,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="oneArtifactIsJobAndStepListener" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
+<job id="oneArtifactIsJobAndStepListener" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <listeners>
         <listener ref="myUniversalListener">
             <properties>
