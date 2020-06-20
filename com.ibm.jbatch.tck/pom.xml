@@ -23,13 +23,13 @@
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>2.0.0-M2</version>
+        <version>2.0.0-M4</version>
     </parent>
 
     <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0-M2</version>
+    <version>2.0.0-M4</version>
     <name>Jakarta Batch TCK Core Test Artifacts</name>
 
     <dependencies>

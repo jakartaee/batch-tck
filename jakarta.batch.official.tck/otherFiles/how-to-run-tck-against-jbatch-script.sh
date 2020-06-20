@@ -67,7 +67,7 @@ java -version
 #
 # STAGED
 #
-TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-2.0.0-M2.zip
+TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-2.0.0-M4.zip
 
 #
 # OFFICIAL (will look like this)
@@ -104,8 +104,8 @@ openssl dgst -sha256 *.jar
 openssl dgst -sha256 ../*.zip
 
 # extract TCK in peer directory
-jar xvf ../jakarta.batch.official.tck-2.0.0-M2.zip
-cd jakarta.batch.official.tck-2.0.0-M2
+jar xvf ../jakarta.batch.official.tck-2.0.0-M4.zip
+cd jakarta.batch.official.tck-2.0.0-M4
 
 
 
@@ -148,7 +148,7 @@ IMPL_PATH=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M1/lib/j
 # TODO add other jars
 
 
-java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M1/artifacts/batch-api-sigtest-java11.sig   -classpath $API_JAR:$JDK11_CLASSES/java.base:$IMPL_PATH
+java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch-api-sigtest-java11.sig   -classpath $API_JAR:$JDK11_CLASSES/java.base:$IMPL_PATH
 
 
 # ------------------------------------------------------------------------------
