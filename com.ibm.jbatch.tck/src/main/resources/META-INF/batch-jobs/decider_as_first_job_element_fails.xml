@@ -10,7 +10,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="decider_as_first_job_element_fails" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
+<job id="decider_as_first_job_element_fails" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <properties>
         <property name="step.complete.but.force.job.stop.status" value="STEP_COMPLETE_BUT_FORCE_JOB_STOP_STATUS"/>
         <property name="step.complete.but.force.job.fail.status" value="STEP_COMPLETE_BUT_FORCE_JOB_FAIL_STATUS"/>

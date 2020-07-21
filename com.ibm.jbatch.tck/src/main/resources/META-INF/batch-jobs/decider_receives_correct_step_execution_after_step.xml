@@ -10,7 +10,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="decider_receives_correct_step_execution_after_step" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
+<job id="decider_receives_correct_step_execution_after_step" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <step id="step1" next="decider1" allow-start-if-complete="#{jobParameters['allow.start.if.complete']}">
         <batchlet ref="doNothingBatchlet"/>
     </step>

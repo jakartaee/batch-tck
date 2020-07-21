@@ -30,7 +30,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.batch</groupId>
     <artifactId>tck-parent</artifactId>
-    <version>2.0.0-M2</version>
+    <version>2.0.0-M4</version>
     <packaging>pom</packaging>
     <name>tck-parent</name>
     <description>
@@ -127,13 +127,13 @@
         -->
 
         <!-- Run against latest version of RI -->
-        <batch.api.version>2.0.0-M2</batch.api.version>
-        <batch.impl.version>2.0.0-M3</batch.impl.version>
+        <batch.api.version>2.0.0-M4</batch.api.version>
+        <batch.impl.version>2.0.0-M4</batch.impl.version>
 
         <!-- This version of TCK -->
-        <batch.tck.version>2.0.0-M2</batch.tck.version>
-        <batch.tck.ann.version>2.0.0-M2</batch.tck.ann.version>
-        <batch.tck.ann.proc.version>2.0.0-M2</batch.tck.ann.proc.version>
+        <batch.tck.version>2.0.0-M4</batch.tck.version>
+        <batch.tck.ann.version>2.0.0-M4</batch.tck.ann.version>
+        <batch.tck.ann.proc.version>2.0.0-M4</batch.tck.ann.proc.version>
         <!-- Named after the module since I'm not sure how to install a different name -->
         <batch.tck.archive.root>jakarta.batch.official.tck-${batch.tck.version}</batch.tck.archive.root>
 

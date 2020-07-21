@@ -232,13 +232,13 @@ It assumes:
 . You have unzipped the TCK into the present working directory.
 . You have copied into the working directory's parent directory each of:
 * the sigtest tool `sigtestdev.jar`
-* The Jakarta Batch API JAR under test `jakarta.batch-api-2.0.0-M2.jar`
+* The Jakarta Batch API JAR under test `jakarta.batch-api-2.0.0-M4.jar`
 . Your JRE distribution has the runtime JAR `rt.jar` at location `$JAVA_HOME/jre/lib/rt.jar`.
 . Your 'java' executable and your 'rt.jar' come from a Java 8 JDK/JRE, since in the example you are running against the Java 8 signature file (based on the -filename argument)
 
     java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch-api-sigtest-java8.sig \
-    -classpath ../jakarta.batch-api-2.0.0-M2.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
+    -classpath ../jakarta.batch-api-2.0.0-M4.jar:$JAVA_HOME/jre/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 So to be clear, the directory structure looks like
 
@@ -248,7 +248,7 @@ So to be clear, the directory structure looks like
         ...
         ... as detailed above ...
         ...
-    jakarta.batch-api-2.0.0-M2.jar
+    jakarta.batch-api-2.0.0-M4.jar
     sigtestdev.jar
 
 Again, be sure to choose the correct version of the signature file depending on your the Java version (e.g V8) of your JDK/JRE.

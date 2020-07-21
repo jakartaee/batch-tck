@@ -12,7 +12,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="job_chunk_globaltran" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
+<job id="job_chunk_globaltran" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <step id="init_tables_step1" next="step2" allow-start-if-complete="false">
         <properties>
             <property name="jakarta.transaction.global.timeout" value="180"/>

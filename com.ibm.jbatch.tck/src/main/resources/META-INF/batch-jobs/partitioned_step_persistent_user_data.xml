@@ -10,7 +10,7 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="partitioned_step_persistent_user_data" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="1.0">
+<job id="partitioned_step_persistent_user_data" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <step id="step1">
         <chunk item-count="1">
             <reader ref="PUDPartitionReader">

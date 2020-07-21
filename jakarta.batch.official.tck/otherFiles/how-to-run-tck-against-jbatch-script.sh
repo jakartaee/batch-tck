@@ -6,7 +6,7 @@ set -x
 
 
 #------------------------------------------------------------------------------
-# Running Jakarta Batch TCK Version 2.0.0-M2 against com.ibm.jbatch 2.0.0-M3
+# Running Jakarta Batch TCK Version 2.0.0-M4 against com.ibm.jbatch 2.0.0-M4
 #
 # This is a documented script that can be used to execute the Jakarta Batch TCK
 # against the com.ibm.jbatch implementation.  By using "set -x" we allow the
@@ -39,10 +39,10 @@ export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-openj9-amd64/
 # 3. Copy required JARs obtained via other mechanisms
 REQUIRED_JARS="\
  /home/ibmadmin/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar \
- /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/2.0.0-M3/com.ibm.jbatch.container-2.0.0-M3.jar \
- /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/2.0.0-M3/com.ibm.jbatch.spi-2.0.0-M3.jar \
+ /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.container/2.0.0-M4/com.ibm.jbatch.container-2.0.0-M4.jar \
+ /home/ibmadmin/.m2/repository/com/ibm/jbatch/com.ibm.jbatch.spi/2.0.0-M4/com.ibm.jbatch.spi-2.0.0-M4.jar \
  /home/ibmadmin/.m2/repository/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar \
- /home/ibmadmin/.m2/repository/jakarta/batch/jakarta.batch-api/2.0.0-M2/jakarta.batch-api-2.0.0-M2.jar \
+ /home/ibmadmin/.m2/repository/jakarta/batch/jakarta.batch-api/2.0.0-M4/jakarta.batch-api-2.0.0-M4.jar \
 "
 
 #--------------------------------------------------
@@ -67,7 +67,7 @@ java -version
 #
 # STAGED
 #
-TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-2.0.0-M2.zip
+TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/jakarta.batch.official.tck-2.0.0-M4.zip
 
 #
 # OFFICIAL (will look like this)
@@ -104,8 +104,8 @@ openssl dgst -sha256 *.jar
 openssl dgst -sha256 ../*.zip
 
 # extract TCK in peer directory
-jar xvf ../jakarta.batch.official.tck-2.0.0-M2.zip
-cd jakarta.batch.official.tck-2.0.0-M2
+jar xvf ../jakarta.batch.official.tck-2.0.0-M4.zip
+cd jakarta.batch.official.tck-2.0.0-M4
 
 
 
@@ -114,7 +114,7 @@ cd jakarta.batch.official.tck-2.0.0-M2
 # com.ibm.jbatch implementation
 #------------------------------------------------
 
-ant -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-2.0.0-M2.jar:../com.ibm.jbatch.container-2.0.0-M3.jar:../com.ibm.jbatch.spi-2.0.0-M3.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
+ant -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-2.0.0-M4.jar:../com.ibm.jbatch.container-2.0.0-M4.jar:../com.ibm.jbatch.spi-2.0.0-M4.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
 
 
 exit 0
@@ -140,7 +140,7 @@ $JAVA_HOME/bin/jimage extract $JAVA_HOME/lib/modules
 
 cd $TCK_HOME_DIR
 
-API_JAR=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch-api-2.0.0-M2.jar
+API_JAR=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch-api-2.0.0-M4.jar
 
 IMPL_PATH=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M1/lib/jakarta.enterprise.cdi-api-3.0.0-M2.jar\
 :$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M1/lib/jakarta.inject-api-2.0.0.RC1.jar 
@@ -148,7 +148,7 @@ IMPL_PATH=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M1/lib/j
 # TODO add other jars
 
 
-java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M1/artifacts/batch-api-sigtest-java11.sig   -classpath $API_JAR:$JDK11_CLASSES/java.base:$IMPL_PATH
+java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch-api-sigtest-java11.sig   -classpath $API_JAR:$JDK11_CLASSES/java.base:$IMPL_PATH
 
 
 # ------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   Signat
 # Run SigTest
 java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package jakarta.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-2.0.0-M2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
+-classpath ../jakarta.batch-api-2.0.0-M4.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar:lib/jakarta.enterprise.cdi-api-2.0.1.jar
 
 
 #------------------------------------------
@@ -181,7 +181,7 @@ echo -------------------------------------------
 echo
 java -jar ../sigtestdev-3.0-b12-v20140219.jar SignatureTest -static -package jakarta.batch \
 -filename artifacts/batch-api-sigtest-java8.sig \
--classpath ../jakarta.batch-api-2.0.0-M2.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
+-classpath ../jakarta.batch-api-2.0.0-M4.jar:$JAVA_HOME/lib/rt.jar:lib/jakarta.inject-api-1.0.jar
 echo
 echo --------------------------------------------
 echo done expecting failure,tests should work now
