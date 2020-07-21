@@ -1,0 +1,56 @@
+# -Djava.compiler=NONE -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=7777
+
+SIGTEST_JAR=/c/git/jakarta/jakartaee-tck/lib/sigtestdev.jar
+JAVA11_RT="C:\JavaEcl\OracleJava11\extract\classes\java.base"
+JAVA11_RT="C:\JavaEcl\OpenJDKJ9Java11\extract\classes\java.base"
+
+RI_JARS="C:\git\jakarta\batch-api\api\target\jakarta.batch-api-2.0.0-M4.jar;C:\Users\ScottKurz\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\3.0.0-M4\jakarta.enterprise.cdi-api-3.0.0-M4.jar;C:\Users\ScottKurz\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.0-RC4\jakarta.inject-api-2.0.0-RC4.jar"
+
+RI2JARS="C:\git\jakarta\batch-api\api\target\jakarta.batch-api-2.0.0-M4.jar;C:\Users\ScottKurz\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\3.0.0-M4\jakarta.enterprise.cdi-api-3.0.0-M4.jar"
+
+GF_JARS="C:\git\jakarta\jakartaee-tck\jakarta.jakartaee-api-9.0.0-RC1.jar"
+FN=jakarta.batch.sig_2.0_se8
+JAVA8_RT="$JAVA_HOME\jre\lib\rt.jar"
+
+
+# JAVA 11
+FN=batch.ri.sig11
+
+
+
+
+# strip out unrelated stuff (still passes)
+java -jar $SIGTEST_JAR   SignatureTest -static -package jakarta.batch -filename  $FN  -classpath "$JAVA11_RT;$RI_JARS" 
+java -jar $SIGTEST_JAR   SignatureTest -static -package jakarta.batch -filename  $FN  -classpath "$JAVA11_RT;$GF_JARS" 
+
+# both sig. files (platform ) and my generated one from Java 11.. pass in each of RI & GF...  Running with Java 11 or 8
+
+
+# stripping unrelated stuff out of the bigger one didn't hurt
+
+
+
+# setting up J11
+mkdir -p $JAVA_HOME/extract/classes
+jimage extract --dir $JAVA_HOME/extract/classes $JAVA_HOME/lib/modules
+
+
+
+# Works with Oracle Java 8
+# Works with OpenJDK8 + J9 as rt.jar classpath
+# Works with OpenJDK8 + J9 and hotspot
+# Works with OpenJDK11 + J9,  Oracle J11 
+
+# Works with j11,j8 (with OpenJDK 8 as CP)
+
+
+java -jar $SIGTEST_JAR   SignatureTest -static -package jakarta.batch -filename  $FN  -classpath "$JAVA8_RT;$RI_JARS"; echo; echo; \
+java -jar $SIGTEST_JAR   SignatureTest -static -package jakarta.batch -filename  $FN  -classpath "$JAVA8_RT;$GF_JARS" 
+
+
+java -jar $SIGTEST_JAR   SignatureTest -static -package jakarta.batch -filename  $FN  -classpath "$JAVA11_RT;$RI_JARS"; echo; echo; \
+java -jar $SIGTEST_JAR   SignatureTest -static -package jakarta.batch -filename  $FN  -classpath "$JAVA11_RT;$GF_JARS" 
+
+
+FN=batch.ri.sig8
+java -jar $SIGTEST_JAR   Setup -static -package jakarta.batch -filename  $FN  -classpath "$JAVA8_RT;$RI_JARS"
