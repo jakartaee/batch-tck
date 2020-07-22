@@ -44,13 +44,20 @@
             <includes>
                 <include>jakarta.activation:jakarta.activation-api</include>
                 <include>jakarta.xml.bind:jakarta.xml.bind-api</include>
-                <include>com.sun.xml.bind:jaxb-impl</include>
+                <include>org.glassfish.jaxb:jaxb-runtime</include>
                 <include>jakarta.inject:jakarta.inject-api</include>
                 <include>org.testng:testng</include>
                 <include>com.beust:jcommander</include>
                 <include>xmlunit:xmlunit</include>
                 <include>jakarta.enterprise:jakarta.enterprise.cdi-api</include>
             </includes>
+            <excludes>
+                <!-- Transitive dependencies of the above we don't need.  We do want the JAXB ones -->
+                <exclude>*:bsh*</exclude>
+                <exclude>jakarta.el:*</exclude>
+                <exclude>jakarta.interceptor:*</exclude>
+            </excludes>
+            <useTransitiveFiltering>true</useTransitiveFiltering>
             <outputDirectory>lib</outputDirectory>
         </dependencySet>
     </dependencySets>
@@ -60,7 +67,7 @@
             <directory>../com.ibm.jbatch.tck/sigtest</directory>
             <outputDirectory>/artifacts</outputDirectory>
             <includes>
-                <include>*.sig</include>
+                <include>batch.tck.sig*</include>
             </includes>
         </fileSet>
     </fileSets>

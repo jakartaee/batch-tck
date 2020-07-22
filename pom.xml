@@ -149,6 +149,7 @@
         <version.jakarta.enterprise.jakarta.enterprise.cdi-api>3.0.0-M2</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
         <version.jakarta.inject.jakarta.inject-api>2.0.0.RC1</version.jakarta.inject.jakarta.inject-api>
         <version.jakarta.xml.bind.jakarta.xml.bind-api>3.0.0-RC3</version.jakarta.xml.bind.jakarta.xml.bind-api>
+        <version.org.glassfish.jaxb.jaxb-runtime>3.0.0-M4</version.org.glassfish.jaxb.jaxb-runtime>
 
         <version.org.testng.testng>6.8.8</version.org.testng.testng>
         <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
@@ -255,17 +256,17 @@
                  <groupId>jakarta.xml.bind</groupId>
                  <artifactId>jakarta.xml.bind-api</artifactId>
                  <version>${version.jakarta.xml.bind.jakarta.xml.bind-api}</version>
-                 <exclusions>
-                     <exclusion>
-                         <groupId>jakarta.activation</groupId>
-                         <artifactId>jakarta.activation-api</artifactId>
-                     </exclusion>
-                 </exclusions>
             </dependency>
             <dependency>
-                 <groupId>com.sun.xml.bind</groupId>
-                 <artifactId>jaxb-impl</artifactId>
-                 <version>3.0.0-M1</version>
+                 <groupId>org.glassfish.jaxb</groupId>
+                 <artifactId>jaxb-runtime</artifactId>
+                 <version>${version.org.glassfish.jaxb.jaxb-runtime}</version>
+                 <exclusions>
+                     <exclusion>
+                         <groupId>com.sun.activation</groupId>
+                         <artifactId>jakarta.activation</artifactId>
+                     </exclusion>
+                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>jakarta.enterprise</groupId>
@@ -411,8 +412,8 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[11.0,12.0)</version>
-                                    <message> ! You need JDK11 !</message>
+                                    <version>[1.8,1.9)</version>
+                                    <message> ! TCK must be run with Java 8 (since signature test config only works with Java 8.  If you add '-DskipSigTests=true' you can run the TestNG runtime tests with Java 11. !</message>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
