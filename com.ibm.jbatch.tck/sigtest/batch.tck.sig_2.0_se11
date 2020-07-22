@@ -1,4 +1,4 @@
-#Signature file v4.3
+#Signature file v4.1
 #Version 
 
 CLSS public abstract jakarta.batch.api.AbstractBatchlet
@@ -13,7 +13,7 @@ CLSS public abstract interface !annotation jakarta.batch.api.BatchProperty
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[FIELD, METHOD, PARAMETER])
 intf java.lang.annotation.Annotation
-meth public abstract !hasdefault java.lang.String name() value= ""
+meth public abstract !hasdefault java.lang.String name()
 
 CLSS public abstract interface jakarta.batch.api.Batchlet
 meth public abstract java.lang.String process() throws java.lang.Exception
@@ -499,8 +499,7 @@ meth public void printStackTrace(java.io.PrintStream)
 meth public void printStackTrace(java.io.PrintWriter)
 meth public void setStackTrace(java.lang.StackTraceElement[])
 supr java.lang.Object
-hfds CAUSE_CAPTION,EMPTY_THROWABLE_ARRAY,NULL_CAUSE_MESSAGE,SELF_SUPPRESSION_MESSAGE,SUPPRESSED_CAPTION,SUPPRESSED_SENTINEL,UNASSIGNED_STACK,backtrace,cause,depth,detailMessage,serialVersionUID,stackTrace,suppressedExceptions
-hcls PrintStreamOrWriter,SentinelHolder,WrappedPrintStream,WrappedPrintWriter
+hfds ZeroElementArray,ZeroStackTraceElementArray,cause,detailMessage,enableWritableStackTrace,serialVersionUID,stackTrace,suppressedExceptions,walkback
 
 CLSS public abstract interface java.lang.annotation.Annotation
 meth public abstract boolean equals(java.lang.Object)

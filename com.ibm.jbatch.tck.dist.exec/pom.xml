@@ -143,6 +143,29 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireProperty>
+                                    <property>java.vendor</property>
+                                    <message>IBM JDK cannot be used for signature tests.</message>
+                                    <regex>^(?:(?!IBM Corporation).)*$</regex>
+                                    <regexMessage>IBM JDK cannot be used for signature tests, due to differences in rt.jar content.  Switch to OpenJDK or Oracle JDK instead. Runtime TestNG tests can be executed with com.ibm.jbatch.tck.exec module.</regexMessage>
+                                </requireProperty>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
