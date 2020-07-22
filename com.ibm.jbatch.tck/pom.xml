@@ -157,9 +157,6 @@
                                 </target>
                             </configuration>
                         </execution>
-                        <!-- Updating the signature files should not be done lightly.  This changes the specified, public API.
-                             We purposely make this fail by default when a signature is changed, to ensure
-                             that the person who would make the update knows what they're doing. -->
                         <execution>
                             <id>generate-sigtest</id>
                             <goals>
@@ -167,6 +164,14 @@
                             </goals>
                             <phase>none</phase>
                             <configuration>
+
+                                <!-- Disabled.  This was left over from JSR 352, and could be a useful piece to work on, but it's not 
+                                     been reworked on Jakarta Batch so just skip. -->
+                                <skip>true</skip>
+
+                                <!-- Updating the signature files should not be done lightly.  This changes the specified, public API.
+                                     We purposely make this fail by default when a signature is changed, to ensure
+                                     that the person who would make the update knows what they're doing. -->
                                 <target>
                                     <!-- Note this simply uses the JRE level of the JRE executing Maven and generates the correspondng .sig file.
                                          So to generate the Java 6, 7, 8 .sig files you have to actually run Maven using Java 6, 7, 8, respectively,
