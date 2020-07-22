@@ -157,7 +157,7 @@
                                     <property>java.vendor</property>
                                     <message>IBM JDK cannot be used for signature tests.</message>
                                     <regex>^(?:(?!IBM Corporation).)*$</regex>
-                                    <regexMessage>IBM JDK cannot be used for signature tests, due to differences in rt.jar content.  Switch to OpenJDK or Oracle JDK instead. Runtime TestNG tests can be executed with com.ibm.jbatch.tck.exec module.</regexMessage>
+                                    <regexMessage>${line.separator}IBM JDK cannot be used for signature tests, due to differences in rt.jar content.  Switch to OpenJDK or Oracle JDK instead. Runtime TestNG tests can be executed with com.ibm.jbatch.tck.exec module.${line.separator}</regexMessage>
                                 </requireProperty>
                             </rules>
                         </configuration>

@@ -413,7 +413,7 @@
                             <rules>
                                 <requireJavaVersion>
                                     <version>[1.8,1.9)</version>
-                                    <message> ! TCK must be run with Java 8 (since signature test config only works with Java 8.  If you add '-DskipSigTests=true' you can run the TestNG runtime tests with Java 11. !</message>
+                                    <message>${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}! TCK must be run with Java 8 (since signature test ${line.separator}config only works with Java 8).${line.separator}If you add '-DskipSigTests=true' you can run the TestNG runtime${line.separator}  tests with Java 11.!${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}</message>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>

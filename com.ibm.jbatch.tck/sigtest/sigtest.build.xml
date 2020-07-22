@@ -40,7 +40,7 @@
             <matches string="${java.vm.specification.version}" pattern="^11"/>
         </condition>
 
-        <property name="sigFile" value="${basedir}/artifacts/batch.tck.sig_2.0_se${javaLevel}"/>
+        <property name="sigFile" value="${basedir}/artifacts/batch.standalone.tck.sig_2.0_se${javaLevel}"/>
 
         <echo message="Validating Java level = ${javaLevel} using signature file: ${sigFile}"/>
 

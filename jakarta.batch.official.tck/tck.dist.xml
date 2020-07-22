@@ -67,7 +67,7 @@
             <directory>../com.ibm.jbatch.tck/sigtest</directory>
             <outputDirectory>/artifacts</outputDirectory>
             <includes>
-                <include>batch.tck.sig*</include>
+                <include>batch.standalone.tck.sig*</include>
             </includes>
         </fileSet>
     </fileSets>
