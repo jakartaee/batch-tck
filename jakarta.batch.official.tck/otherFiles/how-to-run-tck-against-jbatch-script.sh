@@ -20,7 +20,8 @@ set -x
 TCK_HOME_DIR=~/jkbatch
 
 # 2. Point to JAVA_HOME so that the signature test command below can find the runtime JAR (rt.jar):
-export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-openj9-amd64/
+#export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-openj9-amd64/
+export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-openj9
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/
 
 
@@ -148,7 +149,7 @@ cd $TCK_HOME_DIR
 API_JAR=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch-api-2.0.0-M5.jar
 
 IMPL_PATH=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar\
-:$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.inject-api-2.0.0.jar
+:$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.inject-api-2.0.0-RC4.jar
 
 # Java 11
 java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se11  -classpath $API_JAR:$JDK11_CLASSES/java.base:$IMPL_PATH
