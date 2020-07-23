@@ -121,16 +121,19 @@ ant -v -f build.xml -Dbatch.impl.classes=../jakarta.batch-api-2.0.0-M6.jar:../co
 
 cd $TCK_HOME_DIR
 
-API_JAR=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch-api-2.0.0-M6.jar
+BATCH_API_JAR=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch-api-2.0.0-M6.jar
 
-IMPL_PATH=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar\
-:$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.inject-api-2.0.0-RC4.jar
+IMPL_PATH=$BATCH_API_JAR\
+:$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.inject-api-2.0.0-RC4.jar\
+:$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar\
+:$TCK_HOME_DIR/tckdir/prereqs/com.ibm.jbatch.container-2.0.0-M6.jar\
+:$TCK_HOME_DIR/tckdir/prereqs/com.ibm.jbatch.spi-2.0.0-M6.jar
 
 #------------------------------------------------
 # Run Java 8 SigTest portion
 # -----------------------------------------------
 
-$JAVA_HOME/bin/java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se8   -classpath $API_JAR:$JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
+$JAVA_HOME/bin/java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se8   -classpath $JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
 
 #------------------------------------------
 # Run SigTest forcing error (not strictly
@@ -142,9 +145,13 @@ echo Exclude CDI API JAR
 echo expecting failure to show tests are working
 echo -------------------------------------------
 echo
-IMPL_PATH=$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.inject-api-2.0.0-RC4.jar
+IMPL_PATH=$BATCH_API_JAR\
+:$TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/lib/jakarta.inject-api-2.0.0-RC4.jar\
+:$TCK_HOME_DIR/tckdir/prereqs/com.ibm.jbatch.container-2.0.0-M6.jar\
+:$TCK_HOME_DIR/tckdir/prereqs/com.ibm.jbatch.spi-2.0.0-M6.jar
 
-$JAVA_HOME/bin/java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se8   -classpath $API_JAR:$JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
+# Same command as before, different path
+$JAVA_HOME/bin/java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se8   -classpath $JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
 echo
 echo ---------------------
 echo done expected failure
@@ -154,6 +161,13 @@ echo
 #---------------
 # Java 11
 #---------------
+
+#---------------------------------------------------------------------------
+# Currently, the Java 11 path works fine, in both the TestNG and SigTest portions of the TCK.
+# The only step missing here is an automated switch between the Java 8 and Java 11 "branches" of this script.
+#---------------------------------------------------------------------------
+
+
 #cd $TCK_HOME_DIR
 #rm -rf sigtest; mkdir -p sigtest/jimage
 #ls -la .
@@ -163,7 +177,7 @@ echo
 ## Extract here using `jimage extract`
 #$JAVA_HOME/bin/jimage extract $JAVA_HOME/lib/modules
 # Java 11
-#$JAVA_HOME/bin/java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se11  -classpath $API_JAR:$JDK11_CLASSES/java.base:$IMPL_PATH
+#$JAVA_HOME/bin/java -jar $TCK_HOME_DIR/tckdir/prereqs/sigtestdev-3.0-b12-v20140219.jar   SignatureTest -static -package jakarta.batch -filename  $TCK_HOME_DIR/tckdir/prereqs/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch.standalone.tck.sig_2.0_se11  -classpath $JDK11_CLASSES/java.base:$IMPL_PATH
 
 
 

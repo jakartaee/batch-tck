@@ -27,7 +27,7 @@ $MVN_REPO/jakarta/inject/jakarta.inject-api/2.0.0-RC4/jakarta.inject-api-2.0.0-R
 SIGFILE=batch.standalone.tck.sig_2.0_se8
 JAVA8_RT=$JAVA_HOME/jre/lib/rt.jar
 
-$JAVA_HOME/bin/java -jar $SIGTEST_JAR   Setup -static -package jakarta.batch -filename \ $SIGFILE  -classpath "$JAVA8_RT:$API_JARS"
+$JAVA_HOME/bin/java -jar $SIGTEST_JAR   Setup -static -package jakarta.batch -filename $SIGFILE  -classpath "$JAVA8_RT:$API_JARS"
 
 # Set 
 # JAVA_HOME=... JDK 11
