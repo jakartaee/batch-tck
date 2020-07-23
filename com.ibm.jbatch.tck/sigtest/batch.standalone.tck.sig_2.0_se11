@@ -499,7 +499,7 @@ meth public void printStackTrace(java.io.PrintStream)
 meth public void printStackTrace(java.io.PrintWriter)
 meth public void setStackTrace(java.lang.StackTraceElement[])
 supr java.lang.Object
-hfds ZeroElementArray,ZeroStackTraceElementArray,cause,detailMessage,enableWritableStackTrace,serialVersionUID,stackTrace,suppressedExceptions,walkback
+hfds ZeroElementArray,ZeroStackTraceElementArray,cause,detailMessage,disableWritableStackTrace,serialVersionUID,stackTrace,suppressedExceptions,walkback
 
 CLSS public abstract interface java.lang.annotation.Annotation
 meth public abstract boolean equals(java.lang.Object)
