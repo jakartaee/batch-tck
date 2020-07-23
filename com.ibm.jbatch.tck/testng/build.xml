@@ -60,6 +60,8 @@
 
     <target name="init">
         <loadproperties srcFile="batch-tck.properties"/>
+        <echo message="ant.java.version=${ant.java.version}"/>
+        <echo message="java.version=${java.version}"/>
     </target>
 
     <target name="clean">

@@ -127,8 +127,8 @@
         -->
 
         <!-- Run against latest version of RI -->
-        <batch.api.version>2.0.0-M5</batch.api.version>
-        <batch.impl.version>2.0.0-M5</batch.impl.version>
+        <batch.api.version>2.0.0-M6</batch.api.version>
+        <batch.impl.version>2.0.0-M6</batch.impl.version>
 
         <!-- This version of TCK -->
         <batch.tck.version>2.0.0-M4</batch.tck.version>
@@ -277,11 +277,6 @@
                 <groupId>jakarta.inject</groupId>
                 <artifactId>jakarta.inject-api</artifactId>
                 <version>${version.jakarta.inject.jakarta.inject-api}</version>
-            </dependency>
-            <dependency>
-                <groupId>jakarta.transaction</groupId>
-                <artifactId>jta</artifactId>
-                <version>1.1</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
