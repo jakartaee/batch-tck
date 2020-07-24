@@ -37,6 +37,7 @@
 
     <properties>
         <dist.exec.antdir>${project.build.directory}/executeTCK/${batch.tck.archive.root}</dist.exec.antdir>
+        <jbatch.runtime.dir>${project.build.directory}/executeTCK/${batch.tck.archive.root}</jbatch.runtime.dir>
     </properties>
 
   
@@ -90,7 +91,7 @@
                                     <groupId>jakarta.batch</groupId>
                                     <artifactId>jakarta.batch-api</artifactId>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
                                     </outputDirectory>
                                     <destFileName>jakarta.batch-api.jar</destFileName>
                                 </artifactItem>
@@ -98,7 +99,7 @@
                                     <groupId>com.ibm.jbatch</groupId>
                                     <artifactId>com.ibm.jbatch.container</artifactId>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
                                     </outputDirectory>
                                     <destFileName>com.ibm.jbatch.container.jar</destFileName>
                                 </artifactItem>
@@ -106,14 +107,14 @@
                                     <groupId>com.ibm.jbatch</groupId>
                                     <artifactId>com.ibm.jbatch.spi</artifactId>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
                                     </outputDirectory>
                                     <destFileName>com.ibm.jbatch.spi.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.apache.derby</groupId>
                                     <artifactId>derby</artifactId>
-                                    <outputDirectory>${project.build.directory}/executeTCK/runAgainstRI
+                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
                                     </outputDirectory>
                                     <destFileName>derby.jar</destFileName>
                                 </artifactItem>
@@ -129,26 +130,6 @@
                 </executions>
             </plugin>
 
-            <!--
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>${project.basedir}/src/main/resources/jbatch.tck.dist.exec.sigtest-testng.properties</file>
-                            </files>
-                            <quiet>true</quiet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -161,11 +142,15 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <requireJavaVersion>
+                                    <version>[1.8,1.9)</version>
+                                    <message>${nl}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${nl}! This execution must be run with Java 8 (since signature test ${nl}config out of the box only works with Java 8).${nl}If you add '-DskipSigTests=true' you can run the TestNG runtime${nl}  tests with Java 11.  Or set up -Djava.base.sigtest.path to run with Java 11, and remove this enforcer check. ${nl} It's just to give a more obvious failure and keep people thinking they did something wrong.${nl}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${nl}</message>
+                                </requireJavaVersion>
                                 <requireProperty>
                                     <property>java.vendor</property>
                                     <message>IBM JDK cannot be used for signature tests.</message>
                                     <regex>^(?:(?!IBM Corporation).)*$</regex>
-                                    <regexMessage>${line.separator}IBM JDK cannot be used for signature tests, due to differences in rt.jar content.  Switch to OpenJDK or Oracle JDK instead. Runtime TestNG tests can be executed with com.ibm.jbatch.tck.exec module.${line.separator}</regexMessage>
+                                    <regexMessage>${nl}IBM JDK cannot be used for signature tests, due to differences in rt.jar content.  Switch to OpenJDK or Oracle JDK instead. Runtime TestNG tests can be executed with com.ibm.jbatch.tck.exec module.${nl}</regexMessage>
                                 </requireProperty>
                             </rules>
                         </configuration>
@@ -188,7 +173,7 @@
                                 <property name="results" 
                                     value="${project.build.directory}/executeTCK/TestNGResults"/>
                                 <property name="batch.impl.testng.path" 
-                                    value="${project.build.directory}/executeTCK/runAgainstRI/jakarta.batch-api.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.container.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.spi.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/derby.jar"/>
+                                    value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/derby.jar"/>
                                 <property name="jvm.options" 
                                     value="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"/>
                                 <ant dir="${dist.exec.antdir}" target="run"/>
@@ -209,7 +194,7 @@
                                 <property name="sigtestdev.classes" 
                                     value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar"/>
                                 <property name="batch.impl.sigtest.path" 
-                                    value="${project.build.directory}/executeTCK/runAgainstRI/jakarta.batch-api.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.container.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-2.0.0-RC4.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar"/>
+                                    value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-2.0.0-RC4.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar"/>
                                 <ant dir="${dist.exec.antdir}"
                                      antfile="sigtest.build.xml" target="runSigTest"/>
                             </target>

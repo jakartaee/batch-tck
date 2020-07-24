@@ -115,6 +115,9 @@ cd jakarta.batch.official.tck-2.0.0-M4
 
 ant -v -f build.xml -Dbatch.impl.testng.path=../jakarta.batch-api-2.0.0-M6.jar:../com.ibm.jbatch.container-2.0.0-M6.jar:../com.ibm.jbatch.spi-2.0.0-M6.jar:../derby-10.10.1.1.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
 
+
+
+
 #------------------
 # SIGNATURE TESTS
 # -----------------
