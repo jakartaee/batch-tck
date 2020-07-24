@@ -121,11 +121,11 @@
             <destName>sigtest.build.xml</destName>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/sigtest/batch-sigtest-tck.properties</source>
+            <source>../com.ibm.jbatch.tck/sigtest/batch-tck-sigtest.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/testng/batch-tck.properties</source>
+            <source>../com.ibm.jbatch.tck/testng/batch-tck-testng.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
     </files>

@@ -16,7 +16,7 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<project name="batch_tck" default="run" basedir="">
+<project name="batch_tck_testng" default="run" basedir="">
 
     <taskdef resource="testngtasks">
         <classpath>
@@ -50,7 +50,7 @@
                 <fileset dir="lib">
                     <include name="**/*.jar"/>
                 </fileset>
-                <pathelement path="${batch.impl.classes}"/>
+                <pathelement path="${batch.impl.testng.path}"/>
                 <fileset dir="artifacts">
                     <include name="**/com.ibm.jbatch.tck.spi-@project.version@.jar"/>
                 </fileset>
@@ -59,7 +59,7 @@
     </target>
 
     <target name="init">
-        <loadproperties srcFile="batch-tck.properties"/>
+        <loadproperties srcFile="batch-tck-testng.properties"/>
         <echo message="ant.java.version=${ant.java.version}"/>
         <echo message="java.version=${java.version}"/>
     </target>
@@ -78,7 +78,7 @@
                 <include name="**/com.ibm.jbatch.tck.spi-@project.version@.jar"/>
                 <include name="**/com.ibm.jbatch.tck-@project.version@.jar"/>
             </fileset>
-            <pathelement path="${batch.impl.classes}"/>
+            <pathelement path="${batch.impl.testng.path}"/>
         </path>
 
         <testng mode="testng" classpathref="batch.tck.classpath" dumpCommand="true" workingDir="." haltonfailure="true"

@@ -139,6 +139,7 @@
 
         <!-- Convenience -->
         <fs>${file.separator}</fs>
+        <ps>${path.separator}</ps>
 
         <!-- Building the project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -467,7 +468,7 @@
                         <exclude>**/*.html</exclude>
                         <exclude>**/*.css</exclude>
                         <exclude>**/*.ddl</exclude>
-                        <exclude>**/batch-tck.properties</exclude>
+                        <exclude>**/batch-tck-*.properties</exclude>
                         <exclude>**/batch-tck-impl-*.xml</exclude>
                         <exclude>**/testng-class.xml</exclude>
                         <exclude>**/testng-method.xml</exclude>

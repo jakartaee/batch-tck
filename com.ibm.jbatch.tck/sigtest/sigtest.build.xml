@@ -24,7 +24,7 @@
     </description>
 
     <target name="init">
-        <loadproperties srcFile="batch-sigtest-tck.properties"/>
+        <loadproperties srcFile="batch-tck-sigtest.properties"/>
     </target>
 
     <target name="runSigTest" depends="init" description="Runs the SigTest portion of the Jakarta Batch TCK ">
@@ -47,10 +47,8 @@
         <sigtest failonerror="true" filename="${sigFile}">
             <package name="jakarta.batch"/>
             <classpath>
-                <pathelement location="${java.home}/lib/rt.jar"/>
-                <pathelement location="${batch.api.classes}"/>
-                <pathelement location="${jakarta.inject.classes}"/>
-                <pathelement location="${jakarta.enterprise.util.classes}"/>
+                <pathelement location="${java.base.sigtest.path}"/>
+                <pathelement location="${batch.impl.sigtest.path}"/>
             </classpath>
         </sigtest>
     </target>

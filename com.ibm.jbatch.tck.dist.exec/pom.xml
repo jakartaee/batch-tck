@@ -35,6 +35,12 @@
         Distribution ZIP)
     </name>
 
+    <properties>
+        <dist.exec.antdir>${project.build.directory}/executeTCK/${batch.tck.archive.root}</dist.exec.antdir>
+    </properties>
+
+  
+
     <build>
         <plugins>
             <plugin>
@@ -123,6 +129,7 @@
                 </executions>
             </plugin>
 
+            <!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
@@ -134,13 +141,14 @@
                         </goals>
                         <configuration>
                             <files>
-                                <file>${project.basedir}/tck.execution.for.ri.properties</file>
+                                <file>${project.basedir}/src/main/resources/jbatch.tck.dist.exec.sigtest-testng.properties</file>
                             </files>
                             <quiet>true</quiet>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -177,7 +185,13 @@
                         <configuration>
                             <skip>${skipTests}</skip>
                             <target>
-                                <ant dir="target${fs}executeTCK${fs}${batch.tck.archive.root}" target="run"/>
+                                <property name="results" 
+                                    value="${project.build.directory}/executeTCK/TestNGResults"/>
+                                <property name="batch.impl.testng.path" 
+                                    value="${project.build.directory}/executeTCK/runAgainstRI/jakarta.batch-api.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.container.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.spi.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/derby.jar"/>
+                                <property name="jvm.options" 
+                                    value="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"/>
+                                <ant dir="${dist.exec.antdir}" target="run"/>
                             </target>
                         </configuration>
                     </execution>
@@ -190,7 +204,13 @@
                         <configuration>
                             <skip>${skipSigTests}</skip>
                             <target>
-                                <ant dir="target${fs}executeTCK${fs}${batch.tck.archive.root}"
+                                <property name="java.base.sigtest.path" 
+                                    value="${java.home}/lib/rt.jar"/>
+                                <property name="sigtestdev.classes" 
+                                    value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar"/>
+                                <property name="batch.impl.sigtest.path" 
+                                    value="${project.build.directory}/executeTCK/runAgainstRI/jakarta.batch-api.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.container.jar${ps}${project.build.directory}/executeTCK/runAgainstRI/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-2.0.0-RC4.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar"/>
+                                <ant dir="${dist.exec.antdir}"
                                      antfile="sigtest.build.xml" target="runSigTest"/>
                             </target>
                         </configuration>
