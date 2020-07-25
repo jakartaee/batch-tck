@@ -41,6 +41,17 @@ REQUIRED_JARS="\
  /home/ibmadmin/.m2/repository/jakarta/batch/jakarta.batch-api/1.0.2/jakarta.batch-api-1.0.2.jar \
 "
 
+# Make sure we don't have a stale local copy
+rm $REQUIRED_JARS
+for f in "$REQUIRED_JARS"; do ls -l $f ; done
+
+mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get -Dartifact=org.apache.derby:derby:10.10.1.1 -DrepoUrl=https://repo1.maven.org/maven2/
+mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get -Dartifact=net.java.sigtest:sigtestdev:3.0-b12-v20140219 -DrepoUrl=https://repo1.maven.org/maven2/
+mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get -Dartifact=com.ibm.jbatch:com.ibm.jbatch.container:1.0.3 -DrepoUrl=https://repo1.maven.org/maven2/
+mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.2:get -Dartifact=jakarta.batch:jakarta.batch-api:1.0.2 -DrepoUrl=https://repo1.maven.org/maven2/
+
+for f in "$REQUIRED_JARS"; do ls -l $f ; done
+
 #--------------------------------------------------
 # Show some basic info about the OS, JDK/JRE, etc.
 # This could be tweaked without ruining the
@@ -68,7 +79,7 @@ TCK_DOWNLOAD_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/b
 #
 # OFFICIAL
 #
-TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/1.0/eclipse-batch-tck-1.0.2.zip
+TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/1.0/jakarta.batch.official.tck-1.0.2.zip
 
 ################
 # DON'T CHANGE
