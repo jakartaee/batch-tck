@@ -37,7 +37,7 @@
 
     <properties>
         <dist.exec.antdir>${project.build.directory}/executeTCK/${batch.tck.archive.root}</dist.exec.antdir>
-        <jbatch.runtime.dir>${project.build.directory}/executeTCK/${batch.tck.archive.root}</jbatch.runtime.dir>
+        <jbatch.runtime.dir>${project.build.directory}/executeTCK/jbatch-runtime-dir</jbatch.runtime.dir>
     </properties>
 
   
@@ -144,7 +144,7 @@
                             <rules>
                                 <requireJavaVersion>
                                     <version>[1.8,1.9)</version>
-                                    <message>${nl}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${nl}! This execution must be run with Java 8 (since signature test ${nl}config out of the box only works with Java 8).${nl}If you add '-DskipSigTests=true' you can run the TestNG runtime${nl}  tests with Java 11.  Or set up -Djava.base.sigtest.path to run with Java 11, and remove this enforcer check. ${nl} It's just to give a more obvious failure and keep people thinking they did something wrong.${nl}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${nl}</message>
+                                    <message>${nl}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${nl}! This execution must be run with Java 8 (since signature test ${nl}config out of the box only works with Java 8).${nl}If you add '-DskipSigTests=true' you can run the TestNG runtime${nl}  tests with Java 11.  Or set up -Djava.base.sigtest.path to run with Java 11, and run with -Denforcer.skip or remove this enforcer check. ${nl} It's just to give a more obvious failure and keep people thinking they did something wrong.${nl}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${nl}</message>
                                 </requireJavaVersion>
                                 <requireProperty>
                                     <property>java.vendor</property>
