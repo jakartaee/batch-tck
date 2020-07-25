@@ -138,10 +138,14 @@
         <batch.tck.archive.root>jakarta.batch.official.tck-${batch.tck.version}</batch.tck.archive.root>
 
         <!-- Convenience -->
+        <nl>${line.separator}</nl>
         <fs>${file.separator}</fs>
+        <ps>${path.separator}</ps>
 
         <!-- Building the project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Target Java 8 -->
         <version.java>1.8</version.java>
 
         <!-- Dependencies -->
@@ -407,8 +411,8 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[1.8,1.9)</version>
-                                    <message>${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}! TCK must be run with Java 8 (since signature test ${line.separator}config only works with Java 8).${line.separator}If you add '-DskipSigTests=true' you can run the TestNG runtime${line.separator}  tests with Java 11.!${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}</message>
+                                    <version>[1.8,12)</version>
+                                    <message>${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}! TCK must be run with Java 8 thru 11 !${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}</message>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
@@ -467,7 +471,7 @@
                         <exclude>**/*.html</exclude>
                         <exclude>**/*.css</exclude>
                         <exclude>**/*.ddl</exclude>
-                        <exclude>**/batch-tck.properties</exclude>
+                        <exclude>**/batch-tck-*.properties</exclude>
                         <exclude>**/batch-tck-impl-*.xml</exclude>
                         <exclude>**/testng-class.xml</exclude>
                         <exclude>**/testng-method.xml</exclude>
