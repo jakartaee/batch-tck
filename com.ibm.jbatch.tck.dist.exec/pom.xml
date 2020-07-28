@@ -17,20 +17,18 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>2.0.0-M4</version>
+        <version>2.0.0-M5-SNAPSHOT</version>
     </parent>
 
     <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck.dist.exec</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0-M4</version>
+    <version>2.0.0-M5-SNAPSHOT</version>
     <name>Jakarta Batch TCK Execution (testing JBatch, the former RI, plus the new Jakarta Batch API, both against TCK
         Distribution ZIP)
     </name>
@@ -170,13 +168,10 @@
                         <configuration>
                             <skip>${skipTests}</skip>
                             <target>
-                                <property name="results" 
-                                    value="${project.build.directory}/executeTCK/TestNGResults"/>
-                                <property name="batch.impl.testng.path" 
-                                    value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/derby.jar"/>
-                                <property name="jvm.options" 
-                                    value="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"/>
-                                <ant dir="${dist.exec.antdir}" target="run"/>
+                                <property name="results" value="${project.build.directory}/executeTCK/TestNGResults" />
+                                <property name="batch.impl.testng.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/derby.jar" />
+                                <property name="jvm.options" value="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl" />
+                                <ant dir="${dist.exec.antdir}" target="run" />
                             </target>
                         </configuration>
                     </execution>
@@ -189,14 +184,10 @@
                         <configuration>
                             <skip>${skipSigTests}</skip>
                             <target>
-                                <property name="java.base.sigtest.path" 
-                                    value="${java.home}/lib/rt.jar"/>
-                                <property name="sigtestdev.classes" 
-                                    value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar"/>
-                                <property name="batch.impl.sigtest.path" 
-                                    value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-2.0.0-RC4.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar"/>
-                                <ant dir="${dist.exec.antdir}"
-                                     antfile="sigtest.build.xml" target="runSigTest"/>
+                                <property name="java.base.sigtest.path" value="${java.home}/lib/rt.jar" />
+                                <property name="sigtestdev.classes" value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar" />
+                                <property name="batch.impl.sigtest.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-2.0.0-RC4.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar" />
+                                <ant dir="${dist.exec.antdir}" antfile="sigtest.build.xml" target="runSigTest" />
                             </target>
                         </configuration>
                     </execution>

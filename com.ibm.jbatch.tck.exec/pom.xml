@@ -17,20 +17,18 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>2.0.0-M4</version>
+        <version>2.0.0-M5-SNAPSHOT</version>
     </parent>
 
     <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck.exec</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0-M4</version>
+    <version>2.0.0-M5-SNAPSHOT</version>
     <name>Jakarta Batch TCK Execution (using JBatch, the former RI, against TCK Maven module)</name>
 
     <dependencies>
@@ -118,9 +116,7 @@
                         <configuration>
                             <!-- Copy since test.properties is a .gitignore entry -->
                             <target>
-                                <copy file="${project.basedir}/default.tck.exec.properties"
-                                      tofile="${project.basedir}/test.properties"
-                                      overwrite="false">
+                                <copy file="${project.basedir}/default.tck.exec.properties" tofile="${project.basedir}/test.properties" overwrite="false">
                                 </copy>
                             </target>
                         </configuration>

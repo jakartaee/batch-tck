@@ -17,19 +17,18 @@
 
    SPDX-License-Identifier: Apache-2.0
  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>2.0.0-M4</version>
+        <version>2.0.0-M5-SNAPSHOT</version>
     </parent>
 
     <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0-M4</version>
+    <version>2.0.0-M5-SNAPSHOT</version>
     <name>Jakarta Batch TCK Core Test Artifacts</name>
 
     <dependencies>
@@ -100,16 +99,11 @@
                             <phase>none</phase>
                             <configuration>
                                 <target>
-                                    <copy file="${project.basedir}/testng/build.xml"
-                                          tofile="${project.basedir}/testng/filtered.build.xml"
-                                          filtering="true"
-                                          overwrite="true">
+                                    <copy file="${project.basedir}/testng/build.xml" tofile="${project.basedir}/testng/filtered.build.xml" filtering="true" overwrite="true">
                                         <filterset>
-                                            <filter token="project.version" value="${project.version}"/>
-                                            <filter token="version.org.testng.testng"
-                                                    value="${version.org.testng.testng}"/>
-                                            <filter token="version.com.beust.jcommander"
-                                                    value="${version.com.beust.jcommander}"/>
+                                            <filter token="project.version" value="${project.version}" />
+                                            <filter token="version.org.testng.testng" value="${version.org.testng.testng}" />
+                                            <filter token="version.com.beust.jcommander" value="${version.com.beust.jcommander}" />
                                         </filterset>
                                     </copy>
                                 </target>
@@ -127,30 +121,26 @@
                             <phase>none</phase>
                             <configuration>
                                 <target>
-                                    <property name="original.batch.xml"
-                                              value="${project.basedir}${fs}src${fs}main${fs}resources${fs}META-INF${fs}batch.xml"/>
-                                    <property name="generate.batch.xml.dir"
-                                              value="${project.basedir}${fs}target${fs}generate-tck"/>
-                                    <mkdir dir="${generate.batch.xml.dir}"/>
-                                    <echo message="building ${generate.batch.xml.dir}/batch.xml"/>
+                                    <property name="original.batch.xml" value="${project.basedir}${fs}src${fs}main${fs}resources${fs}META-INF${fs}batch.xml" />
+                                    <property name="generate.batch.xml.dir" value="${project.basedir}${fs}target${fs}generate-tck" />
+                                    <mkdir dir="${generate.batch.xml.dir}" />
+                                    <echo message="building ${generate.batch.xml.dir}/batch.xml" />
                                     <java classname="com.ibm.jbatch.tck.utils.BatchXMLGenerator">
-                                        <arg value="${project.build.outputDirectory}"/>
-                                        <arg value="com${fs}ibm${fs}jbatch${fs}tck${fs}artifacts"/>
-                                        <arg value="${generate.batch.xml.dir}"/>
-                                        <classpath refid="maven.compile.classpath"/>
+                                        <arg value="${project.build.outputDirectory}" />
+                                        <arg value="com${fs}ibm${fs}jbatch${fs}tck${fs}artifacts" />
+                                        <arg value="${generate.batch.xml.dir}" />
+                                        <classpath refid="maven.compile.classpath" />
                                         <classpath>
                                             <dirset dir="${project.build.outputDirectory}/com/ibm/jbatch/tck">
-                                                <include name="artifacts utils"/>
+                                                <include name="artifacts utils" />
                                             </dirset>
                                         </classpath>
                                     </java>
                                     <!-- See comment above <execution> -->
-                                    <fail message="Newly-generated ${generate.batch.xml.dir}${fs}batch.xml does not exactly match previous batch.xml at location: ${original.batch.xml}.  Review carefully and if this is correct, then overwrite the old ${original.batch.xml} file with the newly-generated copy of batch.xml">
+                                    <fail message="Newly-generated ${generate.batch.xml.dir}${fs}batch.xml does not exactly match previous batch.xml at location: ${original.batch.xml}. Review carefully and if this is correct, then overwrite the old ${original.batch.xml} file with the newly-generated copy of batch.xml">
                                         <condition>
                                             <not>
-                                                <filesmatch file1="${original.batch.xml}"
-                                                            file2="${generate.batch.xml.dir}${fs}batch.xml"
-                                                            textfile="true"/>
+                                                <filesmatch file1="${original.batch.xml}" file2="${generate.batch.xml.dir}${fs}batch.xml" textfile="true" />
                                             </not>
                                         </condition>
                                     </fail>
@@ -177,36 +167,31 @@
                                          So to generate the Java 6, 7, 8 .sig files you have to actually run Maven using Java 6, 7, 8, respectively,
                                          once for each.  You can't just generate them all at once. -->
                                     <condition property="jdk" value="6">
-                                        <contains string="${ant.java.version}" substring="1.6"/>
+                                        <contains string="${ant.java.version}" substring="1.6" />
                                     </condition>
                                     <condition property="jdk" value="7">
-                                        <contains string="${ant.java.version}" substring="1.7"/>
+                                        <contains string="${ant.java.version}" substring="1.7" />
                                     </condition>
                                     <condition property="jdk" value="8">
-                                        <contains string="${ant.java.version}" substring="1.8"/>
+                                        <contains string="${ant.java.version}" substring="1.8" />
                                     </condition>
-                                    <property name="old.sig.file"
-                                              value="${project.basedir}${fs}sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
-                                    <property name="new.sig.file"
-                                              value="${project.basedir}${fs}generate-sigtest${fs}batch-api-sigtest-java${jdk}.sig"/>
-                                    <mkdir dir="${project.basedir}${fs}generate-sigtest"/>
-                                    <taskdef name="setup" classname="com.sun.tdk.signaturetest.ant.ASetup"
-                                             classpathref="maven.plugin.classpath"/>
-                                    <echo message="Generating Java ${jdk} SigTest files for batch"/>
-                                    <setup failonerror="true" filename="${new.sig.file}"
-                                           package="jakarta.batch">
-                                        <classpath refid="maven.compile.classpath"/>
-                                        <classpath refid="maven.plugin.classpath"/>
+                                    <property name="old.sig.file" value="${project.basedir}${fs}sigtest${fs}batch-api-sigtest-java${jdk}.sig" />
+                                    <property name="new.sig.file" value="${project.basedir}${fs}generate-sigtest${fs}batch-api-sigtest-java${jdk}.sig" />
+                                    <mkdir dir="${project.basedir}${fs}generate-sigtest" />
+                                    <taskdef name="setup" classname="com.sun.tdk.signaturetest.ant.ASetup" classpathref="maven.plugin.classpath" />
+                                    <echo message="Generating Java ${jdk} SigTest files for batch" />
+                                    <setup failonerror="true" filename="${new.sig.file}" package="jakarta.batch">
+                                        <classpath refid="maven.compile.classpath" />
+                                        <classpath refid="maven.plugin.classpath" />
                                         <classpath>
-                                            <pathelement location="${java.home}${fs}lib${fs}rt.jar"/>
+                                            <pathelement location="${java.home}${fs}lib${fs}rt.jar" />
                                         </classpath>
                                     </setup>
                                     <!-- See comment above <execution> -->
-                                    <fail message="Fail on purpose to ensure that any changes to the public API signature are truly intended.  They should not be done just to get the Maven build to complete.  Newly-generated ${new.sig.file} does not exactly match previous sig test file at location: ${old.sig.file}.  Review carefully and if this is correct, then overwrite the old ${old.sig.file} file with the newly-generated copy of the sig test file">
+                                    <fail message="Fail on purpose to ensure that any changes to the public API signature are truly intended. They should not be done just to get the Maven build to complete.  Newly-generated ${new.sig.file} does not exactly match previous sig test file at location: ${old.sig.file}.  Review carefully and if this is correct, then overwrite the old ${old.sig.file} file with the newly-generated copy of the sig test file">
                                         <condition>
                                             <not>
-                                                <filesmatch file1="${old.sig.file}" file2="${new.sig.file}"
-                                                            textfile="true"/>
+                                                <filesmatch file1="${old.sig.file}" file2="${new.sig.file}" textfile="true" />
                                             </not>
                                         </condition>
                                     </fail>
