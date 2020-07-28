@@ -63,7 +63,7 @@
                                          Still, a hack to run against a subset of tests:
                                          1) Do a full 'mvn install'
                                          2) WITHOUT doing a clean, edit
-                                             com.ibm.jbatch.tck.dist.exec/target/executeTCK/jakarta.batch.official.tck-2.0.0-M4/artifacts/batch-tck-impl-SE-suite.xml
+                                           com.ibm.jbatch.tck.dist.exec/target/executeTCK/jakarta.batch.official.tck-2.0.0-*/artifacts/batch-tck-impl-SE-suite.xml
                                             defining the individual test or subset
                                          3)  Replace
                                     <overWrite>true</overWrite>
@@ -186,7 +186,7 @@
                             <target>
                                 <property name="java.base.sigtest.path" value="${java.home}/lib/rt.jar" />
                                 <property name="sigtestdev.classes" value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar" />
-                                <property name="batch.impl.sigtest.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-2.0.0-RC4.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-3.0.0-M4.jar" />
+                                <property name="batch.impl.sigtest.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-${version.jakarta.inject.jakarta.inject-api}.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-${version.jakarta.enterprise.jakarta.enterprise.cdi-api}.jar" />
                                 <ant dir="${dist.exec.antdir}" antfile="sigtest.build.xml" target="runSigTest" />
                             </target>
                         </configuration>
