@@ -10,9 +10,9 @@ MVN_REPO=/home/ibmadmin/.m2/repository
 SIGTEST_JAR=$MVN_REPO/net/java/sigtest/sigtestdev/3.0-b12-v20140219/sigtestdev-3.0-b12-v20140219.jar
 
 API_JARS="\
-$MVN_REPO/jakarta/batch/jakarta.batch-api/2.0.0-M6/jakarta.batch-api-2.0.0-M6.jar:\
-$MVN_REPO/jakarta/enterprise/jakarta.enterprise.cdi-api/3.0.0-M4/jakarta.enterprise.cdi-api-3.0.0-M4.jar:\
-$MVN_REPO/jakarta/inject/jakarta.inject-api/2.0.0-RC4/jakarta.inject-api-2.0.0-RC4.jar\
+$MVN_REPO/jakarta/batch/jakarta.batch-api/2.0.0/jakarta.batch-api-2.0.0.jar:\
+$MVN_REPO/jakarta/enterprise/jakarta.enterprise.cdi-api/3.0.0/jakarta.enterprise.cdi-api-3.0.0.jar:\
+$MVN_REPO/jakarta/inject/jakarta.inject-api/2.0.0/jakarta.inject-api-2.0.0.jar\
 "
 
 

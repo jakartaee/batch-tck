@@ -321,7 +321,7 @@ It assumes:
 . You have unzipped the TCK into the present working directory
 . You have copied into the working directory's parent directory each of:
 * the sigtest tool `sigtestdev.jar`
-* The Jakarta Batch API JAR under test `jakarta.batch-api-2.0.0-M6.jar`
+* The Jakarta Batch API JAR under test `jakarta.batch-api-2.0.0.jar`
 . Your JAVA_HOME variable points to an Oracle or OpenJDK Version 8 JDK  
 
 So with the above assumptions, the directory structure would look like:
@@ -334,7 +334,7 @@ So with the above assumptions, the directory structure would look like:
         ...
         ... as detailed above ...
         ...
-    jakarta.batch-api-2.0.0-M6.jar
+    jakarta.batch-api-2.0.0.jar
     sigtestdev.jar
 
 ==== Command Line
@@ -345,7 +345,7 @@ The command line would look like this:
     $JAVA_HOME/bin/java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch.standalone.tck.sig_2.0_se8 
     -classpath $JAVA_HOME/jre/lib/rt.jar\
-    :../jakarta.batch-api-2.0.0-M6.jar\
+    :../jakarta.batch-api-2.0.0.jar\
     :lib/jakarta.inject-api-1.0.jar\
     :lib/jakarta.enterprise.cdi-api-2.0.1.jar
    
@@ -364,7 +364,7 @@ For additional confirmation that the signature test is working correctly, a fail
     $JAVA_HOME/bin/java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch.standalone.tck.sig_2.0_se8 
     -classpath $JAVA_HOME/jre/lib/rt.jar\
-    :../jakarta.batch-api-2.0.0-M6.jar\
+    :../jakarta.batch-api-2.0.0.jar\
     :lib/jakarta.inject-api-1.0.jar
 
 You will see a failure like:
