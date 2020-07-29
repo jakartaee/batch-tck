@@ -70,10 +70,7 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.inject</groupId>
@@ -95,6 +92,34 @@
             <artifactId>weld-se-core</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- 
+            Using a milestone release rather than a final release is a questionable practice to use for 
+            something as formal as a TCK project.
+
+            Note however that the current module is not at all part of the official TCK "distribution" or
+            the TCK process.  This is just a convenience module for executing the TCK against the jbatch 
+            impl as compatible implementation.
+
+            The shortcut here allows us to release the full, final TCK as-is, without waiting for a final,
+            compatible JAXB implementation.
+
+            Though I think this would be questionable if we were using this execution to certify as a 
+            compatible implementation, we are NOT.  
+
+            The certification happens via another process and will be recorded by issues labeled: 
+            https://github.com/eclipse-ee4j/batch-api/issues?q=is%3Aissue+is%3Aopen+label%3Acertification
+
+            So think of this as "testing the TCK" (rather than testing jbatch against the TCK), which is
+            a useful thing to do now.
+        -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>3.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

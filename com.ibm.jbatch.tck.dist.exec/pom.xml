@@ -39,6 +39,62 @@
     </properties>
 
   
+    <!-- For collecting execution classpath, compile scoped is easier since it's transitive -->
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ibm.jbatch</groupId>
+            <artifactId>com.ibm.jbatch.container</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>jakarta.batch-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+        </dependency>
+
+        <!-- 
+            Using a milestone release rather than a final release is a questionable practice to use for 
+            something as formal as a TCK project.
+
+            Note however that the current module is not at all part of the official TCK "distribution" or
+            the TCK process.  This is just a convenience module for executing the TCK against the jbatch 
+            impl as compatible implementation.
+
+            The shortcut here allows us to release the full, final TCK as-is, without waiting for a final,
+            compatible JAXB implementation.
+
+            Though I think this would be questionable if we were using this execution to certify as a 
+            compatible implementation, we are NOT.  
+
+            The certification happens via another process and will be recorded by issues labeled: 
+            https://github.com/eclipse-ee4j/batch-api/issues?q=is%3Aissue+is%3Aopen+label%3Acertification
+
+            So think of this as "testing the TCK" (rather than testing jbatch against the TCK), which is
+            a useful thing to do now.
+        -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>3.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>
@@ -51,7 +107,7 @@
                         <goals>
                             <goal>unpack</goal>
                         </goals>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
@@ -78,7 +134,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copyRI</id>
+                        <id>copySigTest</id>
                         <goals>
                             <goal>copy</goal>
                         </goals>
@@ -86,43 +142,30 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>jakarta.batch</groupId>
-                                    <artifactId>jakarta.batch-api</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
-                                    </outputDirectory>
-                                    <destFileName>jakarta.batch-api.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.ibm.jbatch</groupId>
-                                    <artifactId>com.ibm.jbatch.container</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
-                                    </outputDirectory>
-                                    <destFileName>com.ibm.jbatch.container.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.ibm.jbatch</groupId>
-                                    <artifactId>com.ibm.jbatch.spi</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
-                                    </outputDirectory>
-                                    <destFileName>com.ibm.jbatch.spi.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.apache.derby</groupId>
-                                    <artifactId>derby</artifactId>
-                                    <outputDirectory>${project.build.directory}/executeTCK/jbatch-runtime-dir
-                                    </outputDirectory>
-                                    <destFileName>derby.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
                                     <groupId>net.java.sigtest</groupId>
                                     <artifactId>sigtestdev</artifactId>
                                     <outputDirectory>${project.build.directory}/executeTCK/runSigTest</outputDirectory>
                                     <destFileName>sigtestdev.jar</destFileName>
+                                    <overWrite>true</overWrite>
                                 </artifactItem>
                             </artifactItems>
+                            <excludeTransitive>false</excludeTransitive>
+                            <outputDirectory>${project.build.directory}/executeTCK/runSigTest</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copyRI</id>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <excludeTransitive>false</excludeTransitive>
+                            <outputDirectory>${jbatch.runtime.dir}</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <stripVersion>true</stripVersion>
                         </configuration>
                     </execution>
                 </executions>
@@ -169,7 +212,7 @@
                             <skip>${skipTests}</skip>
                             <target>
                                 <property name="results" value="${project.build.directory}/executeTCK/TestNGResults" />
-                                <property name="batch.impl.testng.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/derby.jar" />
+                                <property name="batch.impl.testng.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/derby.jar${ps}${jbatch.runtime.dir}/jakarta.activation.jar${ps}${jbatch.runtime.dir}/jakarta.inject-api.jar${ps}${jbatch.runtime.dir}/jakarta.enterprise.cdi-api.jar${ps}${jbatch.runtime.dir}/jakarta.xml.bind-api.jar${ps}${jbatch.runtime.dir}/jaxb-runtime.jar${ps}${jbatch.runtime.dir}/jaxb-core.jar${ps}${jbatch.runtime.dir}/jaxb-runtime.jar${ps}${jbatch.runtime.dir}/istack-commons-runtime.jar" />
                                 <property name="jvm.options" value="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl" />
                                 <ant dir="${dist.exec.antdir}" target="run" />
                             </target>
@@ -186,7 +229,7 @@
                             <target>
                                 <property name="java.base.sigtest.path" value="${java.home}/lib/rt.jar" />
                                 <property name="sigtestdev.classes" value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar" />
-                                <property name="batch.impl.sigtest.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${dist.exec.antdir}/lib/jakarta.inject-api-${version.jakarta.inject.jakarta.inject-api}.jar${ps}${dist.exec.antdir}/lib/jakarta.enterprise.cdi-api-${version.jakarta.enterprise.jakarta.enterprise.cdi-api}.jar" />
+                                <property name="batch.impl.sigtest.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/jakarta.inject-api.jar${ps}${jbatch.runtime.dir}/jakarta.enterprise.cdi-api.jar" />
                                 <ant dir="${dist.exec.antdir}" antfile="sigtest.build.xml" target="runSigTest" />
                             </target>
                         </configuration>
