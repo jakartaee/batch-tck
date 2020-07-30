@@ -116,7 +116,7 @@ In more detail:
 
 `artifacts` contains all the test artifacts pertaining to the TCK: The TCK test classes and source, the TCK SPI classes and source, the TestNG suite.xml file and the signature test files.
 
-`doc` contains the documentation for the TCK (this reference guide)
+`doc` contains the documentation for the TCK: this reference guide, plus a script that helps provide an example of how to run the TCK against the 'jbatch' implementation.
 
 `lib` contains the necessary prereqs for the TCK
 
@@ -148,6 +148,16 @@ The `artifacts/batch-tck-impl-SE-suite.xml` artifact provided in the TCK distrib
 
 The `build.xml` file is used for running the test suite via https://ant.apache.org/[Apache Ant].
 The default target, **run**, will invoke **TestNG**, running the tests specified in the suite xml file, and a report will be generated in the results directory.
+
+
+== Example - How to Run Against 'jbatch' implementation
+
+The TCK includes documentation in the form of the script: `doc/how-to-run-tck-against-jbatch-script.sh` to show how to execute the entire TCK against the **com.ibm.jbatch** implementation.
+
+The script is written as a template, so you could follow the instructions within comments in the script to edit values unique to your installation, (e.g. **JAVA_HOME** based on the JDK install location), and then run it yourself.
+
+**Note:** the script is not fully parameterized, so you could not just run it without making some edits first.
+
 
 ==	TestNG Test Suite Setup
 
@@ -279,40 +289,41 @@ Some alternate suggestions:
 
 It is assumed all these options will give similar results.
 
-=== Other included Jakarta API JARs
+=== Important Jakarta API dependencies
 
-As a convenience, the TCK distribution includes other Jakarta API classes (outside of Jakarta Batch), since a given Jakarta Batch implementation might not typically include that already in a typical package or distribution.  
+The Jakarta Dependency Injection and the Jakarta Contexts Dependency Injection specifications provide a couple key dependency API classes, including:
 
-These classes include:
-
-* the **jakarta.enterprise.util.Nonbinding** class, provided by the `jakarta.enterprise.cdi-api-x.y.z` jar.
-* the **jakarta.inject.*** classes, provided by the `jakarta.inject-api-x.y.z` jar.
+* the **jakarta.enterprise.util.Nonbinding** class, provided by the `jakarta.enterprise.cdi-api-x.y.z` jar, (e.g. Maven coordinates:  **jakarta.enterprise:jakarta.enterprise.cdi-api:3.0.0**)
+* the **jakarta.inject.*** classes, provided by the `jakarta.inject-api-x.y.z` jar, (e.g. Maven coordinates:  **jakarta.inject:jakarta.inject-api:2.0.0**)
 
 It is not obvious that the above annotations are necessary to completely define the "signature" of some Jakarta Batch classes, which is why we call out this detail here.
 
-Note it is not strictly necessary for you to use these two jars when constructing your test path for the signature tests, you can build your path another way if you want.
+====  Dependencies no longer packaged with TCK
+
+In previous versions of the Jakarta Batch TCK the two jars were packaged as a convenience, but this was removed to clarify that it was not a requirement to run with these particular jars.
+
 
 === Running the Signature Tests - Java 8
 
 The TCK package contains the signature file: `batch.standalone.tck.sig_2.0_se8` in the `artifacts` directory.
 
 Run the signature test by executing a command like the following (from the `artifacts` directory):
-
+```
     $JAVA_HOME/bin/java -jar $SIGTEST_DEV_JAR SignatureTest -static -package jakarta.batch \
     -filename batch.standalone.tck.sig_2.0_se8 -classpath \
     $JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
-
+```
 Note the variables above, the valuesof which you may need to modify:
 
 * **JAVA_HOME**: the home of your JDK Version 8 installation that you're using for this test execution.
 * **SIGTEST_DEV_JAR**: the location of your signature test tool jar, which you must download separately.
 * **IMPL_PATH**:  this path should include:
 ** the **jakarta.batch.** API classes
-** the **jakarta.inject.** API classes (shipped with the TCK as mentioned)
-** the **jakarta.enterprise.util.Nonbinding** API class (shipped with the TCK as mentioned)
-** your own Jakarta Batch implementation classes
+** plus the remainder of your own Jakarta Batch implementation classes
+** the **jakarta.inject.** API classes 
+** the **jakarta.enterprise.util.Nonbinding** API class 
 
-=== Example Java 8 Signature Test Command Line
+=== Example Signature Test Command Line - Java 8
 
 Here is an example showing a sample set of values for the shell variables used in the shorthand above.
 
@@ -322,6 +333,9 @@ It assumes:
 . You have copied into the working directory's parent directory each of:
 * the sigtest tool `sigtestdev.jar`
 * The Jakarta Batch API JAR under test `jakarta.batch-api-2.0.0.jar`
+* The Jakarta Dependency Injection JAR as `jakarta.inject-api-2.0.0.jar`
+* The Jakarta Contexts Dependency Injection JAR as `jakarta.enterprise.cdi-api-3.0.0.jar`
+* Your Jakarta Batch implementation, represented here by `com.ibm.jbatch.container-2.0.0.jar` and `com.ibm.jbatch.spi-2.0.0.jar`
 . Your JAVA_HOME variable points to an Oracle or OpenJDK Version 8 JDK  
 
 So with the above assumptions, the directory structure would look like:
@@ -334,21 +348,28 @@ So with the above assumptions, the directory structure would look like:
         ...
         ... as detailed above ...
         ...
-    jakarta.batch-api-2.0.0.jar
     sigtestdev.jar
+    jakarta.batch-api-2.0.0.jar
+    jakarta.inject-api-2.0.0.jar
+    jakarta.enterprise.cdi-api-3.0.0.jar
+    com.ibm.jbatch.container-2.0.0.jar
+    com.ibm.jbatch.spi-2.0.0.jar
 
 ==== Command Line
 
 The command line would look like this:
 
+```bash
+   IMPL_PATH=../jakarta.batch-api-2.0.0.jar\
+    :../jakarta.inject-api-2.0.0.jar\
+    :../jakarta.enterprise.cdi-api-3.0.0.jar\
+    :../com.ibm.jbatch.container-2.0.0.jar\
+    :../com.ibm.jbatch.spi-2.0.0.jar
 
     $JAVA_HOME/bin/java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch.standalone.tck.sig_2.0_se8 
-    -classpath $JAVA_HOME/jre/lib/rt.jar\
-    :../jakarta.batch-api-2.0.0.jar\
-    :lib/jakarta.inject-api-1.0.jar\
-    :lib/jakarta.enterprise.cdi-api-2.0.1.jar
-   
+    -classpath $JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
+```
 === Determining success
 
 The output of your execution should include, at the very end:
@@ -361,12 +382,16 @@ Again, in order to pass the Jakarta Batch TCK you have to make sure that your AP
 
 For additional confirmation that the signature test is working correctly, a failure can be forced by removing the last classpath entry.  E.g., continuing the last example, if we remove the jakarta.enterprise.cdi-api JAR and instead do:
 
+```bash
+   IMPL_PATH=../jakarta.batch-api-2.0.0.jar\
+    :../jakarta.inject-api-2.0.0.jar\
+    :../com.ibm.jbatch.container-2.0.0.jar\
+    :../com.ibm.jbatch.spi-2.0.0.jar
+
     $JAVA_HOME/bin/java -jar ../sigtestdev.jar SignatureTest -static -package jakarta.batch \
     -filename artifacts/batch.standalone.tck.sig_2.0_se8 
-    -classpath $JAVA_HOME/jre/lib/rt.jar\
-    :../jakarta.batch-api-2.0.0.jar\
-    :lib/jakarta.inject-api-1.0.jar
-
+    -classpath $JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
+```
 You will see a failure like:
 
     Warning: Not found annotation type jakarta.enterprise.util.Nonbinding
@@ -385,7 +410,17 @@ It uses the `batch-sigtest-tck.properties` file to supply the four classpath ent
 
 It also detects whether it's running against a Java 8 vs. 11 JVM, and can switch signature files accordingly. 
 
-We list the "raw" `java -jar ... ` approach as the "official" one but this may be helpful as a convenience, and with such a thin wrapper it should be obvious enough whether results should apply.
+We list the "raw" `java -jar ... ` approach as the "official" one but this may be helpful as a convenience, and with such a thin wrapper it should be easy enough to agree whether results should be valid.
+
+=== Generating the Signature Files (optional)
+
+For reference, note that the signature tests for the TCK were generated by building a similar classpath as the one used for executing the tests, but using the 'Setup' argument in place of the 'SignatureTest' argument, e.g.:
+
+```bash
+    $JAVA_HOME/bin/java -jar ../sigtestdev.jar Setup -static -package jakarta.batch \
+    -filename artifacts/batch.standalone.tck.sig_2.0_se8 
+    -classpath $JAVA_HOME/jre/lib/rt.jar:$IMPL_PATH
+```
 
 == Running the Signature Tests - Java 11
 
@@ -397,24 +432,63 @@ The obvious changes are to run with a Java 11 JDK and to use signature file: `ba
 
 In addition, there is a change needed to reflect changes to the JDK due to the addition of Java modules.   
 
-=== Java 11 Setup - jimage
+=== jimage Setup - Java 11
 
 Assuming **JAVA_HOME** points to the Java 11 JDK you're using to certify, you need to: 
 
 1.  Extract modules using the 'jimage' command-line tool
-   
+
+```bash   
    cd $JAVA11_MODULES
    jimage extract $JAVA_HOME/lib/modules
+```
 
 2. Replace `$JAVA_HOME/jre/lib/rt.jar` in the Java 8 example command lines with the "java.base" module you just extracted, which would, continuing this example, be:  `$JAVA11_MODULES/java.base`.
 
-=== Java 11 Command Line
+=== Command Line - Java 11
 
 Having done the jimage extract, you can now run the signature test by executing a command like the following (from the `artifacts` directory):
     
+```bash
     $JAVA_HOME/bin/java -jar $SIGTEST_DEV_JAR SignatureTest -static -package jakarta.batch \
     -filename batch.standalone.tck.sig_2.0_se11 -classpath \
     $JAVA11_MODULES/java.base:$IMPL_PATH
+```
+== TCK SPI "Porting Package" in-depth (optional)
+
+We save this until the end since most commonly it won't be needed.
+
+The two porting package SPI classes in the Jakarta Batch TCK are:
+
+* **com.ibm.jbatch.tck.spi.JobExecutionWaiter**
+* **com.ibm.jbatch.tck.spi.JobExecutionWaiterFactory**
+
+The default implementations of these provided by the Jakarta Batch TCK are, respectively: 
+
+* **com.ibm.jbatch.tck.polling.TCKPollingExecutionWaiterFactory$TCKPollingExecutionWaiter**
+* **com.ibm.jbatch.tck.polling.TCKPollingExecutionWaiterFactory**
+
+The interface definitions are simply:
+
+```java
+public interface JobExecutionWaiterFactory {public JobExecutionWaiter createWaiter(long executionId, JobOperator jobOp, long sleepTime);}
+
+public interface JobExecutionWaiter {JobExecution awaitTermination() throws JobExecutionTimeoutException;}
+```
+
+This SPI can be understood with a simple example showing how it used by the TCK (this sample code is extracted from class **com.ibm.jbatch.tck.utils.JobOperatorBridge** )
+
+```java
+long executionId = jobOp.start(jobName, jobParameters);  
+JobExecutionWaiter waiter = waiterFactory.createWaiter(executionId, jobOp, sleepTime);
+try {
+  terminatedJobExecution = waiter.awaitTermination();  } 
+catch (JobExecutionTimeoutException e) { // ... }
+```
+
+So all that's happening here is that we're "waiting" for the asynchronous job execution to complete, using a blocking method that will either return when execution is complete, or throw an exception if we reach the specified 'sleepTime'.And the provided, **com.ibm.jbatch.tck.polling.TCKPollingExecutionWaiterFactory** implementation simply polls repeatedly until the timeout. 
+
+Finally, note that the **java.util.ServiceLoader** mechanism is used to reference and load the particular SPI implementation.   This implies that you need to update file `META-INF/services/com.ibm.jbatch.tck.spi.JobExecutionWaiterFactory` and update the contents with your factory classname, in order to replace the default implementation.
 
 == Note on previous (JSR 352) TCK guide
 
@@ -436,4 +510,4 @@ Since there are still some details in the previous JSR 352 TCK reference guide t
 
 === Update - Jakarta Batch 2.0
 
-* July 25, 2020
+* July 30, 2020
