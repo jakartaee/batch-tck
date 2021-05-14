@@ -227,7 +227,15 @@
                         <configuration>
                             <skip>${skipSigTests}</skip>
                             <target>
-                                <property name="java.base.sigtest.path" value="${java.home}/lib/rt.jar" />
+                                <available property="java.base.sigtest.path.rt.jar.present" file="${java.home}/lib/rt.jar"/>
+                                <condition property="java.base.sigtest.path" value="${java.home}/lib/rt.jar">
+                                    <istrue value="${java.base.sigtest.path.rt.jar.present}"/>
+                                </condition>
+                                <condition property="java.base.sigtest.path" value="jdk-modules/java.base">
+                                    <isfalse value="${java.base.sigtest.path.rt.jar.present}"/>
+                                </condition>
+                                <ant dir="${dist.exec.antdir}" antfile="sigtest.build.xml" target="extractJdkModulesIfNeeded" />
+
                                 <property name="sigtestdev.classes" value="${project.build.directory}/executeTCK/runSigTest/sigtestdev.jar" />
                                 <property name="batch.impl.sigtest.path" value="${jbatch.runtime.dir}/jakarta.batch-api.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.container.jar${ps}${jbatch.runtime.dir}/com.ibm.jbatch.spi.jar${ps}${jbatch.runtime.dir}/jakarta.inject-api.jar${ps}${jbatch.runtime.dir}/jakarta.enterprise.cdi-api.jar" />
                                 <ant dir="${dist.exec.antdir}" antfile="sigtest.build.xml" target="runSigTest" />

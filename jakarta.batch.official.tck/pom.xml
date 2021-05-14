@@ -136,6 +136,7 @@
                 <configuration>
                     <sourceDocumentName>batch-tck-reference-guide.adoc</sourceDocumentName>
                     <sourceHighlighter>coderay</sourceHighlighter>
+                    <skip>${asciidoc.skip}</skip>
                 </configuration>
             </plugin>
             <plugin>
