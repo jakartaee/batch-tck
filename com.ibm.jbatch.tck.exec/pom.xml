@@ -169,7 +169,7 @@
                                                                 <suiteXmlFile>${project.basedir}/testng.suite.xml</suiteXmlFile>
                                 -->
                             </suiteXmlFiles>
-                            <systemPropertiesFile>${project.build.directory}/test-classes/batch-tck.properties</systemPropertiesFile>
+                            <systemPropertiesFile>${project.build.directory}/test-classes/batch-tck-testng.properties</systemPropertiesFile>
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
                         </configuration>
                     </execution>
