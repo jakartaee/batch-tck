@@ -158,6 +158,8 @@ The script is written as a template, so you could follow the instructions within
 
 **Note:** the script is not fully parameterized, so you could not just run it without making some edits first.
 
+The **com.ibm.jbatch** implementation contains its own copy, based on this source script.
+
 
 ==	TestNG Test Suite Setup
 

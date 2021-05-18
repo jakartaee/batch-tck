@@ -54,9 +54,9 @@ REQUIRED_JARS="\
  /home/ibmadmin/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.0/jakarta.inject-api-2.0.0.jar \
  /home/ibmadmin/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/3.0.0/jakarta.enterprise.cdi-api-3.0.0.jar \
  /home/ibmadmin/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar \
- /home/ibmadmin/.m2/repository/org/glassfish/jaxb/jaxb-runtime/3.0.0-M4/jaxb-runtime-3.0.0-M4.jar \
- /home/ibmadmin/.m2/repository/org/glassfish/jaxb/jaxb-core/3.0.0-M4/jaxb-core-3.0.0-M4.jar \
- /home/ibmadmin/.m2/repository/com/sun/istack/istack-commons-runtime/4.0.0-M3/istack-commons-runtime-4.0.0-M3.jar \
+ /home/ibmadmin/.m2/repository/org/glassfish/jaxb/jaxb-runtime/3.0.0/jaxb-runtime-3.0.0.jar \
+ /home/ibmadmin/.m2/repository/org/glassfish/jaxb/jaxb-core/3.0.0/jaxb-core-3.0.0.jar \
+ /home/ibmadmin/.m2/repository/com/sun/istack/istack-commons-runtime/4.0.0/istack-commons-runtime-4.0.0.jar \
 "
 
 
@@ -152,7 +152,7 @@ echo --------------------------------
 echo
 
 
-ant -v -f build.xml -Dbatch.impl.testng.path=../jakarta.batch-api-2.0.0.jar:../com.ibm.jbatch.container-2.0.0.jar:../com.ibm.jbatch.spi-2.0.0.jar:../derby-10.10.1.1.jar:../jakarta.activation-2.0.0.jar:../jakarta.inject-api-2.0.0.jar:../jakarta.enterprise.cdi-api-3.0.0.jar:../jakarta.xml.bind-api-3.0.0.jar:../jaxb-runtime-3.0.0-M4.jar:../jaxb-core-3.0.0-M4.jar:../istack-commons-runtime-4.0.0-M3.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
+ant -v -f build.xml -Dbatch.impl.testng.path=../jakarta.batch-api-2.0.0.jar:../com.ibm.jbatch.container-2.0.0.jar:../com.ibm.jbatch.spi-2.0.0.jar:../derby-10.10.1.1.jar:../jakarta.activation-2.0.0.jar:../jakarta.inject-api-2.0.0.jar:../jakarta.enterprise.cdi-api-3.0.0.jar:../jakarta.xml.bind-api-3.0.0.jar:../jaxb-runtime-3.0.0.jar:../jaxb-core-3.0.0.jar:../istack-commons-runtime-4.0.0.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
 
 
 echo
@@ -263,7 +263,7 @@ echo Begin TestNG tests using Java 11
 echo --------------------------------
 echo
 
-ant -v -f build.xml -Dbatch.impl.testng.path=../jakarta.batch-api-2.0.0.jar:../com.ibm.jbatch.container-2.0.0.jar:../com.ibm.jbatch.spi-2.0.0.jar:../derby-10.10.1.1.jar:../jakarta.activation-2.0.0.jar:../jakarta.inject-api-2.0.0.jar:../jakarta.enterprise.cdi-api-3.0.0.jar:../jakarta.xml.bind-api-3.0.0.jar:../jaxb-runtime-3.0.0-M4.jar:../jaxb-core-3.0.0-M4.jar:../istack-commons-runtime-4.0.0-M3.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
+ant -v -f build.xml -Dbatch.impl.testng.path=../jakarta.batch-api-2.0.0.jar:../com.ibm.jbatch.container-2.0.0.jar:../com.ibm.jbatch.spi-2.0.0.jar:../derby-10.10.1.1.jar:../jakarta.activation-2.0.0.jar:../jakarta.inject-api-2.0.0.jar:../jakarta.enterprise.cdi-api-3.0.0.jar:../jakarta.xml.bind-api-3.0.0.jar:../jaxb-runtime-3.0.0.jar:../jaxb-core-3.0.0.jar:../istack-commons-runtime-4.0.0.jar  -Djvm.options="-Dcom.ibm.jbatch.spi.ServiceRegistry.BATCH_THREADPOOL_SERVICE=com.ibm.jbatch.container.services.impl.GrowableThreadPoolServiceImpl -Dcom.ibm.jbatch.spi.ServiceRegistry.J2SE_MODE=true -Dcom.ibm.jbatch.spi.ServiceRegistry.CONTAINER_ARTIFACT_FACTORY_SERVICE=com.ibm.jbatch.container.services.impl.DelegatingBatchArtifactFactoryImpl"
 
 echo
 echo --------------------------------
