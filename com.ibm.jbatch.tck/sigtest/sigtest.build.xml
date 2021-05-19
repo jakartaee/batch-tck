@@ -53,6 +53,16 @@
         </sigtest>
     </target>
 
+    <target name="extractJdkModulesIfNeeded" description="If rt.jar isn't available, extracts the JDK 9+ modules so that they can be added to the classpath"
+        unless="java.base.sigtest.path.rt.jar.present">
+        <property name="executable-full-path"
+          location="${java.home}/bin/jimage"/>
+          <exec executable="${executable-full-path}">
+              <arg value="extract"/>
+              <arg value="--dir=jdk-modules"/>
+              <arg value="${java.home}/lib/modules"/>
+          </exec>
+    </target>
 </project>
 
 
