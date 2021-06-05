@@ -33,8 +33,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -163,7 +163,7 @@
                             <groupId>jakarta.batch</groupId>
                             <artifactId>com.ibm.jbatch.tck</artifactId>
                             <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
-                            <includes>testng/*</includes>
+                            <includes>testprofiles/*</includes>
                         </artifactItem>
                     </artifactItems>
                 </configuration>
@@ -179,16 +179,12 @@
                             <goal>integration-test</goal>
                         </goals>
                         <configuration>
-                            <suiteXmlFiles>
-                                <!-- Not sure how to reference the suite XML file within the dependency artifact, so rely on an unpacking first.-->
-                                <suiteXmlFile>
-                                    ${project.build.directory}/test-classes/testng/batch-tck-impl-SE-suite.xml
-                                </suiteXmlFile>
-                                <!-- For debugging -->
-                                <!--
-                                <suiteXmlFile>${project.basedir}/testng.suite.xml</suiteXmlFile>
--->
-                            </suiteXmlFiles>
+                            <testNGArtifactName>dont.use.testng</testNGArtifactName>
+                            <dependenciesToScan>
+                                <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
+                            </dependenciesToScan>
+                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-includes.txt</includesFile>
+                            <excludesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-excludes.txt</excludesFile>
                             <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
                         </configuration>
                     </execution>

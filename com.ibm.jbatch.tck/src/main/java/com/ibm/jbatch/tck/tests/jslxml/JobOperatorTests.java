@@ -35,11 +35,10 @@ import jakarta.batch.runtime.JobInstance;
 import jakarta.batch.runtime.Metric;
 import jakarta.batch.runtime.StepExecution;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -66,14 +65,13 @@ public class JobOperatorTests {
 
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterMethod
-    public static void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() throws Exception {
     }
 
     private void begin(String str) {
@@ -94,7 +92,6 @@ public class JobOperatorTests {
      * @throws JobStartException
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorStart() throws Exception {
 
         String METHOD = "testJobOperatorStart";
@@ -128,7 +125,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorRestart() throws Exception {
 
         String METHOD = "testJobOperatorRestart";
@@ -203,7 +199,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorRestartAlreadyCompleteException() throws Exception {
 
         String METHOD = "testJobOperatorRestartAlreadyCompleteException";
@@ -288,7 +283,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorAbandonJobDuringARestart() throws Exception {
 
         String METHOD = "testJobOperatorAbandonJobDuringARestart";
@@ -368,7 +362,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorRestartJobAlreadyAbandoned() throws Exception {
 
         String METHOD = "testJobOperatorRestartAlreadyCompleteException";
@@ -436,7 +429,6 @@ public class JobOperatorTests {
      * batch status.
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithUserStop() throws Exception {
         String METHOD = "testInvokeJobWithUserStop";
         begin(METHOD);
@@ -480,7 +472,6 @@ public class JobOperatorTests {
      * @throws Exception
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetStepExecutions() throws Exception {
 
         String METHOD = "testJobOperatorGetStepExecutions";
@@ -524,7 +515,6 @@ public class JobOperatorTests {
      *                 a big deal.
      */
     @Test
-    @org.junit.Test
     public void testJobOpGetJobNames() throws Exception {
 
         String METHOD = "testJobOpGetJobNames";
@@ -558,7 +548,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testAbandoned() throws Exception {
 
         String METHOD = "testAbandoned";
@@ -591,7 +580,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOpgetJobInstanceCount() throws Exception {
         String METHOD = "testJobOpgetJobInstanceCount";
         begin(METHOD);
@@ -658,7 +646,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOpgetJobInstanceCountException() throws Exception {
         String METHOD = "testJobOpgetJobInstanceCountException";
         begin(METHOD);
@@ -725,7 +712,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOpgetJobInstances() throws Exception {
         String METHOD = " testJobOpgetJobInstances";
         begin(METHOD);
@@ -793,7 +779,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOpgetJobInstancesException() throws Exception {
         String METHOD = "testJobOpgetJobInstancesException";
         begin(METHOD);
@@ -850,7 +835,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetParameters() throws Exception {
         String METHOD = "testJobOperatorGetParameters";
         begin(METHOD);
@@ -944,7 +928,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetJobInstances() throws Exception {
         String METHOD = "testJobOperatorGetJobInstances";
         begin(METHOD);
@@ -1040,7 +1023,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetRunningJobExecutions() throws Exception {
         String METHOD = "testJobOperatorGetRunningJobExecutions";
         begin(METHOD);
@@ -1090,7 +1072,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetRunningJobInstancesException() throws Exception {
         String METHOD = "testJobOperatorGetRunningJobInstancesException";
         begin(METHOD);
@@ -1141,7 +1122,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetJobExecution() throws Exception {
         String METHOD = "testJobOperatorGetJobExecution";
         begin(METHOD);
@@ -1210,7 +1190,6 @@ public class JobOperatorTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testJobOperatorGetJobExecutions() throws Exception {
         String METHOD = "testJobOperatorGetJobExecutions";
         begin(METHOD);

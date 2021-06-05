@@ -26,18 +26,17 @@ import java.util.Properties;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.StepExecution;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
 public class StartLimitTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
 
     /*
@@ -86,7 +85,6 @@ public class StartLimitTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testStartLimitVariation1() throws Exception {
 
         String METHOD = "testStartLimitVariation1";
@@ -160,7 +158,6 @@ public class StartLimitTests {
      * @test_Strategy:
      */
     @Test
-    @org.junit.Test
     public void testStartLimitVariation2() throws Exception {
 
         String METHOD = "testStartLimitVariation2";
@@ -270,7 +267,6 @@ public class StartLimitTests {
      * @test_Strategy:
      */
     @Test
-    @org.junit.Test
     public void testStartLimitVariation3() throws Exception {
 
         String METHOD = "testStartLimitVariation3";
@@ -357,14 +353,13 @@ public class StartLimitTests {
 
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

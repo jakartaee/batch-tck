@@ -28,17 +28,16 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 public class JobExecutableSequenceTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws JobStartException
@@ -52,7 +51,6 @@ public class JobExecutableSequenceTests {
      * 3. job should fail because it shouldn't be able to transition to unknown
      */
     @Test
-    @org.junit.Test
     public void testJobExecutableSequenceToUnknown() throws Exception {
 
         String METHOD = "testJobExecutableSequenceToUnknown";
@@ -103,14 +101,13 @@ public class JobExecutableSequenceTests {
 
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

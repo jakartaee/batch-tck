@@ -26,10 +26,9 @@ import java.util.Properties;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -51,9 +50,8 @@ public class StopOrFailOnExitStatusWithRestartTests {
         }
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -66,7 +64,6 @@ public class StopOrFailOnExitStatusWithRestartTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithUserStopAndRestart() throws Exception {
 
         String METHOD = "testInvokeJobWithUserStopAndRestart";
@@ -138,7 +135,6 @@ public class StopOrFailOnExitStatusWithRestartTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithUncaughtExceptionFailAndRestart() throws Exception {
         String METHOD = "testInvokeJobWithUncaughtExceptionFailAndRestart";
         begin(METHOD);

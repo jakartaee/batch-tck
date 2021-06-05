@@ -29,10 +29,9 @@ import jakarta.batch.runtime.JobExecution;
 import com.ibm.jbatch.tck.artifacts.specialized.BatchletUsingStepContextImpl;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExecuteTests {
 
@@ -50,9 +49,8 @@ public class ExecuteTests {
         }
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -73,7 +71,6 @@ public class ExecuteTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testMyStepContextBatchlet() throws Exception {
 
         String METHOD = "testMyStepContextBatchlet";

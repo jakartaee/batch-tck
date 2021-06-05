@@ -25,17 +25,16 @@ import java.util.Properties;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 public class SplitFlowTransitionLoopTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws Exception
@@ -81,7 +80,6 @@ public class SplitFlowTransitionLoopTests {
      * </split>
      */
     @Test
-    @org.junit.Test
     public void testSplitFlowTransitionLoopSplitFlowSplit() throws Exception {
 
         String METHOD = "testSplitFlowTransitionLoopSplitFlowSplit";
@@ -120,14 +118,13 @@ public class SplitFlowTransitionLoopTests {
         }
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

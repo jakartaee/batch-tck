@@ -25,17 +25,16 @@ import java.util.Properties;
 import jakarta.batch.operations.JobExecutionNotMostRecentException;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 public class RestartNotMostRecentTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /*
      * @testName: testRestartNotMostRecentException
@@ -45,7 +44,6 @@ public class RestartNotMostRecentTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testRestartNotMostRecentException() throws Exception {
         String METHOD = "testRestartNotMostRecentException";
 
@@ -100,14 +98,13 @@ public class RestartNotMostRecentTests {
 
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 

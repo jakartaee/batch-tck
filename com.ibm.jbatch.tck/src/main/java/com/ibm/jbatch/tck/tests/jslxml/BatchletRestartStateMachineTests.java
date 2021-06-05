@@ -24,10 +24,9 @@ import java.util.Properties;
 
 import jakarta.batch.runtime.BatchStatus;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -47,9 +46,8 @@ public class BatchletRestartStateMachineTests {
         }
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -108,7 +106,6 @@ public class BatchletRestartStateMachineTests {
      * in the wrong step in the wrong execution (e.g. in execution.number N we shouldn't be in step S).
      */
     @Test
-    @org.junit.Test
     public void testTransitionElementOnAttrValuesWithRestartJobParamOverrides() throws Exception {
 
         String METHOD = "testTransitionElementOnAttrValuesWithRestartJobParamOverrides";
@@ -234,7 +231,6 @@ public class BatchletRestartStateMachineTests {
      * in the wrong step in the wrong execution (e.g. in execution.number N we shouldn't be in step S).
      */
     @Test
-    @org.junit.Test
     public void testAllowStartIfCompleteRestartExecution() throws Exception {
 
         String METHOD = "testAllowStartIfCompleteRestartExecution";

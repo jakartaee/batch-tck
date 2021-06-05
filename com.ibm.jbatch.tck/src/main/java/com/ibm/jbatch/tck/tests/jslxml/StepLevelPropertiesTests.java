@@ -29,15 +29,14 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class StepLevelPropertiesTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     private int PROPERTIES_COUNT = 3;
 
@@ -52,7 +51,6 @@ public class StepLevelPropertiesTests {
      * @test_Strategy: set a list of properties to the step should add them to the step context properties
      */
     @Test
-    @org.junit.Test
     public void testStepLevelPropertiesCount() throws Exception {
 
         String METHOD = "testStepLevelPropertiesCount";
@@ -84,7 +82,6 @@ public class StepLevelPropertiesTests {
      * @test_Strategy: set a step property value should equal value set on step context property
      */
     @Test
-    @org.junit.Test
     public void testStepLevelPropertiesPropertyValue() throws Exception {
 
         String METHOD = "testStepLevelPropertiesPropertyValue";
@@ -113,7 +110,6 @@ public class StepLevelPropertiesTests {
      * @test_Strategy: set a step property value should not be available to job context
      */
     @Test
-    @org.junit.Test
     public void testStepLevelPropertiesShouldNotBeAvailableThroughJobContext() throws Exception {
 
         String METHOD = "testStepLevelPropertiesShouldNotBeAvailableThroughJobContext";
@@ -155,15 +151,14 @@ public class StepLevelPropertiesTests {
 
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
 
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 

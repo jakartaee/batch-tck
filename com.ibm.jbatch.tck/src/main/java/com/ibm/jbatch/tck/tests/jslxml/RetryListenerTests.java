@@ -27,10 +27,9 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RetryListenerTests {
 
@@ -47,9 +46,8 @@ public class RetryListenerTests {
         }
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -66,7 +64,6 @@ public class RetryListenerTests {
      * @test_Strategy: Test that the onRetryReadException listener is invoked when a retryable exception occurs on a read.
      */
     @Test
-    @org.junit.Test
     public void testRetryReadListener() throws Exception {
         String METHOD = "testRetryReadListener";
 
@@ -103,7 +100,6 @@ public class RetryListenerTests {
      * @test_Strategy: Test that the onRetryProcessException listener is invoked when a retryable exception occurs on a process.
      */
     @Test
-    @org.junit.Test
     public void testRetryProcessListener() throws Exception {
         String METHOD = "testRetryProcessListener";
 
@@ -140,7 +136,6 @@ public class RetryListenerTests {
      * @test_Strategy: Test that the onRetryWriteException listener is invoked when a retryable exception occurs on a write.
      */
     @Test
-    @org.junit.Test
     public void testRetryWriteListener() throws Exception {
         String METHOD = "testRetryWriteListener";
 

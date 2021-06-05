@@ -28,17 +28,16 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 public class FlowTransitioningTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     /**
      * @throws JobStartException
@@ -55,7 +54,6 @@ public class FlowTransitioningTests {
      * 6. verify that in fact we transition from each step within the flow, then to the flow "next" step
      */
     @Test
-    @org.junit.Test
     public void testFlowTransitionToStep() throws Exception {
 
         String METHOD = "testFlowTransitionToStep";
@@ -110,7 +108,6 @@ public class FlowTransitioningTests {
      * </step>
      */
     @Test
-    @org.junit.Test
     public void testFlowTransitionToStepOutOfScope() throws Exception {
 
         String METHOD = " testFlowTransitionToStepOutOfScope";
@@ -153,7 +150,6 @@ public class FlowTransitioningTests {
      * 4. compare that the exit status set by the decider matches that of the job
      */
     @Test
-    @org.junit.Test
     public void testFlowTransitionToDecision() throws Exception {
 
         String METHOD = "testFlowTransitionToDecision";
@@ -194,7 +190,6 @@ public class FlowTransitioningTests {
      * 6. verify that in fact we transition from each step within the flow, then to the flow "next" step
      */
     @Test
-    @org.junit.Test
     public void testFlowTransitionWithinFlow() throws Exception {
 
         String METHOD = "testFlowTransitionWithinFlow";
@@ -240,14 +235,13 @@ public class FlowTransitioningTests {
 
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

@@ -29,12 +29,11 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.testng.Reporter;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class ExecutionTests {
 
@@ -52,13 +51,12 @@ public class ExecutionTests {
         }
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterClass
+    @AfterAll
     public static void cleanup() throws Exception {
     }
 
@@ -72,7 +70,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithOneBatchletStep() throws Exception {
         String METHOD = "testInvokeJobWithOneBatchletStep";
         begin(METHOD);
@@ -96,7 +93,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithTwoStepSequenceOfBatchlets() throws Exception {
         String METHOD = "testInvokeJobWithTwoStepSequenceOfBatchlets";
         begin(METHOD);
@@ -120,7 +116,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithFourStepSequenceOfBatchlets() throws Exception {
         String METHOD = "testInvokeJobWithFourStepSequenceOfBatchlets";
         begin(METHOD);
@@ -144,7 +139,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithNextElement() throws Exception {
         String METHOD = "testInvokeJobWithNextElement";
         begin(METHOD);
@@ -168,7 +162,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithFailElement() throws Exception {
         String METHOD = "testInvokeJobWithFailElement";
         begin(METHOD);
@@ -194,7 +187,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithStopElement() throws Exception {
         String METHOD = "testInvokeJobWithStopElement";
         begin(METHOD);
@@ -218,7 +210,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobWithEndElement() throws Exception {
         String METHOD = "testInvokeJobWithEndElement";
         begin(METHOD);
@@ -244,7 +235,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobSimpleChunk() throws Exception {
         String METHOD = "testInvokeJobSimpleChunk";
         begin(METHOD);
@@ -267,9 +257,8 @@ public class ExecutionTests {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @org.junit.Test
-    @Test(enabled = false) // Disabling per Bug 5379
-    @Ignore("Bug 5379.  Decided to exclude this test.")
+    @Test
+    @Disabled("Bug 5379.  Decided to exclude this test.")
     public void testInvokeJobChunkWithFullAttributes() throws Exception {
         String METHOD = "testInvokeJobChunkWithFullAttributes";
         begin(METHOD);
@@ -294,7 +283,6 @@ public class ExecutionTests {
      * 	and archive loading are unable to find the specified artifact.
      */
     @Test
-    @org.junit.Test
     public void testInvokeJobUsingTCCL() throws Exception {
         String METHOD = "testInvokeJobUsingTCCL";
         begin(METHOD);
@@ -318,7 +306,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testCheckpoint() throws Exception {
         String METHOD = "testCheckpoint";
         begin(METHOD);
@@ -342,7 +329,6 @@ public class ExecutionTests {
      * @test_Strategy: FIXME
      */
     @Test
-    @org.junit.Test
     public void testSimpleFlow() throws Exception {
         String METHOD = "testSimpleFlow";
         begin(METHOD);

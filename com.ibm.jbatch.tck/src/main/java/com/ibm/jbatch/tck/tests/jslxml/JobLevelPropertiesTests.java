@@ -29,15 +29,14 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class JobLevelPropertiesTests {
 
-    private JobOperatorBridge jobOp = null;
+    private static JobOperatorBridge jobOp = null;
 
     private String FOO_VALUE = "bar";
 
@@ -53,7 +52,6 @@ public class JobLevelPropertiesTests {
      * so as not to prevent a runtime from adding some unknown-to-TCK impl-specific properties.
      */
     @Test
-    @org.junit.Test
     public void testJobLevelPropertiesCount() throws Exception {
 
         String METHOD = "testJobLevelPropertiesCount";
@@ -84,7 +82,6 @@ public class JobLevelPropertiesTests {
      * @test_Strategy: set a job property value should equal value set on job context property.
      */
     @Test
-    @org.junit.Test
     public void testJobLevelPropertiesPropertyValue() throws Exception {
 
         String METHOD = "testJobLevelPropertiesPropertyValue";
@@ -113,7 +110,6 @@ public class JobLevelPropertiesTests {
      * @test_Strategy: set a job property value should not be available to step context
      */
     @Test
-    @org.junit.Test
     public void testJobLevelPropertiesShouldNotBeAvailableThroughStepContext() throws Exception {
 
         String METHOD = "testJobLevelPropertiesShouldNotBeAvailableThroughStepContext";
@@ -155,15 +151,14 @@ public class JobLevelPropertiesTests {
 
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
 
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 

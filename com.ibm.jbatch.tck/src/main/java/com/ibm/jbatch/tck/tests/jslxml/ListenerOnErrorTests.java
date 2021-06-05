@@ -25,10 +25,9 @@ import java.util.Properties;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.ann.*;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
@@ -37,9 +36,8 @@ import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 public class ListenerOnErrorTests {
     private static JobOperatorBridge jobOp = null;
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setup() throws Exception {
+    @BeforeEach
+    public void setup() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -68,7 +66,6 @@ public class ListenerOnErrorTests {
                     + "based on the chunk size, input data, and failing record number. Also check that the job fails."
     )
     @Test
-    @org.junit.Test
     public void testOnWriteErrorItems() throws Exception {
         String GOOD_EXIT_STATUS = new String("[10, 12, 14, 16, 18]");
 
@@ -112,7 +109,6 @@ public class ListenerOnErrorTests {
                     + "based on the input data and the failing record number. Also check that the job fails."
     )
     @Test
-    @org.junit.Test
     public void testOnProcessErrorItems() throws Exception {
         String GOOD_EXIT_STATUS = new String("8");
         Reporter.log("Create job parameters for execution:<p>");

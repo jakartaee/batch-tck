@@ -29,10 +29,9 @@ import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.Metric;
 import jakarta.batch.runtime.StepExecution;
 
-import org.junit.BeforeClass;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.artifacts.specialized.MetricsStepListener;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
@@ -51,9 +50,8 @@ public class MetricsTests {
         }
     }
 
-    @BeforeMethod
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 
@@ -79,7 +77,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsInApp() throws Exception {
         String METHOD = "testMetricsInApp";
 
@@ -130,7 +127,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsSkipRead() throws Exception {
 
         String METHOD = "testMetricsSkipRead";
@@ -207,7 +203,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsSkipWrite() throws Exception {
 
         String METHOD = "testMetricsSkipWrite";
@@ -281,7 +276,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsSkipProcess() throws Exception {
         String METHOD = "testMetricsSkipProcess";
 
@@ -356,7 +350,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testReadMetric() throws Exception {
         String METHOD = "testReadMetric";
 
@@ -427,7 +420,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testWriteMetric() throws Exception {
         String METHOD = "testWriteMetric";
 
@@ -488,7 +480,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsFilterCount() throws Exception {
 
         String METHOD = "testMetricsFilterCount";
@@ -548,7 +539,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsCommitCount() throws Exception {
 
         String METHOD = "testMetricsCommitCount";
@@ -610,7 +600,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsStepTimestamps() throws Exception {
 
         String METHOD = "testMetricsStepTimestamps";
@@ -671,7 +660,6 @@ public class MetricsTests {
      *
      */
     @Test
-    @org.junit.Test
     public void testMetricsJobExecutionTimestamps() throws Exception {
 
         String METHOD = "testMetricsJobExecutionTimestamps";

@@ -29,11 +29,10 @@ import jakarta.batch.runtime.StepExecution;
 import com.ibm.jbatch.tck.ann.*;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.junit.Before;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 
 public class ParallelContextPropagationTests {
@@ -59,7 +58,6 @@ public class ParallelContextPropagationTests {
             notes = {"There is no particular place in the spec that says that partitions share the same values for the getters tested as the top-level JobContext/StepContext."}
     )
     @Test
-    @org.junit.Test
     public void testPartitionContextPropagation() throws Exception {
 
         JobExecution je = jobOp.startJobAndWaitForResult("partitionCtxPropagation", null);
@@ -122,7 +120,6 @@ public class ParallelContextPropagationTests {
             notes = {"There is no particular place in the spec that says that split-flows share the same values for the getters tested as the top-level JobContext/StepContext."}
     )
     @Test
-    @org.junit.Test
     public void testSplitFlowContextPropagation() throws Exception {
 
         JobExecution je = jobOp.startJobAndWaitForResult("splitFlowCtxPropagation", null);
@@ -174,14 +171,13 @@ public class ParallelContextPropagationTests {
         jobOp = null;
     }
 
-    @BeforeTest
-    @Before
-    public void beforeTest() throws ClassNotFoundException {
+    @BeforeAll
+    public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();
     }
 
-    @AfterTest
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         jobOp = null;
     }
 }

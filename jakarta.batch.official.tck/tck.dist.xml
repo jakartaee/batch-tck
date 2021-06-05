@@ -97,11 +97,19 @@
             <outputDirectory>/doc</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-SE-suite.xml</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-suite-includes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testng/batch-tck-impl-EE-suite.xml</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-suite-excludes.txt</source>
+            <outputDirectory>/artifacts</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-includes.txt</source>
+            <outputDirectory>/artifacts</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-excludes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
