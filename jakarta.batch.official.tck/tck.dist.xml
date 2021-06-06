@@ -113,21 +113,12 @@
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/testng/filtered.build.xml</source>
-            <outputDirectory>/</outputDirectory>
-            <destName>build.xml</destName>
-        </file>
-        <file>
             <source>../com.ibm.jbatch.tck/sigtest/sigtest.build.xml</source>
             <outputDirectory>/</outputDirectory>
             <destName>sigtest.build.xml</destName>
         </file>
         <file>
             <source>../com.ibm.jbatch.tck/sigtest/batch-tck-sigtest.properties</source>
-            <outputDirectory>/</outputDirectory>
-        </file>
-        <file>
-            <source>../com.ibm.jbatch.tck/testng/batch-tck-testng.properties</source>
             <outputDirectory>/</outputDirectory>
         </file>
     </files>

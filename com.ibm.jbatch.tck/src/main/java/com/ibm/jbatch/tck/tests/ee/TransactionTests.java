@@ -37,8 +37,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-// Since we don't want to run these in SE, and are only really running TestNG in EE, we
-// can safely do a JUnit @Disabled without missing anything.
 @Tag("ee")
 public class TransactionTests {
 

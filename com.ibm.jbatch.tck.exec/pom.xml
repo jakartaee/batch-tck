@@ -179,7 +179,6 @@
                             <goal>integration-test</goal>
                         </goals>
                         <configuration>
-                            <testNGArtifactName>dont.use.testng</testNGArtifactName>
                             <dependenciesToScan>
                                 <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
                             </dependenciesToScan>
