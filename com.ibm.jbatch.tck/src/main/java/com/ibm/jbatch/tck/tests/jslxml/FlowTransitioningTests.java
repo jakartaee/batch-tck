@@ -22,7 +22,6 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
@@ -217,22 +216,6 @@ public class FlowTransitioningTests {
         Reporter.log("Caught exception: " + e.getMessage() + "<p>");
         Reporter.log(methodName + " failed<p>");
         throw e;
-    }
-
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     @BeforeAll

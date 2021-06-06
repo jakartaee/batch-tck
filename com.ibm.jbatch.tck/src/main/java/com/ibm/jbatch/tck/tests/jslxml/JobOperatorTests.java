@@ -49,22 +49,6 @@ public class JobOperatorTests {
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();

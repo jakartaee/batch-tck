@@ -41,21 +41,9 @@ public class StopOrFailOnExitStatusWithRestartTests {
         Reporter.log("Begin test method: " + str + "<p>");
     }
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    public static void cleanup() throws Exception {
     }
 
     /*

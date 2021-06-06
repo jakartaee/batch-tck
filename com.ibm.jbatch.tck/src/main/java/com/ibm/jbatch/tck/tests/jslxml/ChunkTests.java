@@ -49,24 +49,9 @@ public class ChunkTests {
 
     private static JobOperatorBridge jobOp = null;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     /*

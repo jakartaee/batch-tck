@@ -36,15 +36,6 @@ public class PropertySubstitutionTests {
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -52,11 +43,7 @@ public class PropertySubstitutionTests {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
-    }
-
-    @AfterEach
-    public void cleanup() throws Exception {
+    public void cleanUp() throws Exception {
         // Clear this property for next test
         System.clearProperty("property.junit.result");
     }

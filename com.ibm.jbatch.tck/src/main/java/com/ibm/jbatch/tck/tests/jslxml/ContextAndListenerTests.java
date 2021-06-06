@@ -32,7 +32,6 @@ import jakarta.batch.runtime.StepExecution;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 import org.testng.Reporter;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,18 +39,6 @@ public class ContextAndListenerTests {
 
     private final static Logger logger = Logger.getLogger(ContextAndListenerTests.class.getName());
     private static JobOperatorBridge jobOp = null;
-
-
-    public static void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -324,10 +311,6 @@ public class ContextAndListenerTests {
         } catch (Exception e) {
             handleException(METHOD, e);
         }
-    }
-
-    @AfterAll
-    public static void cleanup() throws Exception {
     }
 
     private static void handleException(String methodName, Exception e) throws Exception {

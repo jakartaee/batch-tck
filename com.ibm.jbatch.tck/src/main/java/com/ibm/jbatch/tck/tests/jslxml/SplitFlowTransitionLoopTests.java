@@ -20,7 +20,6 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
-import java.util.Properties;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
@@ -100,22 +99,6 @@ public class SplitFlowTransitionLoopTests {
         Reporter.log("Caught exception: " + e.getMessage() + "<p>");
         Reporter.log(methodName + " failed<p>");
         throw e;
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
     }
 
     @BeforeAll

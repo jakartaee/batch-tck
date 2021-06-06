@@ -37,7 +37,7 @@ public class ListenerOnErrorTests {
     private static JobOperatorBridge jobOp = null;
 
     @BeforeEach
-    public void setup() throws Exception {
+    public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
     }
 

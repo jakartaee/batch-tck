@@ -33,7 +33,6 @@ import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
 import org.testng.Reporter;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -47,23 +46,9 @@ public class TransactionTests {
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    @AfterAll
-    public static void cleanup() throws Exception {
     }
 
     private void begin(String str) {

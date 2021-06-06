@@ -135,22 +135,6 @@ public class JobLevelPropertiesTests {
         throw e;
     }
 
-    public void setup(String[] args, Properties props) throws Exception {
-
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
-    }
-
     @BeforeAll
     public static void beforeTest() throws ClassNotFoundException {
         jobOp = new JobOperatorBridge();

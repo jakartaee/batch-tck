@@ -43,25 +43,9 @@ public class DeciderTests implements StatusConstants {
     private final static String FORCE_STOP_EXITSTATUS = "STEP_COMPLETE_BUT_FORCE_JOB_STOPPED_STATUS";
     private final static String FORCE_FAIL_EXITSTATUS = "STEP_COMPLETE_BUT_FORCE_JOB_FAILED_STATUS";
 
-
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     /*

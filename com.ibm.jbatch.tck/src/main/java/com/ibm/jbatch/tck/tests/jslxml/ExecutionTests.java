@@ -21,7 +21,6 @@ package com.ibm.jbatch.tck.tests.jslxml;
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 
 
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import jakarta.batch.runtime.BatchStatus;
@@ -30,7 +29,6 @@ import jakarta.batch.runtime.JobExecution;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
 import org.testng.Reporter;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -41,23 +39,9 @@ public class ExecutionTests {
 
     private static JobOperatorBridge jobOp;
 
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    @AfterAll
-    public static void cleanup() throws Exception {
     }
 
     private void begin(String str) {

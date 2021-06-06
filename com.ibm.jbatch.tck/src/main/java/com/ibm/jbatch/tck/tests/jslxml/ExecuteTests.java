@@ -20,7 +20,6 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import jakarta.batch.runtime.BatchStatus;
@@ -38,25 +37,9 @@ public class ExecuteTests {
     private final static Logger logger = Logger.getLogger(ExecuteTests.class.getName());
     private static JobOperatorBridge jobOp = null;
 
-
-    public static void setup(String[] args, Properties props) throws Exception {
-        String METHOD = "setup";
-
-        try {
-            jobOp = new JobOperatorBridge();
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
-
     @BeforeEach
     public void setUp() throws Exception {
         jobOp = new JobOperatorBridge();
-    }
-
-    /* cleanup */
-    public void cleanup() {
-
     }
 
     private static void handleException(String methodName, Exception e) throws Exception {
