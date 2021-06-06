@@ -29,14 +29,15 @@ import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.Metric;
 import jakarta.batch.runtime.StepExecution;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.artifacts.specialized.MetricsStepListener;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class MetricsTests {
+public class MetricsTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 

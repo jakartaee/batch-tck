@@ -20,6 +20,7 @@ package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.List;
 import java.util.Properties;
@@ -31,11 +32,11 @@ import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ContextAndListenerTests {
+public class ContextAndListenerTests extends BaseJUnit5Test {
 
     private final static Logger logger = Logger.getLogger(ContextAndListenerTests.class.getName());
     private static JobOperatorBridge jobOp = null;

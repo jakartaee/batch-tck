@@ -35,13 +35,14 @@ import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.artifacts.reusable.MyBatchletImpl;
 import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentUserData;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StepExecutionTests {
+public class StepExecutionTests extends BaseJUnit5Test {
 
     private final static Logger logger = Logger.getLogger(StepExecutionTests.class.getName());
 

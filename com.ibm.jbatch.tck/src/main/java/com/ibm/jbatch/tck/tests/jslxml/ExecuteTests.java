@@ -26,13 +26,14 @@ import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.artifacts.specialized.BatchletUsingStepContextImpl;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ExecuteTests {
+public class ExecuteTests extends BaseJUnit5Test {
 
     private final static Logger logger = Logger.getLogger(ExecuteTests.class.getName());
     private static JobOperatorBridge jobOp = null;

@@ -19,20 +19,21 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.Properties;
 
 import jakarta.batch.operations.JobExecutionNotMostRecentException;
 import jakarta.batch.runtime.JobExecution;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class RestartNotMostRecentTests {
+public class RestartNotMostRecentTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 

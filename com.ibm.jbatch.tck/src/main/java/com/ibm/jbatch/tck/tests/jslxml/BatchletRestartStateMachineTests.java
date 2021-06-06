@@ -19,19 +19,20 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.util.Properties;
 
 import jakarta.batch.runtime.BatchStatus;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
-public class BatchletRestartStateMachineTests {
+public class BatchletRestartStateMachineTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 

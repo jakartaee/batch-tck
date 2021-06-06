@@ -19,6 +19,7 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.File;
 import java.util.Properties;
@@ -27,12 +28,12 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PropertySubstitutionTests {
+public class PropertySubstitutionTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp;
 

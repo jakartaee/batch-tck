@@ -19,6 +19,7 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 
 import java.util.logging.Logger;
@@ -28,12 +29,12 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class ExecutionTests {
+public class ExecutionTests extends BaseJUnit5Test {
 
     private final static Logger logger = Logger.getLogger(ExecutionTests.class.getName());
 

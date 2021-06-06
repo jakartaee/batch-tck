@@ -28,15 +28,16 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 import com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsBatchlet;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class DeciderTests implements StatusConstants {
+public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
     private final static Logger logger = Logger.getLogger(DeciderTests.class.getName());
     private static JobOperatorBridge jobOp = null;
 

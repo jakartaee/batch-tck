@@ -27,15 +27,16 @@ import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ibm.jbatch.tck.ann.*;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-public class PartitionRerunTests {
+public class PartitionRerunTests extends BaseJUnit5Test {
     static JobOperatorBridge jobOp = null;
 
     private static void handleException(String methodName, Exception e) throws Exception {

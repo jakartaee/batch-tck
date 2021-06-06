@@ -26,15 +26,16 @@ import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.ann.*;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import org.testng.Reporter;
+import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
-public class ParallelContextPropagationTests {
+public class ParallelContextPropagationTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;
 
