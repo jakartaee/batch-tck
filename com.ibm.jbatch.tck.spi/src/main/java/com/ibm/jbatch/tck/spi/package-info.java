@@ -32,6 +32,6 @@
  * <p>
  * For more details, see the documentation in the Jakarta Batch TCK Reference Guide, included within the TCK binary.
  *
- * @see <a href="https://download.eclipse.org/jakartaee/batch/2.0/jakarta.batch.official.tck-2.0.0.zip">TCK binary</a>
+ * @see <a href="https://download.eclipse.org/jakartaee/batch/2.1/jakarta.batch.official.tck-2.1.0.zip">TCK binary</a>
  */
 package com.ibm.jbatch.tck.spi;
