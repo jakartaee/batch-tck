@@ -151,7 +151,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Not sure how to reference the suite XML file within the dependency artifact, so rely on an unpacking first.-->
+                <!-- Not sure how to reference the includes/excludes files within the dependency artifact, so rely on an unpacking first.-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
