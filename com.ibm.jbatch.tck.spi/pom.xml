@@ -25,10 +25,8 @@
         <version>2.1.0-M1-SNAPSHOT</version>
     </parent>
 
-    <groupId>jakarta.batch</groupId>
     <artifactId>com.ibm.jbatch.tck.spi</artifactId>
     <packaging>jar</packaging>
-    <version>2.1.0-M1-SNAPSHOT</version>
     <name>Jakarta Batch TCK SPI</name>
 
     <dependencies>
