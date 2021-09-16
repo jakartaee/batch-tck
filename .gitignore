@@ -2,6 +2,7 @@
 **/target/
 
 # Eclipse
+**/.factorypath
 /.metadata
 **/.classpath
 **/.project
