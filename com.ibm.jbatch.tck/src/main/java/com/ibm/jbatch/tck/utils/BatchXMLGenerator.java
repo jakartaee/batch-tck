@@ -120,7 +120,13 @@ public class BatchXMLGenerator {
         String beanID = null;
         // If we see a @Named with empty value (default), then use the classname-based calculation,
         // which is purposely designed to mirror the CDI default.
-        if (namedAnnotationValue != null && !namedAnnotationValue.trim().isEmpty()) {
+        // 
+        // We will also special case bean names starting with "CDI", not because of anything
+        // inherent with the way CDI beans behave, but simply because this allows us to iterate
+        // simply through a single set of tests loading by bean name and by batch.xml id.   
+        // If we let the batch.xml id equal the bean name we'd have to have some other way to let a single
+        // artifact be used in testing both variations.
+        if (namedAnnotationValue != null && !namedAnnotationValue.trim().isEmpty() && (!namedAnnotationValue.startsWith("CDI"))) {
             beanID = namedAnnotationValue;
         } else {
             beanID = generateId(qualifiedClassName);

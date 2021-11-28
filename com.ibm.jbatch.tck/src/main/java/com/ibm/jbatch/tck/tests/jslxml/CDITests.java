@@ -74,19 +74,51 @@ public class CDITests extends BaseJUnit5Test {
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchlet", "dependentScopedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet"})
-    public void testCDI1(String refName) throws Exception {
+    public void testCDIInject(String refName) throws Exception {
 
-        String METHOD = "testCDI1";
+        String METHOD = "testCDIInject";
 
         try {
         	Properties jobParams = new Properties();
         	jobParams.setProperty("refName", refName);
             Reporter.log("starting job with refName = " + refName);
-            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_1", jobParams);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
-            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job completed");
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
             Reporter.log("job completed");
-            assertEquals("GOOD", jobExec.getExitStatus(), "Test succeeded");
+            assertEquals("GOOD", jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
+     * @throws Exception
+     * @testName: 
+     * @assertion: Section 
+     * @test_Strategy: 
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIDependentScopedBatchletProps", "dependentScopedBatchletProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps"})
+    public void testCDIBatchProps(String refName) throws Exception {
+
+        String METHOD = "testCDIBatchProps";
+
+        try {
+        	Properties jobParams = new Properties();
+        	String field1 = "ABC";
+        	String method1 = "XYZ";
+        	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("field1", field1);
+        	jobParams.setProperty("method1", method1);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_batch_props", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            Reporter.log("job completed with exit status = " + jobExec.getExitStatus());
+            // ES => <field1>:<method1>
+            assertEquals(field1 + ":" + method1, jobExec.getExitStatus(), "Test fails - unexpected exit status");
             Reporter.log("GOOD result");
         } catch (Exception e) {
             handleException(METHOD, e);
