@@ -107,9 +107,11 @@ public class CDITests extends BaseJUnit5Test {
 
         try {
         	Properties jobParams = new Properties();
+        	String ctor1 = "CTOR";
         	String field1 = "ABC";
         	String method1 = "XYZ";
         	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("ctor1", ctor1);
         	jobParams.setProperty("field1", field1);
         	jobParams.setProperty("method1", method1);
             Reporter.log("starting job with refName = " + refName);
@@ -117,8 +119,8 @@ public class CDITests extends BaseJUnit5Test {
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
             assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
             Reporter.log("job completed with exit status = " + jobExec.getExitStatus());
-            // ES => <field1>:<method1>
-            assertEquals(field1 + ":" + method1, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            // ES => <c1>:<field1>:<method1>
+            assertEquals(ctor1 + ":" + field1 + ":" + method1, jobExec.getExitStatus(), "Test fails - unexpected exit status");
             Reporter.log("GOOD result");
         } catch (Exception e) {
             handleException(METHOD, e);

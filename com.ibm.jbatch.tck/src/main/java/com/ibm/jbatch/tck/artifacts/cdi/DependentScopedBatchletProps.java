@@ -17,12 +17,19 @@ import jakarta.inject.Named;
 @Named("CDIDependentScopedBatchletProps")
 public class DependentScopedBatchletProps implements Batchlet {
 
-	@Inject @BatchProperty(name="field1") String field1;
+	@Inject @BatchProperty(name="field1") String f1;
 	@Inject AppScopedTestBean appScoped;
 	@Inject DependentScopedTestBean dependentScoped;
 	@Inject JobContext jobCtx; 
 	
 	private String m1;
+
+	private String c1;
+
+	@Inject
+	DependentScopedBatchletProps(@BatchProperty(name="ctor1") String ctor1) {
+		c1 = ctor1;
+	}
 
 	@Inject  
 	public void setMethod1(@BatchProperty(name="method1") String method1) {
@@ -36,7 +43,7 @@ public class DependentScopedBatchletProps implements Batchlet {
 		if (dependentScoped == null || appScoped == null) {
 			throw new Exception("TEST FAILED");
 		} else {
-			jobCtx.setExitStatus(field1 + ":" + m1);
+			jobCtx.setExitStatus(c1 + ":" + f1 + ":" + m1);
 		}
 		return "OK";
 	}
