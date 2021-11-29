@@ -4,6 +4,7 @@
     <ref id="basicWriter" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicWriter" />
     <ref id="dependentScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet" />
     <ref id="dependentScopedBatchletProps" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps" />
+    <ref id="dependentScopedBatchletPropsNonString" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString" />
     <ref id="instanceCountingAppScopedStepListener" class="com.ibm.jbatch.tck.artifacts.cdi.InstanceCountingAppScopedStepListener" />
     <ref id="instanceCountingStepListener" class="com.ibm.jbatch.tck.artifacts.cdi.InstanceCountingStepListener" />
     <ref id="inventoryInitProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitProcessor" />
