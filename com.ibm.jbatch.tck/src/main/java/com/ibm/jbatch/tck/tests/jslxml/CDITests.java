@@ -22,6 +22,7 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.StringReader;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.jupiter.api.AfterAll;
@@ -37,6 +38,7 @@ import com.ibm.jbatch.tck.utils.Reporter;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
+import jakarta.batch.runtime.StepExecution;
 
 public class CDITests extends BaseJUnit5Test {
 
@@ -70,7 +72,8 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
-     * @test_Strategy: 
+     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
+     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchlet", "dependentScopedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet"})
@@ -79,14 +82,21 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDIInject";
 
         try {
+        	String parm1Val = "It's a parm";
         	Properties jobParams = new Properties();
         	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("parm1", parm1Val);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
             assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
-            Reporter.log("job completed");
-            assertEquals("GOOD", jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            // Expecting exist status of: <jobExecId>:<stepExecId>:<parm1Val>
+            List<StepExecution> steps = jobOp.getStepExecutions(jobExec.getExecutionId());
+            assertEquals(1, steps.size(), "Wrong number of step executions found");
+            String expectedExitStatus = jobExec.getExecutionId() + ":" + steps.get(0).getStepExecutionId() + ":" + parm1Val;
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
             Reporter.log("GOOD result");
         } catch (Exception e) {
             handleException(METHOD, e);
@@ -97,7 +107,7 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
-     * @test_Strategy: 
+     * @test_Strategy: validate within test based on status set within job 
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchletProps", "dependentScopedBatchletProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps"})

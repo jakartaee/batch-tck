@@ -12,6 +12,10 @@
 -->
 <job id="cdi_inject_beans" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
     <step id="step1">
-        <batchlet ref="#{jobParameters['refName']}" />
+        <batchlet ref="#{jobParameters['refName']}" >
+			<properties>
+				<property name="prop1" value="#{jobParameters['parm1']}" />
+			</properties>
+		</batchlet>
     </step>
 </job>

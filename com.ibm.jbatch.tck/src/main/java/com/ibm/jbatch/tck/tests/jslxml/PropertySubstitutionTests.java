@@ -406,7 +406,17 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
     }
 
     
-    // validate in bathclet
+    /*
+     * @testName: testCDIBatchPropsNonString
+     *
+     * @assertion: 
+     * 
+     * @test_Strategy: Supply job parameters of different types with values matching the
+     * expected values hard-coded within the test job batchlet.   Perform validation 
+     * within the batchlet that these parameter values get mapped onto corresponding
+     * batch properties of (non-String) primitive wrapper types:  Integer, Double, etc.
+     *
+     */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchletPropsNonString", "dependentScopedBatchletPropsNonString", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString"})
     public void testCDIBatchPropsNonString(String refName) throws Exception {
@@ -414,31 +424,12 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
         String METHOD = "testCDIBatchPropsNonString";
 
         try {
-        	/*
-        	 * 	String expectedStringProp = "HappyBatchProperties";
-	boolean expectedBooleanProp1 = Boolean.valueOf("true").booleanValue();
-	Boolean expectedBooleanProp2 = Boolean.valueOf("Nope");
-	byte expectedByteProp1 = Byte.valueOf("100").byteValue();
-	Byte expectedByteProp2 = Byte.valueOf("@");
-	double expectedDoubleProp1 = Double.valueOf("234.432d").doubleValue();
-	Double expectedDoubleProp2 = Double.valueOf("123.321d");
-	float expectedFloatProp1 = Float.valueOf("11234.432f").floatValue();
-	Float expectedFloatProp2 = Float.valueOf("11123.321f");
-	int expectedIntProp1 = 7777;
-	Integer expectedIntProp2 = 8888;
-	long expectedLongProp1 = 1234567890123L;
-	Long expectedLongProp2 = 12345678901234L;
-	short expectedShortProp1 = 333;
-	Short expectedShortProp2 = 444;
-
-        	 */
+        	
         	Properties jobParams = new Properties();
         	jobParams.setProperty("refName", refName);
         	jobParams.setProperty("stringProp", "HappyBatchProperties");
         	jobParams.setProperty("booleanProp1", "true");
         	jobParams.setProperty("booleanProp2", "Nope");
-//        	jobParams.setProperty("byteProp1", "100");
-//        	jobParams.setProperty("byteProp2", "@");
         	jobParams.setProperty("doubleProp1", "234.432");
         	jobParams.setProperty("doubleProp2", "123.321");
         	jobParams.setProperty("floatProp1", Float.toString(11234.432F));

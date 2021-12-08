@@ -9,6 +9,7 @@ import com.ibm.jbatch.tck.cdi.DependentScopedTestBean;
 import jakarta.batch.api.BatchProperty;
 import jakarta.batch.api.Batchlet;
 import jakarta.batch.runtime.context.JobContext;
+import jakarta.batch.runtime.context.StepContext;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -17,30 +18,29 @@ import jakarta.inject.Named;
 @Named("CDIDependentScopedBatchlet")
 public class DependentScopedBatchlet implements Batchlet {
 
-	@Inject @BatchProperty(name="xyz") String xyz;
+	@Inject @BatchProperty(name="prop1") String prop1;
 	@Inject AppScopedTestBean appScoped;
 	@Inject DependentScopedTestBean dependentScoped;
 	@Inject JobContext jobCtx; 
-	
-//	@Override
-//	public String process() throws Exception {
-//		Properties p = new Properties();
-//		if (dependentScoped != null) {
-//			p.setProperty("dependent", dependentScoped.getTimestamp());
-//		}
-//		if (appScoped != null) {
-//			p.setProperty("app", appScoped.getTimestamp());
-//		}
-//		jobCtx.setExitStatus(getPropertyAsString(p));
-//		return "GOOD";
-//	}
-	
+	@Inject StepContext stepCtx; 
+
+	private void error(String errorMsg) throws Exception {
+		jobCtx.setExitStatus("FAIL: " + errorMsg); throw new Exception(errorMsg);
+	}
+
 	@Override
 	public String process() throws Exception {
 		if (dependentScoped != null && appScoped != null) {
-			jobCtx.setExitStatus("GOOD");
+			if (jobCtx.getExecutionId() != dependentScoped.getJobContextExecId()) {
+				error("jobCtx execution ids don't match, found: " + dependentScoped.getJobContextExecId());
+			} else if (stepCtx.getStepExecutionId() != dependentScoped.getStepContextExecId()) {
+				error("step execution ids don't match, found: " + dependentScoped.getStepContextExecId());
+			} else if ( prop1 != dependentScoped.getProp1Val()) {
+				error("prop1 property values don't match, found: " + dependentScoped.getProp1Val());
+			}
+			jobCtx.setExitStatus(jobCtx.getExecutionId() + ":" + stepCtx.getStepExecutionId() + ":" + prop1);
 		} else {
-			jobCtx.setExitStatus("FAIL: " + " dep = " + dependentScoped + ", app = " + appScoped);
+			error("Null among dependentScoped = " + dependentScoped + ", appScoped = " + appScoped );
 		}
 		return "OK";
 	}
