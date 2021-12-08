@@ -10,12 +10,21 @@
 	SPDX-License-Identifier: Apache-2.0
 
 -->
-<job id="cdi_inject_beans" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
-    <step id="step1">
+<job id="cdi_inject_beans_2step" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
+    <step id="step1" next="step2">
         <batchlet ref="#{jobParameters['refName']}" >
 			<properties>
 				<property name="prop1" value="#{jobParameters['parm1']}" />
 				<property name="prop2" value="#{jobParameters['parm2']}" />
+			</properties>
+		</batchlet>
+    </step>
+    <step id="step2">
+        <batchlet ref="#{jobParameters['refName']}" >
+			<properties>
+			     <!--  Go wild, mix it up a little -->
+				<property name="prop1" value="s2#{jobParameters['parm1']}" />
+				<property name="prop2" value="s2#{jobParameters['parm2']}" />
 			</properties>
 		</batchlet>
     </step>

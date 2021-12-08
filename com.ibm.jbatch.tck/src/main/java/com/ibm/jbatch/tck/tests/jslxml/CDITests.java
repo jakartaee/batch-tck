@@ -92,10 +92,54 @@ public class CDITests extends BaseJUnit5Test {
             assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
             String exitStatus = jobExec.getExitStatus();
             Reporter.log("job completed with exit status: " + exitStatus);
-            // Expecting exist status of: <jobExecId>:<stepExecId>:<parm1Val>
+            // Expecting exit status of: <jobExecId>:<stepExecId>:<parm1Val>
             List<StepExecution> steps = jobOp.getStepExecutions(jobExec.getExecutionId());
             assertEquals(1, steps.size(), "Wrong number of step executions found");
             String expectedExitStatus = jobExec.getExecutionId() + ":" + steps.get(0).getStepExecutionId() + ":" + parm1Val;
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
+     * @throws Exception
+     * @testName: 
+     * @assertion: Section 
+     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
+     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
+     *   Since it's ApplicationScoped we want to run it twice to make sure something's not cached incorrectly.
+     *   
+     *   
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIApplicationScopedBatchlet", "applicationScopedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.ApplicationScopedBatchlet"})
+    public void testCDILazyInject(String refName) throws Exception {
+
+        String METHOD = "testCDILazyInject";
+
+        try {
+        	String parm1Val = "It's a parm";
+        	String parm2Val = "Or a prop";
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("parm1", parm1Val);
+        	jobParams.setProperty("parm2", parm2Val);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans_2step", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            List<StepExecution> steps = jobOp.getStepExecutions(jobExec.getExecutionId());
+            assertEquals(2, steps.size(), "Wrong number of step executions found");
+            /*
+             * Expecting exit status of: 
+             *   <jobExecId>:step1:<parm1Val>:<parm2Val>,<jobExecId>:step2:s2<parm1Val>:s2<parm2Val>
+             */
+            String expectedExitStatus = jobExec.getExecutionId() + ":step1:" + parm1Val + ":" + parm2Val + ","
+             + jobExec.getExecutionId() + ":step2:" + "s2" + parm1Val + ":" + "s2" + parm2Val;
             assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
             Reporter.log("GOOD result");
         } catch (Exception e) {

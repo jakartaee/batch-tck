@@ -2,6 +2,7 @@
     <ref id="basicProcessor" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicProcessor" />
     <ref id="basicReader" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicReader" />
     <ref id="basicWriter" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicWriter" />
+    <ref id="applicationScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.ApplicationScopedBatchlet" />
     <ref id="dependentScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet" />
     <ref id="dependentScopedBatchletProps" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps" />
     <ref id="dependentScopedBatchletPropsNonString" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString" />
