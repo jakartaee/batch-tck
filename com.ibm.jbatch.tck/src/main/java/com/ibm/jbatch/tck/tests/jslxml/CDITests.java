@@ -83,6 +83,37 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
+     * @test_Strategy: validate within batch job (batchlet) that job operator, injected into batchlet, provides a view of running
+     * executions that matches that of the job context. Then validate again in the JUnit logic that the exit status matches
+     * the job exec id.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIJobOperatorInjectedBatchlet", "jobOperatorInjectedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.JobOperatorInjectedBatchlet"})
+    public void testCDIJobOperatorInject(String refName) throws Exception {
+
+        String METHOD = "testCDIJobOperatorInject";
+
+        try {
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("refName", refName);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            String expectedExitStatus = Long.toString(jobExec.getExecutionId());
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
+     * @throws Exception
+     * @testName: 
+     * @assertion: Section 
      * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
      *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
      *   Since it's ApplicationScoped we want to run it twice to make sure something's not cached incorrectly.

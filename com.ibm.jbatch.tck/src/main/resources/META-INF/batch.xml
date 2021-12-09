@@ -6,6 +6,7 @@
     <ref id="dependentScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet" />
     <ref id="dependentScopedBatchletProps" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps" />
     <ref id="dependentScopedBatchletPropsNonString" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString" />
+    <ref id="jobOperatorInjectedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.JobOperatorInjectedBatchlet" />
     <ref id="nonCDIBeanBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.NonCDIBeanBatchlet" />
     <ref id="inventoryInitProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitProcessor" />
     <ref id="inventoryInitReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitReader" />
