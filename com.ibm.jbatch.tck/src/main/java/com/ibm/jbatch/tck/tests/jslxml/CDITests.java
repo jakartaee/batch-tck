@@ -48,30 +48,6 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
-     * @test_Strategy: 
-     */
-//    @Test
-//    @Disabled
-//    public void testAppScoped() throws Exception {
-//
-//        String METHOD = "testAppScoped";
-//
-//        try {
-//            Reporter.log("starting job");
-//            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_app_scoped", null);
-//            Reporter.log("Job Status = " + jobExec.getBatchStatus());
-//            assertWithMessage("Job completed", BatchStatus.COMPLETED, jobExec.getBatchStatus());
-//            assertWithMessage("Exit status = 1", "1", jobExec.getExitStatus());
-//            Reporter.log("job completed");
-//        } catch (Exception e) {
-//            handleException(METHOD, e);
-//        }
-//    }
-//    
-    /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
      * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
      *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
      */
@@ -225,41 +201,7 @@ public class CDITests extends BaseJUnit5Test {
             handleException(METHOD, e);
         }
     }
-    
 
-    
-    /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: 
-     */
-//    @Test
-//    public void testCDI2() throws Exception {
-//
-//        String METHOD = "testCDI2";
-//
-//        try {
-//            Reporter.log("starting job");
-//            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_2", null);
-//            Reporter.log("Job Status = " + jobExec.getBatchStatus());
-//            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job completed");
-//            Reporter.log("job completed");
-//            String exitStatus = jobExec.getExitStatus();
-//            assertEquals("GOOD", jobExec.getExitStatus(), "Test succeeded");
-//            Reporter.log("GOOD result");
-//        } catch (Exception e) {
-//            handleException(METHOD, e);
-//        }
-//    }
-
-    private Properties loadFromStatus(String status) throws Exception {
-    	StringReader sr = new StringReader(status);
-    	Properties p = new Properties();
-    	p.load(sr);
-    	return p;
-    }
-    
 
     private static void handleException(String methodName, Exception e) throws Exception {
         Reporter.log("Caught exception: " + e.getMessage() + "<p>");
