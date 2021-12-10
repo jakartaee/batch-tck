@@ -54,6 +54,9 @@ public class SimpleJobListener extends AbstractJobListener {
         if (transientData instanceof String) {
             logger.fine("Found String transient data, setting into exit status");
             jobCtx.setExitStatus((String) transientData);
+        } else if (transientData instanceof Integer) {
+            logger.fine("Found Integer transient data, setting into exit status");
+            jobCtx.setExitStatus(String.valueOf((int)transientData));
         } else {
             logger.fine("Found non-String transient data, leaving exit status alone");
         }

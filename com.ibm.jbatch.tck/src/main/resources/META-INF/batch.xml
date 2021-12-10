@@ -1,199 +1,144 @@
-<!--
-   Copyright 2012, 2020 International Business Machines Corp. and others
-
-   See the NOTICE file distributed with this work for additional information
-   regarding copyright ownership. Licensed under the Apache License,
-   Version 2.0 (the "License"); you may not use this file except in compliance
-   with the License. You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-   SPDX-License-Identifier: Apache-2.0
- -->
 <batch-artifacts xmlns="https://jakarta.ee/xml/ns/jakartaee">
-    <ref id="basicProcessor" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicProcessor"/>
-    <ref id="basicReader" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicReader"/>
-    <ref id="basicWriter" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicWriter"/>
-    <ref id="inventoryInitProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitProcessor"/>
-    <ref id="inventoryInitReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitReader"/>
-    <ref id="inventoryInitWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitWriter"/>
-    <ref id="inventoryProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryProcessor"/>
-    <ref id="inventoryReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryReader"/>
-    <ref id="inventoryStepListener" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryStepListener"/>
-    <ref id="inventoryWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryWriter"/>
-    <ref id="numbersReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.NumbersReader"/>
-    <ref id="retryInitProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryInitProcessor"/>
-    <ref id="retryInitReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryInitReader"/>
-    <ref id="retryInitWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryInitWriter"/>
-    <ref id="retryProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryProcessor"/>
-    <ref id="retryReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryReader"/>
-    <ref id="retryWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryWriter"/>
-    <ref id="ListenerOnErrorArtifacts.P" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$P"/>
-    <ref id="ListenerOnErrorArtifacts.PL" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$PL"/>
-    <ref id="ListenerOnErrorArtifacts.R" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$R"/>
-    <ref id="ListenerOnErrorArtifacts.W" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$W"/>
-    <ref id="ListenerOnErrorArtifacts.WL" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$WL"/>
-    <ref id="PCPAnalyzer" class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPAnalyzer"/>
-    <ref id="PCPCollector" class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPCollector"/>
-    <ref id="PCPPartitionBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPPartitionBatchlet"/>
-    <ref id="PCPSplitFlowBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPSplitFlowBatchlet"/>
-    <ref id="PartitionRerunArtifacts.A" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Analyzer"/>
-    <ref id="PartitionRerunArtifacts.B" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Batchlet"/>
-    <ref id="PartitionRerunArtifacts.C" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Collector"/>
-    <ref id="PartitionRerunArtifacts.R" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Reader"/>
-    <ref id="PartitionRerunArtifacts.W" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Writer"/>
-    <ref id="countInvocationsObjectParameterizationStepListener"
-         class="com.ibm.jbatch.tck.artifacts.reusable.CountInvocationsObjectParameterizationStepListener"/>
-    <ref id="countInvocationsStepListener" class="com.ibm.jbatch.tck.artifacts.reusable.CountInvocationsStepListener"/>
-    <ref id="myBatchletImpl" class="com.ibm.jbatch.tck.artifacts.reusable.MyBatchletImpl"/>
-    <ref id="myParallelSubJobsExitStatusBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.reusable.MyParallelSubJobsExitStatusBatchlet"/>
-    <ref id="simpleCustomItemReader" class="com.ibm.jbatch.tck.artifacts.reusable.SimpleCustomItemReader"/>
-    <ref id="simpleJobListener" class="com.ibm.jbatch.tck.artifacts.reusable.SimpleJobListener"/>
-    <ref id="transitionTrackerBatchlet" class="com.ibm.jbatch.tck.artifacts.reusable.TransitionTrackerBatchlet"/>
-    <ref id="artifactInstanceTestChunkListener"
-         class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestChunkListener"/>
-    <ref id="artifactInstanceTestJobListener"
-         class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestJobListener"/>
-    <ref id="artifactInstanceTestReader" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestReader"/>
-    <ref id="artifactInstanceTestStepListener"
-         class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestStepListener"/>
-    <ref id="artifactInstanceTestWriter" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestWriter"/>
-    <ref id="batchletRestartStateMachineImpl"
-         class="com.ibm.jbatch.tck.artifacts.specialized.BatchletRestartStateMachineImpl"/>
-    <ref id="batchletUsingStepContextImpl"
-         class="com.ibm.jbatch.tck.artifacts.specialized.BatchletUsingStepContextImpl"/>
-    <ref id="chunkOnErrorCheckpointListener"
-         class="com.ibm.jbatch.tck.artifacts.specialized.ChunkOnErrorCheckpointListener"/>
-    <ref id="contextsGetIdJobContextTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.ContextsGetIdJobContextTestBatchlet"/>
-    <ref id="contextsGetIdStepContextTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.ContextsGetIdStepContextTestBatchlet"/>
-    <ref id="deciderTestsBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsBatchlet"/>
-    <ref id="deciderTestsDecider" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsDecider"/>
-    <ref id="deciderReceivesCorrectStepExecutionsDecider"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DeciderReceivesCorrectStepExecutionsDecider"/>
-    <ref id="deciderTestsJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsJobListener"/>
-    <ref id="defaultValueArrayWriter" class="com.ibm.jbatch.tck.artifacts.specialized.DefaultValueArrayWriter"/>
-    <ref id="doNothingBatchlet" class="com.ibm.jbatch.tck.artifacts.reusable.DoNothingBatchlet"/>
-    <ref id="doSomethingArrayItemProcessorImpl"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingArrayItemProcessorImpl"/>
-    <ref id="doSomethingArrayItemReaderImpl"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingArrayItemReaderImpl"/>
-    <ref id="doSomethingItemProcessorImpl"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingItemProcessorImpl"/>
-    <ref id="doSomethingItemReaderImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingItemReaderImpl"/>
-    <ref id="doSomethingItemWriterImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingItemWriterImpl"/>
-    <ref id="doSomethingSimpleArrayWriter"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleArrayWriter"/>
-    <ref id="doSomethingSimpleTimeArrayReader"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleTimeArrayReader"/>
-    <ref id="doSomethingSimpleTimeArrayWriter"
-         class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleTimeArrayWriter"/>
-    <ref id="failRestartBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FailRestartBatchlet"/>
-    <ref id="flowTransitionToDecisionTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionToDecisionTestBatchlet"/>
-    <ref id="flowTransitionToDecisionTestDecider"
-         class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionToDecisionTestDecider"/>
-    <ref id="flowTransitionWithinFlowTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionWithinFlowTestBatchlet"/>
-    <ref id="inventoryCheckpointAlgorithmNoOverride"
-         class="com.ibm.jbatch.tck.artifacts.specialized.InventoryCheckpointAlgorithmNoOverride"/>
-    <ref id="inventoryCheckpointAlgorithmOverride150"
-         class="com.ibm.jbatch.tck.artifacts.specialized.InventoryCheckpointAlgorithmOverride150"/>
-    <ref id="inventoryCheckpointAlgorithmOverride2"
-         class="com.ibm.jbatch.tck.artifacts.specialized.InventoryCheckpointAlgorithmOverride2"/>
-    <ref id="jobAttributesTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobAttributesTestBatchlet"/>
-    <ref id="jobContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobContextTestBatchlet"/>
-    <ref id="jobLevelPropertiesCountBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.JobLevelPropertiesCountBatchlet"/>
-    <ref id="jobLevelPropertiesPropertyValueBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.JobLevelPropertiesPropertyValueBatchlet"/>
-    <ref id="jobLevelPropertiesShouldNotBeAvailableThroughStepContextBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.JobLevelPropertiesShouldNotBeAvailableThroughStepContextBatchlet"/>
-    <ref id="listenerOnErrorProcessor" class="com.ibm.jbatch.tck.artifacts.specialized.ListenerOnErrorProcessor"/>
-    <ref id="listenerOnErrorReader" class="com.ibm.jbatch.tck.artifacts.specialized.ListenerOnErrorReader"/>
-    <ref id="listenerOnErrorWriter" class="com.ibm.jbatch.tck.artifacts.specialized.ListenerOnErrorWriter"/>
-    <ref id="metricsStepListener" class="com.ibm.jbatch.tck.artifacts.specialized.MetricsStepListener"/>
-    <ref id="multipleExitStatusBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.MultipleExitStatusBatchlet"/>
-    <ref id="myBatchletWithPropertiesImpl"
-         class="com.ibm.jbatch.tck.artifacts.specialized.MyBatchletWithPropertiesImpl"/>
-    <ref id="myChunkListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyChunkListener"/>
-    <ref id="myCustomCheckpointAlgorithm" class="com.ibm.jbatch.tck.artifacts.specialized.MyCustomCheckpointAlgorithm"/>
-    <ref id="myCustomCheckpointListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyCustomCheckpointListener"/>
-    <ref id="myItemProcessListenerImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyItemProcessListenerImpl"/>
-    <ref id="myItemReadListenerImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyItemReadListenerImpl"/>
-    <ref id="myItemWriteListenerImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyItemWriteListenerImpl"/>
-    <ref id="myLongRunningBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.MyLongRunningBatchletImpl"/>
-    <ref id="myMultipleExceptionsRetryReadListener"
-         class="com.ibm.jbatch.tck.artifacts.specialized.MyMultipleExceptionsRetryReadListener"/>
-    <ref id="myPartitionAnalyzer" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionAnalyzer"/>
-    <ref id="myPartitionCollector" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionCollector"/>
-    <ref id="myPartitionedBatchletImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionedBatchletImpl"/>
-    <ref id="myPartitionMapper" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionMapper"/>
-    <ref id="myPartitionPlan" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionPlan"/>
-    <ref id="myPartitionReducer" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionReducer"/>
-    <ref id="myRetryProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyRetryProcessListener"/>
-    <ref id="myRetryReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyRetryReadListener"/>
-    <ref id="myRetryWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyRetryWriteListener"/>
-    <ref id="mySimpleCustomCheckpointAlgorithm"
-         class="com.ibm.jbatch.tck.artifacts.specialized.MySimpleCustomCheckpointAlgorithm"/>
-    <ref id="mySkipProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipProcessListener"/>
-    <ref id="mySkipReaderExceedListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipReaderExceedListener"/>
-    <ref id="mySkipReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipReadListener"/>
-    <ref id="mySkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipWriteListener"/>
-    <ref id="myTimeCheckpointListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyTimeCheckpointListener"/>
-    <ref id="myUniversalListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyUniversalListener"/>
-    <ref id="nullChkPtInfoReader" class="com.ibm.jbatch.tck.artifacts.specialized.NullChkPtInfoReader"/>
-    <ref id="nullChkPtInfoWriter" class="com.ibm.jbatch.tck.artifacts.specialized.NullChkPtInfoWriter"/>
-    <ref id="numbersRetryProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersRetryProcessListener"/>
-    <ref id="numbersRetryReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersRetryReadListener"/>
-    <ref id="numbersRetryWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersRetryWriteListener"/>
-    <ref id="numbersSkipProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersSkipProcessListener"/>
-    <ref id="numbersSkipReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersSkipReadListener"/>
-    <ref id="numbersSkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersSkipWriteListener"/>
-    <ref id="overrideOnAttributeValuesUponRestartBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.OverrideOnAttributeValuesUponRestartBatchlet"/>
-    <ref id="parsingPartitionAnalyzer" class="com.ibm.jbatch.tck.artifacts.specialized.ParsingPartitionAnalyzer"/>
-    <ref id="PUDPartitionReader" class="com.ibm.jbatch.tck.artifacts.specialized.PUDPartitionReader"/>
-    <ref id="PUDPartitionReducer" class="com.ibm.jbatch.tck.artifacts.specialized.PUDPartitionReducer"/>
-    <ref id="skipProcessor" class="com.ibm.jbatch.tck.artifacts.specialized.SkipProcessor"/>
-    <ref id="skipReader" class="com.ibm.jbatch.tck.artifacts.specialized.SkipReader"/>
-    <ref id="skipReaderMultipleExceptions"
-         class="com.ibm.jbatch.tck.artifacts.specialized.SkipReaderMultipleExceptions"/>
-    <ref id="skipWriter" class="com.ibm.jbatch.tck.artifacts.specialized.SkipWriter"/>
-    <ref id="splitFlowTransitionLoopTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.SplitFlowTransitionLoopTestBatchlet"/>
-    <ref id="splitTransitionToDecisionTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.SplitTransitionToDecisionTestBatchlet"/>
-    <ref id="splitTransitionToDecisionTestDecider"
-         class="com.ibm.jbatch.tck.artifacts.specialized.SplitTransitionToDecisionTestDecider"/>
-    <ref id="splitTransitionToStepTestBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.SplitTransitionToStepTestBatchlet"/>
-    <ref id="startLimitJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitJobListener"/>
-    <ref id="startLimitStateMachineVariation1Batchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitStateMachineVariation1Batchlet"/>
-    <ref id="startLimitStateMachineVariation2Batchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitStateMachineVariation2Batchlet"/>
-    <ref id="startLimitStateMachineVariation3Batchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitStateMachineVariation3Batchlet"/>
-    <ref id="stepContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StepContextTestBatchlet"/>
-    <ref id="stepLevelPropertiesCountBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.StepLevelPropertiesCountBatchlet"/>
-    <ref id="stepLevelPropertiesPropertyValueBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.StepLevelPropertiesPropertyValueBatchlet"/>
-    <ref id="stepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet"
-         class="com.ibm.jbatch.tck.artifacts.specialized.StepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet"/>
-    <ref id="threadTrackingJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.ThreadTrackingJobListener"/>
-    <ref id="threadTrackingStepListener" class="com.ibm.jbatch.tck.artifacts.specialized.ThreadTrackingStepListener"/>
-    <ref id="transitionDecider" class="com.ibm.jbatch.tck.artifacts.specialized.TransitionDecider"/>
-    <ref id="verifySkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.VerifySkipWriteListener"/>
+    <ref id="basicProcessor" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicProcessor" />
+    <ref id="basicReader" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicReader" />
+    <ref id="basicWriter" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicWriter" />
+    <ref id="applicationScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.ApplicationScopedBatchlet" />
+    <ref id="dependentScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet" />
+    <ref id="dependentScopedBatchletProps" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps" />
+    <ref id="dependentScopedBatchletPropsNonString" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString" />
+    <ref id="jobOperatorInjectedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.JobOperatorInjectedBatchlet" />
+    <ref id="nonCDIBeanBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.NonCDIBeanBatchlet" />
+    <ref id="inventoryInitProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitProcessor" />
+    <ref id="inventoryInitReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitReader" />
+    <ref id="inventoryInitWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryInitWriter" />
+    <ref id="inventoryProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryProcessor" />
+    <ref id="inventoryReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryReader" />
+    <ref id="inventoryStepListener" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryStepListener" />
+    <ref id="inventoryWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.InventoryWriter" />
+    <ref id="numbersReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.NumbersReader" />
+    <ref id="retryInitProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryInitProcessor" />
+    <ref id="retryInitReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryInitReader" />
+    <ref id="retryInitWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryInitWriter" />
+    <ref id="retryProcessor" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryProcessor" />
+    <ref id="retryReader" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryReader" />
+    <ref id="retryWriter" class="com.ibm.jbatch.tck.artifacts.chunkartifacts.RetryWriter" />
+    <ref id="ListenerOnErrorArtifacts.P" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$P" />
+    <ref id="ListenerOnErrorArtifacts.PL" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$PL" />
+    <ref id="ListenerOnErrorArtifacts.R" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$R" />
+    <ref id="ListenerOnErrorArtifacts.W" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$W" />
+    <ref id="ListenerOnErrorArtifacts.WL" class="com.ibm.jbatch.tck.artifacts.inner.ListenerOnErrorArtifacts$WL" />
+    <ref id="PCPAnalyzer" class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPAnalyzer" />
+    <ref id="PCPCollector" class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPCollector" />
+    <ref id="PCPPartitionBatchlet" class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPPartitionBatchlet" />
+    <ref id="PCPSplitFlowBatchlet" class="com.ibm.jbatch.tck.artifacts.inner.ParallelContextPropagationArtifacts$PCPSplitFlowBatchlet" />
+    <ref id="PartitionRerunArtifacts.A" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Analyzer" />
+    <ref id="PartitionRerunArtifacts.B" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Batchlet" />
+    <ref id="PartitionRerunArtifacts.C" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Collector" />
+    <ref id="PartitionRerunArtifacts.R" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Reader" />
+    <ref id="PartitionRerunArtifacts.W" class="com.ibm.jbatch.tck.artifacts.inner.PartitionRerunArtifacts$Writer" />
+    <ref id="countInvocationsObjectParameterizationStepListener" class="com.ibm.jbatch.tck.artifacts.reusable.CountInvocationsObjectParameterizationStepListener" />
+    <ref id="countInvocationsStepListener" class="com.ibm.jbatch.tck.artifacts.reusable.CountInvocationsStepListener" />
+    <ref id="doNothingBatchlet" class="com.ibm.jbatch.tck.artifacts.reusable.DoNothingBatchlet" />
+    <ref id="myBatchletImpl" class="com.ibm.jbatch.tck.artifacts.reusable.MyBatchletImpl" />
+    <ref id="myParallelSubJobsExitStatusBatchlet" class="com.ibm.jbatch.tck.artifacts.reusable.MyParallelSubJobsExitStatusBatchlet" />
+    <ref id="simpleCustomItemReader" class="com.ibm.jbatch.tck.artifacts.reusable.SimpleCustomItemReader" />
+    <ref id="simpleJobListener" class="com.ibm.jbatch.tck.artifacts.reusable.SimpleJobListener" />
+    <ref id="transitionTrackerBatchlet" class="com.ibm.jbatch.tck.artifacts.reusable.TransitionTrackerBatchlet" />
+    <ref id="artifactInstanceTestChunkListener" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestChunkListener" />
+    <ref id="artifactInstanceTestJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestJobListener" />
+    <ref id="artifactInstanceTestReader" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestReader" />
+    <ref id="artifactInstanceTestStepListener" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestStepListener" />
+    <ref id="artifactInstanceTestWriter" class="com.ibm.jbatch.tck.artifacts.specialized.ArtifactInstanceTestWriter" />
+    <ref id="batchletRestartStateMachineImpl" class="com.ibm.jbatch.tck.artifacts.specialized.BatchletRestartStateMachineImpl" />
+    <ref id="batchletUsingStepContextImpl" class="com.ibm.jbatch.tck.artifacts.specialized.BatchletUsingStepContextImpl" />
+    <ref id="chunkOnErrorCheckpointListener" class="com.ibm.jbatch.tck.artifacts.specialized.ChunkOnErrorCheckpointListener" />
+    <ref id="contextsGetIdJobContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.ContextsGetIdJobContextTestBatchlet" />
+    <ref id="contextsGetIdStepContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.ContextsGetIdStepContextTestBatchlet" />
+    <ref id="deciderReceivesCorrectStepExecutionsDecider" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderReceivesCorrectStepExecutionsDecider" />
+    <ref id="deciderTestsBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsBatchlet" />
+    <ref id="deciderTestsDecider" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsDecider" />
+    <ref id="deciderTestsJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsJobListener" />
+    <ref id="defaultValueArrayWriter" class="com.ibm.jbatch.tck.artifacts.specialized.DefaultValueArrayWriter" />
+    <ref id="doSomethingArrayItemProcessorImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingArrayItemProcessorImpl" />
+    <ref id="doSomethingArrayItemReaderImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingArrayItemReaderImpl" />
+    <ref id="doSomethingItemProcessorImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingItemProcessorImpl" />
+    <ref id="doSomethingItemReaderImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingItemReaderImpl" />
+    <ref id="doSomethingItemWriterImpl" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingItemWriterImpl" />
+    <ref id="doSomethingSimpleArrayWriter" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleArrayWriter" />
+    <ref id="doSomethingSimpleTimeArrayReader" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleTimeArrayReader" />
+    <ref id="doSomethingSimpleTimeArrayWriter" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleTimeArrayWriter" />
+    <ref id="failRestartBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FailRestartBatchlet" />
+    <ref id="flowTransitionToDecisionTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionToDecisionTestBatchlet" />
+    <ref id="flowTransitionToDecisionTestDecider" class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionToDecisionTestDecider" />
+    <ref id="flowTransitionWithinFlowTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionWithinFlowTestBatchlet" />
+    <ref id="inventoryCheckpointAlgorithmNoOverride" class="com.ibm.jbatch.tck.artifacts.specialized.InventoryCheckpointAlgorithmNoOverride" />
+    <ref id="inventoryCheckpointAlgorithmOverride150" class="com.ibm.jbatch.tck.artifacts.specialized.InventoryCheckpointAlgorithmOverride150" />
+    <ref id="inventoryCheckpointAlgorithmOverride2" class="com.ibm.jbatch.tck.artifacts.specialized.InventoryCheckpointAlgorithmOverride2" />
+    <ref id="jobAttributesTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobAttributesTestBatchlet" />
+    <ref id="jobContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobContextTestBatchlet" />
+    <ref id="jobLevelPropertiesCountBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobLevelPropertiesCountBatchlet" />
+    <ref id="jobLevelPropertiesPropertyValueBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobLevelPropertiesPropertyValueBatchlet" />
+    <ref id="jobLevelPropertiesShouldNotBeAvailableThroughStepContextBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.JobLevelPropertiesShouldNotBeAvailableThroughStepContextBatchlet" />
+    <ref id="listenerOnErrorProcessor" class="com.ibm.jbatch.tck.artifacts.specialized.ListenerOnErrorProcessor" />
+    <ref id="listenerOnErrorReader" class="com.ibm.jbatch.tck.artifacts.specialized.ListenerOnErrorReader" />
+    <ref id="listenerOnErrorWriter" class="com.ibm.jbatch.tck.artifacts.specialized.ListenerOnErrorWriter" />
+    <ref id="metricsStepListener" class="com.ibm.jbatch.tck.artifacts.specialized.MetricsStepListener" />
+    <ref id="multipleExitStatusBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.MultipleExitStatusBatchlet" />
+    <ref id="myBatchletWithPropertiesImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyBatchletWithPropertiesImpl" />
+    <ref id="myChunkListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyChunkListener" />
+    <ref id="myCustomCheckpointAlgorithm" class="com.ibm.jbatch.tck.artifacts.specialized.MyCustomCheckpointAlgorithm" />
+    <ref id="myCustomCheckpointListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyCustomCheckpointListener" />
+    <ref id="myItemProcessListenerImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyItemProcessListenerImpl" />
+    <ref id="myItemReadListenerImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyItemReadListenerImpl" />
+    <ref id="myItemWriteListenerImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyItemWriteListenerImpl" />
+    <ref id="myLongRunningBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.MyLongRunningBatchletImpl" />
+    <ref id="myMultipleExceptionsRetryReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyMultipleExceptionsRetryReadListener" />
+    <ref id="myPartitionAnalyzer" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionAnalyzer" />
+    <ref id="myPartitionCollector" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionCollector" />
+    <ref id="myPartitionedBatchletImpl" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionedBatchletImpl" />
+    <ref id="myPartitionMapper" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionMapper" />
+    <ref id="myPartitionPlan" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionPlan" />
+    <ref id="myPartitionReducer" class="com.ibm.jbatch.tck.artifacts.specialized.MyPartitionReducer" />
+    <ref id="myRetryProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyRetryProcessListener" />
+    <ref id="myRetryReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyRetryReadListener" />
+    <ref id="myRetryWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyRetryWriteListener" />
+    <ref id="mySimpleCustomCheckpointAlgorithm" class="com.ibm.jbatch.tck.artifacts.specialized.MySimpleCustomCheckpointAlgorithm" />
+    <ref id="mySkipProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipProcessListener" />
+    <ref id="mySkipReaderExceedListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipReaderExceedListener" />
+    <ref id="mySkipReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipReadListener" />
+    <ref id="mySkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.MySkipWriteListener" />
+    <ref id="myTimeCheckpointListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyTimeCheckpointListener" />
+    <ref id="myUniversalListener" class="com.ibm.jbatch.tck.artifacts.specialized.MyUniversalListener" />
+    <ref id="nullChkPtInfoReader" class="com.ibm.jbatch.tck.artifacts.specialized.NullChkPtInfoReader" />
+    <ref id="nullChkPtInfoWriter" class="com.ibm.jbatch.tck.artifacts.specialized.NullChkPtInfoWriter" />
+    <ref id="numbersRetryProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersRetryProcessListener" />
+    <ref id="numbersRetryReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersRetryReadListener" />
+    <ref id="numbersRetryWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersRetryWriteListener" />
+    <ref id="numbersSkipProcessListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersSkipProcessListener" />
+    <ref id="numbersSkipReadListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersSkipReadListener" />
+    <ref id="numbersSkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.NumbersSkipWriteListener" />
+    <ref id="overrideOnAttributeValuesUponRestartBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.OverrideOnAttributeValuesUponRestartBatchlet" />
+    <ref id="parsingPartitionAnalyzer" class="com.ibm.jbatch.tck.artifacts.specialized.ParsingPartitionAnalyzer" />
+    <ref id="PUDPartitionReader" class="com.ibm.jbatch.tck.artifacts.specialized.PUDPartitionReader" />
+    <ref id="PUDPartitionReducer" class="com.ibm.jbatch.tck.artifacts.specialized.PUDPartitionReducer" />
+    <ref id="skipProcessor" class="com.ibm.jbatch.tck.artifacts.specialized.SkipProcessor" />
+    <ref id="skipReader" class="com.ibm.jbatch.tck.artifacts.specialized.SkipReader" />
+    <ref id="skipReaderMultipleExceptions" class="com.ibm.jbatch.tck.artifacts.specialized.SkipReaderMultipleExceptions" />
+    <ref id="skipWriter" class="com.ibm.jbatch.tck.artifacts.specialized.SkipWriter" />
+    <ref id="splitFlowTransitionLoopTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.SplitFlowTransitionLoopTestBatchlet" />
+    <ref id="splitTransitionToDecisionTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.SplitTransitionToDecisionTestBatchlet" />
+    <ref id="splitTransitionToDecisionTestDecider" class="com.ibm.jbatch.tck.artifacts.specialized.SplitTransitionToDecisionTestDecider" />
+    <ref id="splitTransitionToStepTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.SplitTransitionToStepTestBatchlet" />
+    <ref id="startLimitJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitJobListener" />
+    <ref id="startLimitStateMachineVariation1Batchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitStateMachineVariation1Batchlet" />
+    <ref id="startLimitStateMachineVariation2Batchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitStateMachineVariation2Batchlet" />
+    <ref id="startLimitStateMachineVariation3Batchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StartLimitStateMachineVariation3Batchlet" />
+    <ref id="stepContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StepContextTestBatchlet" />
+    <ref id="stepLevelPropertiesCountBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StepLevelPropertiesCountBatchlet" />
+    <ref id="stepLevelPropertiesPropertyValueBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StepLevelPropertiesPropertyValueBatchlet" />
+    <ref id="stepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.StepLevelPropertiesShouldNotBeAvailableThroughJobContextBatchlet" />
+    <ref id="threadTrackingJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.ThreadTrackingJobListener" />
+    <ref id="threadTrackingStepListener" class="com.ibm.jbatch.tck.artifacts.specialized.ThreadTrackingStepListener" />
+    <ref id="transitionDecider" class="com.ibm.jbatch.tck.artifacts.specialized.TransitionDecider" />
+    <ref id="verifySkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.VerifySkipWriteListener" />
 </batch-artifacts>

@@ -149,6 +149,9 @@
 
         <!-- Run against latest version of RI -->
         <batch.api.version>2.0.0</batch.api.version>
+        <!--
+        <batch.impl.version>2.1.0-SNAPSHOT</batch.impl.version>
+        -->
         <batch.impl.version>2.0.0</batch.impl.version>
 
         <!-- This version of TCK -->

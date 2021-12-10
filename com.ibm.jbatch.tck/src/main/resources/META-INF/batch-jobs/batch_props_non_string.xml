@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2016, 2020 International Business Machines Corp. and others See the NOTICE file distributed with this work
+	for additional information regarding copyright ownership. Licensed under the Apache License, Version
+	2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain
+	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+	or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+	governing permissions and limitations under the License.
+
+	SPDX-License-Identifier: Apache-2.0
+
+-->
+<job id="batch_props_non_string" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
+    <step id="step1">
+        <batchlet ref="#{jobParameters['refName']}" >
+        <properties>
+            <property name="stringProp" value="#{jobParameters['stringProp']}"/>
+            <property name="booleanProp1" value="#{jobParameters['booleanProp1']}"/>
+            <property name="booleanProp2" value="#{jobParameters['booleanProp2']}"/>
+            <!-- 
+            <property name="byteProp1" value="#{jobParameters['byteProp1']}"/>
+            <property name="byteProp2" value="#{jobParameters['byteProp2']}"/>
+ -->
+            <property name="doubleProp1" value="#{jobParameters['doubleProp1']}"/>
+            <property name="doubleProp2" value="#{jobParameters['doubleProp2']}"/>
+            <property name="floatProp1" value="#{jobParameters['floatProp1']}"/>
+            <property name="floatProp2" value="#{jobParameters['floatProp2']}"/>
+            <property name="intProp1" value="#{jobParameters['intProp1']}"/>
+            <property name="intProp2" value="#{jobParameters['intProp2']}"/>
+            <property name="longProp1" value="#{jobParameters['longProp1']}"/>
+            <property name="longProp2" value="#{jobParameters['longProp2']}"/>
+            <property name="shortProp1" value="#{jobParameters['shortProp1']}"/>
+            <property name="shortProp2" value="#{jobParameters['shortProp2']}"/>
+        </properties>
+        </batchlet>
+    </step>
+</job>

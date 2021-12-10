@@ -19,11 +19,14 @@
 package com.ibm.jbatch.tck.tests.jslxml;
 
 import static com.ibm.jbatch.tck.utils.AssertionUtils.assertObjEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 
 import java.io.File;
 import java.util.Properties;
 
+import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
@@ -32,6 +35,8 @@ import com.ibm.jbatch.tck.utils.Reporter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class PropertySubstitutionTests extends BaseJUnit5Test {
 
@@ -400,6 +405,51 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
 
     }
 
+    
+    /*
+     * @testName: testCDIBatchPropsNonString
+     *
+     * @assertion: 
+     * 
+     * @test_Strategy: Supply job parameters of different types with values matching the
+     * expected values hard-coded within the test job batchlet.   Perform validation 
+     * within the batchlet that these parameter values get mapped onto corresponding
+     * batch properties of (non-String) primitive wrapper types:  Integer, Double, etc.
+     *
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIDependentScopedBatchletPropsNonString", "dependentScopedBatchletPropsNonString", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString"})
+    public void testCDIBatchPropsNonString(String refName) throws Exception {
+
+        String METHOD = "testCDIBatchPropsNonString";
+
+        try {
+        	
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("stringProp", "HappyBatchProperties");
+        	jobParams.setProperty("booleanProp1", "true");
+        	jobParams.setProperty("booleanProp2", "Nope");
+        	jobParams.setProperty("doubleProp1", "234.432");
+        	jobParams.setProperty("doubleProp2", "123.321");
+        	jobParams.setProperty("floatProp1", Float.toString(11234.432F));
+        	jobParams.setProperty("floatProp2", Float.toString(11123.321F));
+        	jobParams.setProperty("intProp1", "7777");
+        	jobParams.setProperty("intProp2", "8888");
+        	jobParams.setProperty("longProp1", Long.toString(1234567890123L));
+        	jobParams.setProperty("longProp2", Long.toString(12345678901234L));
+        	jobParams.setProperty("shortProp1", "333");
+        	jobParams.setProperty("shortProp2", "444");
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("batch_props_non_string", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            Reporter.log("job ended with exit status = " + jobExec.getExitStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
     private static void handleException(String methodName, Exception e) throws Exception {
         Reporter.log("Caught exception: " + e.getMessage() + "<p>");
         Reporter.log(methodName + " failed<p>");
