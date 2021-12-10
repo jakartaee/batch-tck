@@ -14,9 +14,12 @@
 	<step id="step1">
 		<batchlet ref="#{jobParameters['refName']}">
 			<properties>
-				<property name="ctor1" value="#{jobParameters['ctor1']}" />
-				<property name="field1" value="#{jobParameters['field1']}" />
-				<property name="method1" value="#{jobParameters['method1']}" />
+				<property name="c1" value="#{jobParameters['c1']}" />
+				<property name="c2" value="#{jobParameters['c2']}" />
+				<property name="f1" value="#{jobParameters['f1']}" />
+				<property name="f2" value="#{jobParameters['f2']}" />
+				<property name="m1" value="#{jobParameters['m1']}" />
+				<property name="m2" value="#{jobParameters['m2']}" />
 			</properties>
 		</batchlet>
 	</step>

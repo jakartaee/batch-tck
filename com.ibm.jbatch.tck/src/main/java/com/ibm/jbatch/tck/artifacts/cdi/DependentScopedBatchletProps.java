@@ -17,37 +17,43 @@ import jakarta.inject.Named;
 @Named("CDIDependentScopedBatchletProps")
 public class DependentScopedBatchletProps implements Batchlet {
 
-	@Inject @BatchProperty(name="field1") String f1;
+	@Inject @BatchProperty(name="f1") String field1;
+	@Inject @BatchProperty String f2;
 	@Inject AppScopedTestBean appScoped;
 	@Inject DependentScopedTestBean dependentScoped;
 	@Inject JobContext jobCtx; 
 	
-	private String m1;
+	private String method1;
+	private String method2;
 
-	private String c1;
+	private String ctor1;
+	private String ctor2;
 
 	@Inject
-	DependentScopedBatchletProps(@BatchProperty(name="ctor1") String ctor1) {
-		c1 = ctor1;
+	DependentScopedBatchletProps(@BatchProperty(name="c1") String ctor1, @BatchProperty(name="c2") String c2) {
+		this.ctor1 = ctor1;
+		this.ctor2 = c2;
 	}
 
 	@Inject  
-	public void setMethod1(@BatchProperty(name="method1") String method1) {
-		m1 = method1;
+	public void setMethod1(@BatchProperty(name="m1") String method1) {
+		this.method1 = method1;
 	}
-
-
+	
+	@Inject  
+	public void setMethod2(@BatchProperty(name="m2") String m2) {
+		this.method2 = m2;
+	}
 	
 	@Override
 	public String process() throws Exception {
 		if (dependentScoped == null || appScoped == null) {
 			throw new Exception("TEST FAILED");
 		} else {
-			jobCtx.setExitStatus(c1 + ":" + f1 + ":" + m1);
+			jobCtx.setExitStatus(String.join(":", ctor1, ctor2, field1, f2, method1, method2));
 		}
 		return "OK";
 	}
-
 
 	@Override
 	public void stop() throws Exception {
