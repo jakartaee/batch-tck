@@ -203,7 +203,7 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
-     * @test_Strategy: validate within test based on status set within job 
+     * @test_Strategy: validate a mix of field plus method/ctor parm injection within test based on status set within job 
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchletProps", "dependentScopedBatchletProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps"})
@@ -214,19 +214,25 @@ public class CDITests extends BaseJUnit5Test {
         try {
         	Properties jobParams = new Properties();
         	String ctor1 = "CTOR";
+        	String ctor2 = "CAT";
         	String field1 = "ABC";
+        	String field2 = "APPLE";
         	String method1 = "XYZ";
+        	String method2 = "X-WING";
         	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("ctor1", ctor1);
-        	jobParams.setProperty("field1", field1);
-        	jobParams.setProperty("method1", method1);
+        	jobParams.setProperty("c1", ctor1);
+        	jobParams.setProperty("c2", ctor2);
+        	jobParams.setProperty("f1", field1);
+        	jobParams.setProperty("f2", field2);
+        	jobParams.setProperty("m1", method1);
+        	jobParams.setProperty("m2", method2);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_batch_props", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
             assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
             Reporter.log("job completed with exit status = " + jobExec.getExitStatus());
-            // ES => <c1>:<field1>:<method1>
-            assertEquals(ctor1 + ":" + field1 + ":" + method1, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            String expectedExitStatus = String.join(":", ctor1, ctor2, field1, field2, method1, method2);
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
             Reporter.log("GOOD result");
         } catch (Exception e) {
             handleException(METHOD, e);
