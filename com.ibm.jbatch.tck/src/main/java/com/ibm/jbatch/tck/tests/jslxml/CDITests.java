@@ -83,6 +83,43 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
+     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
+     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIDependentScopedBatchletContexts", "dependentScopedBatchletContexts", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletContexts"})
+    public void testCDIInjectContexts(String refName) throws Exception {
+
+        String METHOD = "testCDIInjectContexts";
+
+        try {
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("refName", refName);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            // Expecting exit status of: <jobExecId>:<stepExecId>:<parm1Val>
+            List<StepExecution> steps = jobOp.getStepExecutions(jobExec.getExecutionId());
+            assertEquals(1, steps.size(), "Wrong number of step executions found");
+            Reporter.log("step completed with exit status: " + steps.get(0).getExitStatus());
+            long stepExecId = steps.get(0).getStepExecutionId();
+            String expectedJobExitStatus = jobExec.getExecutionId() + ":" + jobExec.getExecutionId() + ":" + jobExec.getExecutionId() + ":";
+            assertEquals(expectedJobExitStatus, jobExec.getExitStatus(), "Test fails - unexpected job exit status");
+            String expectedStepExitStatus = stepExecId + ":" + stepExecId + ":" + stepExecId + ":";
+            assertEquals(expectedStepExitStatus, steps.get(0).getExitStatus(), "Test fails - unexpected step exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
+     * @throws Exception
+     * @testName: 
+     * @assertion: Section 
      * @test_Strategy: 
      */
     @ParameterizedTest

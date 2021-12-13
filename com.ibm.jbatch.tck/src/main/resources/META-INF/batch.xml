@@ -4,6 +4,7 @@
     <ref id="basicWriter" class="com.ibm.jbatch.tck.artifacts.basicchunk.BasicWriter" />
     <ref id="applicationScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.ApplicationScopedBatchlet" />
     <ref id="dependentScopedBatchlet" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet" />
+    <ref id="dependentScopedBatchletContexts" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletContexts" />
     <ref id="dependentScopedBatchletProps" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps" />
     <ref id="dependentScopedBatchletRepeatProps" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletRepeatProps" />
     <ref id="dependentScopedBatchletPropsNonString" class="com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString" />
