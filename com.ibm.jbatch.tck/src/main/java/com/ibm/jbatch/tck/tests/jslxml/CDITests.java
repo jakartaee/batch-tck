@@ -83,6 +83,40 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
+     * @test_Strategy: 
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIDependentScopedBatchletRepeatProps", "dependentScopedBatchletRepeatProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletRepeatProps"})
+    public void testCDIInjectRepeatProps(String refName) throws Exception {
+
+        String METHOD = "testCDIInjectRepeatProps";
+
+        try {
+        	String p1 = "myParm1";
+        	String p2 = "myParm2";
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("parm1", p1);
+        	jobParams.setProperty("parm2", p2);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            // Expecting exit status of: <jobExecId>:<stepExecId>:<parm1Val>
+            String expectedExitStatus = String.join(":", p1, p2, p1, p1, p2, p1, p1, p2, p1, p1, p1, p1);
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
+     * @throws Exception
+     * @testName: 
+     * @assertion: Section 
      * @test_Strategy: validate within batch job (batchlet) that job operator, injected into batchlet, provides a view of running
      * executions that matches that of the job context. Then validate again in the JUnit logic that the exit status matches
      * the job exec id.
