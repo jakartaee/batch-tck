@@ -120,6 +120,36 @@ public class CDITests extends BaseJUnit5Test {
      * @throws Exception
      * @testName: 
      * @assertion: Section 
+     * @test_Strategy: Don't parameterized tests since the single app scoped bean has different state among each
+     */
+    @Test
+    public void testCDIInjectListenerIntoBatchlet() throws Exception {
+
+        String METHOD = "testCDIInjectListenerIntoBatchlet";
+
+        try {
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("listenerName", "CDIApplicationScopedStepListener");
+        	jobParams.setProperty("batchletName", "CDIDependentScopedBatchletInjectListener");
+            Reporter.log("starting job for testCDIInjectListenerIntoBatchlet");
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_listener_into_batchlet", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            String expectedJobExitStatus = "2:4:6:";
+            assertEquals(expectedJobExitStatus, jobExec.getExitStatus(), "Test fails - unexpected job exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    
+    /**
+     * @throws Exception
+     * @testName: 
+     * @assertion: Section 
      * @test_Strategy: 
      */
     @ParameterizedTest
