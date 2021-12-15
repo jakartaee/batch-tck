@@ -56,16 +56,6 @@
         </dependencySet>
     </dependencySets>
 
-    <fileSets>
-        <fileSet>
-            <directory>../com.ibm.jbatch.tck/sigtest</directory>
-            <outputDirectory>/artifacts</outputDirectory>
-            <includes>
-                <include>batch.standalone.tck.sig*</include>
-            </includes>
-        </fileSet>
-    </fileSets>
-
     <files>
         <file>
             <!-- EFTL LICENSE for the distributed TCK, not the development of the TCK source, which is Apache V2.0 -->
@@ -111,15 +101,6 @@
         <file>
             <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-excludes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
-        </file>
-        <file>
-            <source>../com.ibm.jbatch.tck/sigtest/sigtest.build.xml</source>
-            <outputDirectory>/</outputDirectory>
-            <destName>sigtest.build.xml</destName>
-        </file>
-        <file>
-            <source>../com.ibm.jbatch.tck/sigtest/batch-tck-sigtest.properties</source>
-            <outputDirectory>/</outputDirectory>
         </file>
     </files>
 </assembly>
