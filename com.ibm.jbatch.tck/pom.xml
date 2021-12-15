@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright 2012, 2020 International Business Machines Corp. and others
+   Copyright 2012, 2021 International Business Machines Corp. and others
 
    See the NOTICE file distributed with this work for additional information
    regarding copyright ownership. Licensed under the Apache License,
@@ -114,65 +114,7 @@
                                 </target>
                             </configuration>
                         </execution>
-                        <execution>
-                            <id>generate-sigtest</id>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <phase>none</phase>
-                            <configuration>
-
-                                <!-- Disabled.  This was left over from JSR 352, and could be a useful piece to work on, but it's not 
-                                     been reworked on Jakarta Batch so just skip. -->
-                                <skip>true</skip>
-
-                                <!-- Updating the signature files should not be done lightly.  This changes the specified, public API.
-                                     We purposely make this fail by default when a signature is changed, to ensure
-                                     that the person who would make the update knows what they're doing. -->
-                                <target>
-                                    <!-- Note this simply uses the JRE level of the JRE executing Maven and generates the correspondng .sig file.
-                                         So to generate the Java 6, 7, 8 .sig files you have to actually run Maven using Java 6, 7, 8, respectively,
-                                         once for each.  You can't just generate them all at once. -->
-                                    <condition property="jdk" value="6">
-                                        <contains string="${ant.java.version}" substring="1.6" />
-                                    </condition>
-                                    <condition property="jdk" value="7">
-                                        <contains string="${ant.java.version}" substring="1.7" />
-                                    </condition>
-                                    <condition property="jdk" value="8">
-                                        <contains string="${ant.java.version}" substring="1.8" />
-                                    </condition>
-                                    <property name="old.sig.file" value="${project.basedir}${fs}sigtest${fs}batch-api-sigtest-java${jdk}.sig" />
-                                    <property name="new.sig.file" value="${project.basedir}${fs}generate-sigtest${fs}batch-api-sigtest-java${jdk}.sig" />
-                                    <mkdir dir="${project.basedir}${fs}generate-sigtest" />
-                                    <taskdef name="setup" classname="com.sun.tdk.signaturetest.ant.ASetup" classpathref="maven.plugin.classpath" />
-                                    <echo message="Generating Java ${jdk} SigTest files for batch" />
-                                    <setup failonerror="true" filename="${new.sig.file}" package="jakarta.batch">
-                                        <classpath refid="maven.compile.classpath" />
-                                        <classpath refid="maven.plugin.classpath" />
-                                        <classpath>
-                                            <pathelement location="${java.home}${fs}lib${fs}rt.jar" />
-                                        </classpath>
-                                    </setup>
-                                    <!-- See comment above <execution> -->
-                                    <fail message="Fail on purpose to ensure that any changes to the public API signature are truly intended. They should not be done just to get the Maven build to complete.  Newly-generated ${new.sig.file} does not exactly match previous sig test file at location: ${old.sig.file}.  Review carefully and if this is correct, then overwrite the old ${old.sig.file} file with the newly-generated copy of the sig test file">
-                                        <condition>
-                                            <not>
-                                                <filesmatch file1="${old.sig.file}" file2="${new.sig.file}" textfile="true" />
-                                            </not>
-                                        </condition>
-                                    </fail>
-                                </target>
-                            </configuration>
-                        </execution>
                     </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>jakarta.enterprise</groupId>
-                            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-                            <version>${version.jakarta.enterprise.jakarta.enterprise.cdi-api}</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -230,29 +172,6 @@
                             <execution>
                                 <id>generate-batch.xml</id>
                                 <phase>process-classes</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>sigtest</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>sigtest</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>generate-sigtest</id>
-                                <phase>generate-resources</phase>
                             </execution>
                         </executions>
                     </plugin>

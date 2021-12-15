@@ -29,31 +29,6 @@
     <packaging>jar</packaging>
     <name>Jakarta Batch Signature Test Execution (using JBatch, the former RI, against TCK maven module)</name>
 
-    <!--
-    <dependencies>
-        <dependency>
-            <groupId>jakarta.batch</groupId>
-            <artifactId>jakarta.batch-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.jbatch</groupId>
-            <artifactId>com.ibm.jbatch.spi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.batch</groupId>
-            <artifactId>com.ibm.jbatch.tck.spi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.jbatch</groupId>
-            <artifactId>com.ibm.jbatch.container</artifactId>
-        </dependency>
-    </dependencies>
-    -->
-
     <profiles>
         <profile>
             <id>jdk11</id>
@@ -68,7 +43,7 @@
                   <artifactId>sigtest-maven-plugin</artifactId>
                   <version>1.5</version>
                   <configuration>
-                      <sigfile>../sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
+                      <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
                   </configuration>
                 </plugin>
               </plugins>
@@ -87,7 +62,7 @@
                   <artifactId>sigtest-maven-plugin</artifactId>
                   <version>1.5</version>
                   <configuration>
-                      <sigfile>../sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
+                      <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
                   </configuration>
                 </plugin>
               </plugins>
@@ -102,7 +77,25 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>unpack</id>
+                        <id>unpack-sigfiles</id>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                  <groupId>jakarta.batch</groupId>
+                                  <artifactId>com.ibm.jbatch.tck</artifactId>
+                                  <version>${project.parent.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                            <includes>sigtest/*</includes>
+                            <outputDirectory>${project.build.directory}/sigtest-copy</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-classes</id>
                         <goals>
                             <goal>unpack</goal>
                         </goals>

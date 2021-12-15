@@ -203,7 +203,7 @@
         <module>com.ibm.jbatch.tck.spi</module>
         <module>com.ibm.jbatch.tck.exec</module>
         <module>jakarta.batch.official.tck</module>
-        <module>com.ibm.jbatch.tck.dist.exec</module>
+        <module>com.ibm.jbatch.tck.sigtest.exec</module>
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
         <module>jakarta.batch.reporting</module>
