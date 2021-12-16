@@ -166,8 +166,8 @@
         <!-- Building the project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Target Java 8 -->
-        <version.java>1.8</version.java>
+        <!-- Target Java 11 -->
+        <version.java>11</version.java>
 
         <!-- Dependencies -->
         <version.jakarta.enterprise.jakarta.enterprise.cdi-api>3.0.0</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
@@ -182,7 +182,7 @@
         <version.com.mycila.maven-license-plugin.maven-license-plugin>1.10.b1</version.com.mycila.maven-license-plugin.maven-license-plugin>
         <version.org.apache.maven.plugins.maven-antrun-plugin>1.8</version.org.apache.maven.plugins.maven-antrun-plugin>
         <version.org.apache.maven.plugins.maven-compiler-plugin>3.8.1</version.org.apache.maven.plugins.maven-compiler-plugin>
-        <version.org.apache.maven.plugins.maven-failsafe-plugin>2.22.2</version.org.apache.maven.plugins.maven-failsafe-plugin>
+        <version.org.apache.maven.plugins.maven-failsafe-plugin>3.0.0-M5</version.org.apache.maven.plugins.maven-failsafe-plugin>
         <version.org.apache.maven.plugins.maven-gpg-plugin>1.4</version.org.apache.maven.plugins.maven-gpg-plugin>
         <version.org.apache.maven.plugins.maven-jar-plugin>2.4</version.org.apache.maven.plugins.maven-jar-plugin>
         <version.org.apache.maven.plugins.maven-javadoc-plugin>2.9.1</version.org.apache.maven.plugins.maven-javadoc-plugin>

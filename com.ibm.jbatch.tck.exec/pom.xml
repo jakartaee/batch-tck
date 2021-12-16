@@ -167,7 +167,6 @@
                                 <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
                             </dependenciesToScan>
                             <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-includes.txt</includesFile>
-                            <excludesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-excludes.txt</excludesFile>
 
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
                         </configuration>

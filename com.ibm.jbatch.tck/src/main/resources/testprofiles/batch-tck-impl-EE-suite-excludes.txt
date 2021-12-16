@@ -1,3 +1,0 @@
-*/jslxml/ListenerOnErrorTests.java
-*/jslxml/ParallelContextPropagationTests.java
-*/jslxml/PartitionRerunTests.java
