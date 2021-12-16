@@ -50,10 +50,8 @@
     </configuration>
   </container>
 
-  <!--
-  <container qualifier="liberty_managed" default="true">
   -->
-  <container qualifier="liberty-mgd">
+  <container qualifier="liberty-managed">
     <configuration>
        <property name="wlpHome">target\liberty\wlp</property>
        <property name="serverName">defaultServer</property>

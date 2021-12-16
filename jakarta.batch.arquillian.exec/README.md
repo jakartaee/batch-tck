@@ -1,4 +1,5 @@
 
+# OLD instructions from Ondro
 
 ## Requirements
 
@@ -19,3 +20,16 @@
 ```
 mvn clean verify
 ```
+
+# How to run the TCK against Open Liberty
+
+### prepare Arq env
+1. unset WLP_USER_DIR
+### Install Liberty
+2. mvn clean verify   -Dit.test=CDITests -Pliberty-managed  
+### Manually patch 
+3. cp ..../com.ibm.ws.jbatch.cdi.jakarta_1.0.60.jar  ./target/liberty/wlp/lib   # from building https://github.com/scottkurz/open-liberty/tree/batch21-cdi-fixes  (simple, but not expecting anyone not working on Open Liberty will do this)
+### Clean so patch takes effect
+4. cd target/liberty/wlp/;  ./bin/server start --clean;  ./bin/server stop
+### Now ready to run for real... Don't clean or you delete the applied patch!
+5. cd -; mvn verify   -Dit.test=CDITests -Pliberty-managed 
