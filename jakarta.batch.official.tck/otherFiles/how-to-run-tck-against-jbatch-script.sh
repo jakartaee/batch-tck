@@ -2,7 +2,7 @@
 set -x
 
 #------------------------------------------------------------------------------
-# Running Jakarta Batch TCK Version 2.1.0-M1-SNAPSHOT against com.ibm.jbatch 2.0.0
+# Running Jakarta Batch TCK Version 2.1.0-M1 against com.ibm.jbatch 2.0.0
 #
 # This is a documented script that can be used to execute the Jakarta Batch TCK
 # against the com.ibm.jbatch implementation.
@@ -91,21 +91,21 @@ $JAVA_HOME/bin/java -version
 #  location.
 #############################################
 
-TCK_ARTIFACT_ID=jakarta.batch.official.tck-2.1.0-M1-SNAPSHOT
+TCK_ARTIFACT_ID=jakarta.batch.official.tck-2.1.0-M1
 
 #
 # STAGED
 #
 
-#TCK_DOWNLOAD_URL=https://repo1.maven.org/maven2/jakarta/batch/jakarta.batch.official.tck/2.1.0-M1-SNAPSHOT/$TCK_ARTIFACT_ID.zip
-#TCK_DOWNLOAD_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/2.1.0-M1-SNAPSHOT/$TCK_ARTIFACT_ID.zip
+#TCK_DOWNLOAD_URL=https://repo1.maven.org/maven2/jakarta/batch/jakarta.batch.official.tck/2.1.0-M1/$TCK_ARTIFACT_ID.zip
+#TCK_DOWNLOAD_URL=https://oss.sonatype.org/content/repositories/staging/jakarta/batch/jakarta.batch.official.tck/2.1.0-M1/$TCK_ARTIFACT_ID.zip
 
 TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartabatch/tck/eftl/$TCK_ARTIFACT_ID.zip
 
 #
 # OFFICIAL (will look like this)
 #
-#TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/2.0/jakarta.batch.official.tck-2.1.0-M1-SNAPSHOT.zip
+#TCK_DOWNLOAD_URL=https://download.eclipse.org/jakartaee/batch/2.0/jakarta.batch.official.tck-2.1.0-M1.zip
 
 ################
 # DON'T CHANGE
