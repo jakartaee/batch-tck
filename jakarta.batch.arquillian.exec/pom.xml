@@ -15,21 +15,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
         <version>2.1.0-M1-SNAPSHOT</version>
     </parent>
-    -->
 
-    <properties>
-        <tck.version>2.1.0-M1-SNAPSHOT</tck.version>
-    </properties>
-
-    <groupId>jakarta.batch</groupId>
     <artifactId>jakarta.batch.arquillian.exec</artifactId>
-    <version>2.1.0-M1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Jakarta Batch Arquillian TCK Execution</name>
 
@@ -37,14 +29,14 @@
         <dependency>
             <groupId>jakarta.batch</groupId>
             <artifactId>com.ibm.jbatch.tck</artifactId>
-            <version>${tck.version}</version>
+            <version>${batch.tck.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>jakarta.batch</groupId>
             <artifactId>jakarta.batch.arquillian.extension</artifactId>
-            <version>${tck.version}</version>
+            <version>${batch.tck.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
