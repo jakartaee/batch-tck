@@ -22,18 +22,22 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
 import java.util.Properties;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import com.ibm.jbatch.tck.ann.APIRef;
+import com.ibm.jbatch.tck.ann.SpecRef;
+import com.ibm.jbatch.tck.ann.TCKTest;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
+import com.ibm.jbatch.tck.utils.JobOperatorBridge;
+import com.ibm.jbatch.tck.utils.Reporter;
+
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import com.ibm.jbatch.tck.ann.*;
-import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
-import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-
-
+@Disabled("This actually may be ready to go but it was merged in a long time ago and so probably deserves another round of review.")
 public class ListenerOnErrorTests extends BaseJUnit5Test {
     private static JobOperatorBridge jobOp = null;
 

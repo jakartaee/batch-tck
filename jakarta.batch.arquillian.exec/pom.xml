@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Copyright 2012, 2021 International Business Machines Corp. and others
+    
+    See the NOTICE file distributed with this work for additional information regarding copyright 
+    ownership. Licensed under the Apache License, Version 2.0 (the "License"); 
+    you may not use this file except in compliance with the License. You may 
+    obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+    Unless required by applicable law or agreed to in writing, software distributed 
+    under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+    OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+    the specific language governing permissions and limitations under the License. 
+    SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--
+    <parent>
+        <groupId>jakarta.batch</groupId>
+        <artifactId>tck-parent</artifactId>
+        <version>2.1.0-M1-SNAPSHOT</version>
+    </parent>
+    -->
+
+    <properties>
+        <tck.version>2.1.0-M1-SNAPSHOT</tck.version>
+    </properties>
+
+    <groupId>jakarta.batch</groupId>
+    <artifactId>jakarta.batch.arquillian.exec</artifactId>
+    <version>2.1.0-M1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Jakarta Batch Arquillian TCK Execution</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>com.ibm.jbatch.tck</artifactId>
+            <version>${tck.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>jakarta.batch.arquillian.extension</artifactId>
+            <version>${tck.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-container-test-spi</artifactId>
+            <version>1.7.0.Alpha9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.junit5</groupId>
+            <artifactId>arquillian-junit5-core</artifactId>
+            <version>1.7.0.Alpha9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit5</groupId>
+            <artifactId>arquillian-junit5-container</artifactId>
+            <version>1.7.0.Alpha9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jakarta.batch.reporting</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>antrun-plugin</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="---------------------------------------------------------" />
+                                <echo message="At the moment this module will not do anything by default." />
+                                <echo message="See the README.MD instructions for how to enable a Maven "/>
+                                <echo message="profile to execute.  "/>
+                                <echo message="---------------------------------------------------------" />
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ensure-test-properties</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Copy since test.properties is a .gitignore entry -->
+                            <target>
+                                <copy
+                                    file="${project.basedir}/tck.default.sleep.time.properties"
+                                    tofile="${project.basedir}/test.properties" overwrite="false" />
+                                <copy
+                                    file="${project.basedir}/src/test/resources/arquillian.xml"
+                                    todir="${project.build.directory}/test-classes"
+                                    overwrite="true" />
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Not sure how to reference the config files within the dependency 
+                    artifact, so rely on an unpacking first. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>unpack-tck</id>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>jakarta.batch</groupId>
+                                    <artifactId>com.ibm.jbatch.tck</artifactId>
+                                    <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
+                                    <includes>testprofiles/*,ddls/*</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <dependenciesToScan>
+                                <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
+                            </dependenciesToScan>
+                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-EE-suite-includes.txt</includesFile>
+                            <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
+                            <systemPropertyVariables>
+                                <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+    </build>
+
+    <profiles>
+    
+    <!--  Glassfish/Payara, from Ondro:
+   
+   I wasn't able to get these working so rather than outline a Glassfish and/or Payara profile I'll just dump it here as a comment
+    
+    
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-glassfish-remote-6</artifactId>
+            <version>1.0.0.Alpha1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.hk2</groupId>
+            <artifactId>hk2-locator</artifactId>
+            <version>3.0.2</version>
+        </dependency> 
+       <dependency>
+            <groupId>fish.payara.arquillian</groupId>
+            <artifactId>arquillian-payara-server-4-remote</artifactId>
+            <version>1.1</version>
+        </dependency>
+     -->
+        <profile>
+            <id>liberty-managed</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>liberty-managed</name>
+                </property>
+            </activation>
+
+            <properties>
+                <db.url>${project.build.directory}/liberty/wlp/usr/servers/defaultServer/BATCHDB</db.url>
+                <derby.version>10.13.1.1</derby.version>
+            </properties>
+
+            <dependencies>
+            
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>${derby.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+                <dependency>
+                    <groupId>io.openliberty.arquillian</groupId>
+                    <artifactId>arquillian-liberty-managed-jakarta-junit</artifactId>
+                    <version>2.0.1</version>
+                    <type>pom</type>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.junit</groupId>
+                            <artifactId>arquillian-junit-container</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.openliberty.tools</groupId>
+                        <artifactId>liberty-maven-plugin</artifactId>
+                        <version>3.5.1</version>
+                        <configuration>
+                            <copyDependencies>
+                                <dependency>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                </dependency>
+                                <dependency>
+                                    <groupId>com.h2database</groupId>
+                                    <artifactId>h2</artifactId>
+                                    <version>1.4.190</version>
+                                </dependency>
+                            </copyDependencies>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>setup</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>create</goal>
+                                    <goal>install-feature</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.derby</groupId>
+                                <artifactId>derby</artifactId>
+                                <version>${derby.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+                            <url>jdbc:derby:${db.url};create=true</url>
+                            <forceMojoExecution>true</forceMojoExecution>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>create-db</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <autocommit>true</autocommit>
+                                    <srcFiles>
+                                        <srcFile>${project.build.directory}/test-classes/ddls/derby.ddl.jbatch-tck.sql</srcFile>
+                                    </srcFiles>
+                                    <onError>continue</onError>
+                                    <skip>${reuseDB}</skip>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>shutdown-database-so-that-test-can-run</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <url>jdbc:derby:${db.url};shutdown=true</url>
+                                    <skipOnConnectionError>true</skipOnConnectionError>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <arquillian.launch>liberty-managed</arquillian.launch>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

@@ -18,23 +18,27 @@
  */
 package com.ibm.jbatch.tck.tests.jslxml;
 
-import static com.ibm.jbatch.tck.utils.AssertionUtils.*;
+import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 
 import java.util.List;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import com.ibm.jbatch.tck.ann.APIRef;
+import com.ibm.jbatch.tck.ann.SpecRef;
+import com.ibm.jbatch.tck.ann.TCKTest;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
+import com.ibm.jbatch.tck.utils.JobOperatorBridge;
+import com.ibm.jbatch.tck.utils.Reporter;
 
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.ann.*;
-import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
-import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-
+@Disabled("From the notes this seems like it could have small yet non-trivial implications, so not sure if we want to enable now.")
 public class ParallelContextPropagationTests extends BaseJUnit5Test {
 
     private static JobOperatorBridge jobOp = null;

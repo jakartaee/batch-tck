@@ -91,15 +91,7 @@
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-suite-excludes.txt</source>
-            <outputDirectory>/artifacts</outputDirectory>
-        </file>
-        <file>
             <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-includes.txt</source>
-            <outputDirectory>/artifacts</outputDirectory>
-        </file>
-        <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-excludes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
     </files>

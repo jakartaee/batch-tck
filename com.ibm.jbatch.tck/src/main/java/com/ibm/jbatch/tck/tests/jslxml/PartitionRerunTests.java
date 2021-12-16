@@ -23,19 +23,22 @@ import static com.ibm.jbatch.tck.utils.AssertionUtils.assertWithMessage;
 import java.util.List;
 import java.util.Properties;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import com.ibm.jbatch.tck.ann.SpecRef;
+import com.ibm.jbatch.tck.ann.TCKTest;
+import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
+import com.ibm.jbatch.tck.utils.JobOperatorBridge;
+import com.ibm.jbatch.tck.utils.Reporter;
+
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import com.ibm.jbatch.tck.ann.*;
-import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
-import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-
+@Disabled("This really should be part of the core TCK, but we haven't fixed the jbatch bug that would cause this to fail")
 public class PartitionRerunTests extends BaseJUnit5Test {
     static JobOperatorBridge jobOp = null;
 

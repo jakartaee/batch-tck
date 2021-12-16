@@ -45,11 +45,15 @@ public class CDITests extends BaseJUnit5Test {
     private static JobOperatorBridge jobOp = null;
 
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
-     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
+     * @testName: testCDIInject
+     * @assertion: Section 9.3.5.2. Batch Property Values Resolved Based on "current batch artifact" on Thread;   
+     *             Section 9.4.3 CDI-Related Context Requirements
+     * @test_Strategy: Validate within batch job (batchlet) that a CDI Bean injected into the batchlet has a JobContext and batch property value injected into this Bean 
+     * with property and context id values of the injected bean matching the property and context id values of the batchlet itself.  This proves that a non-batch-artifact
+     * Bean can get injected with batch properties and context from the thread of execution.
+     * Then validate again in the JUnit test logic that these injected values match the ones obtained via JobOperator from the job repository.
+     * 
+     * Parameterize test with three artifact loading syntaxes:  bean name, batch.xml lookup, and FQCN
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchlet", "dependentScopedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchlet"})
@@ -80,11 +84,11 @@ public class CDITests extends BaseJUnit5Test {
     }
     
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
-     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
+     * @testName: testCDIInjectContexts
+     * @assertion: Section 9.4.3 CDI-Related Context Requirements 
+     * @test_Strategy: Within batch job (batchlet) inject batch contexts using a variety of injection styles: field, method and constructor parms, 
+     * multiple parameter methods, etc, and use the execution ids built from these injected contexts to set a job exit status. Then validate in the 
+     * JUnit test logic that this exit status matches the expected value, based on the ids obtained from the JobOperator from the just-executed job.
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchletContexts", "dependentScopedBatchletContexts", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletContexts"})
@@ -117,10 +121,13 @@ public class CDITests extends BaseJUnit5Test {
     }
     
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: Don't parameterized tests since the single app scoped bean has different state among each
+     * @testName: testCDIInjectListenerIntoBatchlet 
+     * @assertion: Section 10.5.1. Required Artifact Loading Sequence
+     * @test_Strategy: Inject the same @ApplicationScoped listener into a batchlet used in each step of a three step job.
+     * Configure the listener as a step listener in two of the three steps.  Read a count that gets incremeneted in the listener
+     * instance from each batchlet, to confirm it is a single instance of the @ApplicationScoped listener used across all these usages.
+     * 
+     * Don't parameterize tests since the single app scoped bean would have different state among each, complicating test logic.
      */
     @Test
     public void testCDIInjectListenerIntoBatchlet() throws Exception {
@@ -137,7 +144,7 @@ public class CDITests extends BaseJUnit5Test {
             assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
             String exitStatus = jobExec.getExitStatus();
             Reporter.log("job completed with exit status: " + exitStatus);
-            String expectedJobExitStatus = "2:4:6:";
+            String expectedJobExitStatus = "2:4:5:";
             assertEquals(expectedJobExitStatus, jobExec.getExitStatus(), "Test fails - unexpected job exit status");
             Reporter.log("GOOD result");
         } catch (Exception e) {
@@ -147,10 +154,52 @@ public class CDITests extends BaseJUnit5Test {
     
     
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: 
+     * @testName: testCDIBatchProps
+     * @assertion: Section 9.3.5. CDI-Related Batch Property Requirements
+     * @test_Strategy: Within batch job (batchlet) inject two batch properties using a variety of injection styles: fields (explicitly named and defaulted), 
+     * method and constructor parms, multiple parameter methods, etc.  In the batchlet set a job exit status, then validate in the JUnit test logic that these injected 
+     * values in the exist status match the expected value.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIDependentScopedBatchletProps", "dependentScopedBatchletProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps"})
+    public void testCDIBatchProps(String refName) throws Exception {
+
+        String METHOD = "testCDIBatchProps";
+
+        try {
+        	Properties jobParams = new Properties();
+        	String ctor1 = "CTOR";
+        	String ctor2 = "CAT";
+        	String field1 = "ABC";
+        	String field2 = "APPLE";
+        	String method1 = "XYZ";
+        	String method2 = "X-WING";
+        	jobParams.setProperty("refName", refName);
+        	jobParams.setProperty("c1", ctor1);
+        	jobParams.setProperty("c2", ctor2);
+        	jobParams.setProperty("f1", field1);
+        	jobParams.setProperty("f2", field2);
+        	jobParams.setProperty("m1", method1);
+        	jobParams.setProperty("m2", method2);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_batch_props", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            Reporter.log("job completed with exit status = " + jobExec.getExitStatus());
+            String expectedExitStatus = String.join(":", ctor1, ctor2, field1, field2, method1, method2);
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
+     * @testName: testCDIInjectRepeatProps
+     * @assertion: Section 9.3.5. CDI-Related Batch Property Requirements
+     * @test_Strategy: Within batch job (batchlet) inject two batch properties using a variety of injection styles: fields (explicitly named and defaulted), 
+     * method and constructor parms, multiple parameter methods, etc.  In the batchlet set a job exit status, then validate in the JUnit test logic that these injected 
+     * values in the exist status match the expected value.
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchletRepeatProps", "dependentScopedBatchletRepeatProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletRepeatProps"})
@@ -181,12 +230,11 @@ public class CDITests extends BaseJUnit5Test {
     }
     
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: validate within batch job (batchlet) that job operator, injected into batchlet, provides a view of running
-     * executions that matches that of the job context. Then validate again in the JUnit logic that the exit status matches
-     * the job exec id.
+     * @testName: testCDIJobOperatorInject
+     * @assertion: Section 10.4. JobOperator
+     * @test_Strategy: validate within batch job (batchlet) that @Inject JobOperator within batchlet, provides a view of running
+     * executions that matches that of the JobContext injected into the batchlet (i.e. execution id matches). Set as job exit status
+     * then validate again in the JUnit logic that the exit status matches the job execution id obtained via the JobOperator for the just-executed job.
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIJobOperatorInjectedBatchlet", "jobOperatorInjectedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.JobOperatorInjectedBatchlet"})
@@ -212,13 +260,12 @@ public class CDITests extends BaseJUnit5Test {
     }
     
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
-     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
-     *   Since it's ApplicationScoped we want to run it twice to make sure something's not cached incorrectly.
-     *   
+     * @testName: testCDILazyInject 
+     * @assertion: Section 9.3.5.2. Batch Property Values Resolved Based on "current batch artifact" on Thread
+     * @test_Strategy: In an @ApplicationScoped batchlet obtain batch properties and contexts "lazily" by injecting CDI Instance(s) but then only doing
+     * Instance.get() during job execution, from a batch execution thread, so the correct values can be injected via CDI and the batch runtime. 
+     * Build a job exit status from the batchlet's view of the lazily-obtained property and context values.   Then, from the JUnit logic, validate the
+     * exit status against an  the expected exit status built from parameters passed to the job plus execution ids obtained via the JobOperator for the just-executed job. 
      *   
      */
     @ParameterizedTest
@@ -257,14 +304,13 @@ public class CDITests extends BaseJUnit5Test {
     
     
     /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: validate within batch job (batchlet) that inject bean ctx and property values match the ctx and property values injected into
-     *   the batchlet itself.  Then validate again in the JUnit test logic that these injected values match the ones passed to JobOperator and from the job repository.
-     *   Since it's ApplicationScoped we want to run it twice to make sure something's not cached incorrectly.
-     *   
-     *   
+     * @throws 
+     * @testName: testCDILookup
+     * @assertion: Section 9.3.5.2. Batch Property Values Resolved Based on "current batch artifact" on Thread 
+     * @test_Strategy: In a non-Bean (batch-managed) batchlet artifact,  obtain batch properties and contexts dynamically by "lookup" by 
+     * using CDI#select() from the non-Bean batchlet during job execution, from a batch execution thread, so the correct values can be injected via CDI and the batch runtime. 
+     * Build a job exit status from the batchlet's view of the lazily-obtained property and context values.   Then, from the JUnit logic, validate the
+     * exit status against an  the expected exit status built from parameters passed to the job plus execution ids obtained via the JobOperator for the just-executed job. 
      */
     @ParameterizedTest
     @ValueSource(strings="com.ibm.jbatch.tck.artifacts.cdi.NonCDIBeanBatchlet")
@@ -300,45 +346,7 @@ public class CDITests extends BaseJUnit5Test {
         }
     }
     
-    /**
-     * @throws Exception
-     * @testName: 
-     * @assertion: Section 
-     * @test_Strategy: validate a mix of field plus method/ctor parm injection within test based on status set within job 
-     */
-    @ParameterizedTest
-    @ValueSource(strings = {"CDIDependentScopedBatchletProps", "dependentScopedBatchletProps", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletProps"})
-    public void testCDIBatchProps(String refName) throws Exception {
 
-        String METHOD = "testCDIBatchProps";
-
-        try {
-        	Properties jobParams = new Properties();
-        	String ctor1 = "CTOR";
-        	String ctor2 = "CAT";
-        	String field1 = "ABC";
-        	String field2 = "APPLE";
-        	String method1 = "XYZ";
-        	String method2 = "X-WING";
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("c1", ctor1);
-        	jobParams.setProperty("c2", ctor2);
-        	jobParams.setProperty("f1", field1);
-        	jobParams.setProperty("f2", field2);
-        	jobParams.setProperty("m1", method1);
-        	jobParams.setProperty("m2", method2);
-            Reporter.log("starting job with refName = " + refName);
-            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_batch_props", jobParams);
-            Reporter.log("Job Status = " + jobExec.getBatchStatus());
-            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
-            Reporter.log("job completed with exit status = " + jobExec.getExitStatus());
-            String expectedExitStatus = String.join(":", ctor1, ctor2, field1, field2, method1, method2);
-            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
-            Reporter.log("GOOD result");
-        } catch (Exception e) {
-            handleException(METHOD, e);
-        }
-    }
 
 
     private static void handleException(String methodName, Exception e) throws Exception {
