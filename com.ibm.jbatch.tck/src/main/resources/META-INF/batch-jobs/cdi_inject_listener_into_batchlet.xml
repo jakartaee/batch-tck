@@ -24,9 +24,6 @@
         <batchlet ref="#{jobParameters['batchletName']}"/>
     </step>
     <step id="step3">
-        <listeners>
-        	<listener ref="#{jobParameters['listenerName']}"/>
-        </listeners>
         <batchlet ref="#{jobParameters['batchletName']}"/>
     </step>
 </job>

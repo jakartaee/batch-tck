@@ -409,13 +409,17 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
     /*
      * @testName: testCDIBatchPropsNonString
      *
-     * @assertion: 
+     * @assertion: Section 9.3.3. Conversion from strings to non-String types
      * 
-     * @test_Strategy: Supply job parameters of different types with values matching the
+     * @test_Strategy: Supply job parameters of different types with values matching 
      * expected values hard-coded within the test job batchlet.   Perform validation 
      * within the batchlet that these parameter values get mapped onto corresponding
      * batch properties of (non-String) primitive wrapper types:  Integer, Double, etc.
-     *
+     * injected into the batchlet via:
+     * 
+     *    @Inject @BatchProperty Integer
+     *    
+     * etc.
      */
     @ParameterizedTest
     @ValueSource(strings = {"CDIDependentScopedBatchletPropsNonString", "dependentScopedBatchletPropsNonString", "com.ibm.jbatch.tck.artifacts.cdi.DependentScopedBatchletPropsNonString"})
