@@ -31,7 +31,7 @@
     <artifactId>tck-parent</artifactId>
     <version>2.1.0-M2-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>tck-parent</name>
+    <name>Jakarta Batch TCK parent</name>
     <description>
         Batch processing is a pervasive workload pattern, expressed by a distinct application organization and
         execution model. It is found across virtually every industry, applied to such tasks as statement
