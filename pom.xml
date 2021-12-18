@@ -196,7 +196,9 @@
         <module>com.ibm.jbatch.tck</module>
         <module>com.ibm.jbatch.tck.spi</module>
         <module>com.ibm.jbatch.tck.exec</module>
+        <!--
         <module>jakarta.batch.official.tck</module>
+        -->
         <module>com.ibm.jbatch.tck.sigtest.exec</module>
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
@@ -261,11 +263,13 @@
                 <version>${batch.tck.version}</version>
                 <classifier>javadoc</classifier>
             </dependency>
+            <!--
             <dependency>
                 <groupId>jakarta.batch</groupId>
                 <artifactId>jakarta.batch.official.tck</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>
+            -->
             <dependency>
                 <groupId>com.ibm.jbatch</groupId>
                 <artifactId>com.ibm.jbatch.container</artifactId>
