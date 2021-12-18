@@ -16,9 +16,9 @@ SPDX-License-Identifier: Apache-2.0
 
 ## How to run the TCK against GlassFish
 
-First, install GlassFIsh on the same machine and then start it with the default configuration.
+First, install GlassFish on the same machine and then start it with the default configuration.
 
-Then exxecute:
+Then execute:
 
 ```
 mvn clean verify -Dit.test=CDITests -Pglassfish-remote
