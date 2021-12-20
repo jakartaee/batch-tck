@@ -32,7 +32,8 @@ Create a new maven project that:
 
 * Uses this maven artifact as the parent
 * Contains the Arquillian container for the target runtime, including all its dependencies and configuration for it
-* (Optionally) Create `test.properties` file with properties for the test execution. You can find the defaults in the file `tck.default.sleep.time.properties` in this project
+* (Optionally but strongly recommended) Contains the `maven-dependency-plugin` in the list of plugins. This plugin 
+is pre-configured in the parent POM to copy test resources from the TCK artifact
 * (Optionally) Specify to exclude some artifacts on the maven test classpath from the Arquillian test 
 deployment with the `artifact-group-prefixes-to-ignore` system property if they cause problems
 
@@ -51,6 +52,10 @@ An example for GlassFish:
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -72,7 +77,7 @@ An example for GlassFish:
     </dependencies>
 ```
 
-For a complete example, see the example project in the `jakarta.batch.arquillian.exec.example` directory in the Batch TCK sources.
+For a complete example, see the example project in the `jakarta.batch.arquillian.exec` directory in the Batch TCK sources.
 
 Then run the test suite with the following executed in the new project:
 
