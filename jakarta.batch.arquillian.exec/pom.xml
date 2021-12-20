@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0 -->
         <relativePath>../jakarta.batch.arquillian.exec-parent</relativePath>
     </parent>
 
-    <artifactId>jakarta.batch.arquillian.exec.example</artifactId>
+    <artifactId>jakarta.batch.arquillian.exec</artifactId>
     <packaging>pom</packaging>
     <name>Jakarta Batch Arquillian TCK Execution Example</name>
 
