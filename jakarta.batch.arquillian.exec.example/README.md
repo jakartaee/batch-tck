@@ -16,7 +16,12 @@ SPDX-License-Identifier: Apache-2.0
 
 ## How to run the TCK against GlassFish
 
-First, install GlassFish on the same machine and then start it with the default configuration.
+NOTE: The TCK doesn't pass with any existing GlassFish release yet. 
+The work on GlassFish 7.x has only started and support for Batch 2.1 has not been implemented there yet.
+
+First, install GlassFish on the same machine and then start it with the default configuration. (`asadmin start-domain`).
+
+Then start the default database with `asadmin start-database`).
 
 Then execute:
 

@@ -203,7 +203,7 @@
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
         <module>jakarta.batch.reporting</module>
-        <module>jakarta.batch.arquillian.exec</module>
+        <module>jakarta.batch.arquillian.exec-parent</module>
         <module>jakarta.batch.arquillian.extension</module>
     </modules>
 
