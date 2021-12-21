@@ -19,6 +19,7 @@ SPDX-License-Identifier: Apache-2.0
 2. Uses the official Arquillian JUnit5 extension and enables it globally via a service loader file
 3. Enables the Arquillian JUnit5 extension by setting `junit.jupiter.extensions.autodetection.enabled` system property to true in pom.xml
 4. Uses an Arquillian extension specific for Batch TCK to create a deployment for each test 
+5. Generates the `test.properties` file with default test properties, which can be later modified and versioned. Existing `test.properties` file won't be overwritten.
 
 The Batch TCK Arquillian extension is a separate module. It contains 
 
@@ -36,6 +37,7 @@ Create a new maven project that:
 is pre-configured in the parent POM to copy test resources from the TCK artifact
 * (Optionally) Specify to exclude some artifacts on the maven test classpath from the Arquillian test 
 deployment with the `artifact-group-prefixes-to-ignore` system property if they cause problems
+* (Optionally) Execute `mvn pre-integration-test` and then modify the generated `test.properties` file to adjust system properties for the tests
 
 An example for GlassFish:
 
