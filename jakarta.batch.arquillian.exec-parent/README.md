@@ -25,7 +25,7 @@ The Batch TCK Arquillian extension is a separate module. It contains
 
 * The Arquillian extension class
 * A service loader file to register the extension with Arquillian
-* A service leader file to register the Arquillian JUnit 5 extension with JUnit 5 (because the it's not included in the extension module)
+* A service loader file to register the Arquillian JUnit 5 extension with JUnit 5 (because it's not included in the extension module)
 
 # How to run the TCK
 
@@ -45,7 +45,7 @@ An example for GlassFish:
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>jakarta.batch.arquillian.exec-parent</artifactId>
-        <version>2.1.0-M1</version>
+        <version>2.1.0-M2-SNAPSHOT</version>
     </parent>
 
     <artifactId>glassfish-batch-tck-execution</artifactId>

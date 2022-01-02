@@ -106,6 +106,16 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     }
 
     private Archive<?> generateDeployment() {
+        /**
+         * As coded, doesn't use profile to resolve even if profile is active in top-level execution. 
+         *
+         * During staging, we need to resolve against artifacts not published to Maven Central, so this next line would need to look something like:
+         *
+         *   Maven.resolver().loadPomFromFile("pom.xml", "staging") ...
+         *
+         * See javadoc:
+         *   https://repository.jboss.org/nexus/content/repositories/unzip/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api-maven/3.1.4/shrinkwrap-resolver-api-maven-3.1.4-javadoc.jar-unzip/index.html
+         */
         MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml")
                 .importDependencies(ScopeType.COMPILE, ScopeType.TEST)
                 .resolve().withTransitivity().asResolvedArtifact();
