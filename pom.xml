@@ -202,6 +202,7 @@
         <module>com.ibm.jbatch.tck.sigtest.exec</module>
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
+        <module>com.ibm.jbatch.tck.appbean</module>
         <module>jakarta.batch.reporting</module>
         <module>jakarta.batch.arquillian.exec</module>
         <module>jakarta.batch.arquillian.extension</module>
@@ -232,6 +233,11 @@
             <dependency>
                 <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck.ann.proc</artifactId>
+                <version>${batch.tck.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.batch</groupId>
+                <artifactId>com.ibm.jbatch.tck.appbean</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>
             <dependency>

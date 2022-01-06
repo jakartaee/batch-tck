@@ -1,0 +1,1 @@
+*/tests/appjoboperatorbean/InjectAppProvidedJobOperatorTests.java
