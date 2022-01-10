@@ -31,8 +31,8 @@ public class JobOperatorInjectedBatchlet implements Batchlet {
 		}
 		jobCtx.setExitStatus(Long.toString(jobExecId));
 		
-		return "OK";
-	}
+		return jobOperator.getClass().getCanonicalName();
+	}	
 
 
 	@Override
