@@ -63,6 +63,11 @@
         </dependency>
         <dependency>
             <groupId>jakarta.batch</groupId>
+            <artifactId>com.ibm.jbatch.tck.appbean</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
             <artifactId>com.ibm.jbatch.tck.spi</artifactId>
             <scope>test</scope>
         </dependency>
@@ -149,6 +154,12 @@
                             <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
                             <includes>testprofiles/*</includes>
                         </artifactItem>
+                        <artifactItem>
+                            <groupId>jakarta.batch</groupId>
+                            <artifactId>com.ibm.jbatch.tck.appbean</artifactId>
+                            <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
+                            <includes>testprofiles/*</includes>
+                        </artifactItem>
                     </artifactItems>
                 </configuration>
             </plugin>
@@ -158,20 +169,38 @@
                 <version>${version.org.apache.maven.plugins.maven-failsafe-plugin}</version>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <classpathDependencyExcludes>jakarta.batch:com.ibm.jbatch.tck.appbean</classpathDependencyExcludes>
+                            <dependenciesToScan>
+                                <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
+                            </dependenciesToScan>
+                                <!-- Rather than using the 'tck.default.sleep.time.properties' with the com.ibm.jbatch.tck module and merging/combining the jbatch-specific properties 
+                                    we simply duplicate (more or less) the TCK properties in this single properties file that also includes the jbatch-specific config properties. -->
+                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-includes.txt</includesFile>
+                            <failIfNoTests>false</failIfNoTests>
+                            <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>integration-test-joboperator-bean</id>
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
                         <configuration>
                             <dependenciesToScan>
-                                <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
+                                <dependency>jakarta.batch:com.ibm.jbatch.tck.appbean</dependency>
                             </dependenciesToScan>
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-includes.txt</includesFile>
-                                <!-- Rather than using the 'tck.default.sleep.time.properties' with the com.ibm.jbatch.tck module and merging/combining the jbatch-specific properties 
-                                    we simply duplicate (more or less) the TCK properties in this single properties file that also includes the jbatch-specific config properties. -->
+                            <failIfNoTests>false</failIfNoTests>
+                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-appjoboperator-suite-includes.txt</includesFile>
+
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>verify</id>
                         <goals>
