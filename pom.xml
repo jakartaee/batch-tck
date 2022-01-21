@@ -168,8 +168,8 @@
         <version.java>11</version.java>
 
         <!-- Dependencies -->
-        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>3.0.0</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
-        <version.jakarta.inject.jakarta.inject-api>2.0.0</version.jakarta.inject.jakarta.inject-api>
+        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>4.0.0.Beta3</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
+        <version.jakarta.inject.jakarta.inject-api>2.0.1.MR</version.jakarta.inject.jakarta.inject-api>
         <version.jakarta.xml.bind.jakarta.xml.bind-api>3.0.0</version.jakarta.xml.bind.jakarta.xml.bind-api>
         <version.org.glassfish.jaxb.jaxb-runtime>3.0.0</version.org.glassfish.jaxb.jaxb-runtime>
 
@@ -189,7 +189,7 @@
         <version.org.apache.maven.plugins.maven-source-plugin>2.2.1</version.org.apache.maven.plugins.maven-source-plugin>
         <version.org.apache.maven.plugins.maven-surefire-plugin>2.18</version.org.apache.maven.plugins.maven-surefire-plugin>
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
-        <version.org.jboss.weld.se.weld-se-core>4.0.0.Alpha1</version.org.jboss.weld.se.weld-se-core>
+        <version.org.jboss.weld.se.weld-se-core>5.0.0.Alpha2</version.org.jboss.weld.se.weld-se-core>
     </properties>
 
     <modules>
