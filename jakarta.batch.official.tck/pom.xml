@@ -43,10 +43,6 @@
             <artifactId>junit-jupiter</artifactId>
         </dependency>        
         <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-        </dependency>
-        <dependency>
             <groupId>jakarta.batch</groupId>
             <artifactId>jakarta.batch-api</artifactId>
         </dependency>

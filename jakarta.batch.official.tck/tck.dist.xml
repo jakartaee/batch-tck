@@ -39,20 +39,19 @@
                 <include>jakarta.batch:com.ibm.jbatch.tck:jar:javadoc</include>
             </includes>
             <outputDirectory>artifacts</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
         </dependencySet>
         <dependencySet>
             <includes>
-                <include>org.testng:testng</include>
-                <include>com.beust:jcommander</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck.spi</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck.spi:jar:sources</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck.spi:jar:javadoc</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck:jar:sources</include>
+                <include>jakarta.batch:com.ibm.jbatch.tck:jar:javadoc</include>
             </includes>
-            <excludes>
-                <!-- Transitive dependencies of the above we don't need.  We do want the JAXB ones -->
-                <exclude>*:bsh*</exclude>
-                <exclude>jakarta.el:*</exclude>
-                <exclude>jakarta.interceptor:*</exclude>
-            </excludes>
-            <useTransitiveFiltering>true</useTransitiveFiltering>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory>artifacts</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
         </dependencySet>
     </dependencySets>
 
@@ -72,7 +71,7 @@
         </file>
         <file>
             <source>otherFiles/CoverageStatement.md</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>/doc</outputDirectory>
         </file>
         <file>
             <source>otherFiles/how-to-run-tck-against-jbatch-script.sh</source>
@@ -87,12 +86,52 @@
             <outputDirectory>/doc</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-suite-includes.txt</source>
+            <source>../com.ibm.jbatch.tck.appbean/src/main/resources/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
-            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-suite-includes.txt</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-SE-core-suite-includes.txt</source>
             <outputDirectory>/artifacts</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck/src/main/resources/testprofiles/batch-tck-impl-EE-platform-core-suite-includes.txt</source>
+            <outputDirectory>/artifacts</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck.exec/config/tck.exec.properties</source>
+            <outputDirectory>/runners/se-classpath/config</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck.exec/pom.xml</source>
+            <outputDirectory>/runners/se-classpath</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck.sigtest.exec/pom.xml</source>
+            <outputDirectory>/runners/sigtest</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck.sigtest.exec/pom.xml</source>
+            <outputDirectory>/runners/sigtest</outputDirectory>
+        </file>
+        <file>
+            <source>../jakarta.batch.arquillian.exec/pom.xml</source>
+            <outputDirectory>/runners/platform-arquillian</outputDirectory>
+        </file>
+        <file>
+            <source>../jakarta.batch.arquillian.exec/README.md</source>
+            <outputDirectory>/runners/platform-arquillian</outputDirectory>
+        </file>
+        <file>
+            <source>../jakarta.batch.arquillian.exec/src/main/liberty/config/server.xml</source>
+            <outputDirectory>/runners/platform-arquillian/src/main/liberty/config</outputDirectory>
+        </file>
+        <file>
+            <source>../jakarta.batch.arquillian.exec/src/test/resources/arquillian.xml</source>
+            <outputDirectory>/runners/platform-arquillian/src/test/resources</outputDirectory>
+        </file>
+        <file>
+            <source>../jakarta.batch.arquillian.exec/tck.default.sleep.time.properties</source>
+            <outputDirectory>/runners/platform-arquillian</outputDirectory>
         </file>
     </files>
 </assembly>
