@@ -6,6 +6,8 @@ import org.jboss.arquillian.core.spi.LoadableExtension.ExtensionBuilder;
 
 public class ArquillianExtension implements LoadableExtension {
 
+	public static final String PROPERTY_PREFIX = "arquillian.extensions.jakarta.batch.";
+	
     @Override
     public void register(ExtensionBuilder builder) {
         builder.service(DeploymentScenarioGenerator.class, MavenTestDependenciesDeploymentPackager.class);

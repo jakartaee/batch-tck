@@ -11,7 +11,12 @@ import org.jboss.shrinkwrap.resolver.api.maven.*;
 
 public class MavenTestDependenciesDeploymentPackager implements DeploymentScenarioGenerator {
 
+    public static final String PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN = ArquillianExtension.PROPERTY_PREFIX + "appbean";
+    
     private Archive<?> generateDeployment() {
+
+        Boolean includeAppBean = Boolean.getBoolean(PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN);
+
         MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml")
                 .importDependencies(ScopeType.COMPILE, ScopeType.TEST)
                 .resolve().withTransitivity().asResolvedArtifact();
@@ -28,8 +33,17 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
                     || groupId.startsWith("org.apache.maven")) {
                 continue;
             }
+            
             if ("jar".equals(artifact.getExtension())) {
-                archive = archive.addAsLibrary(artifact.asFile());
+            	// Conditionally exclude the app-packaged JobOperator bean
+            	boolean isAppBeanArtifact = "com.ibm.jbatch.tck.appbean".equals(artifact.getCoordinate().getArtifactId());
+            	if (isAppBeanArtifact) {
+            		if (includeAppBean) {
+            		    archive = archive.addAsLibrary(artifact.asFile());
+            		} 
+            	} else {
+            	    archive = archive.addAsLibrary(artifact.asFile());
+            	}
             }
         }
         return archive;

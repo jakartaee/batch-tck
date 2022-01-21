@@ -154,12 +154,6 @@
                             <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
                             <includes>testprofiles/*</includes>
                         </artifactItem>
-                        <artifactItem>
-                            <groupId>jakarta.batch</groupId>
-                            <artifactId>com.ibm.jbatch.tck.appbean</artifactId>
-                            <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
-                            <includes>testprofiles/*</includes>
-                        </artifactItem>
                     </artifactItems>
                 </configuration>
             </plugin>
@@ -169,7 +163,7 @@
                 <version>${version.org.apache.maven.plugins.maven-failsafe-plugin}</version>
                 <executions>
                     <execution>
-                        <id>default-cli</id>
+                        <id>core</id>
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
@@ -180,12 +174,11 @@
                             </dependenciesToScan>
                             <failIfNoTests>false</failIfNoTests>
                             <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-core-suite-includes.txt</includesFile>
-
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>integration-test-joboperator-bean</id>
+                        <id>appbean</id>
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
@@ -194,12 +187,10 @@
                                 <dependency>jakarta.batch:com.ibm.jbatch.tck.appbean</dependency>
                             </dependenciesToScan>
                             <failIfNoTests>false</failIfNoTests>
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-appjoboperator-suite-includes.txt</includesFile>
-
+                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</includesFile>
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
                         </configuration>
                     </execution>
-
                     <execution>
                         <id>verify</id>
                         <goals>
