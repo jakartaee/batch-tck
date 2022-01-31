@@ -152,11 +152,10 @@
                             <dependenciesToScan>
                                 <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
                             </dependenciesToScan>
-                                <!-- Rather than using the 'tck.default.sleep.time.properties' with the com.ibm.jbatch.tck module and merging/combining the jbatch-specific properties 
-                                    we simply duplicate (more or less) the TCK properties in this single properties file that also includes the jbatch-specific config properties. -->
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-suite-includes.txt</includesFile>
                             <failIfNoTests>false</failIfNoTests>
                             <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-SE-core-suite-includes.txt</includesFile>
+                            <!-- Rather than using the 'tck.default.sleep.time.properties' with the com.ibm.jbatch.tck module and merging/combining the jbatch-specific properties
+                                we simply duplicate (more or less) the TCK properties in this single properties file that also includes the jbatch-specific config properties. -->
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
                         </configuration>
                     </execution>
