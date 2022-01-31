@@ -138,7 +138,7 @@
             <outputDirectory>/runners/platform-arquillian/src/test/resources</outputDirectory>
         </file>
         <file>
-            <source>../jakarta.batch.arquillian.exec/tck.default.sleep.time.properties</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/tck.default.sleep.time.properties</source>
             <outputDirectory>/runners/platform-arquillian</outputDirectory>
         </file>
     </files>
