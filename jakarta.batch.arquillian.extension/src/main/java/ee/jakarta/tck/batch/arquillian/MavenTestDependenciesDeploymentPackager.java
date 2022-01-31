@@ -14,7 +14,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package jbatch.arquillian.extension;
+package ee.jakarta.tck.batch.arquillian;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,8 +32,6 @@ import org.jboss.shrinkwrap.resolver.api.maven.*;
 
 public class MavenTestDependenciesDeploymentPackager implements DeploymentScenarioGenerator {
 
-    public static final String PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN = ArquillianExtension.PROPERTY_PREFIX + "appbean";
-
     // Artifacts with a group matching one of these prefixes will not be added to the package. 
     // Expects a comma-separated list of prefixes.
     public static final String PROPERTY_KEY_GROUP_PREFIXES_TO_IGNORE = ArquillianExtension.PROPERTY_PREFIX + "groupPrefixesToIgnore";
@@ -43,14 +41,11 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
 
     private List<String> groupPrefixesToIgnore = null;
 
-    boolean includeAppBean = false;
-
     private DeploymentPackage deploymentPackage = DeploymentPackage.WAR;
 
     public MavenTestDependenciesDeploymentPackager() {
         initListOfIgnoredArtifactPrefixes();
         initDeploymentPackage();
-        includeAppBean = Boolean.getBoolean(PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN);
     }
 
     public enum DeploymentPackage {
@@ -111,40 +106,18 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     }
 
     private Archive<?> generateDeployment() {
-        /**
-         * As coded, doesn't use profile to resolve even if profile is active in
-         * top-level execution.
-         *
-         * During staging, we need to resolve against artifacts not published to
-         * Maven Central, so this next line would need to look something like:
-         *
-         * Maven.resolver().loadPomFromFile("pom.xml", "staging") ...
-         *
-         * See javadoc:
-         * https://repository.jboss.org/nexus/content/repositories/unzip/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api-maven/3.1.4/shrinkwrap-resolver-api-maven-3.1.4-javadoc.jar-unzip/index.html
-         */
         MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml")
                 .importDependencies(ScopeType.COMPILE, ScopeType.TEST)
                 .resolve().withTransitivity().asResolvedArtifact();
 
         final Stream<File> streamArtifactsToAdd = Stream.of(resolvedArtifacts)
                 .filter(this::artifactNotToIgnore)
-                .filter(this::notAppBeanArtifactToIgnore)
                 .filter(artifact -> {
                     return "jar".equals(artifact.getExtension());
                 }).map(MavenResolvedArtifact::asFile);
 
         Archive<?> archive = deploymentPackage.createDeploymentArchive(streamArtifactsToAdd);
         return archive;
-    }
-
-    private boolean notAppBeanArtifactToIgnore(MavenResolvedArtifact artifact) {
-        if (!includeAppBean) {
-            boolean isAppBeanArtifact = "com.ibm.jbatch.tck.appbean".equals(artifact.getCoordinate().getArtifactId());
-            return !isAppBeanArtifact;
-        } else {
-            return true;
-        }
     }
 
     private boolean artifactNotToIgnore(MavenResolvedArtifact artifact) {

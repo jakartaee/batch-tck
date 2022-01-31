@@ -168,14 +168,13 @@
         <version.java>11</version.java>
 
         <!-- Dependencies -->
-        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>3.0.0</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
-        <version.jakarta.inject.jakarta.inject-api>2.0.0</version.jakarta.inject.jakarta.inject-api>
+        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>4.0.0.Beta3</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
+        <version.jakarta.inject.jakarta.inject-api>2.0.1.MR</version.jakarta.inject.jakarta.inject-api>
         <version.jakarta.xml.bind.jakarta.xml.bind-api>3.0.0</version.jakarta.xml.bind.jakarta.xml.bind-api>
         <version.org.glassfish.jaxb.jaxb-runtime>3.0.0</version.org.glassfish.jaxb.jaxb-runtime>
 
         <version.org.junit.jupiter>5.6.1</version.org.junit.jupiter>
         <version.org.junit.platform>1.7.2</version.org.junit.platform>
-        <version.com.beust.jcommander>1.60</version.com.beust.jcommander>
         <version.org.sonatype.plugins.nexus-staging-maven-plugin>1.6.6</version.org.sonatype.plugins.nexus-staging-maven-plugin>
         <version.com.mycila.maven-license-plugin.maven-license-plugin>1.10.b1</version.com.mycila.maven-license-plugin.maven-license-plugin>
         <version.org.apache.maven.plugins.maven-antrun-plugin>1.8</version.org.apache.maven.plugins.maven-antrun-plugin>
@@ -190,16 +189,14 @@
         <version.org.apache.maven.plugins.maven-surefire-plugin>2.18</version.org.apache.maven.plugins.maven-surefire-plugin>
         <version.org.apache.maven.plugins.maven-dependency-plugin>3.2.0</version.org.apache.maven.plugins.maven-dependency-plugin>
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
-        <version.org.jboss.weld.se.weld-se-core>4.0.0.Alpha1</version.org.jboss.weld.se.weld-se-core>
+        <version.org.jboss.weld.se.weld-se-core>5.0.0.Alpha2</version.org.jboss.weld.se.weld-se-core>
     </properties>
 
     <modules>
         <module>com.ibm.jbatch.tck</module>
         <module>com.ibm.jbatch.tck.spi</module>
         <module>com.ibm.jbatch.tck.exec</module>
-        <!--
         <module>jakarta.batch.official.tck</module>
-        -->
         <module>com.ibm.jbatch.tck.sigtest.exec</module>
         <module>com.ibm.jbatch.tck.ann</module>
         <module>com.ibm.jbatch.tck.ann.proc</module>
@@ -318,11 +315,6 @@
                 <version>${version.org.junit.platform}</version>
             </dependency>
             <dependency>
-                <groupId>net.java.sigtest</groupId>
-                <artifactId>sigtestdev</artifactId>
-                <version>${version.net.java.sigtest.sigtestdev}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.derby</groupId>
                 <artifactId>derby</artifactId>
                 <version>10.10.1.1</version>
@@ -336,11 +328,6 @@
                 <groupId>org.jboss.weld.se</groupId>
                 <artifactId>weld-se-core</artifactId>
                 <version>${version.org.jboss.weld.se.weld-se-core}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.beust</groupId>
-                <artifactId>jcommander</artifactId>
-                <version>${version.com.beust.jcommander}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

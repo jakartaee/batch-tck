@@ -18,67 +18,16 @@ SPDX-License-Identifier: Apache-2.0 -->
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>jakarta.batch.arquillian.exec-parent</artifactId>
-        <version>2.1.0-M2-SNAPSHOT</version>
+        <version>2.1.0-M1</version>
         <relativePath>../jakarta.batch.arquillian.exec-parent</relativePath>
     </parent>
 
-    <artifactId>jakarta.batch.arquillian.exec</artifactId>
+    <artifactId>jakarta.batch.arquillian.exec.example</artifactId>
     <packaging>pom</packaging>
-    <name>Jakarta Batch Arquillian TCK Execution</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>jakarta.batch</groupId>
-            <artifactId>com.ibm.jbatch.tck</artifactId>
-            <version>${batch.tck.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.batch</groupId>
-            <artifactId>com.ibm.jbatch.tck.appbean</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.batch</groupId>
-            <artifactId>jakarta.batch.arquillian.extension</artifactId>
-            <version>${batch.tck.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-container-test-spi</artifactId>
-            <version>1.7.0.Alpha9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.junit5</groupId>
-            <artifactId>arquillian-junit5-core</artifactId>
-            <version>1.7.0.Alpha9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.junit5</groupId>
-            <artifactId>arquillian-junit5-container</artifactId>
-            <version>1.7.0.Alpha9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>jakarta.batch.reporting</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>1.7.30</version>
-        </dependency>
-    </dependencies>
+    <name>Jakarta Batch Arquillian TCK Execution Example</name>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -101,62 +50,10 @@ SPDX-License-Identifier: Apache-2.0 -->
                 </executions>
             </plugin>
         </plugins>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>core</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <!-- This exclude describes how we want the classpath to look but this has no effect, we're going to use custom ShrinkWrap logic to build our Deployment for Arquillian -->
-                            <classpathDependencyExcludes>jakarta.batch:com.ibm.jbatch.tck.appbean</classpathDependencyExcludes>
-                            <dependenciesToScan>
-                                <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
-                            </dependenciesToScan>
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-EE-platform-core-suite-includes.txt</includesFile>
-                            <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
-                            <systemPropertyVariables>
-                                <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>appbean</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <dependenciesToScan>
-                                <dependency>jakarta.batch:com.ibm.jbatch.tck.appbean</dependency>
-                            </dependenciesToScan>
-                            <failIfNoTests>false</failIfNoTests>
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</includesFile>
-                            <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
-                            <systemPropertyVariables>
-                                <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                                <!-- The property to have our custom ShrinkWrap logic add the joboperator bean into our app Deployment for Arquillian -->
-                                <arquillian.extensions.jakarta.batch.appbean>true</arquillian.extensions.jakarta.batch.appbean>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>verify</id>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </pluginManagement>
     </build>
 
     <profiles>
+    
         <profile>
             <id>glassfish-remote</id>
             <activation>

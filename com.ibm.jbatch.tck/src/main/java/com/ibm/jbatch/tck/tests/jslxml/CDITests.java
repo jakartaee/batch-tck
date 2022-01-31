@@ -230,6 +230,36 @@ public class CDITests extends BaseJUnit5Test {
     }
     
     /**
+     * @testName: testCDIJobOperatorInject
+     * @assertion: Section 10.4. JobOperator
+     * @test_Strategy: validate within batch job (batchlet) that @Inject JobOperator within batchlet, provides a view of running
+     * executions that matches that of the JobContext injected into the batchlet (i.e. execution id matches). Set as job exit status
+     * then validate again in the JUnit logic that the exit status matches the job execution id obtained via the JobOperator for the just-executed job.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"CDIJobOperatorInjectedBatchlet", "jobOperatorInjectedBatchlet", "com.ibm.jbatch.tck.artifacts.cdi.JobOperatorInjectedBatchlet"})
+    public void testCDIJobOperatorInject(String refName) throws Exception {
+
+        String METHOD = "testCDIJobOperatorInject";
+
+        try {
+        	Properties jobParams = new Properties();
+        	jobParams.setProperty("refName", refName);
+            Reporter.log("starting job with refName = " + refName);
+            JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
+            Reporter.log("Job Status = " + jobExec.getBatchStatus());
+            assertEquals(BatchStatus.COMPLETED, jobExec.getBatchStatus(), "Job didn't complete successfully");
+            String exitStatus = jobExec.getExitStatus();
+            Reporter.log("job completed with exit status: " + exitStatus);
+            String expectedExitStatus = Long.toString(jobExec.getExecutionId());
+            assertEquals(expectedExitStatus, jobExec.getExitStatus(), "Test fails - unexpected exit status");
+            Reporter.log("GOOD result");
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
+    
+    /**
      * @testName: testCDILazyInject 
      * @assertion: Section 9.3.5.2. Batch Property Values Resolved Based on "current batch artifact" on Thread
      * @test_Strategy: In an @ApplicationScoped batchlet obtain batch properties and contexts "lazily" by injecting CDI Instance(s) but then only doing
