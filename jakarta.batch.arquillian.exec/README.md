@@ -19,9 +19,38 @@ SPDX-License-Identifier: Apache-2.0
 NOTE: The TCK doesn't pass with any existing GlassFish release yet. 
 The work on GlassFish 7.x has only started and support for Batch 2.1 has not been implemented there yet.
 
-First, install GlassFish on the same machine and then start it with the default configuration. (`asadmin start-domain`).
+First, install GlassFish on the same machine and then start it with the default configuration:
 
-Then start the default database with `asadmin start-database`).
+```
+asadmin start-domain domain1
+```
+
+Alternatively, create a brand-new domain and start it:
+
+```
+asadmin create-domain --checkports=false --nopassword batch
+asadmin start-domain batch
+```
+
+Then start the default database with:
+
+```
+asadmin start-database
+```
+
+Then create the database `batch` and execute the `derby.ddl.jbatch-tck.sql` DDL script to prepare its structure. 
+You can do that with the following steps:
+
+1. Copy the DDL file `com.ibm.jbatch.tck/src/main/resources/ddls/derby.ddl.jbatch-tck.sql` (from the root of the batch-tck source repository)
+2. Modify the DDL file to insert a line at the top: `CONNECT 'jdbc:derby://localhost:1527/batch;create=true';`
+3. Navigate to the `javadb` directory in the GlassFish installation and execute the following: `bin/ij path/to/the/modified/derby.ddl.jbatch-tck.sql`
+
+Then run the following commands to create the JDBC resource `jdbc/orderDB` batch database.
+
+```
+asadmin create-jdbc-connection-pool --datasourceClassname=org.apache.derby.jdbc.ClientDataSource40 --resType=javax.sql.DataSource  --property DatabaseName=batch:serverName=localhost:PortNumber=1527:User=batch:Password=batch batchtck
+asadmin create-jdbc-resource --poolName=batchtck jdbc/orderDB
+```
 
 Then execute:
 
