@@ -14,7 +14,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package jbatch.arquillian.extension;
+package ee.jakarta.tck.batch.arquillian;
 
 import java.io.File;
 import java.util.ArrayList;

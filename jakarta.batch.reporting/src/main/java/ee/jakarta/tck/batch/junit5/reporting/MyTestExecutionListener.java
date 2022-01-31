@@ -15,7 +15,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package jakarta.batch.junit5reporting;
+package ee.jakarta.tck.batch.junit5.reporting;
 
 import java.util.logging.Level;
 import java.util.logging.LogManager;
