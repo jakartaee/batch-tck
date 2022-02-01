@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation
+ * Copyright (c) 2021-2022 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -29,6 +29,8 @@ import org.jboss.arquillian.container.test.spi.client.deployment.*;
 import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.Asset;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.*;
 
@@ -47,7 +49,7 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
 
     boolean includeAppBean = false;
 
-    private DeploymentPackage deploymentPackage = DeploymentPackage.WAR;
+    private DeploymentPackageType deploymentPackageType = DeploymentPackageType.WAR;
 
     public MavenTestDependenciesDeploymentPackager() {
         initListOfIgnoredArtifactPrefixes();
@@ -55,46 +57,6 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
         includeAppBean = Boolean.getBoolean(PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN);
     }
 
-    public enum DeploymentPackage {
-        WAR {
-            @Override
-            protected Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-                WebArchive archive = ShrinkWrap
-                        .create(WebArchive.class, "jbatch-test-package-all.war")
-                        .as(WebArchive.class);
-                streamArtifactsToAdd.forEach(archive::addAsLibrary);
-                return archive;
-            }
-        }, EJBJAR {
-            @Override
-            protected Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-                return createEarDeploymentArchive(streamArtifactsToAdd);
-            }
-
-        }, EAR {
-            @Override
-            protected Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-                return createEarDeploymentArchive(streamArtifactsToAdd);
-            }
-
-        };
-
-        public static DeploymentPackage fromString(String value) {
-            if (value == null || value.isEmpty()) {
-                return null;
-            }
-            String upperCaseValue = value.toUpperCase();
-            // remove special chars, e.g. ejb-jar is turned into EJBJAR
-            upperCaseValue = upperCaseValue.replaceAll("-|_|\\.| ", "");
-            return DeploymentPackage.valueOf(upperCaseValue);
-        }
-
-        protected abstract Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd);
-
-        protected Archive<?> createEarDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-            throw new RuntimeException("TODO - Not implemented yet!");
-        }
-    }
 
     public List<String> getGroupPrefixesToIgnore() {
         return groupPrefixesToIgnore;
@@ -104,12 +66,12 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
         this.groupPrefixesToIgnore = groupPrefixesToIgnore;
     }
 
-    public DeploymentPackage getDeploymentPackage() {
-        return deploymentPackage;
+    public DeploymentPackageType getDeploymentPackageType() {
+        return deploymentPackageType;
     }
 
-    public void setDeploymentPackage(DeploymentPackage deploymentPackage) {
-        this.deploymentPackage = deploymentPackage;
+    public void setDeploymentPackageType(DeploymentPackageType deploymentPackageType) {
+        this.deploymentPackageType = deploymentPackageType;
     }
 
     private Archive<?> generateDeployment() {
@@ -129,15 +91,18 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
                 .importDependencies(ScopeType.COMPILE, ScopeType.TEST)
                 .resolve().withTransitivity().asResolvedArtifact();
 
-        final Stream<File> streamArtifactsToAdd = Stream.of(resolvedArtifacts)
-                .filter(this::artifactNotToIgnore)
+        DeploymentPackageType.PackageBuilder packageBuilder = deploymentPackageType.getPackageBuilder();
+
+        Stream.of(resolvedArtifacts)
+                .filter(this::artifactShouldntBeIgnored)
                 .filter(this::notAppBeanArtifactToIgnore)
                 .filter(artifact -> {
                     return "jar".equals(artifact.getExtension());
-                }).map(MavenResolvedArtifact::asFile);
+                })
+                .map(MavenResolvedArtifact::asFile)
+                .forEach(packageBuilder::addArtifact);
 
-        Archive<?> archive = deploymentPackage.createDeploymentArchive(streamArtifactsToAdd);
-        return archive;
+        return packageBuilder.build();
     }
 
     private boolean notAppBeanArtifactToIgnore(MavenResolvedArtifact artifact) {
@@ -149,7 +114,7 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
         }
     }
 
-    private boolean artifactNotToIgnore(MavenResolvedArtifact artifact) {
+    private boolean artifactShouldntBeIgnored(MavenResolvedArtifact artifact) {
         String groupId = artifact.getCoordinate().getGroupId();
         final boolean groupMatchesAPrefix = groupPrefixesToIgnore.stream()
                 .anyMatch(prefix -> groupId.startsWith(prefix));
@@ -165,10 +130,10 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
 
     private void initListOfIgnoredArtifactPrefixes() {
         groupPrefixesToIgnore = new ArrayList<>(Arrays.asList(
-                "org.jboss.shrinkwrap",
-                "arquillian.extension",
-                "org.codehaus.plexus",
-                "org.apache.maven"));
+                "org.jboss.shrinkwrap", // ShrinkWrap - creates a deployment, not needed in the deployment itself
+                "jbatch.arquillian.extension", // This extension - not needed in the deployment itself
+                "org.codehaus.plexus",  // Maven classes - not needed in the deployment itself
+                "org.apache.maven"));   // Maven classes - not needed in the deployment itself
         String additionalPrefixesFromProperties = System.getProperty(PROPERTY_KEY_GROUP_PREFIXES_TO_IGNORE);
         if (additionalPrefixesFromProperties != null) {
             List<String> prefixesFromPropertiesList = Arrays.asList(additionalPrefixesFromProperties.split("\\s*,\\s*"));
@@ -179,7 +144,7 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     private void initDeploymentPackage() {
         String packageValue = System.getProperty(PROPERTY_KEY_PACKAGE);
         if (packageValue != null) {
-            deploymentPackage = DeploymentPackage.fromString(packageValue);
+            deploymentPackageType = DeploymentPackageType.fromString(packageValue);
         }
     }
 

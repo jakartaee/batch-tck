@@ -205,6 +205,7 @@
         <module>jakarta.batch.reporting</module>
         <module>jakarta.batch.arquillian.exec-parent</module>
         <module>jakarta.batch.arquillian.extension</module>
+        <module>jakarta.batch.tck.api</module>
     </modules>
 
     <dependencyManagement>
@@ -222,6 +223,11 @@
             <dependency>
                 <groupId>jakarta.batch</groupId>
                 <artifactId>com.ibm.jbatch.tck</artifactId>
+                <version>${batch.tck.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.batch</groupId>
+                <artifactId>jakarta.batch.tck.api</artifactId>
                 <version>${batch.tck.version}</version>
             </dependency>
             <dependency>

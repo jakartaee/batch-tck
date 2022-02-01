@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-Copyright (c) 2021 Contributors to the Eclipse Foundation
+Copyright (c) 2021-2022 Contributors to the Eclipse Foundation
 
 See the NOTICE file distributed with this work for additional information regarding copyright 
 ownership. Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -30,7 +30,6 @@ SPDX-License-Identifier: Apache-2.0 -->
         <dependency>
             <groupId>jakarta.batch</groupId>
             <artifactId>com.ibm.jbatch.tck</artifactId>
-            <version>${batch.tck.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -41,7 +40,6 @@ SPDX-License-Identifier: Apache-2.0 -->
         <dependency>
             <groupId>jakarta.batch</groupId>
             <artifactId>jakarta.batch.arquillian.extension</artifactId>
-            <version>${batch.tck.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
@@ -106,51 +104,6 @@ SPDX-License-Identifier: Apache-2.0 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>core</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <!-- This exclude describes how we want the classpath to look but this has no effect, we're going to use custom ShrinkWrap logic to build our Deployment for Arquillian -->
-                            <classpathDependencyExcludes>jakarta.batch:com.ibm.jbatch.tck.appbean</classpathDependencyExcludes>
-                            <dependenciesToScan>
-                                <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
-                            </dependenciesToScan>
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-EE-platform-core-suite-includes.txt</includesFile>
-                            <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
-                            <systemPropertyVariables>
-                                <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>appbean</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <dependenciesToScan>
-                                <dependency>jakarta.batch:com.ibm.jbatch.tck.appbean</dependency>
-                            </dependenciesToScan>
-                            <failIfNoTests>false</failIfNoTests>
-                            <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</includesFile>
-                            <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
-                            <systemPropertyVariables>
-                                <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                                <!-- The property to have our custom ShrinkWrap logic add the joboperator bean into our app Deployment for Arquillian -->
-                                <arquillian.extensions.jakarta.batch.appbean>true</arquillian.extensions.jakarta.batch.appbean>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>verify</id>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </pluginManagement>

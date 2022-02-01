@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-Copyright 2012, 2021 International Business Machines Corp. and others
+Copyright 2012, 2022 International Business Machines Corp. and others
 
 See the NOTICE file distributed with this work for additional information regarding copyright 
 ownership. Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -130,10 +130,12 @@ SPDX-License-Identifier: Apache-2.0 -->
                                 <dependenciesToScan>
                                     <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
                                 </dependenciesToScan>
+                                <failIfNoTests>false</failIfNoTests>
                                 <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-EE-platform-core-suite-includes.txt</includesFile>
                                 <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
                                 <systemPropertyVariables>
                                     <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+                                    <vehicles>ejb,web</vehicles>
                                 </systemPropertyVariables>
                             </configuration>
                         </execution>
@@ -151,6 +153,7 @@ SPDX-License-Identifier: Apache-2.0 -->
                                 <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
                                 <systemPropertyVariables>
                                     <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+                                    <vehicles>ejb,web</vehicles>
                                     <!-- The property to have our custom ShrinkWrap logic add the joboperator bean into our app Deployment for Arquillian -->
                                     <arquillian.extensions.jakarta.batch.appbean>true</arquillian.extensions.jakarta.batch.appbean>                                
                                 </systemPropertyVariables>
