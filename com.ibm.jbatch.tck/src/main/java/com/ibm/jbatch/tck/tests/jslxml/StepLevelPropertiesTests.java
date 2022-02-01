@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -30,10 +30,10 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 public class StepLevelPropertiesTests extends BaseJUnit5Test {
 
@@ -51,7 +51,7 @@ public class StepLevelPropertiesTests extends BaseJUnit5Test {
      * @assertion: Section 5.2.3 Step Level Properties
      * @test_Strategy: set a list of properties to the step should add them to the step context properties
      */
-    @Test
+    @EETest
     public void testStepLevelPropertiesCount() throws Exception {
 
         String METHOD = "testStepLevelPropertiesCount";
@@ -82,7 +82,7 @@ public class StepLevelPropertiesTests extends BaseJUnit5Test {
      * @assertion: Section 5.2.3 Step Level Properties
      * @test_Strategy: set a step property value should equal value set on step context property
      */
-    @Test
+    @EETest
     public void testStepLevelPropertiesPropertyValue() throws Exception {
 
         String METHOD = "testStepLevelPropertiesPropertyValue";
@@ -110,7 +110,7 @@ public class StepLevelPropertiesTests extends BaseJUnit5Test {
      * @assertion: Section 5.2.3 Step Level Properties
      * @test_Strategy: set a step property value should not be available to job context
      */
-    @Test
+    @EETest
     public void testStepLevelPropertiesShouldNotBeAvailableThroughJobContext() throws Exception {
 
         String METHOD = "testStepLevelPropertiesShouldNotBeAvailableThroughJobContext";

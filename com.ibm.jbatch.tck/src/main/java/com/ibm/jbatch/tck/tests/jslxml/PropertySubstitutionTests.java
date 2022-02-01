@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -31,10 +31,10 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -64,7 +64,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * verify the java value of the String is set to the same value as in the
      * job xml.
      */
-    @Test
+    @EETest
     public void testBatchArtifactPropertyInjection() throws Exception {
         String METHOD = "testBatchArtifactPropertyInjection";
 
@@ -96,7 +96,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * verify the java value of the String is set to the same value as in the
      * job xml even if the Java field is initialized.
      */
-    @Test
+    @EETest
     public void testInitializedPropertyIsOverwritten() throws Exception {
 
         String METHOD = "testInitializedPropertyIsOverwritten";
@@ -128,7 +128,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * Properties) and verify that xml string is substituted correctly by
      * injecting the property into a batch artifact
      */
-    @Test
+    @EETest
     public void testPropertyWithJobParameter() throws Exception {
 
         String METHOD = "testPropertyWithJobParameter";
@@ -167,7 +167,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * Java field name and verify that the java field value injected matches the
      * value provided through the job xml
      */
-    @Test
+    @EETest
     public void testDefaultPropertyName() throws Exception {
 
         String METHOD = "testDefaultPropertyName";
@@ -198,7 +198,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * @BatchProperty name and verify that the java field value injected matches the
      * value provided through the job xml.
      */
-    @Test
+    @EETest
     public void testGivenPropertyName() throws Exception {
 
         String METHOD = "testGivenPropertyName";
@@ -229,7 +229,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * @test_Strategy: Issue a job with a step level property and batchlet property with the same name.
      * Verify that the injected property value is from the artifact level property.
      */
-    @Test
+    @EETest
     public void testPropertyInnerScopePrecedence() throws Exception {
 
         String METHOD = "testPropertyInnerScopePrecedence";
@@ -262,7 +262,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * to the default value expression which is verified through it's Java value in the
      * batctlet artifact.
      */
-    @Test
+    @EETest
     public void testPropertyQuestionMarkSimple() throws Exception {
 
         String METHOD = "testPropertyQuestionMarkSimple";
@@ -299,7 +299,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * to the default value expression.  This is verified through the injected Java value in the
      * batctlet artifact.
      */
-    @Test
+    @EETest
     public void testPropertyQuestionMarkComplex() throws Exception {
 
         String METHOD = "testPropertyQuestionMarkComplex";
@@ -335,7 +335,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * @BatchProperty name and verify that the java field value injected matches the
      * value provided through the job xml.
      */
-    @Test
+    @EETest
     public void testPropertyWithConcatenation() throws Exception {
 
         String METHOD = "testPropertyWithConcatenation";
@@ -375,7 +375,7 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
      * in this test.
      *
      */
-    @Test
+    @EETest
     public void testJavaSystemProperty() throws Exception {
 
         String METHOD = "testJavaSystemProperty";

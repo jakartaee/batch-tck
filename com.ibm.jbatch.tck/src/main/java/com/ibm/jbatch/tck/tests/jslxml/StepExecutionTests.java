@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -38,9 +38,9 @@ import com.ibm.jbatch.tck.artifacts.reusable.MyPersistentUserData;
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 public class StepExecutionTests extends BaseJUnit5Test {
 
@@ -62,7 +62,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testOneStepExecutionStatus() throws Exception {
 
         String METHOD = "testOneStepExecutionStatus";
@@ -99,7 +99,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testFourStepExecutionStatus() throws Exception {
 
         String METHOD = "testFourStepExecutionStatus";
@@ -138,7 +138,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testFailedStepExecutionStatus() throws Exception {
         String METHOD = "testFailedStepExecutionStatus";
         begin(METHOD);
@@ -172,7 +172,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testStoppedStepExecutionStatus() throws Exception {
         String METHOD = "testStoppedStepExecutionStatus";
         begin(METHOD);
@@ -204,7 +204,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testPersistedStepData() throws Exception {
         String METHOD = "testPersistedStepData";
         begin(METHOD);
@@ -258,7 +258,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testStepExecutionExitStatus() throws Exception {
         String METHOD = "testStepExecutionExitStatus";
         begin(METHOD);
@@ -291,7 +291,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testStepInFlowStepExecution() throws Exception {
         String METHOD = "testStepInFlowStepExecution";
         begin(METHOD);
@@ -327,7 +327,7 @@ public class StepExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testStepInFlowInSplitStepExecution() throws Exception {
         String METHOD = "testStepInFlowInSplitStepExecution";
         begin(METHOD);

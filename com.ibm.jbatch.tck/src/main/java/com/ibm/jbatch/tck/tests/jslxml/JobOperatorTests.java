@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -36,10 +36,10 @@ import jakarta.batch.runtime.JobInstance;
 import jakarta.batch.runtime.Metric;
 import jakarta.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -76,7 +76,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @test_Strategy: start a job that completes successfully with no exceptions thrown.
      * @throws JobStartException
      */
-    @Test
+    @EETest
     public void testJobOperatorStart() throws Exception {
 
         String METHOD = "testJobOperatorStart";
@@ -109,7 +109,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws JobRestartException
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorRestart() throws Exception {
 
         String METHOD = "testJobOperatorRestart";
@@ -183,7 +183,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws JobRestartException
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorRestartAlreadyCompleteException() throws Exception {
 
         String METHOD = "testJobOperatorRestartAlreadyCompleteException";
@@ -267,7 +267,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws JobRestartException
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorAbandonJobDuringARestart() throws Exception {
 
         String METHOD = "testJobOperatorAbandonJobDuringARestart";
@@ -346,7 +346,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws JobRestartException
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorRestartJobAlreadyAbandoned() throws Exception {
 
         String METHOD = "testJobOperatorRestartAlreadyCompleteException";
@@ -413,7 +413,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @test_Strategy: Issue a job that runs in an infinite loop. Issue a job operator stop and verify the
      * batch status.
      */
-    @Test
+    @EETest
     public void testInvokeJobWithUserStop() throws Exception {
         String METHOD = "testInvokeJobWithUserStop";
         begin(METHOD);
@@ -456,7 +456,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      *                 Test that all objects retrieved are of type StepExecution.
      * @throws Exception
      */
-    @Test
+    @EETest
     public void testJobOperatorGetStepExecutions() throws Exception {
 
         String METHOD = "testJobOperatorGetStepExecutions";
@@ -499,7 +499,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      *                 verifying anything.  This is a simple function to implement so not
      *                 a big deal.
      */
-    @Test
+    @EETest
     public void testJobOpGetJobNames() throws Exception {
 
         String METHOD = "testJobOpGetJobNames";
@@ -532,7 +532,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testAbandoned() throws Exception {
 
         String METHOD = "testAbandoned";
@@ -564,7 +564,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOpgetJobInstanceCount() throws Exception {
         String METHOD = "testJobOpgetJobInstanceCount";
         begin(METHOD);
@@ -630,7 +630,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOpgetJobInstanceCountException() throws Exception {
         String METHOD = "testJobOpgetJobInstanceCountException";
         begin(METHOD);
@@ -696,7 +696,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOpgetJobInstances() throws Exception {
         String METHOD = " testJobOpgetJobInstances";
         begin(METHOD);
@@ -763,7 +763,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws  Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOpgetJobInstancesException() throws Exception {
         String METHOD = "testJobOpgetJobInstancesException";
         begin(METHOD);
@@ -819,7 +819,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorGetParameters() throws Exception {
         String METHOD = "testJobOperatorGetParameters";
         begin(METHOD);
@@ -912,7 +912,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorGetJobInstances() throws Exception {
         String METHOD = "testJobOperatorGetJobInstances";
         begin(METHOD);
@@ -1007,7 +1007,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorGetRunningJobExecutions() throws Exception {
         String METHOD = "testJobOperatorGetRunningJobExecutions";
         begin(METHOD);
@@ -1056,7 +1056,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorGetRunningJobInstancesException() throws Exception {
         String METHOD = "testJobOperatorGetRunningJobInstancesException";
         begin(METHOD);
@@ -1106,7 +1106,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorGetJobExecution() throws Exception {
         String METHOD = "testJobOperatorGetJobExecution";
         begin(METHOD);
@@ -1174,7 +1174,7 @@ public class JobOperatorTests extends BaseJUnit5Test {
      * @throws Exception
      *
      */
-    @Test
+    @EETest
     public void testJobOperatorGetJobExecutions() throws Exception {
         String METHOD = "testJobOperatorGetJobExecutions";
         begin(METHOD);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -34,10 +34,10 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 public class JobAttributeRestartTests extends BaseJUnit5Test {
 
@@ -58,7 +58,7 @@ public class JobAttributeRestartTests extends BaseJUnit5Test {
      * @assertion: Section 5.1 job attribute restartable
      * @test_Strategy: set restartable true should allow job to restart
      */
-    @Test
+    @EETest
     public void testJobAttributeRestartableTrue() throws Exception {
 
         String METHOD = "testJobAttributeRestartableTrue";

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -30,9 +30,9 @@ import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -58,7 +58,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithOnePartitionedStep() throws Exception {
         String METHOD = "testInvokeJobWithOnePartitionedStep";
         begin(METHOD);
@@ -81,7 +81,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithOnePartitionedStepExitStatus() throws Exception {
         String METHOD = "testInvokeJobWithOnePartitionedStepExitStatus";
         begin(METHOD);
@@ -126,7 +126,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * instances. The Test verifies that the job returns with STOPPED status
      * instead of running forever.
      */
-    @Test
+    @EETest
     public void testStopRunningPartitionedStep() throws Exception {
         String METHOD = "testStopRunningPartitionedStep";
         begin(METHOD);
@@ -170,7 +170,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * instead of running forever. The job is restarted and each partition must
      * restart and run to completion.
      */
-    @Test
+    @EETest
     public void testStopRestartRunningPartitionedStep() throws Exception {
         String METHOD = "testStopRestartRunningPartitionedStep";
         begin(METHOD);
@@ -218,7 +218,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobSimpleSplit() throws Exception {
         String METHOD = "testInvokeJobSimpleSplit";
         begin(METHOD);
@@ -250,7 +250,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * called in the correct order. The persistent data is used to remember how
      * many times the step has been run. If the data is not persisted
      */
-    @Test
+    @EETest
     public void testPartitionedPlanCollectorAnalyzerReducerComplete() throws Exception {
         String METHOD = "testPartitionedPlanCollectorAnalyzerReducerComplete";
         begin(METHOD);
@@ -290,7 +290,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * one partition marked to fail. Each partition appends to the exit status
      * through the collector, analyzer, and finally the reducer.
      */
-    @Test
+    @EETest
     public void testZeroBasedPartitionedPlanCollectorAnalyzerReducerRollback() throws Exception {
         String METHOD = "testZeroBasedPartitionedPlanCollectorAnalyzerReducerRollback";
         begin(METHOD);
@@ -338,7 +338,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * must be restarted. We verify that the completed partition is not rerun
      * since it does not append any data to the exit status.
      */
-    @Test
+    @EETest
     public void testPartitionedCollectorAnalyzerReducerChunkRestartItemCount10() throws Exception {
 
         String METHOD = "testPartitionedCollectorAnalyzerReducerChunkRestartItemCount10";
@@ -424,7 +424,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * should use the same number of partitions as the previous execution, and it should only restart
      * the failed partition.
      */
-    @Test
+    @EETest
     public void testPartitionedMapperOverrideFalseOnRestart() throws Exception {
         String METHOD = "testPartitionedMapperOverrideFalse";
         begin(METHOD);
@@ -476,7 +476,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * set to true, so previous execution data are discarded, and a new number of partitions is
      * used.
      */
-    @Test
+    @EETest
     public void testPartitionedMapperOverrideTrueDiffPartitionNumOnRestart() throws Exception {
         String METHOD = "testPartitionedMapperOverrideTrueDiffPartitionNumOnRestart";
         begin(METHOD);
@@ -528,7 +528,7 @@ public class ParallelExecutionTests extends BaseJUnit5Test {
      * number of partitions specified for execution #2 is the same as in the first execution, all
      * partitions should be restarted anyway, even though some had completed previously.
      */
-    @Test
+    @EETest
     public void testPartitionedMapperOverrideTrueSamePartitionNumOnRestart() throws Exception {
         String METHOD = "testPartitionedMapperOverrideTrueSamePartitionNumOnRestart";
         begin(METHOD);

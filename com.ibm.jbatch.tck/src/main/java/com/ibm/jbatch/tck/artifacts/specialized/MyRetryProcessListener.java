@@ -24,7 +24,7 @@ import jakarta.batch.api.chunk.listener.RetryProcessListener;
 import jakarta.batch.runtime.context.JobContext;
 import jakarta.inject.Inject;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 
 
 @jakarta.inject.Named("myRetryProcessListener")

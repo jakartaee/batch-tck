@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2020 International Business Machines Corp. and others
+ * Copyright 2013, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -28,10 +28,10 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
@@ -53,7 +53,7 @@ public class FlowTransitioningTests extends BaseJUnit5Test {
      * 5. compare that list to our transition list
      * 6. verify that in fact we transition from each step within the flow, then to the flow "next" step
      */
-    @Test
+    @EETest
     public void testFlowTransitionToStep() throws Exception {
 
         String METHOD = "testFlowTransitionToStep";
@@ -107,7 +107,7 @@ public class FlowTransitioningTests extends BaseJUnit5Test {
      * <batchlet ref="flowTransitionToStepTestBatchlet"/>
      * </step>
      */
-    @Test
+    @EETest
     public void testFlowTransitionToStepOutOfScope() throws Exception {
 
         String METHOD = " testFlowTransitionToStepOutOfScope";
@@ -149,7 +149,7 @@ public class FlowTransitioningTests extends BaseJUnit5Test {
      * 3. flow will transition to decider which will change the exit status
      * 4. compare that the exit status set by the decider matches that of the job
      */
-    @Test
+    @EETest
     public void testFlowTransitionToDecision() throws Exception {
 
         String METHOD = "testFlowTransitionToDecision";
@@ -189,7 +189,7 @@ public class FlowTransitioningTests extends BaseJUnit5Test {
      * 5. compare that list to our transition list
      * 6. verify that in fact we transition from each step within the flow, then to the flow "next" step
      */
-    @Test
+    @EETest
     public void testFlowTransitionWithinFlow() throws Exception {
 
         String METHOD = "testFlowTransitionWithinFlow";

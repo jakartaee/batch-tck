@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2020 International Business Machines Corp. and others
+ * Copyright 2013, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -25,10 +25,10 @@ import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
@@ -79,7 +79,7 @@ public class SplitFlowTransitionLoopTests extends BaseJUnit5Test {
      * </flow>
      * </split>
      */
-    @Test
+    @EETest
     public void testSplitFlowTransitionLoopSplitFlowSplit() throws Exception {
 
         String METHOD = "testSplitFlowTransitionLoopSplitFlowSplit";

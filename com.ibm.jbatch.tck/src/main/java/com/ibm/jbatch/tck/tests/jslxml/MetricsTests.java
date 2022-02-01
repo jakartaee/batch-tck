@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -29,9 +29,9 @@ import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.Metric;
 import jakarta.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.artifacts.specialized.MetricsStepListener;
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
@@ -62,7 +62,7 @@ public class MetricsTests extends BaseJUnit5Test {
      *                 in the read count and accessible at job execution time to the Batch Artifact
      *
      */
-    @Test
+    @EETest
     public void testMetricsInApp() throws Exception {
         String METHOD = "testMetricsInApp";
 
@@ -112,7 +112,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Force Batch Artifact to skip a known number of reads - test that those skips are reflected in the skip read count
      *
      */
-    @Test
+    @EETest
     public void testMetricsSkipRead() throws Exception {
 
         String METHOD = "testMetricsSkipRead";
@@ -188,7 +188,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Force Batch Artifact to skip a known number of writes - test that those skips are reflected in the skip write count
      *
      */
-    @Test
+    @EETest
     public void testMetricsSkipWrite() throws Exception {
 
         String METHOD = "testMetricsSkipWrite";
@@ -261,7 +261,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Force Batch Artifact to skip a known number of processing - test that those skips are reflected in the skip process count
      *
      */
-    @Test
+    @EETest
     public void testMetricsSkipProcess() throws Exception {
         String METHOD = "testMetricsSkipProcess";
 
@@ -335,7 +335,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Batch Artifact reads a known number of items - test that those reads are reflected in the read count
      *
      */
-    @Test
+    @EETest
     public void testReadMetric() throws Exception {
         String METHOD = "testReadMetric";
 
@@ -405,7 +405,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Batch Artifact writes a known number of items - test that those writes are reflected in the write count
      *
      */
-    @Test
+    @EETest
     public void testWriteMetric() throws Exception {
         String METHOD = "testWriteMetric";
 
@@ -465,7 +465,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Batch Artifact filters a known number of items while processing - test that those filter actions are reflected in the filter count
      *
      */
-    @Test
+    @EETest
     public void testMetricsFilterCount() throws Exception {
 
         String METHOD = "testMetricsFilterCount";
@@ -524,7 +524,7 @@ public class MetricsTests extends BaseJUnit5Test {
      * @test_Strategy: Batch Artifact read/process/writes a known number of items and all are committed - test that those commits are reflected in the commit count
      *
      */
-    @Test
+    @EETest
     public void testMetricsCommitCount() throws Exception {
 
         String METHOD = "testMetricsCommitCount";
@@ -585,7 +585,7 @@ public class MetricsTests extends BaseJUnit5Test {
      *                 test that the step end time occurs after the test case point in time.
      *
      */
-    @Test
+    @EETest
     public void testMetricsStepTimestamps() throws Exception {
 
         String METHOD = "testMetricsStepTimestamps";
@@ -645,7 +645,7 @@ public class MetricsTests extends BaseJUnit5Test {
      *                 test that the job end time occurs after the testcase start time.
      *
      */
-    @Test
+    @EETest
     public void testMetricsJobExecutionTimestamps() throws Exception {
 
         String METHOD = "testMetricsJobExecutionTimestamps";

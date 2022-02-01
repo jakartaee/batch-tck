@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -25,9 +25,9 @@ import java.util.Properties;
 
 import jakarta.batch.runtime.BatchStatus;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -90,7 +90,7 @@ public class BatchletRestartStateMachineTests extends BaseJUnit5Test {
      * the batchlet, using the stepName and the execution number (as restart parameter), so that we validate we're never called
      * in the wrong step in the wrong execution (e.g. in execution.number N we shouldn't be in step S).
      */
-    @Test
+    @EETest
     public void testTransitionElementOnAttrValuesWithRestartJobParamOverrides() throws Exception {
 
         String METHOD = "testTransitionElementOnAttrValuesWithRestartJobParamOverrides";
@@ -215,7 +215,7 @@ public class BatchletRestartStateMachineTests extends BaseJUnit5Test {
      * the batchlet, using the stepName and the execution number (as restart parameter), so that we validate we're never called
      * in the wrong step in the wrong execution (e.g. in execution.number N we shouldn't be in step S).
      */
-    @Test
+    @EETest
     public void testAllowStartIfCompleteRestartExecution() throws Exception {
 
         String METHOD = "testAllowStartIfCompleteRestartExecution";

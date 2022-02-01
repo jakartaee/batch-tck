@@ -1,5 +1,5 @@
 /*
- * Copyright 2016, 2020 International Business Machines Corp. and others
+ * Copyright 2016, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -26,13 +26,13 @@ import java.util.Properties;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.ann.SpecRef;
 import com.ibm.jbatch.tck.ann.TCKTest;
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
@@ -82,7 +82,7 @@ public class PartitionRerunTests extends BaseJUnit5Test {
                     + "partitions in step1 are re-executed.",
             notes = {"The spec doesn't explicitly describe this combination of partitions plus allow-start-if-complete=\"true\", but it seems the only valid interpretation."}
     )
-    @Test
+    @EETest
     public void testRerunPartitionAndBatchlet() throws Exception {
         Properties origParams = new Properties();
         origParams.setProperty("force.failure", "true");

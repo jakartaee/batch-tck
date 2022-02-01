@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2020 International Business Machines Corp. and others
+ * Copyright 2013, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -28,10 +28,10 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
@@ -51,7 +51,7 @@ public class SplitTransitioningTests extends BaseJUnit5Test {
      * 3. add step id from step context to job context exit status
      * 4. verify that the split indeed transitioned to the step
      */
-    @Test
+    @EETest
     public void testSplitTransitionToStep() throws Exception {
 
         String METHOD = "testSplitTransitionToStep";
@@ -104,7 +104,7 @@ public class SplitTransitioningTests extends BaseJUnit5Test {
      * <batchlet ref="splitTransitionToStepTestBatchlet"/>
      * </step>
      */
-    @Test
+    @EETest
     public void testSplitTransitionToStepOutOfScope() throws Exception {
 
         String METHOD = "testSplitTransitionToStepOutOfScope";
@@ -146,7 +146,7 @@ public class SplitTransitioningTests extends BaseJUnit5Test {
      * 3. split will transition to decider which will change the exit status
      * 4. compare that the exit status set by the decider matches that of the job
      */
-    @Test
+    @EETest
     public void testSplitTransitionToDecision() throws Exception {
 
         String METHOD = "testSplitTransitionToDecision";

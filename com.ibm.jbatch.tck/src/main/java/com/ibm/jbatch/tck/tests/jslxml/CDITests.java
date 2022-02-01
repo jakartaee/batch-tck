@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2021 International Business Machines Corp. and others
+ * Copyright 2013, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -28,13 +28,13 @@ import java.util.Properties;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
@@ -129,7 +129,7 @@ public class CDITests extends BaseJUnit5Test {
      * 
      * Don't parameterize tests since the single app scoped bean would have different state among each, complicating test logic.
      */
-    @Test
+    @EETest
     public void testCDIInjectListenerIntoBatchlet() throws Exception {
 
         String METHOD = "testCDIInjectListenerIntoBatchlet";

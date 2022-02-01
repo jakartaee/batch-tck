@@ -1,5 +1,5 @@
 /*
- * Copyright 2014, 2020 International Business Machines Corp. and others
+ * Copyright 2014, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -24,14 +24,14 @@ import java.util.Properties;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.ann.APIRef;
 import com.ibm.jbatch.tck.ann.SpecRef;
 import com.ibm.jbatch.tck.ann.TCKTest;
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
@@ -70,7 +70,7 @@ public class ListenerOnErrorTests extends BaseJUnit5Test {
                     + "and set a String representation of this List as the job's exit status.  Check that this matches the expected value "
                     + "based on the chunk size, input data, and failing record number. Also check that the job fails."
     )
-    @Test
+    @EETest
     public void testOnWriteErrorItems() throws Exception {
         String GOOD_EXIT_STATUS = new String("[10, 12, 14, 16, 18]");
 
@@ -113,7 +113,7 @@ public class ListenerOnErrorTests extends BaseJUnit5Test {
                     + "and set a String representation of this item as the job's exit status. Check that this matches the expected value "
                     + "based on the input data and the failing record number. Also check that the job fails."
     )
-    @Test
+    @EETest
     public void testOnProcessErrorItems() throws Exception {
         String GOOD_EXIT_STATUS = new String("8");
         Reporter.log("Create job parameters for execution:<p>");

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014, 2020 International Business Machines Corp. and others
+ * Copyright 2014, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -25,14 +25,14 @@ import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.ann.APIRef;
 import com.ibm.jbatch.tck.ann.SpecRef;
 import com.ibm.jbatch.tck.ann.TCKTest;
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 
 import jakarta.batch.runtime.JobExecution;
 import jakarta.batch.runtime.StepExecution;
@@ -61,7 +61,7 @@ public class ParallelContextPropagationTests extends BaseJUnit5Test {
                     + "values obtained by parsing the job exit status correspond with the values obtained from the JobExecution and StepExecution.",
             notes = {"There is no particular place in the spec that says that partitions share the same values for the getters tested as the top-level JobContext/StepContext."}
     )
-    @Test
+    @EETest
     public void testPartitionContextPropagation() throws Exception {
 
         JobExecution je = jobOp.startJobAndWaitForResult("partitionCtxPropagation", null);
@@ -123,7 +123,7 @@ public class ParallelContextPropagationTests extends BaseJUnit5Test {
                     + "of the steps correspond with the values obtained from the JobExecution and StepExecutions.",
             notes = {"There is no particular place in the spec that says that split-flows share the same values for the getters tested as the top-level JobContext/StepContext."}
     )
-    @Test
+    @EETest
     public void testSplitFlowContextPropagation() throws Exception {
 
         JobExecution je = jobOp.startJobAndWaitForResult("splitFlowCtxPropagation", null);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -29,10 +29,10 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 public class ExecutionTests extends BaseJUnit5Test {
 
@@ -54,7 +54,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithOneBatchletStep() throws Exception {
         String METHOD = "testInvokeJobWithOneBatchletStep";
         begin(METHOD);
@@ -77,7 +77,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithTwoStepSequenceOfBatchlets() throws Exception {
         String METHOD = "testInvokeJobWithTwoStepSequenceOfBatchlets";
         begin(METHOD);
@@ -100,7 +100,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithFourStepSequenceOfBatchlets() throws Exception {
         String METHOD = "testInvokeJobWithFourStepSequenceOfBatchlets";
         begin(METHOD);
@@ -123,7 +123,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithNextElement() throws Exception {
         String METHOD = "testInvokeJobWithNextElement";
         begin(METHOD);
@@ -146,7 +146,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithFailElement() throws Exception {
         String METHOD = "testInvokeJobWithFailElement";
         begin(METHOD);
@@ -171,7 +171,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithStopElement() throws Exception {
         String METHOD = "testInvokeJobWithStopElement";
         begin(METHOD);
@@ -194,7 +194,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobWithEndElement() throws Exception {
         String METHOD = "testInvokeJobWithEndElement";
         begin(METHOD);
@@ -219,7 +219,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testInvokeJobSimpleChunk() throws Exception {
         String METHOD = "testInvokeJobSimpleChunk";
         begin(METHOD);
@@ -242,7 +242,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     @Disabled("Bug 5379.  Decided to exclude this test.")
     public void testInvokeJobChunkWithFullAttributes() throws Exception {
         String METHOD = "testInvokeJobChunkWithFullAttributes";
@@ -267,7 +267,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @test_Strategy: Implementation should attempt to load artifact using Thread Context Class Loader if implementation specific
      * 	and archive loading are unable to find the specified artifact.
      */
-    @Test
+    @EETest
     public void testInvokeJobUsingTCCL() throws Exception {
         String METHOD = "testInvokeJobUsingTCCL";
         begin(METHOD);
@@ -290,7 +290,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testCheckpoint() throws Exception {
         String METHOD = "testCheckpoint";
         begin(METHOD);
@@ -313,7 +313,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testSimpleFlow() throws Exception {
         String METHOD = "testSimpleFlow";
         begin(METHOD);

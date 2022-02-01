@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -32,9 +32,9 @@ import jakarta.batch.runtime.StepExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 public class ContextAndListenerTests extends BaseJUnit5Test {
 
@@ -51,7 +51,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testExamineJobContextInArtifact() throws Exception {
 
         String METHOD = "testExamineJobContextInArtifact()";
@@ -86,7 +86,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testExamineStepContextInArtifact() throws Exception {
 
         String METHOD = "testExamineStepContextInArtifact()";
@@ -125,7 +125,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testOneArtifactIsJobAndStepListener() throws Exception {
 
         String METHOD = "testOneArtifactIsJobAndStepListener";
@@ -162,7 +162,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testgetException() throws Exception {
 
         String METHOD = "testgetException";
@@ -195,7 +195,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testgetExceptionListenerBased() throws Exception {
 
         String METHOD = "testgetExceptionListenerBased";
@@ -230,7 +230,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      *
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testJobContextIsUniqueForMainThreadAndPartitions() throws Exception {
 
         String METHOD = "testJobContextIsUniqueForMainThreadAndPartitions";
@@ -258,7 +258,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      *
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testJobContextIsUniqueForMainThreadAndFlowsInSplits() throws Exception {
 
         String METHOD = "testJobContextIsUniqueForMainThreadAndFlowsInSplits";
@@ -286,7 +286,7 @@ public class ContextAndListenerTests extends BaseJUnit5Test {
      *
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testStepContextIsUniqueForMainThreadAndPartitions() throws Exception {
         String METHOD = "testStepContextIsUniqueForMainThreadAndPartitions";
         begin(METHOD);

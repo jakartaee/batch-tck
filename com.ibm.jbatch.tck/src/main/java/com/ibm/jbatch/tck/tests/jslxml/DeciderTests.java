@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -28,9 +28,9 @@ import jakarta.batch.operations.JobStartException;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.artifacts.common.StatusConstants;
 import com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsBatchlet;
@@ -76,7 +76,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                    tests the @exit-status attributes of fail, stop, end.
      *
      */
-    @Test
+    @EETest
     public void testDeciderEndNormal() throws Exception {
 
         String METHOD = "testDeciderEndNormal";
@@ -121,7 +121,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderEndSpecial() throws Exception {
         String METHOD = "testDeciderEndSpecial";
 
@@ -158,7 +158,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderStopNormal() throws Exception {
         String METHOD = " testDeciderStopNormal";
 
@@ -196,7 +196,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderStopSpecial() throws Exception {
         String METHOD = "testDeciderStopSpecial";
 
@@ -233,7 +233,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderFailNormal() throws Exception {
 
         String METHOD = "testDeciderFailNormal";
@@ -271,7 +271,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderFailSpecial() throws Exception {
         String METHOD = "testDeciderFailSpecial";
 
@@ -307,7 +307,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderNextNormal() throws Exception {
         String METHOD = "testDeciderNextNormal";
 
@@ -345,7 +345,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      * @assertion: see testDeciderEndNormal
      * @test_Strategy: see testDeciderEndNormal
      */
-    @Test
+    @EETest
     public void testDeciderNextSpecial() throws Exception {
         String METHOD = "testDeciderNextSpecial";
 
@@ -387,7 +387,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *   be equal to the return value of the last decision (i.e. Decider#decide). Note the test doesn't necessarily
      *   confirm that the exit status is set on the JobContext directly, but this is the intent behind the test method name.
      */
-    @Test
+    @EETest
     public void testDeciderExitStatusIsSetOnJobContext() throws Exception {
 
         String METHOD = "testDeciderExitStatusIsSetOnJobContext";
@@ -423,7 +423,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *  begin an execution which fails, we will pass the test if we see either JobStartException
      *  or BatchStatus of FAILED.
      */
-    @Test
+    @EETest
     public void testDeciderCannotbeFirstElementOnStart() throws Exception {
 
         String METHOD = "testDeciderCannotbeFirstElementOnStart";
@@ -465,7 +465,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     JobContext transient user data is used to assert the correct number of decider invocations have
      *                     been performed.
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromStepAndAllowRestart() throws Exception {
         String METHOD = "testDeciderTransitionFromStepAndAllowRestart";
 
@@ -519,7 +519,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     been performed.
      *                  3. A decision within a flow is configured to stop (based on exit status matching against a <stop> element).
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromStepWithinFlowAndAllowRestart() throws Exception {
 
         String METHOD = "testDeciderTransitionFromStepWithinFlowAndAllowRestart";
@@ -571,7 +571,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     JobContext transient user data is used to assert the correct number of decider invocations have
      *                     been performed.
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromFlowAndAllowRestart() throws Exception {
 
         String METHOD = "testDeciderTransitionFromFlowAndAllowRestart";
@@ -626,7 +626,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *              	3. NOTE: TODO for future - Perhaps the strategy in asserting that EACH StepExecution is passed should be
      *                     tightened.  We could go further to assert that the full list of StepExecution(s) is what we'd expect.
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromSplitAndAllowRestart() throws Exception {
 
         String METHOD = "testDeciderTransitionFromSplitAndAllowRestart";
@@ -680,7 +680,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                  JobContext transient user data is used to assert the correct number of decider invocations have
      *                  been performed.
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromStepAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromStepAndAllowRestartFalse";
@@ -737,7 +737,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     been performed.
      *                  3. A decision within a flow is configured to stop (based on exit status matching against a <stop> element).
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromStepWithinFlowAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromStepWithinFlowAndAllowRestartFalse";
@@ -793,7 +793,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     JobContext transient user data is used to assert the correct number of decider invocations have
      *                     been performed.
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromFlowAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromFlowAndAllowRestartFalse";
@@ -852,7 +852,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *              	3. NOTE: TODO for future - Perhaps the strategy in asserting that EACH StepExecution is passed should be
      *                     tightened.  We could go further to assert that the full list of StepExecution(s) is what we'd expect.
      */
-    @Test
+    @EETest
     public void testDeciderTransitionFromSplitAndAllowRestartFalse() throws Exception {
 
         String METHOD = "testDeciderTransitionFromSplitAndAllowRestartFalse";

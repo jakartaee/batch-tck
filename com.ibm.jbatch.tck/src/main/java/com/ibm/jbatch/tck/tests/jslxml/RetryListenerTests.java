@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -28,9 +28,9 @@ import jakarta.batch.runtime.JobExecution;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 public class RetryListenerTests extends BaseJUnit5Test {
 
@@ -48,7 +48,7 @@ public class RetryListenerTests extends BaseJUnit5Test {
      *
      * @test_Strategy: Test that the onRetryReadException listener is invoked when a retryable exception occurs on a read.
      */
-    @Test
+    @EETest
     public void testRetryReadListener() throws Exception {
         String METHOD = "testRetryReadListener";
 
@@ -84,7 +84,7 @@ public class RetryListenerTests extends BaseJUnit5Test {
      *
      * @test_Strategy: Test that the onRetryProcessException listener is invoked when a retryable exception occurs on a process.
      */
-    @Test
+    @EETest
     public void testRetryProcessListener() throws Exception {
         String METHOD = "testRetryProcessListener";
 
@@ -120,7 +120,7 @@ public class RetryListenerTests extends BaseJUnit5Test {
      *
      * @test_Strategy: Test that the onRetryWriteException listener is invoked when a retryable exception occurs on a write.
      */
-    @Test
+    @EETest
     public void testRetryWriteListener() throws Exception {
         String METHOD = "testRetryWriteListener";
 

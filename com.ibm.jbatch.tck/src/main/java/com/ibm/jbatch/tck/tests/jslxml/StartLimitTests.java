@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2020 International Business Machines Corp. and others
+ * Copyright 2013, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -27,10 +27,10 @@ import java.util.Properties;
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.StepExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
@@ -85,7 +85,7 @@ public class StartLimitTests extends BaseJUnit5Test {
      *                 f - failed (via JSL transition element)
      *
      */
-    @Test
+    @EETest
     public void testStartLimitVariation1() throws Exception {
 
         String METHOD = "testStartLimitVariation1";
@@ -158,7 +158,7 @@ public class StartLimitTests extends BaseJUnit5Test {
      * @assertion:
      * @test_Strategy:
      */
-    @Test
+    @EETest
     public void testStartLimitVariation2() throws Exception {
 
         String METHOD = "testStartLimitVariation2";
@@ -267,7 +267,7 @@ public class StartLimitTests extends BaseJUnit5Test {
      * @assertion:
      * @test_Strategy:
      */
-    @Test
+    @EETest
     public void testStartLimitVariation3() throws Exception {
 
         String METHOD = "testStartLimitVariation3";

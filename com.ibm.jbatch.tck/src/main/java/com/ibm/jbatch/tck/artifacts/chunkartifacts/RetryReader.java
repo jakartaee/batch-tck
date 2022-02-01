@@ -34,7 +34,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersCheckpointData;
 import com.ibm.jbatch.tck.artifacts.chunktypes.NumbersRecord;

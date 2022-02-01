@@ -32,10 +32,10 @@ import jakarta.batch.runtime.StepExecution;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.api.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import ee.jakarta.tck.batch.api.EETest;
 
 @Tag("ee")
 public class TransactionTests {
@@ -65,7 +65,7 @@ public class TransactionTests {
      * Test that the item is skipped, and onSkipReadItem listener is invoked, when the same exception occurs on the retry
      *
      */
-    @Test
+    @EETest
     public void testTranRollbackRetryReadSkipRead() throws Exception {
         String METHOD = "testTranRollbackRetryReadSkipRead";
         begin(METHOD);
@@ -112,7 +112,7 @@ public class TransactionTests {
      * Test that the item is skipped, and onSkipProcessItem listener is invoked, when the same exception occurs on the retry
      *
      */
-    @Test
+    @EETest
     public void testTranRollbackRetryProcessSkipProcess() throws Exception {
         String METHOD = "testTranRollbackRetryProcessSkipProcess";
         begin(METHOD);
@@ -159,7 +159,7 @@ public class TransactionTests {
      * Test that the item is skipped, and onSkipWriteItem listener is invoked, when the same exception occurs on the retry
      *
      */
-    @Test
+    @EETest
     public void testTranRollbackRetryWriteSkipWrite() throws Exception {
         String METHOD = "testTranRollbackRetryWriteSkipWrite";
         begin(METHOD);
@@ -200,7 +200,7 @@ public class TransactionTests {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testGlobalTranNoExceptions() throws Exception {
         String METHOD = "testGlobalTranNoExceptions";
         begin(METHOD);
@@ -253,7 +253,7 @@ public class TransactionTests {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testGlobalTranForcedExceptionWithRollback() throws Exception {
         String METHOD = "testGlobalTranForcedExceptionWithRollback";
         begin(METHOD);
@@ -304,7 +304,7 @@ public class TransactionTests {
      * @assertion: FIXME
      * @test_Strategy: FIXME
      */
-    @Test
+    @EETest
     public void testGlobalTranForcedExceptionCheckpointRestart() throws Exception {
         String METHOD = "testGlobalTranForcedExceptionCheckpointRestart";
         begin(METHOD);
@@ -373,7 +373,7 @@ public class TransactionTests {
      *                 use any delay or sleep, so it just confirms that the timeout doesn't hit and the chunk completes
      *                 normally.
      */
-    @Test
+    @EETest
     public void testGlobalTranNoDelayLongTimeout() throws Exception {
         String METHOD = "testGlobalTranNoDelayLongTimeout";
         begin(METHOD);
@@ -442,7 +442,7 @@ public class TransactionTests {
      *                 or that the value of '0' means unlimited.  We don't try to prove that conclusively but just
      *                 to hint at it and possibly catch an implementation doing something completely off-base.
      */
-    @Test
+    @EETest
     public void testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutSteps() throws Exception {
         String METHOD = "testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutSteps";
         begin(METHOD);
@@ -515,7 +515,7 @@ public class TransactionTests {
      *
      *                 The long timeouts are longer than the "long" delay, so steps 2, 3 complete successfully.
      */
-    @Test
+    @EETest
     public void testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutStepsCustomCheckpointAlgorithm() throws Exception {
         String METHOD = "testGlobalTranLongDelayMixOfLongTimeoutStepsAndShortTimeoutStepsCustomCheckpointAlgorithm";
         begin(METHOD);
