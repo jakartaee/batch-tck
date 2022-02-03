@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Copyright 2012, 2021 International Business Machines Corp. and others
+
+See the NOTICE file distributed with this work for additional information regarding copyright 
+ownership. Licensed under the Apache License, Version 2.0 (the "License"); 
+you may not use this file except in compliance with the License. You may 
+obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+Unless required by applicable law or agreed to in writing, software distributed 
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+the specific language governing permissions and limitations under the License. 
+SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>jakarta.batch</groupId>
+        <artifactId>tck-parent</artifactId>
+        <version>2.1.0-M2-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jakarta.batch.arquillian.exec-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>Jakarta Batch Arquillian TCK Execution Parent</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>com.ibm.jbatch.tck</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>com.ibm.jbatch.tck.appbean</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>jakarta.batch.arquillian.extension</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-container-test-spi</artifactId>
+            <version>1.7.0.Alpha9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.junit5</groupId>
+            <artifactId>arquillian-junit5-core</artifactId>
+            <version>1.7.0.Alpha9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit5</groupId>
+            <artifactId>arquillian-junit5-container</artifactId>
+            <version>1.7.0.Alpha9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jakarta.batch.reporting</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maybe should remove from parent instead of dong this -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution> 
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- Not sure how to reference the config files within the dependency 
+                    artifact, so rely on an unpacking first. -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>unpack-tck</id>
+                            <goals>
+                                <goal>unpack</goal>
+                            </goals>
+                            <phase>pre-integration-test</phase>
+                            <configuration>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>jakarta.batch</groupId>
+                                        <artifactId>com.ibm.jbatch.tck</artifactId>
+                                        <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
+                                        <includes>testprofiles/*,ddls/*</includes>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>core</id>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                            <configuration>
+                                <!-- This exclude describes how we want the classpath to look but this has no effect, we're going to use custom ShrinkWrap logic to build our Deployment for Arquillian -->
+                                <classpathDependencyExcludes>jakarta.batch:com.ibm.jbatch.tck.appbean</classpathDependencyExcludes>                                
+                                <dependenciesToScan>
+                                    <dependency>jakarta.batch:com.ibm.jbatch.tck</dependency>
+                                </dependenciesToScan>
+                                <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-EE-platform-core-suite-includes.txt</includesFile>
+                                <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
+                                <systemPropertyVariables>
+                                    <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+                                </systemPropertyVariables>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>appbean</id>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                            <configuration>
+                                <dependenciesToScan>
+                                    <dependency>jakarta.batch:com.ibm.jbatch.tck.appbean</dependency>
+                                </dependenciesToScan>
+                                <failIfNoTests>false</failIfNoTests>
+                                <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</includesFile>
+                                <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
+                                <systemPropertyVariables>
+                                    <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+                                    <!-- The property to have our custom ShrinkWrap logic add the joboperator bean into our app Deployment for Arquillian -->
+                                    <arquillian.extensions.jakarta.batch.appbean>true</arquillian.extensions.jakarta.batch.appbean>                                
+                                </systemPropertyVariables>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>verify</id>
+                            <goals>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+    <profiles>
+        <profile>
+            <!-- Unpack test.properties but only if it doesn't exist - allows users to modify it locally -->
+            <id>unpack-test-properties</id>
+            <activation>
+                <file>
+                    <missing>${basedir}/test.properties</missing>
+                </file>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-dependency-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>unpack-test-properties</id>
+                                    <!-- Will unpack tck.default.sleep.time.properties file from com.ibm.jbatch.tck to test.properties -->
+                                    <goals>
+                                        <goal>unpack</goal>
+                                    </goals>
+                                    <phase>pre-integration-test</phase>
+                                    <configuration>
+                                        <artifactItems>
+                                            <artifactItem>
+                                                <groupId>jakarta.batch</groupId>
+                                                <artifactId>com.ibm.jbatch.tck</artifactId>
+                                                <outputDirectory>${basedir}</outputDirectory>
+                                                <includes>tck.default.sleep.time.properties</includes>
+                                                <fileMappers>
+                                                    <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                                        <pattern>.*</pattern>
+                                                        <replacement>test.properties</replacement>
+                                                    </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                                </fileMappers>          
+                                            </artifactItem>
+                                        </artifactItems>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

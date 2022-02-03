@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright 2012, 2020 International Business Machines Corp. and others
+  Copyright 2012, 2020 International Business Machines Corp. and others
+  Copyright 2022 Contributors to the Eclipse Foundation.
 
-   See the NOTICE file distributed with this work for additional information
-   regarding copyright ownership. Licensed under the Apache License,
-   Version 2.0 (the "License"); you may not use this file except in compliance
-   with the License. You may obtain a copy of the License at
+  See the NOTICE file distributed with this work for additional information
+  regarding copyright ownership. Licensed under the Apache License,
+  Version 2.0 (the "License"); you may not use this file except in compliance
+  with the License. You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
 
-   SPDX-License-Identifier: Apache-2.0
- -->
+  SPDX-License-Identifier: Apache-2.0
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
@@ -31,7 +32,7 @@
     <artifactId>tck-parent</artifactId>
     <version>2.1.0-M2-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>tck-parent</name>
+    <name>Jakarta Batch TCK parent</name>
     <description>
         Batch processing is a pervasive workload pattern, expressed by a distinct application organization and
         execution model. It is found across virtually every industry, applied to such tasks as statement
@@ -168,7 +169,7 @@
         <version.java>11</version.java>
 
         <!-- Dependencies -->
-        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>4.0.0.Beta3</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
+        <version.jakarta.enterprise.jakarta.enterprise.cdi-api>4.0.0-RC3</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
         <version.jakarta.inject.jakarta.inject-api>2.0.1.MR</version.jakarta.inject.jakarta.inject-api>
         <version.jakarta.xml.bind.jakarta.xml.bind-api>3.0.0</version.jakarta.xml.bind.jakarta.xml.bind-api>
         <version.org.glassfish.jaxb.jaxb-runtime>3.0.0</version.org.glassfish.jaxb.jaxb-runtime>
@@ -187,6 +188,7 @@
         <version.org.apache.maven.plugins.maven-shade-plugin>2.1</version.org.apache.maven.plugins.maven-shade-plugin>
         <version.org.apache.maven.plugins.maven-source-plugin>2.2.1</version.org.apache.maven.plugins.maven-source-plugin>
         <version.org.apache.maven.plugins.maven-surefire-plugin>2.18</version.org.apache.maven.plugins.maven-surefire-plugin>
+        <version.org.apache.maven.plugins.maven-dependency-plugin>3.2.0</version.org.apache.maven.plugins.maven-dependency-plugin>
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
         <version.org.jboss.weld.se.weld-se-core>5.0.0.Alpha2</version.org.jboss.weld.se.weld-se-core>
     </properties>
@@ -201,7 +203,7 @@
         <module>com.ibm.jbatch.tck.ann.proc</module>
         <module>com.ibm.jbatch.tck.appbean</module>
         <module>jakarta.batch.reporting</module>
-        <module>jakarta.batch.arquillian.exec</module>
+        <module>jakarta.batch.arquillian.exec-parent</module>
         <module>jakarta.batch.arquillian.extension</module>
     </modules>
 
@@ -274,14 +276,19 @@
             </dependency>
             -->
             <dependency>
+                <groupId>jakarta.batch</groupId>
+                <artifactId>jakarta.batch.arquillian.extension</artifactId>
+                <version>${batch.tck.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.ibm.jbatch</groupId>
                 <artifactId>com.ibm.jbatch.container</artifactId>
                 <version>${batch.impl.version}</version>
             </dependency>
             <dependency>
-                 <groupId>jakarta.xml.bind</groupId>
-                 <artifactId>jakarta.xml.bind-api</artifactId>
-                 <version>${version.jakarta.xml.bind.jakarta.xml.bind-api}</version>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${version.jakarta.xml.bind.jakarta.xml.bind-api}</version>
             </dependency>
             <dependency>
                 <groupId>jakarta.enterprise</groupId>
@@ -392,6 +399,11 @@
                     <version>${version.org.apache.maven.plugins.maven-surefire-plugin}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${version.org.apache.maven.plugins.maven-dependency-plugin}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>properties-maven-plugin</artifactId>
                     <version>${version.org.codehaus.mojo.properties-maven-plugin}</version>
@@ -484,14 +496,14 @@
                 </configuration>
                 <executions>
                     <!--
-                        <execution>
-                            <id>check-headers</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                            -->
+                <execution>
+                    <id>check-headers</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                </execution>
+                    -->
                 </executions>
             </plugin>
         </plugins>

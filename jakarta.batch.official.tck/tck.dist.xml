@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright 2012, 2020 International Business Machines Corp. and others
+   Copyright 2012, 2020-2022 International Business Machines Corp. and others.
+   Copyright 2022 Contributors to the Eclipse Foundation.
 
    See the NOTICE file distributed with this work for additional information
    regarding copyright ownership. Licensed under the Apache License,
@@ -138,7 +139,7 @@
             <outputDirectory>/runners/platform-arquillian/src/test/resources</outputDirectory>
         </file>
         <file>
-            <source>../jakarta.batch.arquillian.exec/tck.default.sleep.time.properties</source>
+            <source>../com.ibm.jbatch.tck/src/main/resources/tck.default.sleep.time.properties</source>
             <outputDirectory>/runners/platform-arquillian</outputDirectory>
         </file>
     </files>
