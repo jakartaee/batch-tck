@@ -75,10 +75,6 @@
             <outputDirectory>/doc</outputDirectory>
         </file>
         <file>
-            <source>otherFiles/how-to-run-tck-against-jbatch-script.sh</source>
-            <outputDirectory>/doc</outputDirectory>
-        </file>
-        <file>
             <source>target/generated-docs/batch-tck-reference-guide-${project.version}.html</source>
             <outputDirectory>/doc</outputDirectory>
         </file>
