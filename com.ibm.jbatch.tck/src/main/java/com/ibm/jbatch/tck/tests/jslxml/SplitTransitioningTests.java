@@ -154,11 +154,11 @@ public class SplitTransitioningTests extends BaseJUnit5Test {
         try {
             String exitStatus = "ThatsAllFolks";
             // based on our decider exit status
-			/*
-			<decision id="decider1" ref="flowTransitionToDecisionTestDecider">
-				<end exit-status="ThatsAllFolks" on="DECIDER_EXIT_STATUS*2" />
-			</decision>
-			 */
+            /*
+            <decision id="decider1" ref="flowTransitionToDecisionTestDecider">
+                <end exit-status="ThatsAllFolks" on="DECIDER_EXIT_STATUS*2" />
+            </decision>
+             */
             Reporter.log("starting job");
             JobExecution jobExec = jobOp.startJobAndWaitForResult("split_transition_to_decision", null);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());

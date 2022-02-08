@@ -41,13 +41,13 @@ public class JobLevelPropertiesCountBatchlet extends AbstractBatchlet {
 
         Properties properties = JobCtx.getProperties();
 
-		/*
-		<properties>
-		  <property name="foo" value="bar" />
-		  <property name="super" value="hero" />
-		  <property name="me" value="too" />
-	    </properties>
-		 */
+        /*
+        <properties>
+          <property name="foo" value="bar" />
+          <property name="super" value="hero" />
+          <property name="me" value="too" />
+        </properties>
+         */
 
         /*
          * Verify that all three job-level properties were seen.

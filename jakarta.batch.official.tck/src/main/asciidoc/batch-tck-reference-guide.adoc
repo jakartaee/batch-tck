@@ -83,17 +83,17 @@ For the current TCK version, this can be done with either Java SE Version 11 or 
 
 
 
-==	A Guide to the TCK Distribution
+== A Guide to the TCK Distribution
 
 This section explains how to obtain the TCK and extract it on your system.
 
-===	Obtaining the Software
+=== Obtaining the Software
 
 The Jakarta Batch TCK is distributed as a zip file, which contains the TCK artifacts (the test suite binary and source, porting package SPI binary and source, the test suite XML definitions, and signature files) in
 `/artifacts`, the documentation in `/doc`, and some example Maven modules showing how to run the TCK in `/runners`.
 You can access the current source code from the Git repository: https://github.com/eclipse-ee4j/batch-tck.
 
-===	The TCK Environment
+=== The TCK Environment
 
 The software can simply be extracted from the ZIP file.
 Once the TCK is extracted, you'll see the following structure:
@@ -650,7 +650,7 @@ Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.
 
 Note the expected warning about the "incorrect classpath parameter" **target/classes**, which occurs because our execution project only tests content pulled in as dependencies (it is unfortunate the plugin is this noisy here).  This can be ignored.
 
-====	Forcing a Signature Test failure (optional)
+==== Forcing a Signature Test failure (optional)
 
 Though it is not required it can be useful to validate the setup by forcing a failure in the signature test. 
 
@@ -761,7 +761,7 @@ The JobOperator is wrapped by a thin layer which blocks waiting for the job to f
 
 Several tests intentionally produce failures to test relevant portions of the specification, so a normal execution may cause a number of stack traces, error messages, etc. to stdout.
 
-===	Porting Package SPI
+=== Porting Package SPI
 
 The Jakarta Batch TCK relies on an implementation of a "porting package" SPI to function, in order to verify test execution results.
 The reason is that the Jakarta Batch specification API alone does not provide a convenient-enough mechanism to check results.
@@ -772,7 +772,7 @@ The expectation is that the typical Jakarta Batch implementation will be content
 Further detail on the porting package is provided later in this document, in case you wish to provide your own, different implementation.
 
 
-===	Adjusting the Default Timeout Value
+=== Adjusting the Default Timeout Value
 
 The JobOperatorBridge is a utility/helper class in the Jakarta Batch TCK which makes use of the following system property:
 

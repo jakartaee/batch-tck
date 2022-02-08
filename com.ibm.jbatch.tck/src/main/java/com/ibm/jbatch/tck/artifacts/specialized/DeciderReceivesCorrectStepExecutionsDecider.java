@@ -43,8 +43,8 @@ public class DeciderReceivesCorrectStepExecutionsDecider implements Decider {
             throw new Exception("Expecting stepExecutions array of size " + numOfStepExecs + ", found one of size = " + stepExecutions.length);
         }
 
-		/*we sort the stepExecutions to guarantee that the decider exit status, made up of the concatenated
-		step executions, will have the same order of step executions on subsequent job executions*/
+        /*we sort the stepExecutions to guarantee that the decider exit status, made up of the concatenated
+        step executions, will have the same order of step executions on subsequent job executions*/
         sortStepExecutionsByStepName(stepExecutions);
 
         /*

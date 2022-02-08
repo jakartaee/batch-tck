@@ -178,7 +178,7 @@ public class ChunkTests extends BaseJUnit5Test {
      * @assertion: Test will finish in FAILED status, with the onError chunk listener invoked
      *
      * @test_Strategy: Test that the ChunkListener.onError method is driven for an exception occurring
-     * 		during the read-write-process batch loop
+     *         during the read-write-process batch loop
      */
     @Test
     public void testChunkOnErrorListener() throws Exception {
@@ -1323,7 +1323,7 @@ public class ChunkTests extends BaseJUnit5Test {
     /*
      * @testName: testChunkRetryRead
      * @assertion: job will finish successfully as COMPLETED and retryable skippable exceptions will be recognized
-     * 			   5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
      *             5.2.1.2 - Processor
      *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
      *             5.2.1 - Chunk, item-count, retry-limit
@@ -1413,7 +1413,7 @@ public class ChunkTests extends BaseJUnit5Test {
      * @testName: testChunkItemListeners
      * @assertion: each job will finish successfully as COMPLETED and the invocation of each type of item listener
      *             will be recognized
-     * 			   5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
      *             5.2.1.2 - Processor, 5.2.2.1 - Processor Properties
      *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
      *             5.2.1 - Chunk, item-count, retry-limit
@@ -1508,7 +1508,7 @@ public class ChunkTests extends BaseJUnit5Test {
      * @testName: testChunkItemListenersOnError
      * @assertion: each job will finish successfully as COMPLETED and the invocation of each type of item listener
      *             will be recognized
-     * 			   5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
      *             5.2.1.2 - Processor, 5.2.2.1 - Processor Properties
      *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
      *             5.2.1 - Chunk, item-count, retry-limit
