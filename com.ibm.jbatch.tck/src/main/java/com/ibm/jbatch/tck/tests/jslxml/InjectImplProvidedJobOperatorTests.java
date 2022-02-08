@@ -1,5 +1,5 @@
 /*
- * Copyright 2021, 2022 International Business Machines Corp. and others
+ * Copyright 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -62,8 +62,8 @@ public class InjectImplProvidedJobOperatorTests extends BaseJUnit5Test {
         String tckAppProvidedJobOperatorClassNameFromOtherTest = "com.ibm.jbatch.tck.cdi.jobop.TCKJobOperatorWrapper";
         
         try {
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());

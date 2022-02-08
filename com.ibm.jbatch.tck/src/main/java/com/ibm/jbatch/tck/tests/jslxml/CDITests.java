@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2021 International Business Machines Corp. and others
+ * Copyright 2021 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -62,10 +62,10 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDIInject";
 
         try {
-        	String parm1Val = "It's a parm";
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("parm1", parm1Val);
+            String parm1Val = "It's a parm";
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
+            jobParams.setProperty("parm1", parm1Val);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
@@ -97,8 +97,8 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDIInjectContexts";
 
         try {
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
@@ -135,9 +135,9 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDIInjectListenerIntoBatchlet";
 
         try {
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("listenerName", "CDIApplicationScopedStepListener");
-        	jobParams.setProperty("batchletName", "CDIDependentScopedBatchletInjectListener");
+            Properties jobParams = new Properties();
+            jobParams.setProperty("listenerName", "CDIApplicationScopedStepListener");
+            jobParams.setProperty("batchletName", "CDIDependentScopedBatchletInjectListener");
             Reporter.log("starting job for testCDIInjectListenerIntoBatchlet");
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_listener_into_batchlet", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
@@ -167,20 +167,20 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDIBatchProps";
 
         try {
-        	Properties jobParams = new Properties();
-        	String ctor1 = "CTOR";
-        	String ctor2 = "CAT";
-        	String field1 = "ABC";
-        	String field2 = "APPLE";
-        	String method1 = "XYZ";
-        	String method2 = "X-WING";
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("c1", ctor1);
-        	jobParams.setProperty("c2", ctor2);
-        	jobParams.setProperty("f1", field1);
-        	jobParams.setProperty("f2", field2);
-        	jobParams.setProperty("m1", method1);
-        	jobParams.setProperty("m2", method2);
+            Properties jobParams = new Properties();
+            String ctor1 = "CTOR";
+            String ctor2 = "CAT";
+            String field1 = "ABC";
+            String field2 = "APPLE";
+            String method1 = "XYZ";
+            String method2 = "X-WING";
+            jobParams.setProperty("refName", refName);
+            jobParams.setProperty("c1", ctor1);
+            jobParams.setProperty("c2", ctor2);
+            jobParams.setProperty("f1", field1);
+            jobParams.setProperty("f2", field2);
+            jobParams.setProperty("m1", method1);
+            jobParams.setProperty("m2", method2);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_batch_props", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
@@ -208,12 +208,12 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDIInjectRepeatProps";
 
         try {
-        	String p1 = "myParm1";
-        	String p2 = "myParm2";
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("parm1", p1);
-        	jobParams.setProperty("parm2", p2);
+            String p1 = "myParm1";
+            String p2 = "myParm2";
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
+            jobParams.setProperty("parm1", p1);
+            jobParams.setProperty("parm2", p2);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
@@ -245,12 +245,12 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDILazyInject";
 
         try {
-        	String parm1Val = "It's a parm";
-        	String parm2Val = "Or a prop";
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("parm1", parm1Val);
-        	jobParams.setProperty("parm2", parm2Val);
+            String parm1Val = "It's a parm";
+            String parm2Val = "Or a prop";
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
+            jobParams.setProperty("parm1", parm1Val);
+            jobParams.setProperty("parm2", parm2Val);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans_2step", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
@@ -289,12 +289,12 @@ public class CDITests extends BaseJUnit5Test {
         String METHOD = "testCDILookup";
 
         try {
-        	String parm1Val = "It's a parm";
-        	String parm2Val = "Or a prop";
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("parm1", parm1Val);
-        	jobParams.setProperty("parm2", parm2Val);
+            String parm1Val = "It's a parm";
+            String parm2Val = "Or a prop";
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
+            jobParams.setProperty("parm1", parm1Val);
+            jobParams.setProperty("parm2", parm2Val);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans_2step", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());

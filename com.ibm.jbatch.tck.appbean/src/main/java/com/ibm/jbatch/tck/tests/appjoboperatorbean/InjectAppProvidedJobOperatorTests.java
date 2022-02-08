@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2021 International Business Machines Corp. and others
+ * Copyright 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -42,8 +42,8 @@ public class InjectAppProvidedJobOperatorTests extends BaseJUnit5Test {
 
     /**
      * @testName: testCDIJobOperatorInject
-     * @assertion: Section 10.4. JobOperator - TODO (update?)
-     * @test_Strategy: First validate the JobOperator function of the injected JbobOperator.  I.e. validate within batch job (batchlet) 
+     * @assertion: Section 10.4.1 - Precedence and Requirements for Injected JobOperator Bean
+     * @test_Strategy: First validate the JobOperator function of the injected JobOperator.  I.e. validate within batch job (batchlet) 
      * that @Inject(ed) JobOperator provides a view of running executions that matches that of the JobContext injected into the batchlet 
      * (i.e. execution id matches). Set as job exit status then validate again in the JUnit logic that the exit status matches the job 
      * execution id obtained via the JobOperator for the just-executed job.
@@ -64,8 +64,8 @@ public class InjectAppProvidedJobOperatorTests extends BaseJUnit5Test {
         String expectedTckAppProvidedJobOperatorClassName = "com.ibm.jbatch.tck.cdi.jobop.TCKJobOperatorWrapper";
 
         try {
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("cdi_inject_beans", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());

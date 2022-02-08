@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2021 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -428,22 +428,22 @@ public class PropertySubstitutionTests extends BaseJUnit5Test {
         String METHOD = "testCDIBatchPropsNonString";
 
         try {
-        	
-        	Properties jobParams = new Properties();
-        	jobParams.setProperty("refName", refName);
-        	jobParams.setProperty("stringProp", "HappyBatchProperties");
-        	jobParams.setProperty("booleanProp1", "true");
-        	jobParams.setProperty("booleanProp2", "Nope");
-        	jobParams.setProperty("doubleProp1", "234.432");
-        	jobParams.setProperty("doubleProp2", "123.321");
-        	jobParams.setProperty("floatProp1", Float.toString(11234.432F));
-        	jobParams.setProperty("floatProp2", Float.toString(11123.321F));
-        	jobParams.setProperty("intProp1", "7777");
-        	jobParams.setProperty("intProp2", "8888");
-        	jobParams.setProperty("longProp1", Long.toString(1234567890123L));
-        	jobParams.setProperty("longProp2", Long.toString(12345678901234L));
-        	jobParams.setProperty("shortProp1", "333");
-        	jobParams.setProperty("shortProp2", "444");
+            
+            Properties jobParams = new Properties();
+            jobParams.setProperty("refName", refName);
+            jobParams.setProperty("stringProp", "HappyBatchProperties");
+            jobParams.setProperty("booleanProp1", "true");
+            jobParams.setProperty("booleanProp2", "Nope");
+            jobParams.setProperty("doubleProp1", "234.432");
+            jobParams.setProperty("doubleProp2", "123.321");
+            jobParams.setProperty("floatProp1", Float.toString(11234.432F));
+            jobParams.setProperty("floatProp2", Float.toString(11123.321F));
+            jobParams.setProperty("intProp1", "7777");
+            jobParams.setProperty("intProp2", "8888");
+            jobParams.setProperty("longProp1", Long.toString(1234567890123L));
+            jobParams.setProperty("longProp2", Long.toString(12345678901234L));
+            jobParams.setProperty("shortProp1", "333");
+            jobParams.setProperty("shortProp2", "444");
             Reporter.log("starting job with refName = " + refName);
             JobExecution jobExec = jobOp.startJobAndWaitForResult("batch_props_non_string", jobParams);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());
