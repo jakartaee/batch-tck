@@ -265,7 +265,7 @@ public class ExecutionTests extends BaseJUnit5Test {
      * @testName: testInvokeJobUsingTCCL
      * @assertion: Section 10.5 Batch Artifact loading
      * @test_Strategy: Implementation should attempt to load artifact using Thread Context Class Loader if implementation specific
-     * 	and archive loading are unable to find the specified artifact.
+     *     and archive loading are unable to find the specified artifact.
      */
     @Test
     public void testInvokeJobUsingTCCL() throws Exception {

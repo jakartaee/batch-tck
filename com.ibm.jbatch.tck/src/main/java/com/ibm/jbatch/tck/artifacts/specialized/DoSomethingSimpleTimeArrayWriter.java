@@ -120,11 +120,11 @@ public class DoSomethingSimpleTimeArrayWriter extends AbstractItemWriter {
         //logger.fine("WRITE: diff = " + diff);
 
         //if ((diff <= timeinterval+2) || (diff >= timeinterval-2) ) {
-        //	logger.fine("WRITE: the chunk write is occuring at the correct time -> " + diff + " which is: " + timeinterval + " +/- 2 seconds");
+        //    logger.fine("WRITE: the chunk write is occuring at the correct time -> " + diff + " which is: " + timeinterval + " +/- 2 seconds");
         //}
         //else {
-        //	logger.fine("WRITE: we have an issue! throw exception here");
-        //	throw new Exception("WRITE: the chunk write did not occur at the correct time boundary -> "+ diff + " which is: " + timeinterval + "+/- 2 seconds");
+        //    logger.fine("WRITE: we have an issue! throw exception here");
+        //    throw new Exception("WRITE: the chunk write did not occur at the correct time boundary -> "+ diff + " which is: " + timeinterval + "+/- 2 seconds");
         //}
         chunkWriteIteration++;
         //date = new java.util.Date();

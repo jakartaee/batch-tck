@@ -623,7 +623,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     StepExecution exit status is asserted to be the one on the restarted execution.
      *                     JobContext transient user data is used to assert the correct number of decider invocations have
      *                     been performed.
-     *              	3. NOTE: TODO for future - Perhaps the strategy in asserting that EACH StepExecution is passed should be
+     *                  3. NOTE: TODO for future - Perhaps the strategy in asserting that EACH StepExecution is passed should be
      *                     tightened.  We could go further to assert that the full list of StepExecution(s) is what we'd expect.
      */
     @Test
@@ -849,7 +849,7 @@ public class DeciderTests extends BaseJUnit5Test implements StatusConstants {
      *                     to return a different result on restart.
      *                     JobContext transient user data is used to assert the correct number of decider invocations have
      *                     been performed.
-     *              	3. NOTE: TODO for future - Perhaps the strategy in asserting that EACH StepExecution is passed should be
+     *                  3. NOTE: TODO for future - Perhaps the strategy in asserting that EACH StepExecution is passed should be
      *                     tightened.  We could go further to assert that the full list of StepExecution(s) is what we'd expect.
      */
     @Test

@@ -1,3 +1,21 @@
+/*
+* Copyright 2021 International Business Machines Corp. and others
+*
+* See the NOTICE file distributed with this work for additional information
+* regarding copyright ownership. Licensed under the Apache License,
+* Version 2.0 (the "License"); you may not use this file except in compliance
+* with the License. You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* SPDX-License-Identifier: Apache-2.0
+*/
 package com.ibm.jbatch.tck.artifacts.cdi;
 
 import java.io.StringWriter;
@@ -21,63 +39,63 @@ import jakarta.inject.Named;
 @Named("CDIDependentScopedBatchletRepeatProps")
 public class DependentScopedBatchletRepeatProps implements Batchlet {
 
-	@Inject JobContext jobCtx;
+    @Inject JobContext jobCtx;
 
-	@Inject @BatchProperty String prop1;
-	@Inject @BatchProperty String prop2;
-	@Inject @BatchProperty(name="prop1") String prop3;
-	
-	private String m1;
-	private String m2;
-	private String m3;
-	private String m4;
-	private String m5;
-	private String m6;
+    @Inject @BatchProperty String prop1;
+    @Inject @BatchProperty String prop2;
+    @Inject @BatchProperty(name="prop1") String prop3;
+    
+    private String m1;
+    private String m2;
+    private String m3;
+    private String m4;
+    private String m5;
+    private String m6;
 
-	private String c1;
-	private String c2;
-	private String c3;
+    private String c1;
+    private String c2;
+    private String c3;
 
-	@Inject
-	DependentScopedBatchletRepeatProps(@BatchProperty(name="prop1") String c1, @BatchProperty(name="prop2") String c2,  @BatchProperty(name="prop1") String c3) {
-		this.c1 = c1;
-		this.c2 = c2;
-		this.c3 = c3;
-	}
+    @Inject
+    DependentScopedBatchletRepeatProps(@BatchProperty(name="prop1") String c1, @BatchProperty(name="prop2") String c2,  @BatchProperty(name="prop1") String c3) {
+        this.c1 = c1;
+        this.c2 = c2;
+        this.c3 = c3;
+    }
 
-	@Inject  
-	public void setMethod1(@BatchProperty(name="prop1") String m1, @BatchProperty(name="prop2") String m2) {
-		this.m1 = m1;
-		this.m2 = m2;
-	}
-	
-	@Inject  
-	public void setMethod2(@BatchProperty(name="prop1") String m3) {
-		this.m3 = m3;
-	}
-	
-	@Inject  
-	public void setMethod2(@BatchProperty(name="prop1") String m4, @BatchProperty(name="prop1") String m5,  @BatchProperty(name="prop1") String m6) {
-		this.m4 = m4;
-		this.m5 = m5;
-		this.m6 = m6;
-	}
+    @Inject  
+    public void setMethod1(@BatchProperty(name="prop1") String m1, @BatchProperty(name="prop2") String m2) {
+        this.m1 = m1;
+        this.m2 = m2;
+    }
+    
+    @Inject  
+    public void setMethod2(@BatchProperty(name="prop1") String m3) {
+        this.m3 = m3;
+    }
+    
+    @Inject  
+    public void setMethod2(@BatchProperty(name="prop1") String m4, @BatchProperty(name="prop1") String m5,  @BatchProperty(name="prop1") String m6) {
+        this.m4 = m4;
+        this.m5 = m5;
+        this.m6 = m6;
+    }
 
-	@Override
-	public String process() throws Exception {
-		jobCtx.setExitStatus(String.join(":", prop1, prop2, prop3, c1, c2, c3, m1, m2, m3, m4, m5, m6));
-		return "OK";
-	}
+    @Override
+    public String process() throws Exception {
+        jobCtx.setExitStatus(String.join(":", prop1, prop2, prop3, c1, c2, c3, m1, m2, m3, m4, m5, m6));
+        return "OK";
+    }
 
-	@Override
-	public void stop() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void stop() throws Exception {
+        // TODO Auto-generated method stub
+        
+    }
 
-	public static String getPropertyAsString(Properties prop) throws Exception {
-	    StringWriter writer = new StringWriter();
-	    prop.store(writer, "");
-	    return writer.getBuffer().toString();
-	}
+    public static String getPropertyAsString(Properties prop) throws Exception {
+        StringWriter writer = new StringWriter();
+        prop.store(writer, "");
+        return writer.getBuffer().toString();
+    }
 }

@@ -26,10 +26,10 @@ import jakarta.enterprise.inject.Produces;
 @Dependent
 public class TCKJobOperatorProducer {
 
-	@Produces
-	@Dependent
-	public JobOperator produceJobOperator() {
-		return new TCKJobOperatorWrapper();
-	}
-	
+    @Produces
+    @Dependent
+    public JobOperator produceJobOperator() {
+        return new TCKJobOperatorWrapper();
+    }
+    
 }

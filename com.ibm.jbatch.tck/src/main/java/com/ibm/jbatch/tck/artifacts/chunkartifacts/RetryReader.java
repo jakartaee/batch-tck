@@ -121,19 +121,19 @@ public class RetryReader extends AbstractItemReader {
 
         if (testState == STATE_RETRY) {
             // should be retrying at same index with no rollback
-			/*if(!rollback) {
-					if(failindex != readerIndex)
-						throw new Exception("Error reading data.  Expected to be at index " + failindex + " but got index " + readerIndex);
-			}
+            /*if(!rollback) {
+                    if(failindex != readerIndex)
+                        throw new Exception("Error reading data.  Expected to be at index " + failindex + " but got index " + readerIndex);
+            }
 
-			// should be retrying at last checkpoint with rollback
-			else {
+            // should be retrying at last checkpoint with rollback
+            else {
 
-					int checkpointIndex = Integer.parseInt((Properties)stepCtx.getTransientUserData()).getProperty("checkpoint.index"));
+                    int checkpointIndex = Integer.parseInt((Properties)stepCtx.getTransientUserData()).getProperty("checkpoint.index"));
 
-					if(checkpointIndex != readerIndex)
-						throw new Exception("Error reading data.  Expected to be at index " + checkpointIndex + " but got index " + readerIndex);
-			}*/
+                    if(checkpointIndex != readerIndex)
+                        throw new Exception("Error reading data.  Expected to be at index " + checkpointIndex + " but got index " + readerIndex);
+            }*/
 
             if (((Properties) stepCtx.getTransientUserData()).getProperty("retry.read.exception.invoked") != "true") {
                 Reporter.log("onRetryReadException not invoked<p>");

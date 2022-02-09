@@ -79,16 +79,16 @@ public class SkipWriter implements ItemWriter {
             // position at index held in the cpd
             idx = checkpointData.getCurrentIndex();
             //for (int i = 0; i<writePoints.length; i++){
-            //	if (idx <= writePoints[i]){
-            //		chunkWriteIteration++;
-            //	}
+            //    if (idx <= writePoints[i]){
+            //        chunkWriteIteration++;
+            //    }
             //}
 
             logger.fine("WRITE: chkpt data was valid, so idx = " + idx);
             logger.fine("WRITE: chunkWriteIteration = " + chunkWriteIteration);
         }
         //for (int n=0; n<chkArraySize;n++){
-        //	logger.fine("WRITE: chunk write point[" + n + " ]: " + checkArray[n]);
+        //    logger.fine("WRITE: chunk write point[" + n + " ]: " + checkArray[n]);
         //}
 
 

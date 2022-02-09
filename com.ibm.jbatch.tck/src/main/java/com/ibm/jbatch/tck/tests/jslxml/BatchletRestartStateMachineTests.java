@@ -59,23 +59,23 @@ public class BatchletRestartStateMachineTests extends BaseJUnit5Test {
      *
      *----------------------------------------------------------------------------
      * <job id="overrideOnAttributeValuesUponRestartBatchlet"
-     *	<step id="step1">
-     *	    <!-- same batchlet in all three steps -->
-     *		<batchlet ref="overrideOnAttributeValuesUponRestartBatchlet">
-     *			<stop on="#{jobParameters['step1.stop']}"/>             [ ES.STEP1, ES.STOP, ES.STOP ]
-     *			<next on="#{jobParameters['step1.next']}" to="step2"/>  [ ES.XXX, ES.STEP1, ES.STEP1 ]
-     *			<fail on="*" exit-status="FAILURE"/>
-     *	<step id="step2">
-     *		<batchlet ref="overrideOnAttributeValuesUponRestartBatchlet">
-     *			<fail on="#{jobParameters['step2.fail']}" exit-status="EXPECTED_FAILURE"/>  [ES.STEP2, ES.STEP2, ES.FAIL]
-     *			<next on="#{jobParameters['step2.next']}" to="step3"/>                      [ES.XXX, ES.STEP2, ES.STEP2]
-     *			<fail on="*" exit-status="FAILURE"/>                <!-- Distinguish between first /fail element via @exit-status. -->
-     *	<step id="step3">
-     *		<batchlet ref="overrideOnAttributeValuesUponRestartBatchlet">
-     *		<end on="ES.STEP3"/>
-     *		<fail on="*" exit-status="FAILURE"/>
+     *    <step id="step1">
+     *        <!-- same batchlet in all three steps -->
+     *        <batchlet ref="overrideOnAttributeValuesUponRestartBatchlet">
+     *            <stop on="#{jobParameters['step1.stop']}"/>             [ ES.STEP1, ES.STOP, ES.STOP ]
+     *            <next on="#{jobParameters['step1.next']}" to="step2"/>  [ ES.XXX, ES.STEP1, ES.STEP1 ]
+     *            <fail on="*" exit-status="FAILURE"/>
+     *    <step id="step2">
+     *        <batchlet ref="overrideOnAttributeValuesUponRestartBatchlet">
+     *            <fail on="#{jobParameters['step2.fail']}" exit-status="EXPECTED_FAILURE"/>  [ES.STEP2, ES.STEP2, ES.FAIL]
+     *            <next on="#{jobParameters['step2.next']}" to="step3"/>                      [ES.XXX, ES.STEP2, ES.STEP2]
+     *            <fail on="*" exit-status="FAILURE"/>                <!-- Distinguish between first /fail element via @exit-status. -->
+     *    <step id="step3">
+     *        <batchlet ref="overrideOnAttributeValuesUponRestartBatchlet">
+     *        <end on="ES.STEP3"/>
+     *        <fail on="*" exit-status="FAILURE"/>
      *
-     *	----------------------------------------------------------------------------
+     *    ----------------------------------------------------------------------------
      * On first execution, stop after step1.
      *
      * On second execution, step1 is already complete with allow-start-if-complete=false (by default), so the first execution is step2.
@@ -84,7 +84,7 @@ public class BatchletRestartStateMachineTests extends BaseJUnit5Test {
      *
      * On the third execution, we this time do not execuute step1, or step 2, so we transition past each
      * and the first step we execute is step 3.
-     *	----------------------------------------------------------------------------
+     *    ----------------------------------------------------------------------------
      *
      * Note that because we reuse the same batchlet across the three steps we perform some validation in
      * the batchlet, using the stepName and the execution number (as restart parameter), so that we validate we're never called
@@ -186,29 +186,29 @@ public class BatchletRestartStateMachineTests extends BaseJUnit5Test {
      * This simplified JSL (end tags not shown) makes this clear.
      *
      * <job id="batchletRestartStateMachine"
-     *	<step id="step1" allow-start-if-complete="true">
-     *	   <batchlet ref="batchletRestartStateMachineImpl">
-     *		<!-- Remember these aren't regular expressions, so '.' is just a regular character. -->
-     *		  <stop on="STOP.1" exit-status="EXECUTION.1"/>
-     *		  <stop on="STOP.2" exit-status="EXECUTION.2" restart="step2" />
-     *		  <stop on="STOP.?" restart="step3" exit-status="EXECUTION.5"/>
+     *    <step id="step1" allow-start-if-complete="true">
+     *       <batchlet ref="batchletRestartStateMachineImpl">
+     *        <!-- Remember these aren't regular expressions, so '.' is just a regular character. -->
+     *          <stop on="STOP.1" exit-status="EXECUTION.1"/>
+     *          <stop on="STOP.2" exit-status="EXECUTION.2" restart="step2" />
+     *          <stop on="STOP.?" restart="step3" exit-status="EXECUTION.5"/>
      *        <fail on="ILLEGAL.STATE"/>
-     *		  <next on="*" to="step2"/>
-     *	<step id="step2">
-     *		<batchlet ref="batchletRestartStateMachineImpl">
-     *		  <next on="GO" to="step3"/>
+     *          <next on="*" to="step2"/>
+     *    <step id="step2">
+     *        <batchlet ref="batchletRestartStateMachineImpl">
+     *          <next on="GO" to="step3"/>
      *        <fail on="ILLEGAL.STATE"/>
-     *		  <next on="*" to="step4"/> <!-- Shouldn't happen, here to test earlier exit status is persisted -->
-     *	<step id="step3" allow-start-if-complete="true">
-     *		<batchlet ref="batchletRestartStateMachineImpl">
-     *		  <stop on="STOP.3" exit-status="EXECUTION.3"/>
-     *		  <stop on="STOP.4" exit-status="EXECUTION.4"/>
+     *          <next on="*" to="step4"/> <!-- Shouldn't happen, here to test earlier exit status is persisted -->
+     *    <step id="step3" allow-start-if-complete="true">
+     *        <batchlet ref="batchletRestartStateMachineImpl">
+     *          <stop on="STOP.3" exit-status="EXECUTION.3"/>
+     *          <stop on="STOP.4" exit-status="EXECUTION.4"/>
      *        <fail on="ILLEGAL.STATE"/>
-     *		  <next on="*" to="step4"/>
-     *	<step id="step4" >
-     *		<batchlet ref="batchletRestartStateMachineImpl">
+     *          <next on="*" to="step4"/>
+     *    <step id="step4" >
+     *        <batchlet ref="batchletRestartStateMachineImpl">
      *        <fail on="ILLEGAL.STATE"/>
-     *		  <end on="*" exit-status="EXECUTION.6"/>
+     *          <end on="*" exit-status="EXECUTION.6"/>
      *</job>
      *
      * Note that because we reuse the same batchlet across the three steps we perform some validation in

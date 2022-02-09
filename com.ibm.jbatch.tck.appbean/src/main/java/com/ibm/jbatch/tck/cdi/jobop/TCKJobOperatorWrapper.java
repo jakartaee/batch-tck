@@ -43,76 +43,76 @@ import jakarta.enterprise.inject.Produces;
 
 public class TCKJobOperatorWrapper implements JobOperator {
 
-	@Override
-	public Set<String> getJobNames() throws JobSecurityException {
-		return BatchRuntime.getJobOperator().getJobNames();
-	}
+    @Override
+    public Set<String> getJobNames() throws JobSecurityException {
+        return BatchRuntime.getJobOperator().getJobNames();
+    }
 
-	@Override
-	public int getJobInstanceCount(String jobName) throws NoSuchJobException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getJobInstanceCount(jobName);
-	}
+    @Override
+    public int getJobInstanceCount(String jobName) throws NoSuchJobException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getJobInstanceCount(jobName);
+    }
 
-	@Override
-	public List<JobInstance> getJobInstances(String jobName, int start, int count)
-			throws NoSuchJobException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getJobInstances(jobName, start, count);
-	}
+    @Override
+    public List<JobInstance> getJobInstances(String jobName, int start, int count)
+            throws NoSuchJobException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getJobInstances(jobName, start, count);
+    }
 
-	@Override
-	public List<Long> getRunningExecutions(String jobName) throws NoSuchJobException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getRunningExecutions(jobName);
-	}
+    @Override
+    public List<Long> getRunningExecutions(String jobName) throws NoSuchJobException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getRunningExecutions(jobName);
+    }
 
-	@Override
-	public Properties getParameters(long executionId) throws NoSuchJobExecutionException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getParameters(executionId);
-	}
+    @Override
+    public Properties getParameters(long executionId) throws NoSuchJobExecutionException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getParameters(executionId);
+    }
 
-	@Override
-	public long start(String jobXMLName, Properties jobParameters) throws JobStartException, JobSecurityException {
-		return BatchRuntime.getJobOperator().start(jobXMLName, jobParameters);
-	}
+    @Override
+    public long start(String jobXMLName, Properties jobParameters) throws JobStartException, JobSecurityException {
+        return BatchRuntime.getJobOperator().start(jobXMLName, jobParameters);
+    }
 
-	@Override
-	public long restart(long executionId, Properties restartParameters) throws JobExecutionAlreadyCompleteException,
-			NoSuchJobExecutionException, JobExecutionNotMostRecentException, JobRestartException, JobSecurityException {
-		return BatchRuntime.getJobOperator().restart(executionId, restartParameters);
-	}
+    @Override
+    public long restart(long executionId, Properties restartParameters) throws JobExecutionAlreadyCompleteException,
+            NoSuchJobExecutionException, JobExecutionNotMostRecentException, JobRestartException, JobSecurityException {
+        return BatchRuntime.getJobOperator().restart(executionId, restartParameters);
+    }
 
-	@Override
-	public void stop(long executionId)
-			throws NoSuchJobExecutionException, JobExecutionNotRunningException, JobSecurityException {
-		BatchRuntime.getJobOperator().stop(executionId);
-	}
+    @Override
+    public void stop(long executionId)
+            throws NoSuchJobExecutionException, JobExecutionNotRunningException, JobSecurityException {
+        BatchRuntime.getJobOperator().stop(executionId);
+    }
 
-	@Override
-	public void abandon(long executionId)
-			throws NoSuchJobExecutionException, JobExecutionIsRunningException, JobSecurityException {
-		
-		BatchRuntime.getJobOperator().abandon(executionId);
-	}
+    @Override
+    public void abandon(long executionId)
+            throws NoSuchJobExecutionException, JobExecutionIsRunningException, JobSecurityException {
+        
+        BatchRuntime.getJobOperator().abandon(executionId);
+    }
 
-	@Override
-	public JobInstance getJobInstance(long executionId) throws NoSuchJobExecutionException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getJobInstance(executionId);
-	}
+    @Override
+    public JobInstance getJobInstance(long executionId) throws NoSuchJobExecutionException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getJobInstance(executionId);
+    }
 
-	@Override
-	public List<JobExecution> getJobExecutions(JobInstance instance)
-			throws NoSuchJobInstanceException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getJobExecutions(instance);
-	}
+    @Override
+    public List<JobExecution> getJobExecutions(JobInstance instance)
+            throws NoSuchJobInstanceException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getJobExecutions(instance);
+    }
 
-	@Override
-	public JobExecution getJobExecution(long executionId) throws NoSuchJobExecutionException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getJobExecution(executionId);
-	}
+    @Override
+    public JobExecution getJobExecution(long executionId) throws NoSuchJobExecutionException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getJobExecution(executionId);
+    }
 
-	@Override
-	public List<StepExecution> getStepExecutions(long jobExecutionId)
-			throws NoSuchJobExecutionException, JobSecurityException {
-		return BatchRuntime.getJobOperator().getStepExecutions(jobExecutionId);
-	}
+    @Override
+    public List<StepExecution> getStepExecutions(long jobExecutionId)
+            throws NoSuchJobExecutionException, JobSecurityException {
+        return BatchRuntime.getJobOperator().getStepExecutions(jobExecutionId);
+    }
 
 }

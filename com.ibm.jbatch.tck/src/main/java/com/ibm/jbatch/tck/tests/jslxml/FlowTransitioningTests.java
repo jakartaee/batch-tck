@@ -157,11 +157,11 @@ public class FlowTransitioningTests extends BaseJUnit5Test {
         try {
             String exitStatus = "ThatsAllFolks";
             // based on our decider exit status
-			/*
-			<decision id="decider1" ref="flowTransitionToDecisionTestDecider">
-				<end exit-status="ThatsAllFolks" on="DECIDER_EXIT_STATUS*VERY GOOD INVOCATION" />
-			</decision>
-			 */
+            /*
+            <decision id="decider1" ref="flowTransitionToDecisionTestDecider">
+                <end exit-status="ThatsAllFolks" on="DECIDER_EXIT_STATUS*VERY GOOD INVOCATION" />
+            </decision>
+             */
             Reporter.log("starting job");
             JobExecution jobExec = jobOp.startJobAndWaitForResult("flow_transition_to_decision", null);
             Reporter.log("Job Status = " + jobExec.getBatchStatus());

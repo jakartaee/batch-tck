@@ -118,7 +118,7 @@ public class DoSomethingSimpleArrayWriter extends AbstractItemWriter {
             logger.fine("WRITE: chunkWriteIteration = " + chunkWriteIteration);
         }
         //for (int n=0; n<chkArraySize;n++){
-        //	logger.fine("WRITE: chunk write point[" + n + " ]: " + checkArray[n]);
+        //    logger.fine("WRITE: chunk write point[" + n + " ]: " + checkArray[n]);
         //}
 
 
