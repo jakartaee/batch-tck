@@ -4,6 +4,7 @@
         <feature>batch-2.0</feature>
         <feature>pages-3.0</feature>
         <feature>localConnector-1.0</feature>
+        <feature>enterpriseBeans-4.0</feature>
         <feature>cdi-3.0</feature>
         <feature>jndi-1.0</feature>
         <feature>servlet-5.0</feature>
