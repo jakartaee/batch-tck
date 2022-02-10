@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, 2020 International Business Machines Corp. and others
+ * Copyright 2012, 2022 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -33,12 +33,10 @@ import jakarta.batch.runtime.StepExecution;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
 import com.ibm.jbatch.tck.utils.TCKJobExecutionWrapper;
 
-import com.ibm.jbatch.tck.utils.Reporter;
-import ee.jakarta.tck.batch.util.extensions.VehicleInvocationInterceptor;
+import ee.jakarta.tck.batch.util.Reporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 @Tag("ee")
 public class TransactionTests extends BaseJUnit5Test {

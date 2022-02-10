@@ -27,7 +27,7 @@ import ee.jakarta.tck.batch.util.extensions.TSNamingContext;
 public class EJBVehicleRunner {
 
     public void run(Runnable test, Properties p) throws Exception {
-        EJBVehicleRemote ref = null;
+        EJBVehicleRemote ref;
         String sEJBVehicleJndiName = p.getProperty(PropertyKeys.EJB_VEHICLE_JNDI_NAME, "java:global/jbatch-test-package-all/EJBVehicle");
         TSNamingContext jc = new TSNamingContext();
         ref = jc.lookup(sEJBVehicleJndiName,
