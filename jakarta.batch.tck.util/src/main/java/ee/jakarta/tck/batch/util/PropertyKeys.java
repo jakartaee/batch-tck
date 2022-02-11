@@ -20,10 +20,13 @@ package ee.jakarta.tck.batch.util;
 
 public interface PropertyKeys {
 
-    String PROPERTIES_FILE_NAME = "vehicle.properties";
+    String VEHICLE_PROPERTY_PREFIX = "jakarta.batch.tck.vehicles.";
+    
+    
+    String VEHICLE_PROPERTIES_FILE_NAME = "vehicle.properties";
     /* A comma-separated list of vehicles to run the tests with. Possible values: ejb, web, standalone */
-    String ENABLED_VEHICLE = "vehicle";
-    // Whether the mechnism of vehicles is enabled, by default false
-    String RUN_IN_VEHICLES = "runInVehicles";
-    String EJB_VEHICLE_JNDI_NAME = "vehicle.ejb.jndiName";
+    String ENABLED_VEHICLE = VEHICLE_PROPERTY_PREFIX + "vehicleName";
+    // Whether the mechnism of vehicles is enabled, by default false.
+    String RUN_IN_VEHICLES = VEHICLE_PROPERTY_PREFIX + "runInVehicles";
+    String EJB_VEHICLE_JNDI_NAME = VEHICLE_PROPERTY_PREFIX + "ejb.jndiName";
 }

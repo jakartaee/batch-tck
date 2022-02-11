@@ -45,13 +45,17 @@ public class VehicleSelectionArchiveProcessor implements ApplicationArchiveProce
         if (enabledVehicles != null) {
             props.put(PropertyKeys.ENABLED_VEHICLE, enabledVehicles);
             props.put(PropertyKeys.RUN_IN_VEHICLES, Boolean.TRUE.toString());
+            final String customEjbVehicleName = System.getProperty(PropertyKeys.EJB_VEHICLE_JNDI_NAME);
+            if (customEjbVehicleName != null) {
+                props.put(PropertyKeys.EJB_VEHICLE_JNDI_NAME, customEjbVehicleName);
+            }
         }
         String propertiesContent = propertiesToStringContent(props);
         DeploymentPackageType deploymentpackage
                 = DeploymentPackageType.fromArchive(archive);
         deploymentpackage.getPackageBuilder(archive)
                 // store properties into a properties file
-                .addResource(new StringAsset(propertiesContent), PropertyKeys.PROPERTIES_FILE_NAME)
+                .addResource(new StringAsset(propertiesContent), PropertyKeys.VEHICLE_PROPERTIES_FILE_NAME)
                 .build();
     }
 

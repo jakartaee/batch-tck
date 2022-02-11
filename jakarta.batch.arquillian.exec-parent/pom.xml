@@ -140,7 +140,7 @@ Copyright 2012, 2022 International Business Machines Corp. and others
                                 <reportNameSuffix>core-ejb</reportNameSuffix>
                                 <systemPropertyVariables>
                                     <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                                    <vehicle>ejb</vehicle>
+                                    <jakarta.batch.tck.vehicles.vehicleName>ejb</jakarta.batch.tck.vehicles.vehicleName>
                                 </systemPropertyVariables>
                             </configuration>
                         </execution>
@@ -159,7 +159,7 @@ Copyright 2012, 2022 International Business Machines Corp. and others
                                 <reportNameSuffix>core-web</reportNameSuffix>
                                 <systemPropertyVariables>
                                     <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                                    <vehicle>web</vehicle>
+                                    <jakarta.batch.tck.vehicles.vehicleName>web</jakarta.batch.tck.vehicles.vehicleName>
                                 </systemPropertyVariables>
                             </configuration>
                         </execution>
@@ -175,7 +175,7 @@ Copyright 2012, 2022 International Business Machines Corp. and others
                                 <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</includesFile>
                                 <reportNameSuffix>appbean-ejb</reportNameSuffix>
                                 <systemPropertyVariables>
-                                    <vehicle>ejb</vehicle>
+                                    <jakarta.batch.tck.vehicles.vehicleName>ejb</jakarta.batch.tck.vehicles.vehicleName>
                                     <!-- The property to have our custom ShrinkWrap logic add the joboperator bean into our app Deployment for Arquillian -->
                                     <arquillian.extensions.jakarta.batch.appbean>true</arquillian.extensions.jakarta.batch.appbean>                                
                                 </systemPropertyVariables>
@@ -193,7 +193,7 @@ Copyright 2012, 2022 International Business Machines Corp. and others
                                 <includesFile>${project.build.directory}/test-classes/testprofiles/batch-tck-impl-appjoboperator-suite-includes.txt</includesFile>
                                 <reportNameSuffix>appbean-web</reportNameSuffix>
                                 <systemPropertyVariables>
-                                    <vehicle>web</vehicle>
+                                    <jakarta.batch.tck.vehicles.vehicleName>web</jakarta.batch.tck.vehicles.vehicleName>
                                     <!-- The property to have our custom ShrinkWrap logic add the joboperator bean into our app Deployment for Arquillian -->
                                     <arquillian.extensions.jakarta.batch.appbean>true</arquillian.extensions.jakarta.batch.appbean>                                
                                 </systemPropertyVariables>

@@ -20,12 +20,19 @@ package ee.jakarta.tck.batch.util.vehicle.ejb;
 
 import ee.jakarta.tck.batch.util.Reporter;
 import java.lang.reflect.Method;
+import java.util.Properties;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.InvocationInterceptor;
 import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
 
 public class EjbExecutionInterceptor implements InvocationInterceptor {
 
+    private Properties props;
+    
+    public EjbExecutionInterceptor(Properties props) {
+        this.props = props;
+    }
+    
     @Override
     public void interceptTestTemplateMethod(Invocation<Void> invocation,
             ReflectiveInvocationContext<Method> invocationContext,
@@ -44,7 +51,7 @@ public class EjbExecutionInterceptor implements InvocationInterceptor {
             } catch (Throwable ex) {
                 throw new RuntimeException(ex);
             }
-        }, System.getProperties());
+        }, props);
         Reporter.logTrace("...finished test method " + invocationContext.getExecutable().getName() + " in EJB.");
     }
 }

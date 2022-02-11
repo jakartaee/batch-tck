@@ -21,6 +21,9 @@ SPDX-License-Identifier: Apache-2.0
 4. Uses an Arquillian extension specific for Batch TCK to create a deployment for each test 
 5. Generates the `test.properties` file with default test properties, which can be later modified and versioned. Existing `test.properties` file won't be overwritten.
 
+IMPORTANT: The properties from the `test.properties` file are then added to the maven execution but note that they are not passed to the Arquillian container. 
+If you want to apply them within the implementation container, you need to apply them to the implementation in a vendor-specific way, before you execute the TCK.
+
 The Batch TCK Arquillian extension is a separate module. It contains 
 
 * The Arquillian extension class
@@ -36,7 +39,8 @@ Create a new maven project that:
 * (Required) Contains the `maven-dependency-plugin` in the list of plugins. This plugin 
 is pre-configured in the parent POM to copy test resources from the TCK artifact
 * (Optional) Specify to exclude some artifacts on the maven test classpath from the Arquillian test 
-deployment with the `artifact-group-prefixes-to-ignore` system property if they cause problems
+deployment with the `arquillian.extensions.jakarta.batch.groupPrefixesToIgnore` system property if they cause problems. 
+Specify prefixes of group names, separated by a column.
 * (Optional) Contains the `xml-maven-plugin` and `echo-maven-plugin` in the list of plugins in the respected order 
 (first the xml plugin, then echo plugin). These plugins will transfor the summary from the failsafe plugin and print it to output. 
 This can output can be used to report test results for Jakarta TCK certification.
@@ -44,6 +48,8 @@ This can output can be used to report test results for Jakarta TCK certification
 the implementation under the tests. Note that, even though these properties are applied for test execution, they are not transferred 
 into the Arquillian container and they have to be applied in a way that is specific to the implementation. For example, in GlassFish, 
 you can apply each property using `asadmin create-system-properties` against a running GlassFish server
+* (Optional) If the JNDI name of the `EJBVehicleRemote` EJB is different from the default name, specify the correct name using 
+the `jakarta.batch.tck.vehicles.ejb.jndiName` system property, either in the failsafe maven plugin, or inside the implementation container.
 
 An example for GlassFish:
 
@@ -69,7 +75,7 @@ An example for GlassFish:
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <artifact-group-prefixes-to-ignore>org.glassfish</artifact-group-prefixes-to-ignore>
+                        <arquillian.extensions.jakarta.batch.groupPrefixesToIgnore>org.glassfish</arquillian.extensions.jakarta.batch.groupPrefixesToIgnore>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

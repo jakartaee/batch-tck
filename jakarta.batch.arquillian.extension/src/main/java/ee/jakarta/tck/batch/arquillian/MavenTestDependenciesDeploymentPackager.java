@@ -31,14 +31,20 @@ import org.jboss.shrinkwrap.resolver.api.maven.*;
 
 public class MavenTestDependenciesDeploymentPackager implements DeploymentScenarioGenerator {
 
-    public static final String PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN = ArquillianExtension.PROPERTY_PREFIX + "appbean";
+    public interface PropertyKeys {
 
-    // Artifacts with a group matching one of these prefixes will not be added to the package. 
-    // Expects a comma-separated list of prefixes.
-    public static final String PROPERTY_KEY_GROUP_PREFIXES_TO_IGNORE = ArquillianExtension.PROPERTY_PREFIX + "groupPrefixesToIgnore";
+        String INCLUDE_JOBOP_APPBEAN = ArquillianExtension.PROPERTY_PREFIX + "appbean";
 
-    // package type, e.g. EAR, EJBJAR, WAR. Default is WAR
-    public static final String PROPERTY_KEY_PACKAGE = ArquillianExtension.PROPERTY_PREFIX + "package";
+        String ACTIVE_MAVEN_PROFILES = ArquillianExtension.PROPERTY_PREFIX + "activeMavenProfiles";
+
+        // Artifacts with a group matching one of these prefixes will not be added to the package. 
+        // Expects a comma-separated list of prefixes.
+        String GROUP_PREFIXES_TO_IGNORE = ArquillianExtension.PROPERTY_PREFIX + "groupPrefixesToIgnore";
+
+        // package type, e.g. EAR, EJBJAR, WAR. Default is WAR
+        String PACKAGE = ArquillianExtension.PROPERTY_PREFIX + "packageType";
+
+    }
 
     private List<String> groupPrefixesToIgnore = null;
 
@@ -49,9 +55,8 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     public MavenTestDependenciesDeploymentPackager() {
         initListOfIgnoredArtifactPrefixes();
         initDeploymentPackage();
-        includeAppBean = Boolean.getBoolean(PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN);
+        includeAppBean = Boolean.getBoolean(PropertyKeys.INCLUDE_JOBOP_APPBEAN);
     }
-
 
     public List<String> getGroupPrefixesToIgnore() {
         return groupPrefixesToIgnore;
@@ -70,19 +75,9 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     }
 
     private Archive<?> generateDeployment() {
-        /**
-         * As coded, doesn't use profile to resolve even if profile is active in
-         * top-level execution.
-         *
-         * During staging, we need to resolve against artifacts not published to
-         * Maven Central, so this next line would need to look something like:
-         *
-         * Maven.resolver().loadPomFromFile("pom.xml", "staging") ...
-         *
-         * See javadoc:
-         * https://repository.jboss.org/nexus/content/repositories/unzip/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api-maven/3.1.4/shrinkwrap-resolver-api-maven-3.1.4-javadoc.jar-unzip/index.html
-         */
-        MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml")
+        String[] activeMavenProfiles = getListOfActiveMavenProfiles();
+        
+        MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml", activeMavenProfiles)
                 .importDependencies(ScopeType.COMPILE, ScopeType.TEST)
                 .resolve().withTransitivity().asResolvedArtifact();
 
@@ -98,6 +93,15 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
                 .forEach(packageBuilder::addArtifact);
 
         return packageBuilder.build();
+    }
+
+    private String[] getListOfActiveMavenProfiles() {
+        String activeManveProfilesRawValue = System.getProperty(PropertyKeys.ACTIVE_MAVEN_PROFILES);
+        if (activeManveProfilesRawValue != null) {
+            return activeManveProfilesRawValue.split("\\s*,\\s*");
+        } else {
+            return new String[] {};
+        }
     }
 
     private boolean notAppBeanArtifactToIgnore(MavenResolvedArtifact artifact) {
@@ -126,10 +130,9 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     private void initListOfIgnoredArtifactPrefixes() {
         groupPrefixesToIgnore = new ArrayList<>(Arrays.asList(
                 "org.jboss.shrinkwrap", // ShrinkWrap - creates a deployment, not needed in the deployment itself
-                "jbatch.arquillian.extension", // This extension - not needed in the deployment itself
-                "org.codehaus.plexus",  // Maven classes - not needed in the deployment itself
+                "org.codehaus.plexus", // Maven classes - not needed in the deployment itself
                 "org.apache.maven"));   // Maven classes - not needed in the deployment itself
-        String additionalPrefixesFromProperties = System.getProperty(PROPERTY_KEY_GROUP_PREFIXES_TO_IGNORE);
+        String additionalPrefixesFromProperties = System.getProperty(PropertyKeys.GROUP_PREFIXES_TO_IGNORE);
         if (additionalPrefixesFromProperties != null) {
             List<String> prefixesFromPropertiesList = Arrays.asList(additionalPrefixesFromProperties.split("\\s*,\\s*"));
             groupPrefixesToIgnore.addAll(prefixesFromPropertiesList);
@@ -137,7 +140,7 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     }
 
     private void initDeploymentPackage() {
-        String packageValue = System.getProperty(PROPERTY_KEY_PACKAGE);
+        String packageValue = System.getProperty(PropertyKeys.PACKAGE);
         if (packageValue != null) {
             deploymentPackageType = DeploymentPackageType.fromString(packageValue);
         }

@@ -77,13 +77,13 @@ public class VehicleInvocationInterceptor implements InvocationInterceptor {
     private Properties loadProperties() {
         Properties props = new Properties(System.getProperties());
         try (InputStream propertiesInputStream = this.getClass().getClassLoader()
-                .getResourceAsStream(PropertyKeys.PROPERTIES_FILE_NAME)) {
+                .getResourceAsStream(PropertyKeys.VEHICLE_PROPERTIES_FILE_NAME)) {
             if (propertiesInputStream != null) {
                 props.load(propertiesInputStream);
             }
         } catch (IOException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.WARNING, ex,
-                    () -> "Couldn't find resource " + PropertyKeys.PROPERTIES_FILE_NAME
+                    () -> "Couldn't find resource " + PropertyKeys.VEHICLE_PROPERTIES_FILE_NAME
                     + " on the classpath or read properties from it. Properties from it won't be applied");
         }
         return props;
@@ -94,7 +94,7 @@ public class VehicleInvocationInterceptor implements InvocationInterceptor {
 
         if (runInVehicle) {
             if (vehicle.contains("ejb")) {
-                return new EjbExecutionInterceptor();
+                return new EjbExecutionInterceptor(props);
             } else if (vehicle.contains("web")) {
                 return new WebExecutionInterceptor();
             }
