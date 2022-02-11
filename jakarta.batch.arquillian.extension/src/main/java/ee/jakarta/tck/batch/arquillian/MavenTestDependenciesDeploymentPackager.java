@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation
+ * Copyright (c) 2022 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -18,7 +18,6 @@
  */
 package ee.jakarta.tck.batch.arquillian;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,72 +27,35 @@ import org.jboss.arquillian.container.spi.client.deployment.DeploymentDescriptio
 import org.jboss.arquillian.container.test.spi.client.deployment.*;
 import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.*;
 
 public class MavenTestDependenciesDeploymentPackager implements DeploymentScenarioGenerator {
 
-    public static final String PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN = ArquillianExtension.PROPERTY_PREFIX + "appbean";
+    public interface PropertyKeys {
 
-    // Artifacts with a group matching one of these prefixes will not be added to the package. 
-    // Expects a comma-separated list of prefixes.
-    public static final String PROPERTY_KEY_GROUP_PREFIXES_TO_IGNORE = ArquillianExtension.PROPERTY_PREFIX + "groupPrefixesToIgnore";
+        String INCLUDE_JOBOP_APPBEAN = ArquillianExtension.PROPERTY_PREFIX + "appbean";
 
-    // package type, e.g. EAR, EJBJAR, WAR. Default is WAR
-    public static final String PROPERTY_KEY_PACKAGE = ArquillianExtension.PROPERTY_PREFIX + "package";
+        String ACTIVE_MAVEN_PROFILES = ArquillianExtension.PROPERTY_PREFIX + "activeMavenProfiles";
+
+        // Artifacts with a group matching one of these prefixes will not be added to the package. 
+        // Expects a comma-separated list of prefixes.
+        String GROUP_PREFIXES_TO_IGNORE = ArquillianExtension.PROPERTY_PREFIX + "groupPrefixesToIgnore";
+
+        // package type, e.g. EAR, EJBJAR, WAR. Default is WAR
+        String PACKAGE = ArquillianExtension.PROPERTY_PREFIX + "packageType";
+
+    }
 
     private List<String> groupPrefixesToIgnore = null;
 
     boolean includeAppBean = false;
 
-    private DeploymentPackage deploymentPackage = DeploymentPackage.WAR;
+    private DeploymentPackageType deploymentPackageType = DeploymentPackageType.WAR;
 
     public MavenTestDependenciesDeploymentPackager() {
         initListOfIgnoredArtifactPrefixes();
         initDeploymentPackage();
-        includeAppBean = Boolean.getBoolean(PROPERTY_KEY_INCLUDE_JOBOP_APPBEAN);
-    }
-
-    public enum DeploymentPackage {
-        WAR {
-            @Override
-            protected Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-                WebArchive archive = ShrinkWrap
-                        .create(WebArchive.class, "jbatch-test-package-all.war")
-                        .as(WebArchive.class);
-                streamArtifactsToAdd.forEach(archive::addAsLibrary);
-                return archive;
-            }
-        }, EJBJAR {
-            @Override
-            protected Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-                return createEarDeploymentArchive(streamArtifactsToAdd);
-            }
-
-        }, EAR {
-            @Override
-            protected Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-                return createEarDeploymentArchive(streamArtifactsToAdd);
-            }
-
-        };
-
-        public static DeploymentPackage fromString(String value) {
-            if (value == null || value.isEmpty()) {
-                return null;
-            }
-            String upperCaseValue = value.toUpperCase();
-            // remove special chars, e.g. ejb-jar is turned into EJBJAR
-            upperCaseValue = upperCaseValue.replaceAll("-|_|\\.| ", "");
-            return DeploymentPackage.valueOf(upperCaseValue);
-        }
-
-        protected abstract Archive<?> createDeploymentArchive(Stream<File> streamArtifactsToAdd);
-
-        protected Archive<?> createEarDeploymentArchive(Stream<File> streamArtifactsToAdd) {
-            throw new RuntimeException("TODO - Not implemented yet!");
-        }
+        includeAppBean = Boolean.getBoolean(PropertyKeys.INCLUDE_JOBOP_APPBEAN);
     }
 
     public List<String> getGroupPrefixesToIgnore() {
@@ -104,40 +66,42 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
         this.groupPrefixesToIgnore = groupPrefixesToIgnore;
     }
 
-    public DeploymentPackage getDeploymentPackage() {
-        return deploymentPackage;
+    public DeploymentPackageType getDeploymentPackageType() {
+        return deploymentPackageType;
     }
 
-    public void setDeploymentPackage(DeploymentPackage deploymentPackage) {
-        this.deploymentPackage = deploymentPackage;
+    public void setDeploymentPackageType(DeploymentPackageType deploymentPackageType) {
+        this.deploymentPackageType = deploymentPackageType;
     }
 
     private Archive<?> generateDeployment() {
-        /**
-         * As coded, doesn't use profile to resolve even if profile is active in
-         * top-level execution.
-         *
-         * During staging, we need to resolve against artifacts not published to
-         * Maven Central, so this next line would need to look something like:
-         *
-         * Maven.resolver().loadPomFromFile("pom.xml", "staging") ...
-         *
-         * See javadoc:
-         * https://repository.jboss.org/nexus/content/repositories/unzip/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api-maven/3.1.4/shrinkwrap-resolver-api-maven-3.1.4-javadoc.jar-unzip/index.html
-         */
-        MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml")
+        String[] activeMavenProfiles = getListOfActiveMavenProfiles();
+        
+        MavenResolvedArtifact[] resolvedArtifacts = Maven.resolver().loadPomFromFile("pom.xml", activeMavenProfiles)
                 .importDependencies(ScopeType.COMPILE, ScopeType.TEST)
                 .resolve().withTransitivity().asResolvedArtifact();
 
-        final Stream<File> streamArtifactsToAdd = Stream.of(resolvedArtifacts)
-                .filter(this::artifactNotToIgnore)
+        DeploymentPackageType.PackageBuilder packageBuilder = deploymentPackageType.getPackageBuilder();
+
+        Stream.of(resolvedArtifacts)
+                .filter(this::artifactShouldntBeIgnored)
                 .filter(this::notAppBeanArtifactToIgnore)
                 .filter(artifact -> {
                     return "jar".equals(artifact.getExtension());
-                }).map(MavenResolvedArtifact::asFile);
+                })
+                .map(MavenResolvedArtifact::asFile)
+                .forEach(packageBuilder::addArtifact);
 
-        Archive<?> archive = deploymentPackage.createDeploymentArchive(streamArtifactsToAdd);
-        return archive;
+        return packageBuilder.build();
+    }
+
+    private String[] getListOfActiveMavenProfiles() {
+        String activeManveProfilesRawValue = System.getProperty(PropertyKeys.ACTIVE_MAVEN_PROFILES);
+        if (activeManveProfilesRawValue != null) {
+            return activeManveProfilesRawValue.split("\\s*,\\s*");
+        } else {
+            return new String[] {};
+        }
     }
 
     private boolean notAppBeanArtifactToIgnore(MavenResolvedArtifact artifact) {
@@ -149,7 +113,7 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
         }
     }
 
-    private boolean artifactNotToIgnore(MavenResolvedArtifact artifact) {
+    private boolean artifactShouldntBeIgnored(MavenResolvedArtifact artifact) {
         String groupId = artifact.getCoordinate().getGroupId();
         final boolean groupMatchesAPrefix = groupPrefixesToIgnore.stream()
                 .anyMatch(prefix -> groupId.startsWith(prefix));
@@ -165,11 +129,10 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
 
     private void initListOfIgnoredArtifactPrefixes() {
         groupPrefixesToIgnore = new ArrayList<>(Arrays.asList(
-                "org.jboss.shrinkwrap",
-                "arquillian.extension",
-                "org.codehaus.plexus",
-                "org.apache.maven"));
-        String additionalPrefixesFromProperties = System.getProperty(PROPERTY_KEY_GROUP_PREFIXES_TO_IGNORE);
+                "org.jboss.shrinkwrap", // ShrinkWrap - creates a deployment, not needed in the deployment itself
+                "org.codehaus.plexus", // Maven classes - not needed in the deployment itself
+                "org.apache.maven"));   // Maven classes - not needed in the deployment itself
+        String additionalPrefixesFromProperties = System.getProperty(PropertyKeys.GROUP_PREFIXES_TO_IGNORE);
         if (additionalPrefixesFromProperties != null) {
             List<String> prefixesFromPropertiesList = Arrays.asList(additionalPrefixesFromProperties.split("\\s*,\\s*"));
             groupPrefixesToIgnore.addAll(prefixesFromPropertiesList);
@@ -177,9 +140,9 @@ public class MavenTestDependenciesDeploymentPackager implements DeploymentScenar
     }
 
     private void initDeploymentPackage() {
-        String packageValue = System.getProperty(PROPERTY_KEY_PACKAGE);
+        String packageValue = System.getProperty(PropertyKeys.PACKAGE);
         if (packageValue != null) {
-            deploymentPackage = DeploymentPackage.fromString(packageValue);
+            deploymentPackageType = DeploymentPackageType.fromString(packageValue);
         }
     }
 

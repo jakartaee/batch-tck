@@ -32,7 +32,7 @@ import com.ibm.jbatch.tck.ann.SpecRef;
 import com.ibm.jbatch.tck.ann.TCKTest;
 import com.ibm.jbatch.tck.utils.BaseJUnit5Test;
 import com.ibm.jbatch.tck.utils.JobOperatorBridge;
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.util.Reporter;
 
 import jakarta.batch.runtime.BatchStatus;
 import jakarta.batch.runtime.JobExecution;

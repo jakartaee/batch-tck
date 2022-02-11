@@ -26,7 +26,7 @@ import java.util.Properties;
 import jakarta.batch.operations.JobExecutionNotMostRecentException;
 import jakarta.batch.runtime.JobExecution;
 
-import com.ibm.jbatch.tck.utils.Reporter;
+import ee.jakarta.tck.batch.util.Reporter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

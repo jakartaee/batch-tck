@@ -68,6 +68,10 @@
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jakarta.batch.tck.util</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>

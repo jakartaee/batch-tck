@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation
+ * Copyright (c) 2022 Contributors to the Eclipse Foundation
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -18,6 +18,7 @@
  */
 package ee.jakarta.tck.batch.arquillian;
 
+import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.container.test.spi.client.deployment.DeploymentScenarioGenerator;
 import org.jboss.arquillian.core.spi.LoadableExtension;
 import org.jboss.arquillian.core.spi.LoadableExtension.ExtensionBuilder;
@@ -29,5 +30,6 @@ public class ArquillianExtension implements LoadableExtension {
     @Override
     public void register(ExtensionBuilder builder) {
         builder.service(DeploymentScenarioGenerator.class, MavenTestDependenciesDeploymentPackager.class);
+        builder.service(ApplicationArchiveProcessor.class, VehicleSelectionArchiveProcessor.class);
     }
 }
