@@ -130,7 +130,7 @@
                 <configuration>
                     <sourceDocumentName>batch-tck-reference-guide.adoc</sourceDocumentName>
                     <sourceHighlighter>coderay</sourceHighlighter>
-                    <skip>${asciidoc.skip}</skip>
+                    <skip>${maven.adoc.skip}</skip>
                 </configuration>
             </plugin>
             <plugin>
