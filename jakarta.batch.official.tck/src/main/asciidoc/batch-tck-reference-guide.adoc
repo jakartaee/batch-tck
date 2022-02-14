@@ -689,7 +689,7 @@ $ mvn verify
 [INFO] Packages: jakarta.batch.api.chunk.listener, jakarta.batch.api.chunk, jakarta.batch.api.listener, jakarta.batch.api, jakarta.batch.api.partition, jakarta.batch.operations, jakarta.batch.runtime.context, jakarta.batch.runtime
 [ERROR] SignatureTest report
 Base version: 2.0.0
-Tested version: 2.1.0-M2-SNAPSHOT
+Tested version: 2.1.0
 Check mode: src [throws normalized]
 Constant checking: on
 
@@ -718,7 +718,7 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 
 
-[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0-M2-SNAPSHOT.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
+[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------

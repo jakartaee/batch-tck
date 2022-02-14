@@ -57,7 +57,7 @@ An example for GlassFish:
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>jakarta.batch.arquillian.exec-parent</artifactId>
-        <version>2.1.0-M2-SNAPSHOT</version>
+        <version>2.1.0</version>
     </parent>
 
     <artifactId>glassfish-batch-tck-execution</artifactId>
