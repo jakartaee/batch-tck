@@ -362,7 +362,7 @@ If you experienced a failure, it is possible that you experienced a timing issue
 
 == JUnit EE suite - 'platform-arquillian' runner
 
-Each of these Arquillian tests run within the runtime's "container", with the help of an Arquillian adapter for that runtime implementation (mentioned as a prerequisite).  This Arquillian-based test suite essentially executes the same set of tests within each of an EJB container and a Servlet container (except for perhaps a small number of container-specific tests).
+Each of these Arquillian tests run within the runtime's "container", with the help of an Arquillian adapter for that runtime implementation (mentioned as a prerequisite).  This Arquillian-based test suite essentially executes the same set of tests within each of an Jakarta Enterprise Beans container and a Servlet container (except for perhaps a small number of container-specific tests).
 
 The 'platform-arquillian' runner shows how to configure an execution of the JUnit runtime tests implementation in EE mode against some implementation via an Arquillian adapter. This exercises Batch as part of the full Jakarta EE Platform.  We walk through its POM configuration below.
 
@@ -390,13 +390,13 @@ While it is not required, strictly speaking, to inherit from this parent, it is 
 
 **NOTE:** Because the parent module is referenced by other modules we don't include the parent module in the TCK distribution, to avoid confusion.   An easy, standard Maven technique for merging a given POM with its parent (and ancestors, more generally) is to run the goal:  `mvn help:effective-pom` from the current module directory at the command line.
 
-=== ejb vs web executions, core vs appbean executions
+=== Jakarta Enterprise Beans vs web executions, core vs appbean executions
 
-A requirement for certifying in EE mode is to execute each test in each of a servlet ('web') and an EJB context.  So to run from an "EJB context" is to have the test perform the JobOperator API calls used in each TCK test method from within an EJB (provided by the TCK).  This mechanism is established through the Arquillian adapter, via the parent POM config.  
+A requirement for certifying in EE mode is to execute each test in each of a servlet ('web') and a Jakarta Enterprise Bean context.  So to run from a "Jakarta Enterprise Bean context" is to have the test perform the JobOperator API calls used in each TCK test method from within a Jakarta Enterprise Bean (provided by the TCK).  This mechanism is established through the Arquillian adapter, via the parent POM config.
 
 We also need to run a set of tests (the 'appbean' tests) with a different application classpath than the 'core' majority of the tests.  
 
-Therefore we set up our parent POM to establish four executions of the 'failsafe' plugin:  for each of the two classpath configurations ('core' and 'appbean') we have one execution for each of the 'web' and 'ejb' contexts.
+Therefore we set up our parent POM to establish four executions of the 'failsafe' plugin:  for each of the two classpath configurations ('core' and 'appbean') we have one execution for each of the Jakarta Enterprise Beans and servlet contexts.
 
 === One-time setup used for all failsafe executions
 
@@ -491,7 +491,7 @@ and it includes five aspects, which we use to illustrate required vs. optional a
 ```
 
 5. **REQUIRED** - The system property:
-* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `ejb` to execute within the EJB context, e.g.: 
+* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `ejb` to execute within the Jakarta Enterprise Beans context, e.g.:
 +
 ```
     <configuration>
@@ -511,7 +511,7 @@ Some special, optional properties we mention which are defined by the TCK itself
 deployment with the `arquillian.extensions.jakarta.batch.groupPrefixesToIgnore` system property if they cause problems. 
 Specify prefixes of group names, separated by a column.
 
-2. If the JNDI name of the `EJBVehicleRemote` EJB is different from the default name, specify the correct name using 
+2. If the JNDI name of the `EJBVehicleRemote` Jakarta Enterprise Bean is different from the default name, specify the correct name using
 the `jakarta.batch.tck.vehicles.ejb.jndiName` system property, either in the failsafe maven plugin, or inside the implementation container.
 
 **TCK wait times**  
@@ -575,7 +575,7 @@ The **junit.jupiter.extensions.autodetection.enabled** system property must be s
 ```
 
 5. **REQUIRED** - The system property:
-* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `ejb` to execute within the EJB context, e.g.: 
+* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `ejb` to execute within the Jakarta Enterprise Bean context, e.g.:
 +
 ```
     <configuration>
