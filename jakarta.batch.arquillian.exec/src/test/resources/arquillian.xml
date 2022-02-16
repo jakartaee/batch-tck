@@ -66,6 +66,7 @@ SPDX-License-Identifier: Apache-2.0 -->
        <property name="serverName">defaultServer</property>
        <property name="httpPort">9080</property>
        <property name="serverStartTimeout">180</property>
+       <property name="serverStopTimeout">180</property>
        <property name="appDeployTimeout">180</property>
        <!--
        <property name="javaVmArguments">-Djava.compiler=NONE -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=7777</property>

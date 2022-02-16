@@ -46,12 +46,12 @@ This version of the Jakarta Batch TCK introduces two major changes to the TCK:
 
 == What Tests Must I Pass To Certify Compatibility? 
 
-=== Overview 
+=== Runtime Tests & Signature Tests Required
 
 Whether you are using this guide and the TCK to certify compatibility of a batch implementation against the Jakarta Batch specification alone, or certifying compatibility with the entire Jakarta EE Platform, you will in both cases need to run the TCK against your implementation and pass 100% of both the:
 
-* Signature tests
 * JUnit 5 runtime tests
+* Signature tests
 
 The two types of tests are not encapsulated in a single execution or configuration; typically they must be executed via multiple executions, as explained in detail later in the guide.
 
@@ -76,7 +76,7 @@ For the current TCK version, this can be done with either Java SE Version 11 or 
 
 === Other Dependencies
 3. **Arquillian** - Since the EE Platform TCK uses Arquillian to execute tests within an Arquillian "container" for certifying against the EE Platform, you must configure an Arquillian https://arquillian.org/guides/developing_a_container_adapter/[adapter] for your target runtime.
-4. **Signature Test Tool** - No action is needed here, but we note that the signature files were built and should be validated with the Maven plugin with G:A:V coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.5**, as used by the sample sigtest runner included in the TCK zip. This is a more specific direction than in earlier releases, in which it was left more open for the user to use a compatible tool.  Since there are small differences in the various signature test tools, we standardize on this version.
+4. **Signature Test Tool** - No action is needed here, but we note that the signature files were built and should be validated with the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**, as used by the sample sigtest runner included in the TCK zip. This is a more specific direction than in earlier releases, in which it was left more open for the user to use a compatible tool.  Since there are small differences in the various signature test tools, we standardize on this version.
 
 
 
@@ -158,8 +158,8 @@ Likewise, for the EE tests we have:
 
 The two signature files, for Java 11 and 17, respectively:
 
-1. `artifacts/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9`
-2. `artifacts/sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot`
+1. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9`
+2. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot`
 
 
 == Quick Start - Run the TCK against jbatch
@@ -184,11 +184,11 @@ Because there is flexibility regarding how a user could use Maven to configure a
 For the runtime test (JUnit) component of the TCK: 
 
 * 178 tests must be passed to successfully execute the SE TCK suite
-* 187 tests must be passed to successfully execute the EE TCK suite
+* 374 tests must be passed to successfully execute the EE TCK suite
 
 === Signature tests
 
-All signature tests must be passed.
+All signature tests must be passed.  The sigtest tool must be pointed to the TCK-provided signature file with an appropriate configuration and get a clean result without error or failures.
 
 == Requirements As Illustrated by TCK "runners"
 
@@ -204,17 +204,27 @@ We accept this ambiguity and think we can live with this compromise.  If it turn
 
 One unusual aspect of a POM like this is that, one the one hand, it has a non-SNAPSHOT version and is released to Maven Central.   On the other hand, it is delivered in the TCK ZIP in a way that the user may simply choose to edit it and run the TCK against their implementation, without changing the Maven GAV coordinates to something they own.   We don't consider this a problem but beware, e.g. if you do `mvn install` you'll be overwriting this locally. (This shouldn't affect the TCK execution since nothing else uses any runner as a dependency or parent).
 
-== TCK Runners In Detail
+=== Runners use TCK ZIP artifacts for viewing, not for execution
 
-=== JUnit SE suite 
+**Note:** the TCK runners mentioned here are configured to run "against" artifacts referenced as Maven dependencies, and so obtained from a Maven repository (e.g Maven Central).  They are configured this way even though as explained in the guide to the TCK ZIP contents, the artifacts are all present in the TCK zip.
+
+This is a significant difference with the previous Jakarta Batch Ant-based TCK.
+
+Starting with the Jakarta Batch 2.1 TCK release, the runner configurations are NOT set up referencing relative paths within the TCK zip. The artifacts packaged in the ZIP (detailed below) only help create a self-contained TCK package, providing an easy view of what artifacts are relevant to the TCK in a single place without requiring the user to follow Maven dependency references.  
+
+While it would be possible to construct a valid TCK execution configuration running against the artifacts in the TCK ZIP, an example is not provided.
+
+=== Runners inherit from Batch TCK modules 
+
+The runners each inherit from a module within the Batch TCK, in order to leave the minimum amount of configuration needed to be performed by the implementer.  Use standard Maven techniques, e.g. `mvn help:effective-pom` to see the configuration of the module being executed merged with its parent.  **NOTE:** Inheriting from these parents is optional, strictly speaking, but it is a good way to ensure a valid configuration for certifying against the TCK is being used.
+
+== JUnit SE suite - 'se-classpath' runner
 
 We call this suite of tests the "SE" suite just to distinguish from the EE suite. It can be exercised outside of an EE platform.
 
-==== se-classpath runner
-
 The 'se-classpath' runner shows an execution of the JUnit runtime tests against the 'jbatch' implementation in SE mode.  We walk through its POM configuration below.
 
-==== Maven failsafe 'core' execution
+=== Maven failsafe 'core' execution
 
 First, we look at the 'core' execution, through which the large majority of the runtime tests are executed.  It is defined like this in the runner POM:
 ```
@@ -266,7 +276,7 @@ and which includes four aspects, which we use to illustrate required vs. optiona
        <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
 ```
 
-==== Maven failsafe 'appbean' execution
+=== Maven failsafe 'appbean' execution
 
 Next we look at the 'appbean' execution, through which only a small number of tests are executed.  This configuration differs from that of the 'core' execution in that an application JobOperator bean producer is added to the test classpath.  It is defined like this in the runner POM:
 
@@ -323,20 +333,20 @@ and we step through the same four details:
        <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
 ```
 
-==== Alternative Aproaches
+=== Alternative Approaches
 
-Note there is no requirement to configure these two executions from a single POM, as the runner does.  E.g. two separate POMs could be used. Hopefully the details above provide clear enough guidance for what is and is not required for each execution.
+Note there is no requirement to configure these two executions from a single POM, as the runner does.  E.g. two separate POMs could be used. Hopefully the details above provide clear enough guidance for what is and is not required for each execution. As mentioned above it is not required that the user's "runner" module inherit from the parent like this example one does.
 
-==== Expected Results
+=== Expected Results
 
-There are six tests marked in the source to be skipped/ignored, leaving a total of 175 tests.
+(Here we abstract out the exact numbers to avoid forgetting to update this count and causing ambiguity with the required test count detailed elsewhere).
 
 The 'core' execution:
 ```
 [INFO]
 [INFO] Results:
 [INFO]
-[WARNING] Tests run: 181, Failures: 0, Errors: 0, Skipped: 6
+[WARNING] Tests run: MMM, Failures: 0, Errors: 0, Skipped: NN
 ```
 
 The 'appbean' execution:
@@ -344,49 +354,112 @@ The 'appbean' execution:
 [INFO]
 [INFO] Results:
 [INFO]
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: N, Failures: 0, Errors: 0, Skipped: 0
 ```
 
-==== In case of Failure
+=== In case of Failure
 **Note**: there are many forced failure scenarios tested by the TCK, so typically the log will show a lot of exception stack traces during a normal, successful execution.
 
 If you experienced a failure, it is possible that you experienced a timing issue.  The TCK has several built-in properties allowing for tuning of execution to deal with these, and instructions elsewhere in this guide for doing so.
 
 
-=== JUnit EE suite 
+== JUnit EE suite - 'platform-arquillian' runner
 
-Each of these Arquillian tests run within the runtime's "container", with the help of an Arquillian adapter for that runtime implementation (mentioned as a prerequisite).  This Arquillian-based test suite essentially executes the same set of tests within each of an EJB container and a Servlet container (except for perhaps a small number of container-specific tests).
+Each of these Arquillian tests run within the runtime's "container", with the help of an Arquillian adapter for that runtime implementation (mentioned as a prerequisite).  This Arquillian-based test suite essentially executes the same set of tests within each of an Jakarta Enterprise Beans container and a Servlet container (except for perhaps a small number of container-specific tests).
 
-==== platform-arquillian runner
+The 'platform-arquillian' runner shows how to configure an execution of the JUnit runtime tests implementation in EE mode against some implementation via an Arquillian adapter. This exercises Batch as part of the full Jakarta EE Platform.  We walk through its POM configuration below.
 
-The 'platform-arquillian' runner shows an execution of the JUnit runtime tests against the 'jbatch' implementation in EE mode, which exercises Batch as part of the full Jakarta EE Platform.  We walk through its POM configuration below.
-
-==== Runtime-specific Maven profile
+=== Runtime-specific Maven profile
 
 Without additional configuration the runner POM is not actually configured to run any tests, because the specific runtime with its specific Arquillian adapter is not configured by default. 
 
-Instead the runtime-specific pieces are configured within a set of optional profiles, e.g. **liberty-managed** to run against Open Liberty, which can be activated via normal Maven techniques e.g. `-Pliberty-managed`.
+Instead the runtime-specific pieces are configured within a set of optional profiles, e.g. `-Pglassfish-remote` or `-Pliberty-managed`, to run against GlassFish or Open Liberty, respectively.
 
 To run against a specific runtime, then, you would need to combine something like this runtime-specific profile with the common configuration defined in the runner module (independent of any profile).
 
-TODO - glassfish?
+=== 'jakarta.batch.arquillian.exec-parent' parent module 
 
-==== Maven failsafe 'core' execution
+The runner provides the common setup and configuration needed for any runtime-specific execution via a parent module that can referenced via: 
 
-First, we look at the 'core' execution, through which the large majority of the runtime tests are executed.  It is defined like this in the runner POM:
+```xml
+    <parent>
+        <groupId>jakarta.batch</groupId>
+        <artifactId>jakarta.batch.arquillian.exec-parent</artifactId>
+        <version>...</version>
+    </parent>
+```
+
+While it is not required, strictly speaking, to inherit from this parent, it is a convenient way to add all the required elements of the TCK execution while still providing a space for customization to adapt to your specific runtime.
+
+**NOTE:** Because the parent module is referenced by other modules we don't include the parent module in the TCK distribution, to avoid confusion.   An easy, standard Maven technique for merging a given POM with its parent (and ancestors, more generally) is to run the goal:  `mvn help:effective-pom` from the current module directory at the command line.
+
+=== Jakarta Enterprise Beans vs web executions, core vs appbean executions
+
+A requirement for certifying in EE mode is to execute each test in each of a servlet ('web') and a Jakarta Enterprise Bean context.  So to run from a "Jakarta Enterprise Bean context" is to have the test perform the JobOperator API calls used in each TCK test method from within a Jakarta Enterprise Bean (provided by the TCK).  This mechanism is established through the Arquillian adapter, via the parent POM config.
+
+We also need to run a set of tests (the 'appbean' tests) with a different application classpath than the 'core' majority of the tests.  
+
+Therefore we set up our parent POM to establish four executions of the 'failsafe' plugin:  for each of the two classpath configurations ('core' and 'appbean') we have one execution for each of the Jakarta Enterprise Beans and servlet contexts.
+
+=== One-time setup used for all failsafe executions
+
+==== OPTIONAL - use dependency plugin to conveniently unpack dependencies
+
+The test suite files, the test database DDLs, and reporting XSL can be extracted into place by adding the following plugin to your module build (the execution is configured in the 'jakarta.batch.arquillian.exec-parent' module to run during the `pre-integration-test` phase.
+```xml
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+```
+
+==== REQUIRED - test database setup - DDL files
+
+The test suite includes tests that use an application database which must be created separately, prior to TCK execution, potentially in an application-specific way.  The DDL defining the required table format is specified in a set of .ddl files included in the 'com.ibm.jbatch.tck' module dependency.  These can most conveniently be accessed by adding the dependency plugin with parent configuration, as mentioned in the previous section.   They can also be accessed in the TCK zip at file: `artifacts/com.ibm.jbatch.tck-<version>.jar`. 
+
+There is no requirement to use one of the databases for which a DDL is included; another database with JDBC-compliant driver could potentially be used.
+
+
+==== OPTIONAL test results reporting
+
+Finally, the parent POM configures a couple of plugins which, if added to your build in order (first the xml plugin, then echo plugin), can conveniently collect and report test results across the multiple failsafe executions. 
+This output can then be used to report test results for Jakarta TCK certification.
+
+These plugins will transfer the summary from the failsafe plugin and print it to output, using the XSL (zipped up in the 'com.ibm.jbatch.tck' module dependency which can be unpacked with the dependency plugin as mentioned above).
+
+E.g.: 
+
+```xml
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>xml-maven-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>com.github.ekryd.echo-maven-plugin</groupId>
+            <artifactId>echo-maven-plugin</artifactId>
+        </plugin>
+```
+
+=== Maven failsafe core execution: 'core-ejb'
+
+First, we look at the 'core' executions, through which the large majority of the runtime tests are executed.  If we look specifically at the 'core-ejb' execution, is defined like this in the parent POM:
 ```
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 ...
                 <execution>
-                    <id>core</id>
+                    <id>core-ejb</id>
                     <goals>
                         <goal>integration-test</goal>
                     </goals>
 ```
 
-and which includes five aspects, which we use to illustrate required vs. optional aspects of TCK execution.
+and it includes five aspects, which we use to illustrate required vs. optional aspects of TCK execution.
+
+==== REQUIRED POM elements
 
 1. **REQUIRED** -  The test includes list must match that defined in
 `batch-tck-impl-EE-platform-core-suite-includes.txt`, e.g.:
@@ -407,10 +480,10 @@ and which includes five aspects, which we use to illustrate required vs. optiona
         </dependenciesToScan>
 ```
 
-3. **REQUIRED** - By default there's nothing to do here.   But, for the sake of completeness, we note the configuration must NOT include the artifacts packaged in Maven artifact `jakarta.batch:com.ibm.jbatch.tck.appbean` on the test classpath.  For the analogous case the corresponding SE test configuration used the  classpathDependencyExcludes parameter to ensure the 'appbean' artifact did not appear on the test classpath.  Our Arquillian-based test uses custom ShrinkWrap logic to package a test application.  By default, we will not package 'appbean'.  The exact requirement is that the **arquillian.extensions.jakarta.batch.appbean** system property is NOT equal to `true` (with a case-insensitive check).   
+3. **REQUIRED** - By default there's nothing to do here.   But, for the sake of completeness, we note the configuration must NOT include the artifacts packaged in Maven artifact `jakarta.batch:com.ibm.jbatch.tck.appbean` on the test classpath.  For the analogous case the corresponding SE test configuration used the  classpathDependencyExcludes parameter to ensure the 'appbean' artifact did not appear on the test classpath.  Our Arquillian-based test uses custom ShrinkWrap logic to package a test application.  By default, we will not package 'appbean'.  The exact requirement using this ShrinkWrap logic is that the **arquillian.extensions.jakarta.batch.appbean** system property must NOT equal to `true` (via a case-insensitive match).   
 
-4. **REQUIRED** - 
-The **junit.jupiter.extensions.autodetection.enabled** system property must be set to `true` to allow the TCK's JUnit extension to plugin to JUnit 5, e.g.: 
+4. **REQUIRED** - The system property:
+* The **junit.jupiter.extensions.autodetection.enabled** system property must be set to `true` to allow the TCK's JUnit extension to plugin to JUnit 5.  
 +
 ```
     <configuration>
@@ -420,31 +493,46 @@ The **junit.jupiter.extensions.autodetection.enabled** system property must be s
         </systemPropertyVariables>
 ```
 
-5. **OPTIONAL** - As long as the above requirements are met, it is up to the user which, if any, other system properties are passed to the execution, either properties defined by the Batch TCK (e.g. the wait times explained elsewhere in this document) or implementation-specific properties. In the runner we use properties to enable executing with the 'jbatch' implementation:
+5. **REQUIRED** - The system property:
+* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `ejb` to execute within the Jakarta Enterprise Beans context, e.g.:
 +
 ```
-<configuration>
-   ...
-   <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
+    <configuration>
+        ...
+        <systemPropertyVariables>
+            <jakarta.batch.tck.vehicles.vehicleName>ejb</jakarta.batch.tck.vehicles.vehicleName>
+        </systemPropertyVariables>
 ```
 
-==== Maven failsafe 'appbean' execution
+==== OPTIONAL POM properties
 
-Next we look at the 'appbean' execution, through which only a small number of tests are executed.  This configuration differs from that of the 'core' execution in that an application JobOperator bean producer is added to the test classpath. For the EE/platform suite, this is accomplished via a custom ShrinkWrap routine defined in our Arquillian integration layer.  It is defined like this in the runner POM:
+As long as the above requirements are met, it is up to the user which, if any, other system properties are passed to the execution, either properties defined by the Batch TCK (e.g. the wait times explained elsewhere in this document) or implementation-specific properties.
 
-```
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            ...
-            <execution>
-                <id>appbean</id>
-                <goals>
-                    <goal>integration-test</goal>
-                </goals>
-```
+Some special, optional properties we mention which are defined by the TCK itself:
 
-and we step through the same four details:
+1. Specify to exclude some artifacts on the maven test classpath from the Arquillian test 
+deployment with the `arquillian.extensions.jakarta.batch.groupPrefixesToIgnore` system property if they cause problems. 
+Specify prefixes of group names, separated by a column.
+
+2. If the JNDI name of the `EJBVehicleRemote` Jakarta Enterprise Bean is different from the default name, specify the correct name using
+the `jakarta.batch.tck.vehicles.ejb.jndiName` system property, either in the failsafe maven plugin, or inside the implementation container.
+
+**TCK wait times**  
+
+The TCK wait times for the various tests can be configured via system properties, however note that configuring the failsafe execution which these
+system properties does not itself guarantee that these properties will be propagated to the underlying Arquillian container.
+ If you want to apply them within the implementation container, you need to apply them to the implementation in a vendor-specific way, before you execute the TCK.
+
+E.g. to apply a custom set of wait time properties in Glassfish you could execute `mvn pre-integration-test`, then take the generated `test.properties` and apply using `asadmin create-system-properties` 
+against a running GlassFish server.
+
+
+=== Maven failsafe appbean execution: 'appbean-ejb'
+
+Next we look at the 'appbean' execution, through which only a small number of tests are executed.  This configuration differs from that of the 'core-ejb' execution in that an application JobOperator bean producer is added to the test classpath. For the EE/platform suite, this is accomplished via a custom ShrinkWrap routine defined in our Arquillian extension module.
+
+
+==== REQUIRED POM elements
 
 1. **REQUIRED** -  The test includes list must match that defined in
 `batch-tck-impl-appjoboperator-suite-includes.txt`, e.g.:
@@ -489,67 +577,89 @@ The **junit.jupiter.extensions.autodetection.enabled** system property must be s
         </systemPropertyVariables>
 ```
 
-5. **OPTIONAL** - As long as the above requirements are met, it is up to the user which, if any, other system properties are passed to the execution, either properties defined by the Batch TCK (e.g. the wait times explained elsewhere in this document) or implementation-specific properties. In the runner we use properties to enable executing with the 'jbatch' implementation:
+5. **REQUIRED** - The system property:
+* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `ejb` to execute within the Jakarta Enterprise Bean context, e.g.:
 +
 ```
-<configuration>
-   ...
-   <systemPropertiesFile>${project.basedir}/test.properties</systemPropertiesFile>
+    <configuration>
+        ...
+        <systemPropertyVariables>
+            <jakarta.batch.tck.vehicles.vehicleName>ejb</jakarta.batch.tck.vehicles.vehicleName>
+        </systemPropertyVariables>
 ```
 
-==== Alternative Aproaches
+==== OPTIONAL POM properties
 
-Note there is no requirement to configure these two executions from a single POM, as the runner does.  E.g. two separate POMs could be used. Hopefully the details above provide clear enough guidance for what is and is not required for each execution.
+See the discussion in the earlier section regarding the 'core-ejb' execution, as the same details apply to this execution as well.
 
-==== Expected Output
+=== Maven failsafe web executions: 'core-web', 'appbean-web'
 
-There are six tests marked in the source to be skipped/ignored, leaving a total of 184 tests.
+The requirements for each of the  'core-web', 'appbean-web' executions are identical to those of the 'core-ejb', 'appbean-ejb' executions, respectively, with a single change:
 
-The 'core' execution:
+1. **REQUIRED** - The system property:
+* The **jakarta.batch.tck.vehicles.vehicleName** system property must be set to `web` to execute within a Servlet (web) context, e.g.: 
++
 ```
+    <configuration>
+        ...
+        <systemPropertyVariables>
+            <jakarta.batch.tck.vehicles.vehicleName>web</jakarta.batch.tck.vehicles.vehicleName>
+        </systemPropertyVariables>
+```
+
+So each of these two "web" executions must be run, and all tests contained must pass.
+
+
+=== Alternative Approaches
+
+Note there is no requirement to configure these four executions from a single POM, as the runner does.  E.g. one conceivable approach would be to use four separate POMs even, if that were preferred for some reason. Hopefully the details above provide clear enough guidance for what is and is not required for each execution, and if not an issue should be raised with the Jakarta Batch TCK project.  As mentioned above it is not required that the user's "runner" module inherit from the parent like this example one does.
+
+=== Expected Output
+
+Here is example output when we, as in the sample runner, configure the 'xml' and 'echo' Maven plugins to collect and display the test results.
+
+(Here we abstract out the exact numbers to avoid forgetting to update this count and causing ambiguity with the required test count detailed elsewhere).
+
 [INFO]
-[INFO] Results:
+        Jakarta Batch TCK completed running NNN tests.
+        Number of Tests Passed      = NNN
+        Number of Tests with Errors = 0
+        Number of Tests Failed      = 0
+        Number of Tests Skipped     = XX
 [INFO]
-[WARNING] Tests run: 190, Failures: 0, Errors: 0, Skipped: 6
-```
 
-The 'appbean' execution:
-```
-[INFO]
-[INFO] Results:
-[INFO]
-[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
-```
-
-==== In case of Failure
+=== In case of Failure
 **Note**: there are many forced failure scenarios tested by the TCK, so typically the log will show a lot of exception stack traces during a normal, successful execution.
 
 If you experienced a failure, it is possible that you experienced a timing issue.  The TCK has several built-in properties allowing for tuning of execution to deal with these, and instructions elsewhere in this guide for doing so.
 
 
-=== Signature Tests
+== Signature Tests
 
-The signature tests validate the integrity of the `jakarta.batch.*` Java "namespace" of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have been added to `jakarta.batch.*` packages/classes/etc. 
+The signature tests validate the integrity of the `jakarta.batch` Java "namespace" (or "package prefix") of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have been added to `jakarta.batch.*` packages/classes/etc. 
 
-As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with G:A:V coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.5**.
+As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.
 
-==== sigtest runner
+=== sigtest runner
 
 The 'sigtest' runner shows an execution of the signature tests against the 'jbatch' implementation, while pulling in its dependencies:
+
 * Jakarta Batch 2.1 API 
 * Jakarta Inject 2.0 API
 * Jakarta CDI 4.0 API
 
 
-==== Java 11 vs Java 17
+=== Java 11 vs Java 17
 
 The TCK provides a distinct signature file depending on whether a Java 11 or a Java 17 JDK is used to certify.
 
 The runner provides a profile-based POM config which is automatically activated based on the Java SE level of the JDK used to run Maven.
 
-==== Maven execution - pre-integration-test setup
+=== Maven setup - OPTIONAL
 
-The 'maven-dependency-plugin' is used in the 'pre-integration-test' phase to setup the later sigtest execution 
+In calling the setup "OPTIONAL" we are referring to the fact that an implementer does not need to use any of these exact goals or configuration, though it is probably necessary that some analogous setup work will need to be done before executing the signature tests.
+
+In our example runner, the 'maven-dependency-plugin' is used in the 'pre-integration-test' phase to setup the later sigtest execution.
 
 The first execution unpacks (copies) the signature files themselves into place in the **target/sigtest-copy** location:
 
@@ -573,12 +683,19 @@ The second execution unpacks the jbatch impl, including its API dependencies (it
 
 The 'sigtest-maven-plugin' can also be configured to pick up dependencies as Maven dependencies, building the "test classpath" via Maven.   However, we chose to show a more explicit approach, "flattening" the dependency tree by copying everything into a single directory we will execute the tests against
 
-==== Maven execution - integration-test
+=== Maven test execution - REQUIRED
 
-**REQUIRED**: The execution of the signature tests is accomplished by running the sigtest plugin's `check` goal.
+==== Required JDK level
 
-In the runner, this is done during the integration-test phase (after the pre-integration-test setup). The core configuration (independent of profile)  in the runner looks like:
+It is REQUIRED that you run with a JDK of the Java version that you are certifying against. We did not develop the current instructions and requirements with support for the ability to somehow "target" a different Java version (e.g. Java 11) than the version of the JDK using to run the tests via Maven (e.g. Java 17).
 
+In particular note this implies you can NOT use the `<release/>` parameter with the sigtest plugin configuration, e.g. `<release>17</release>`, though it might seem that it is designed for exactly this purpose.  (Though this could possibly be an area for future enhancement for someone interested in improvements the Batch TCK for future releases).
+
+==== Required Maven configuration
+
+The execution of the signature tests is accomplished by running the sigtest plugin's `check` goal.
+
+In the runner, this is done during the integration-test phase (after the pre-integration-test setup). The "core" configuration (the part that's independent of profile) in the runner looks like:
 
 ```
 <plugin>
@@ -595,7 +712,7 @@ In the runner, this is done during the integration-test phase (after the pre-int
     <configuration>
         <action>strictcheck</action>
         <failOnError>true</failOnError>
-        <packages>jakarta.batch.api.chunk.listener, jakarta.batch.api.chunk, jakarta.batch.api.listener, jakarta.batch.api, jakarta.batch.api.partition, jakarta.batch.operations, jakarta.batch.runtime.context, jakarta.batch.runtime</packages>
+        <packages>jakarta.batch.**</packages>
         <classes>${project.build.directory}/dependency</classes>
     </configuration>
 ```
@@ -605,9 +722,8 @@ For Java 11, the corresponding Java 11 signature file must be configured, e.g. i
 <plugin>
     <groupId>org.netbeans.tools</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
-    <version>1.5</version>
     <configuration>
-       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
+       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
     </configuration>
 </plugin>
 ```
@@ -617,16 +733,26 @@ Likewise for Java 17, the corresponding Java 17 signature file must be configure
 <plugin>
     <groupId>org.netbeans.tools</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
-    <version>1.5</version>
     <configuration>
-        <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
+        <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
     </configuration>
 </plugin>
 ```
+Note we construct our runner POM like this leveraging the standard Maven behavior for merging profile plugin configuration with non-profile plugin configuration.
 
-Note we can construct our runner POM like this because in Maven, profile plugin configuration is merged with the non-profile plugin configuration.
+==== Required Maven configuration - summarized
 
-==== Expected Output
+To summarize and say it another way, the **REQUIRED** config consists of these configuration parameter elements with values exactly as shown above in the previous section:
+
+* <action/>
+* <failOnError/>
+* <packages/>
+* <sigfile/>  (with value depending on Java 11 vs 17)
+
+and additionally the `<classes/>` parameter **REQUIRED** to be set in such a way that the implementation is tested, (including any packaging of the Jakarta Batch API by the implementation).
+
+
+=== Expected Output
 
 ----
 $ mvn verify
@@ -637,10 +763,11 @@ $ mvn verify
  ...
  ...
 
-[INFO] --- sigtest-maven-plugin:1.5:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
-[INFO] Packages: jakarta.batch.api.chunk.listener, jakarta.batch.api.chunk, jakarta.batch.api.listener, jakarta.batch.api, jakarta.batch.api.partition, jakarta.batch.operations, jakarta.batch.runtime.context, jakarta.batch.runtime
+[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
+
+[INFO] Packages: jakarta.batch.**
 [INFO] SignatureTest report
-Base version: 2.0.0
+Base version: 2.1.0
 Tested version: 2.1.0
 Check mode: src [throws normalized]
 Constant checking: on
@@ -648,9 +775,11 @@ Constant checking: on
 Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes (C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes). This directory or jar file will be ignored!
 ----
 
-Note the expected warning about the "incorrect classpath parameter" **target/classes**, which occurs because our execution project only tests content pulled in as dependencies (it is unfortunate the plugin is this noisy here).  This can be ignored.
+**NOTE:** Included in the output above is an expected warning about the "incorrect classpath parameter" **target/classes**. This occurs because our execution project only tests content pulled in as dependencies. It is unfortunate the plugin is this noisy here, and this can be ignored.
 
-==== Forcing a Signature Test failure (optional)
+**NOTE:** The `Base version:` in the above output comes from the signature file under test, so should appear exactly as shown.  The `Test version:`, on the other hand, comes from the version of the module executing the tests, and so a user not using the runner module could see their own value here.
+
+=== Forcing a Signature Test failure (optional)
 
 Though it is not required it can be useful to validate the setup by forcing a failure in the signature test. 
 
@@ -685,11 +814,11 @@ $ mvn verify
 [INFO] -----------< jakarta.batch:com.ibm.jbatch.tck.sigtest.exec >------------
  ...
  ...
-[INFO] --- sigtest-maven-plugin:1.5:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
-[INFO] Packages: jakarta.batch.api.chunk.listener, jakarta.batch.api.chunk, jakarta.batch.api.listener, jakarta.batch.api, jakarta.batch.api.partition, jakarta.batch.operations, jakarta.batch.runtime.context, jakarta.batch.runtime
+[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
+[INFO] Packages: jakarta.batch.**
 [ERROR] SignatureTest report
-Base version: 2.0.0
-Tested version: 2.1.0-M2-SNAPSHOT
+Base version: 2.1.0
+Tested version: 2.1.0
 Check mode: src [throws normalized]
 Constant checking: on
 
@@ -718,7 +847,7 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 
 
-[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0-M2-SNAPSHOT.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
+[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
@@ -739,18 +868,9 @@ Simply run:
 $ mvn sigtest:generate
 ```
 
-Since the main plugin configuration as well as the profile-based configuration (activated by current JDK level) is added at the plugin-level (rather than the execution-level), no additional configuration is required.   The plugin will generate to the same output locations used during the `check` goal, e.g. **target/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9** (possibly overwriting whatever was there).
+Since the main plugin configuration as well as the profile-based configuration (activated by current JDK level) is added at the plugin-level (rather than the execution-level), no additional configuration is required.   The plugin will generate to the same output locations used during the `check` goal, e.g. **target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9** (possibly overwriting whatever was there).
 
 
-=== Runners use TCK ZIP artifacts for viewing, not for execution
-
-Note the TCK runners mentioned here are configured to run "against" artifacts referenced as Maven dependencies, and so obtained from a Maven repository (e.g Maven Central).  They are configured this way even though as explained in the guide to the TCK ZIP contents, the artifacts are all present in the TCK zip.
-
-This is a significant difference with the previous Jakarta Batch Ant-based TCK.
-
-Starting with the Jakarta Batch 2.1 TCK release, the runner configurations are NOT set up referencing relative paths within the TCK zip. The artifacts packaged in the ZIP (detailed below) only help create a self-contained TCK package, providing an easy view of what artifacts are relevant to the TCK in a single place without requiring the user to follow Maven dependency references.  
-
-While it would be possible to construct a valid TCK execution configuration running against the artifacts in the TCK ZIP, an example is not provided.
 
 == JUnit test suite in detail (Optional)
 
@@ -810,7 +930,18 @@ Note too that for an implementation to pass the TCK, it must run against the shi
 
 === Arquillian / EE Platform Tests 
 
-The EE Platform version of the TCK uses Arquillian to run the JUnit 5 tests.  This approach is enabled by first, defining a JUnit 5 extension which extends JUnit 5 to delegate to Arquillian to run tests. The TCK in turn, provides an  implementation of an Arquillian extension which plugs into Arquillian in order to build a custom ShrinkWrap deployment archive from the TCK dependencies, with logic to support the necessary permutations and variations required by the TCK.
+The EE Platform version of the TCK uses Arquillian to run the JUnit 5 tests.  It works by:
+
+1. Using the standard Arquillian dependencies as for JUnit4, except the JUnit4 runner
+2. Using the official Arquillian JUnit5 extension and enables it globally via a service loader file
+3. Enabling the Arquillian JUnit5 extension by setting `junit.jupiter.extensions.autodetection.enabled` system property to true in pom.xml
+4. Using an Arquillian extension specific for Batch TCK to create a deployment for each test 
+
+The Batch TCK Arquillian extension is implemented in its own module within the Batch TCK. It contains :
+
+* The Arquillian extension class
+* A service loader file to register the extension with Arquillian
+* A service loader file to register the Arquillian JUnit 5 extension with JUnit 5 (because it's not included in the extension module)
 
 === Multiple Maven Executions for Multiple Classpath Configurations
 

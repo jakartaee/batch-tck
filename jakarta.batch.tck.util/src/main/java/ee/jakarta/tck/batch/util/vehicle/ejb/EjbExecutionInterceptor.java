@@ -44,7 +44,7 @@ public class EjbExecutionInterceptor implements InvocationInterceptor {
     public void interceptTestMethod(Invocation<Void> invocation,
             ReflectiveInvocationContext<Method> invocationContext,
             ExtensionContext extensionContext) throws Throwable {
-        Reporter.logTrace("Invoking test method " + invocationContext.getExecutable().getName() + " in EJB...");
+        Reporter.logTrace("Invoking test method " + invocationContext.getExecutable().getName() + " in Enterprise Bean.");
         new EJBVehicleRunner().run(() -> {
             try {
                 invocation.proceed();
@@ -52,6 +52,6 @@ public class EjbExecutionInterceptor implements InvocationInterceptor {
                 throw new RuntimeException(ex);
             }
         }, props);
-        Reporter.logTrace("...finished test method " + invocationContext.getExecutable().getName() + " in EJB.");
+        Reporter.logTrace("...finished test method " + invocationContext.getExecutable().getName() + " in Enterprise Bean.");
     }
 }

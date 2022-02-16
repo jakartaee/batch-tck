@@ -22,7 +22,7 @@
     <parent>
         <groupId>jakarta.batch</groupId>
         <artifactId>tck-parent</artifactId>
-        <version>2.1.0-M2-SNAPSHOT</version>
+        <version>2.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>com.ibm.jbatch.tck.exec</artifactId>
@@ -140,7 +140,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${version.org.apache.maven.plugins.maven-failsafe-plugin}</version>
                 <executions>
                     <execution>
                         <id>core</id>
@@ -157,6 +156,14 @@
                             <!-- Rather than using the 'tck.default.sleep.time.properties' with the com.ibm.jbatch.tck module and merging/combining the jbatch-specific properties
                                 we simply duplicate (more or less) the TCK properties in this single properties file that also includes the jbatch-specific config properties. -->
                             <systemPropertiesFile>${project.basedir}/config/tck.exec.properties</systemPropertiesFile>
+                            <!--
+                                <systemProperties>
+                                <property> 
+                                    <name>java.util.logging.config.file</name>
+                                    <value>src/test/resources/logging.properties</value>
+                                  </property>
+                                </systemProperties>
+                            -->
                         </configuration>
                     </execution>
                     <execution>

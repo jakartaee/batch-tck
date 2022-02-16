@@ -1,5 +1,5 @@
 <!--- 
-Copyright (c) 2021 Contributors to the Eclipse Foundation
+Copyright (c) 2021-2022 Contributors to the Eclipse Foundation
 
 See the NOTICE file distributed with this work for additional information regarding copyright 
 ownership. Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -12,7 +12,11 @@ the specific language governing permissions and limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 --->
 
-# An example how to run the TCK with the Arquillian execution module
+# NOTE:  Unofficial Documentation Only
+
+Note that the **Jakarta Batch TCK Reference Guide** document included in the TCK distribution contains the final, official instructions for all aspects of executing the TCK and certifying an implementation as compliant with the specification.
+
+This README contains examples on running against the Arquillian-based TCK tests against specific implementations, (GlassFish and Open Liberty).  Since, naturally, there is no requirement to run the TCK against specific implementations, the instructions below should be taken just as examples to help get started and get familiar with Arquillian-based execution of the Batch TCK, and not as official, required TCK instructions.
 
 ## How to run the TCK against GlassFish
 
@@ -62,8 +66,6 @@ If you need, configure Arquillian properties in the `src/test/resources/arquilli
 
 ## How to run the TCK against Open Liberty
 
-There's nothing special about using the `CDITests.java` file.  We just pick one to simplify and shorten the initial execution so you can see things are set up correctly.  Once setup is confirmed you can run the whole suite.
-
 ### prepare Arq env
 1. unset WLP_USER_DIR
 ### Install Open Liberty - (Run tests expecting failure, with the side effect of installing Open Liberty, we can patch it)
@@ -74,3 +76,7 @@ There's nothing special about using the `CDITests.java` file.  We just pick one 
 4. cd target/liberty/wlp/;  ./bin/server start --clean;  ./bin/server stop
 ### Now ready to run for real... Don't do 'mvn clean' or you delete the applied patch!
 5. cd -; mvn verify -Dit.test=CDITests -Pliberty-managed 
+
+If you need, configure Arquillian properties in the `src/test/resources/arquillian.xml` file, e.g. to attach a debugger to the tests running within the Liberty server.
+
+**NOTE** :  There's nothing special about using the `CDITests.java` file.  We just pick one to simplify and shorten the initial execution so you can see things are set up correctly.  Once setup is confirmed you can run the whole suite.
