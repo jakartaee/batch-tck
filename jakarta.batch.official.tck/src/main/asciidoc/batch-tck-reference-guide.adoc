@@ -76,7 +76,7 @@ For the current TCK version, this can be done with either Java SE Version 11 or 
 
 === Other Dependencies
 3. **Arquillian** - Since the EE Platform TCK uses Arquillian to execute tests within an Arquillian "container" for certifying against the EE Platform, you must configure an Arquillian https://arquillian.org/guides/developing_a_container_adapter/[adapter] for your target runtime.
-4. **Signature Test Tool** - No action is needed here, but we note that the signature files were built and should be validated with the Maven plugin with G:A:V coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.5**, as used by the sample sigtest runner included in the TCK zip. This is a more specific direction than in earlier releases, in which it was left more open for the user to use a compatible tool.  Since there are small differences in the various signature test tools, we standardize on this version.
+4. **Signature Test Tool** - No action is needed here, but we note that the signature files were built and should be validated with the Maven plugin with G:A:V coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**, as used by the sample sigtest runner included in the TCK zip. This is a more specific direction than in earlier releases, in which it was left more open for the user to use a compatible tool.  Since there are small differences in the various signature test tools, we standardize on this version.
 
 
 
@@ -158,8 +158,8 @@ Likewise, for the EE tests we have:
 
 The two signature files, for Java 11 and 17, respectively:
 
-1. `artifacts/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9`
-2. `artifacts/sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot`
+1. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9`
+2. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot`
 
 
 == Quick Start - Run the TCK against jbatch
@@ -643,7 +643,7 @@ If you experienced a failure, it is possible that you experienced a timing issue
 
 The signature tests validate the integrity of the `jakarta.batch.*` Java "namespace" of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have been added to `jakarta.batch.*` packages/classes/etc. 
 
-As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with G:A:V coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.5**.
+As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with G:A:V coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.
 
 === sigtest runner
 
@@ -717,9 +717,9 @@ For Java 11, the corresponding Java 11 signature file must be configured, e.g. i
 <plugin>
     <groupId>org.netbeans.tools</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
     <configuration>
-       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
+       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
     </configuration>
 </plugin>
 ```
@@ -729,9 +729,9 @@ Likewise for Java 17, the corresponding Java 17 signature file must be configure
 <plugin>
     <groupId>org.netbeans.tools</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
     <configuration>
-        <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
+        <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
     </configuration>
 </plugin>
 ```
@@ -749,7 +749,7 @@ $ mvn verify
  ...
  ...
 
-[INFO] --- sigtest-maven-plugin:1.5:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
+[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.api.chunk.listener, jakarta.batch.api.chunk, jakarta.batch.api.listener, jakarta.batch.api, jakarta.batch.api.partition, jakarta.batch.operations, jakarta.batch.runtime.context, jakarta.batch.runtime
 [INFO] SignatureTest report
 Base version: 2.0.0
@@ -797,7 +797,7 @@ $ mvn verify
 [INFO] -----------< jakarta.batch:com.ibm.jbatch.tck.sigtest.exec >------------
  ...
  ...
-[INFO] --- sigtest-maven-plugin:1.5:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
+[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.api.chunk.listener, jakarta.batch.api.chunk, jakarta.batch.api.listener, jakarta.batch.api, jakarta.batch.api.partition, jakarta.batch.operations, jakarta.batch.runtime.context, jakarta.batch.runtime
 [ERROR] SignatureTest report
 Base version: 2.0.0
@@ -830,7 +830,7 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 
 
-[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.5-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
+[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
@@ -851,7 +851,7 @@ Simply run:
 $ mvn sigtest:generate
 ```
 
-Since the main plugin configuration as well as the profile-based configuration (activated by current JDK level) is added at the plugin-level (rather than the execution-level), no additional configuration is required.   The plugin will generate to the same output locations used during the `check` goal, e.g. **target/sigtest-copy/sigtest/sigtest-1.5-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9** (possibly overwriting whatever was there).
+Since the main plugin configuration as well as the profile-based configuration (activated by current JDK level) is added at the plugin-level (rather than the execution-level), no additional configuration is required.   The plugin will generate to the same output locations used during the `check` goal, e.g. **target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9** (possibly overwriting whatever was there).
 
 
 
