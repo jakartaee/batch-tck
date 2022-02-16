@@ -50,8 +50,8 @@ public class TCKPollingExecutionWaiterFactory implements JobExecutionWaiterFacto
     /**
      * This implementation does no pooling of any kind, it just creates a new instance with new thread each time.
      *
-     * @param executionId
-     * @param JobOperator
+     * @param executionId job execution id
+     * @param jobOp       JobOperator
      * @param timeout     In milliseconds
      * @return JobExecutionWaiter
      */

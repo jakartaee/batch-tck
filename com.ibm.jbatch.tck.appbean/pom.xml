@@ -54,4 +54,16 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <excludePackageNames>com.ibm.jbatch.tck.tests.*</excludePackageNames>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
