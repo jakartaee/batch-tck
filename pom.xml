@@ -179,6 +179,7 @@
         <version.com.mycila.maven-license-plugin.maven-license-plugin>1.10.b1</version.com.mycila.maven-license-plugin.maven-license-plugin>
         <version.org.apache.maven.plugins.maven-antrun-plugin>1.8</version.org.apache.maven.plugins.maven-antrun-plugin>
         <version.org.apache.maven.plugins.maven-compiler-plugin>3.8.1</version.org.apache.maven.plugins.maven-compiler-plugin>
+        <version.org.apache.maven.plugins.maven-enforcer-plugin>1.4.1</version.org.apache.maven.plugins.maven-enforcer-plugin>
         <version.org.apache.maven.plugins.maven-failsafe-plugin>3.0.0-M5</version.org.apache.maven.plugins.maven-failsafe-plugin>
         <version.org.apache.maven.plugins.maven-gpg-plugin>1.4</version.org.apache.maven.plugins.maven-gpg-plugin>
         <version.org.apache.maven.plugins.maven-jar-plugin>2.4</version.org.apache.maven.plugins.maven-jar-plugin>
@@ -414,13 +415,17 @@
                     <artifactId>properties-maven-plugin</artifactId>
                     <version>${version.org.codehaus.mojo.properties-maven-plugin}</version>
                 </plugin>
+                <plugin>
+                  <groupId>org.netbeans.tools</groupId>
+                  <artifactId>sigtest-maven-plugin</artifactId>
+                  <version>${version.org.netbeans.tools.sigtest-maven-plugin}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version>
                 <executions>
                     <execution>
                         <id>enforce-versions</id>

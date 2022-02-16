@@ -41,7 +41,7 @@
                 <plugin>
                   <groupId>org.netbeans.tools</groupId>
                   <artifactId>sigtest-maven-plugin</artifactId>
-                  <version>${version.org.netbeans.tools.sigtest-maven-plugin}</version>
+
                   <configuration>
                       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
                   </configuration>
@@ -60,7 +60,6 @@
                 <plugin>
                   <groupId>org.netbeans.tools</groupId>
                   <artifactId>sigtest-maven-plugin</artifactId>
-                  <version>${version.org.netbeans.tools.sigtest-maven-plugin}</version>
                   <configuration>
                       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
                   </configuration>
@@ -135,7 +134,6 @@
             <plugin>
                 <groupId>org.netbeans.tools</groupId>
                 <artifactId>sigtest-maven-plugin</artifactId>
-                <version>${version.org.netbeans.tools.sigtest-maven-plugin}</version>
                 <executions>
                   <execution>
                     <id>default-cli</id>
