@@ -25,6 +25,15 @@
         <version>2.1.0-SNAPSHOT</version>
     </parent>
 
+    <licenses>
+        <license>
+            <name>Eclipse Foundation Technology Compatibility Kit License - v1.0</name>
+            <url>https://www.eclipse.org/legal/tck.php</url>
+            <distribution>manual</distribution>
+            <comments>This module is specially licensed under EFTL and must be manually downloaded - see https://jakarta.ee/specifications/batch/</comments>
+        </license>
+    </licenses>
+
     <properties>
         <maven.site.skip>true</maven.site.skip>
         <asciidoctor.maven.plugin.version>1.5.7.1</asciidoctor.maven.plugin.version>
