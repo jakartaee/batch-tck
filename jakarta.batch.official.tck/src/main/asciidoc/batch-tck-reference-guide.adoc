@@ -138,7 +138,7 @@ Besides the test classes themselves, the Jakarta Batch TCK is comprised of a num
 
 Here we use the term "suite" informally to describe groups of tests required to pass the TCK (and NOT specifically to refer to any particular "suite" construct defined by the JUnit 5 API).
 
-There are three JUnit 5 test "suites" included in the TCK.  There are two required to pass the complete "SE mode" TCK and two separate ones required to pass the Batch portion of the "Jakarta EE Platform" TCK.
+There are three JUnit 5 test "suites" included in the TCK.  There is a separate "suite" for each of the "SE mode" TCK and the Batch portion of the "Jakarta EE Platform" TCK and there is a third suite that must be run in both SE and EE "modes".
 
 The SE suites:
 
@@ -365,7 +365,7 @@ If you experienced a failure, it is possible that you experienced a timing issue
 
 == JUnit EE suite - 'platform-arquillian' runner
 
-Each of these Arquillian tests run within the runtime's "container", with the help of an Arquillian adapter for that runtime implementation (mentioned as a prerequisite).  This Arquillian-based test suite essentially executes the same set of tests within each of an Jakarta Enterprise Beans container and a Servlet container (except for perhaps a small number of container-specific tests).
+Each of these Arquillian tests run within the runtime's "container", with the help of an Arquillian adapter for that runtime implementation (mentioned as a prerequisite).  This Arquillian-based test suite executes the same set of tests within each of an Jakarta Enterprise Beans container and a Servlet container.
 
 The 'platform-arquillian' runner shows how to configure an execution of the JUnit runtime tests implementation in EE mode against some implementation via an Arquillian adapter. This exercises Batch as part of the full Jakarta EE Platform.  We walk through its POM configuration below.
 
@@ -395,7 +395,7 @@ While it is not required, strictly speaking, to inherit from this parent, it is 
 
 === Jakarta Enterprise Beans vs web executions, core vs appbean executions
 
-A requirement for certifying in EE mode is to execute each test in each of a servlet ('web') and a Jakarta Enterprise Bean context.  So to run from a "Jakarta Enterprise Bean context" is to have the test perform the JobOperator API calls used in each TCK test method from within a Jakarta Enterprise Bean (provided by the TCK).  This mechanism is established through the Arquillian adapter, via the parent POM config.
+A requirement for certifying in EE mode is to execute each test in each of a servlet ('web') and a Jakarta Enterprise Bean context.  So to run from a "Jakarta Enterprise Bean context" is to have the test perform the JobOperator API calls used in each TCK test method from within a Jakarta Enterprise Bean (provided by the TCK).  This mechanism is established through the Arquillian adapter plus our Arquillian extension module, configured with the help of the parent POM.
 
 We also need to run a set of tests (the 'appbean' tests) with a different application classpath than the 'core' majority of the tests.  
 
@@ -633,10 +633,9 @@ Here is example output when we, as in the sample runner, configure the 'xml' and
 
 If you experienced a failure, it is possible that you experienced a timing issue.  The TCK has several built-in properties allowing for tuning of execution to deal with these, and instructions elsewhere in this guide for doing so.
 
-
 == Signature Tests
 
-The signature tests validate the integrity of the `jakarta.batch` Java "namespace" (or "package prefix") of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have been added to `jakarta.batch.*` packages/classes/etc. 
+The signature tests validate the integrity of the `jakarta.batch` Java "namespace" (or "package prefix") of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have not been added to `jakarta.batch.*` packages/classes/etc.
 
 As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.
 
@@ -689,7 +688,7 @@ The 'sigtest-maven-plugin' can also be configured to pick up dependencies as Mav
 
 It is REQUIRED that you run with a JDK of the Java version that you are certifying against. We did not develop the current instructions and requirements with support for the ability to somehow "target" a different Java version (e.g. Java 11) than the version of the JDK using to run the tests via Maven (e.g. Java 17).
 
-In particular note this implies you can NOT use the `<release/>` parameter with the sigtest plugin configuration, e.g. `<release>17</release>`, though it might seem that it is designed for exactly this purpose.  (Though this could possibly be an area for future enhancement for someone interested in improvements the Batch TCK for future releases).
+In particular note this implies you can NOT use the `<release/>` parameter with the sigtest plugin configuration, e.g. `<release>17</release>`, though it might seem that it is designed for exactly this purpose.  (Though this could possibly be an area for future enhancement for someone interested in improving the Batch TCK for future releases).
 
 ==== Required Maven configuration
 
@@ -773,7 +772,12 @@ Check mode: src [throws normalized]
 Constant checking: on
 
 Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes (C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes). This directory or jar file will be ignored!
+
+
+[INFO] /home/java_user/jkbatch/tckdir/jakarta.batch.official.tck-2.1.0/runners/sigtest/target/surefire-reports/sigtest/TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 0 failures in /home/java_user/jkbatch/tckdir/jakarta.batch.official.tck-2.1.0/runners/sigtest/target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
 ----
+
+**NOTE:** Also a '0' exit status should be returned from the `mvn verify` command line (shown by `echo $?`).
 
 **NOTE:** Included in the output above is an expected warning about the "incorrect classpath parameter" **target/classes**. This occurs because our execution project only tests content pulled in as dependencies. It is unfortunate the plugin is this noisy here, and this can be ignored.
 
@@ -854,7 +858,7 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 ----
 
-and a non-zero exit code should be return by 'mvn'.
+and a non-zero exit status should be returned by `mvn verify` (shown by `echo $?`).
 
 
 === Generating the Signature Files (optional)
