@@ -298,6 +298,12 @@
                 <version>${batch.tck.version}</version>
             </dependency>
             <dependency>
+                <groupId>jakarta.batch</groupId>
+                <artifactId>jakarta.batch.reporting</artifactId>
+                <version>${batch.tck.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.ibm.jbatch</groupId>
                 <artifactId>com.ibm.jbatch.container</artifactId>
                 <version>${batch.impl.version}</version>
@@ -436,9 +442,9 @@
                     <version>${version.org.codehaus.mojo.properties-maven-plugin}</version>
                 </plugin>
                 <plugin>
-                  <groupId>org.netbeans.tools</groupId>
-                  <artifactId>sigtest-maven-plugin</artifactId>
-                  <version>${version.org.netbeans.tools.sigtest-maven-plugin}</version>
+                    <groupId>org.netbeans.tools</groupId>
+                    <artifactId>sigtest-maven-plugin</artifactId>
+                    <version>${version.org.netbeans.tools.sigtest-maven-plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
