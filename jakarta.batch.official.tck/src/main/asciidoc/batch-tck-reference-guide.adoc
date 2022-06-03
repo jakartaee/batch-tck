@@ -416,7 +416,21 @@ The test suite files, the test database DDLs, and reporting XSL can be extracted
 
 ==== REQUIRED - test database setup - DDL files
 
-The test suite includes tests that use an application database which must be created separately, prior to TCK execution, potentially in an application-specific way.  The DDL defining the required table format is specified in a set of .ddl files included in the 'com.ibm.jbatch.tck' module dependency.  These can most conveniently be accessed by adding the dependency plugin with parent configuration, as mentioned in the previous section.   They can also be accessed in the TCK zip at file: `artifacts/com.ibm.jbatch.tck-<version>.jar`. 
+The test suite includes tests that use an application database which must be created separately, prior to TCK execution, potentially in an implementation-specific way.  The DDL defining the required table format is specified in a set of *.sql files included in the 'com.ibm.jbatch.tck' module dependency.  These can most conveniently be accessed by adding the dependency plugin with parent configuration, as mentioned in the previous section.   They can also be accessed in the TCK zip at file: `artifacts/com.ibm.jbatch.tck-<version>.jar`. 
+
+==== NOTE: database setup process may require extra steps for non-Derby databases
+
+During TCK execution, the test application accesses database tables with the 'app' high-level qualifier (or "schema"), e.g. `insert into app.numbers values(?, ?)`.  However, this 'app' high-level qualifier does not appear in the *.sql setup DDL files provided by the TCK.  These DDL files reference tables without a high-level qualifier.
+
+Since the Apache Derby database uses 'app' as the default high-level qualifier (schema), the runtime access aligns with the setup DDL when Derby is used as the database product.  
+
+However, when setting up other databases not using 'app' as the default schema, additional step(s) may be needed.  This could involve modifying the setup DDL to set 'app' as the high-level qualifier and/or setting the current schema way when executing the database setup DDL, perhaps using a database-specific tool.
+
+In issue:  https://github.com/eclipse-ee4j/batch-tck/issues/51 a challenge was raised because the TCK seemed too dependent on the use of the Derby database.
+
+The challenge was accepted but it was agreed to resolve this for the current TCK release by documenting the workaround (in the documentation section you are reading now) and open an issue to enhance the TCK in a future release.  This future enhancement could either allow the schema to be parameterized or perhaps removed altogether.
+
+==== NOTE: any database with JDBC driver may be used
 
 There is no requirement to use one of the databases for which a DDL is included; another database with JDBC-compliant driver could potentially be used.
 
