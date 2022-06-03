@@ -36,12 +36,18 @@ import jakarta.inject.Named;
 @Named("CDIDependentScopedBatchletContexts")
 public class DependentScopedBatchletContexts implements Batchlet {
 
+    //
+    // As mentioned in issue: https://github.com/eclipse-ee4j/batch-tck/issues/49
+    // the fields getting set via constructor/method parameter injection should not
+    // themselves be annotated with "@Inject".
+    //
     @Inject JobContext jf; 
-    @Inject JobContext jc; 
-    @Inject JobContext jm; 
+    JobContext jc;
+    JobContext jm;
+
     @Inject StepContext sf; 
-    @Inject StepContext sc; 
-    @Inject StepContext sm; 
+    StepContext sc;
+    StepContext sm;
 
     @Inject
     DependentScopedBatchletContexts(JobContext jc, StepContext sc) {
@@ -61,13 +67,21 @@ public class DependentScopedBatchletContexts implements Batchlet {
 
     @Override
     public String process() throws Exception {
+
         updateJobExitStatus(jf);
         updateJobExitStatus(jc);
         updateJobExitStatus(jm);
         updateStepExitStatus(sf);
         updateStepExitStatus(sc);
         updateStepExitStatus(sm);
-        return "OK";
+
+        //
+        // Spec doesn't clearly specify precedence between exit status set into StepContext vs. exit status returned by Batchlet process().
+        // To avoid ambiguity, ensure the same value is used by both mechanisms.
+        //
+        // See: https://github.com/eclipse-ee4j/batch-tck/issues/49
+        //
+        return sm.getExitStatus();
     }
 
     private void updateJobExitStatus(JobContext jobCtx) {
