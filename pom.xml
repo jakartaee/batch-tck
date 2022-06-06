@@ -169,6 +169,7 @@
         <version.java>11</version.java>
 
         <!-- Dependencies -->
+        <version.commons-codec.commons-codec>1.15</version.commons-codec.commons-codec>
         <version.commons-io.commons-io>2.11.0</version.commons-io.commons-io>
         <version.jakarta.enterprise.jakarta.enterprise.cdi-api>4.0.0</version.jakarta.enterprise.jakarta.enterprise.cdi-api>
         <version.jakarta.inject.jakarta.inject-api>2.0.1</version.jakarta.inject.jakarta.inject-api>
@@ -180,6 +181,7 @@
         <version.org.sonatype.plugins.nexus-staging-maven-plugin>1.6.6</version.org.sonatype.plugins.nexus-staging-maven-plugin>
         <version.com.mycila.maven-license-plugin.maven-license-plugin>1.10.b1</version.com.mycila.maven-license-plugin.maven-license-plugin>
         <version.org.apache.commons.commons-compress>1.21</version.org.apache.commons.commons-compress>
+        <version.org.apache.maven.maven-settings>3.8.5</version.org.apache.maven.maven-settings>
         <version.org.apache.maven.plugins.maven-antrun-plugin>1.8</version.org.apache.maven.plugins.maven-antrun-plugin>
         <version.org.apache.maven.plugins.maven-compiler-plugin>3.8.1</version.org.apache.maven.plugins.maven-compiler-plugin>
         <version.org.apache.maven.plugins.maven-enforcer-plugin>1.4.1</version.org.apache.maven.plugins.maven-enforcer-plugin>
@@ -362,6 +364,16 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${version.org.jsoup.jsoup}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-settings</artifactId>
+                <version>${version.org.apache.maven.maven-settings}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${version.commons-codec.commons-codec}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
