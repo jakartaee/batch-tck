@@ -428,7 +428,7 @@ However, when setting up other databases not using 'app' as the default schema, 
 
 In issue:  https://github.com/eclipse-ee4j/batch-tck/issues/51 a challenge was raised because the TCK seemed too dependent on the use of the Derby database.
 
-The challenge was accepted but it was agreed to resolve this for the current TCK release by documenting the workaround (in the documentation section you are reading now) and open an issue to enhance the TCK in a future release.  This future enhancement could either allow the schema to be parameterized or perhaps removed altogether.
+The challenge was accepted but it was agreed to resolve this for the current TCK release by documenting the workaround (in the documentation section you are reading now) and opening an issue to enhance the TCK in a future release (that enhancement issue is: https://github.com/eclipse-ee4j/batch-tck/issues/55).  This future enhancement could either allow the schema to be parameterized or perhaps removed altogether.
 
 ==== NOTE: any database with JDBC driver may be used
 
