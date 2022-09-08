@@ -197,7 +197,7 @@
         <version.org.codehaus.mojo.properties-maven-plugin>1.0-alpha-2</version.org.codehaus.mojo.properties-maven-plugin>
         <!-- Note that since the tck.exec module is for sample purposes and testing the TCK itself, it is fine to include a non-final-release version here -->
         <version.org.jboss.weld.se.weld-se-core>5.0.0.Beta1</version.org.jboss.weld.se.weld-se-core>
-        <version.org.jsoup.jsoup>1.14.3</version.org.jsoup.jsoup>
+        <version.org.jsoup.jsoup>1.15.3</version.org.jsoup.jsoup>
         <version.org.netbeans.tools.sigtest-maven-plugin>1.6</version.org.netbeans.tools.sigtest-maven-plugin>
     </properties>
 
