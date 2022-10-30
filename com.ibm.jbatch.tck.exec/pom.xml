@@ -27,7 +27,7 @@
 
     <artifactId>com.ibm.jbatch.tck.exec</artifactId>
     <packaging>pom</packaging>
-    <name>Jakarta Batch TCK Execution (using JBatch, the former RI, against TCK Maven module)</name>
+    <name>Jakarta Batch TCK Execution (using configured implementation against TCK Maven module)</name>
 
     <dependencies>
         <dependency>

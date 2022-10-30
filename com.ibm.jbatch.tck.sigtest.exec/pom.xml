@@ -27,7 +27,7 @@
 
     <artifactId>com.ibm.jbatch.tck.sigtest.exec</artifactId>
     <packaging>jar</packaging>
-    <name>Jakarta Batch Signature Test Execution (using JBatch, the former RI, against TCK maven module)</name>
+    <name>Jakarta Batch Signature Test Execution (using configured implementation against TCK maven module)</name>
 
     <profiles>
         <profile>
