@@ -55,9 +55,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:https://github.com/eclipse-ee4j/batch-tck.git</connection>
-        <developerConnection>scm:git:https://github.com/eclipse-ee4j/batch-tck.git</developerConnection>
-        <url>https://github.com/eclipse-ee4j/batch-tck</url>
+        <connection>scm:git:https://github.com/jakartaee/batch-tck.git</connection>
+        <developerConnection>scm:git:https://github.com/jakartaee/batch-tck.git</developerConnection>
+        <url>https://github.com/jakartaee/batch-tck</url>
         <tag>HEAD</tag>
     </scm>
 
