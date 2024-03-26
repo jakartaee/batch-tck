@@ -76,12 +76,7 @@ For the current TCK version, this can be done with either Java SE Version 11 or 
 
 === Other Dependencies
 3. **Arquillian** - Since the EE Platform TCK uses Arquillian to execute tests within an Arquillian "container" for certifying against the EE Platform, you must configure an Arquillian https://arquillian.org/guides/developing_a_container_adapter/[adapter] for your target runtime.
-4. **Signature Test Tool** - No action is needed here, but we note that the signature files were built and should be validated with the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**, as used by the sample sigtest runner included in the TCK zip. This is a more specific direction than in earlier releases, in which it was left more open for the user to use a compatible tool.  Since there are small differences in the various signature test tools, we standardize on this version.
-
-
-
-
-
+4. **Signature Test Tool** - No action is needed here, but we note that the Java 11 and 17 signature files were built with the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.  The Java 21 signature file was built with the newer plugin maintained by the EE4J organization, with coordinates:  **jakarta.tck:sigtest-maven-plugin:2.2**.  The sample sigtest runner included in the TCK zip also uses the EE4J plugin, and it acan be used to validate an implementation using one of the Java 11 or 17 signature files (built by the other plugin) as well as the newest Java 21 signature file.  Though there are other signature test tools available, one of these two tools should be used when executing this TCK.
 
 == A Guide to the TCK Distribution
 
@@ -651,7 +646,7 @@ If you experienced a failure, it is possible that you experienced a timing issue
 
 The signature tests validate the integrity of the `jakarta.batch` Java "namespace" (or "package prefix") of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have not been added to `jakarta.batch.*` packages/classes/etc.
 
-As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.
+As mentioned in the <<Prerequisites>> section the signature tests must be run with one of the specified signature tests tools, since there are other Java tools available using somewhat different signature test formats.
 
 === sigtest runner
 
@@ -712,7 +707,7 @@ In the runner, this is done during the integration-test phase (after the pre-int
 
 ```
 <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
     ...
    <executions>
@@ -733,7 +728,7 @@ In the runner, this is done during the integration-test phase (after the pre-int
 For Java 11, the corresponding Java 11 signature file must be configured, e.g. in the Java 11-activated profile:
 ```
 <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
     <configuration>
        <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
@@ -744,7 +739,7 @@ For Java 11, the corresponding Java 11 signature file must be configured, e.g. i
 Likewise for Java 17, the corresponding Java 17 signature file must be configured, e.g. in the Java 17-activated profile:
 ```
 <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
     <configuration>
         <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
@@ -776,19 +771,26 @@ $ mvn verify
  ...
  ...
 
-[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
-
+[INFO]
+[INFO] --- sigtest:2.2:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.**
+Mar 26, 2024 2:10:20 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
+INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9, -static, -ApiVersion, 2.2.0-SNAPSHOT, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes]
 [INFO] SignatureTest report
 Base version: 2.1.0
-Tested version: 2.1.0
+Tested version: 2.2.0-SNAPSHOT
 Check mode: src [throws normalized]
 Constant checking: on
 
-Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes (C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes). This directory or jar file will be ignored!
+Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes). This directory or jar file will be ignored!
 
-
-[INFO] /home/java_user/jkbatch/tckdir/jakarta.batch.official.tck-2.1.0/runners/sigtest/target/surefire-reports/sigtest/TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 0 failures in /home/java_user/jkbatch/tckdir/jakarta.batch.official.tck-2.1.0/runners/sigtest/target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
+[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.2.0-SNAPSHOT.xml: 0 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.905 s
+[INFO] Finished at: 2024-03-26T14:10:20-04:00
+[INFO] ------------------------------------------------------------------------
 ----
 
 **NOTE:** Also a '0' exit status should be returned from the `mvn verify` command line (shown by `echo $?`).
@@ -824,7 +826,7 @@ E.g.:
 ```
 
 
-This should produce output like:
+This should produce output like this, (e.g. here running with a Java 11 JDK but wrongly pointing to the Java 17 signature file):
 ----
 $ mvn verify
 [INFO] Scanning for projects...
@@ -832,15 +834,18 @@ $ mvn verify
 [INFO] -----------< jakarta.batch:com.ibm.jbatch.tck.sigtest.exec >------------
  ...
  ...
-[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
+[INFO]
+[INFO] --- sigtest:2.2:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.**
+Mar 26, 2024 2:15:04 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
+INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot, -static, -ApiVersion, 2.2.0-SNAPSHOT, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes]
 [ERROR] SignatureTest report
 Base version: 2.1.0
-Tested version: 2.1.0
+Tested version: 2.2.0-SNAPSHOT
 Check mode: src [throws normalized]
 Constant checking: on
 
-Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes (C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes). This directory or jar file will be ignored!
+Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes). This directory or jar file will be ignored!
 
 Missing Nested Classes
 ----------------------
@@ -865,11 +870,13 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 
 
-[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
+[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.2.0-SNAPSHOT.xml: 1 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-
+[INFO] Total time:  22.597 s
+[INFO] Finished at: 2024-03-26T14:15:04-04:00
+[INFO] ------------------------------------------------------------------------
 ----
 
 and a non-zero exit status should be returned by `mvn verify` (shown by `echo $?`).
