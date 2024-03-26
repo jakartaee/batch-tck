@@ -473,8 +473,8 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[11,18)</version>
-                                    <message>${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}! TCK must be run with Java 11 thru 17 !${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}</message>
+                                    <version>[11,22)</version>
+                                    <message>${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}! TCK must be run with Java 11 through 21 !${line.separator}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${line.separator}</message>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
