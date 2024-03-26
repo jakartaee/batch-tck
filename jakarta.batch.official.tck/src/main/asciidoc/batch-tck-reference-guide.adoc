@@ -151,10 +151,11 @@ Likewise, for the EE tests we have:
 
 ==== API Signature Files
 
-The two signature files, for Java 11 and 17, respectively:
+The three signature files, for Java 11, 17 and 21, respectively:
 
 1. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9`
 2. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot`
+3. `artifacts/jakarta.sigtest-2.2-batch.standalone.tck.sig-2.1-se21-Temurin`
 
 
 == Quick Start - Run the TCK against jbatch
@@ -746,6 +747,18 @@ Likewise for Java 17, the corresponding Java 17 signature file must be configure
     </configuration>
 </plugin>
 ```
+
+And for Java 21, the corresponding Java 21 signature file must be configured, e.g. in the Java 21-activated profile:
+```
+<plugin>
+    <groupId>jakarta.tck</groupId>
+    <artifactId>sigtest-maven-plugin</artifactId>
+    <configuration>
+        <sigfile>${project.build.directory}/sigtest-copy/sigtest/jakarta.sigtest-2.2-batch.standalone.tck.sig-2.1-se21-Temurin</sigfile>
+    </configuration>
+</plugin>
+```
+
 Note we construct our runner POM like this leveraging the standard Maven behavior for merging profile plugin configuration with non-profile plugin configuration.
 
 ==== Required Maven configuration - summarized
@@ -755,7 +768,7 @@ To summarize and say it another way, the **REQUIRED** config consists of these c
 * <action/>
 * <failOnError/>
 * <packages/>
-* <sigfile/>  (with value depending on Java 11 vs 17)
+* <sigfile/>  (with value depending on Java version: 11, 17, or 21)
 
 and additionally the `<classes/>` parameter **REQUIRED** to be set in such a way that the implementation is tested, (including any packaging of the Jakarta Batch API by the implementation).
 
@@ -890,11 +903,10 @@ Of course, this is also necessary for producing the TCK in the first place, and 
 
 Simply run:
 ```bash
-$ mvn sigtest:generate
+$ mvn clean pre-integration-test sigtest:generate
 ```
 
 Since the main plugin configuration as well as the profile-based configuration (activated by current JDK level) is added at the plugin-level (rather than the execution-level), no additional configuration is required.   The plugin will generate to the same output locations used during the `check` goal, e.g. **target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9** (possibly overwriting whatever was there).
-
 
 
 == JUnit test suite in detail (Optional)

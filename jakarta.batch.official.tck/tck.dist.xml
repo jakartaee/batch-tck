@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright 2012, 2022 International Business Machines Corp. and others.
+   Copyright 2012, 2024 International Business Machines Corp. and others.
 
    See the NOTICE file distributed with this work for additional information
    regarding copyright ownership. Licensed under the Apache License,
@@ -87,6 +87,10 @@
         </file>
         <file>
             <source>../com.ibm.jbatch.tck/src/main/resources/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</source>
+            <outputDirectory>/artifacts</outputDirectory>
+        </file>
+        <file>
+            <source>../com.ibm.jbatch.tck/src/main/resources/sigtest/jakarta.sigtest-2.2-batch.standalone.tck.sig-2.1-se21-Temurin</source>
             <outputDirectory>/artifacts</outputDirectory>
         </file>
         <file>
