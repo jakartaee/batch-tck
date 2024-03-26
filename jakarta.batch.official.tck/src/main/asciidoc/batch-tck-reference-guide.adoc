@@ -61,11 +61,11 @@ By "runtime" tests we simply mean tests simulating Jakarta Batch applications ru
 
 The set of runtime tests required to use the TCK to certify the Batch portion of Jakarta EE Platform compatibility ("EE mode") is a superset of the set of runtime tests required to satisfy compatibility only with the Jakarta Batch specification ("SE mode").
 
-=== Java SE level - Java 11 or Java 17
+=== Java SE level - Java 11, 17, or 21
 
 The JDK used during test execution must be noted and listed as an important component of the certification request.   In particular, the Java SE version is important to note, and this version must be used consistently throughout both the JUnit 5 runtime and Signature tests for a given certification request.   
 
-For the current TCK version, this can be done with either Java SE Version 11 or Version 17.
+For the current TCK version, this can be done with either Java SE Version 11, Version 17, or Version 21.
 
 == Prerequisites
 
@@ -658,9 +658,9 @@ The 'sigtest' runner shows an execution of the signature tests against the 'jbat
 * Jakarta CDI 4.0 API
 
 
-=== Java 11 vs Java 17
+=== Java Version
 
-The TCK provides a distinct signature file depending on whether a Java 11 or a Java 17 JDK is used to certify.
+The TCK provides a distinct signature file depending on whether a Java 11, 17, or 21 JDK is used to certify.
 
 The runner provides a profile-based POM config which is automatically activated based on the Java SE level of the JDK used to run Maven.
 
@@ -1080,3 +1080,6 @@ Finally, note that the **java.util.ServiceLoader** mechanism is used to referenc
 
 * January 30, 2022
 
+=== Support for Java 21
+
+* March 2024
