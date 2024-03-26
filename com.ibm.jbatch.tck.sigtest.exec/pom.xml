@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright 2012, 2021 International Business Machines Corp. and others
+   Copyright 2012, 2024 International Business Machines Corp. and others
 
    See the NOTICE file distributed with this work for additional information
    regarding copyright ownership. Licensed under the Apache License,
@@ -61,6 +61,24 @@
                   <artifactId>sigtest-maven-plugin</artifactId>
                   <configuration>
                       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
+                  </configuration>
+                </plugin>
+              </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jdk21</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <jdk>21</jdk>
+            </activation>
+            <build>
+              <plugins>
+                <plugin>
+                  <groupId>jakarta.tck</groupId>
+                  <artifactId>sigtest-maven-plugin</artifactId>
+                  <configuration>
+                      <sigfile>${project.build.directory}/sigtest-copy/sigtest/jakarta.sigtest-2.2-batch.standalone.tck.sig-2.1-se21-Temurin</sigfile>
                   </configuration>
                 </plugin>
               </plugins>
