@@ -39,9 +39,8 @@
             <build>
               <plugins>
                 <plugin>
-                  <groupId>org.netbeans.tools</groupId>
+                  <groupId>jakarta.tck</groupId>
                   <artifactId>sigtest-maven-plugin</artifactId>
-
                   <configuration>
                       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
                   </configuration>
@@ -58,7 +57,7 @@
             <build>
               <plugins>
                 <plugin>
-                  <groupId>org.netbeans.tools</groupId>
+                  <groupId>jakarta.tck</groupId>
                   <artifactId>sigtest-maven-plugin</artifactId>
                   <configuration>
                       <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
@@ -132,7 +131,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.netbeans.tools</groupId>
+                <groupId>jakarta.tck</groupId>
                 <artifactId>sigtest-maven-plugin</artifactId>
                 <executions>
                   <execution>
