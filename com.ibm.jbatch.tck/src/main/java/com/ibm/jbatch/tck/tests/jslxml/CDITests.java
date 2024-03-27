@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 International Business Machines Corp. and others
+ * Copyright 2021, 2024 International Business Machines Corp. and others
  *
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership. Licensed under the Apache License,
@@ -284,6 +284,7 @@ public class CDITests extends BaseJUnit5Test {
      */
     @ParameterizedTest
     @ValueSource(strings="com.ibm.jbatch.tck.artifacts.cdi.NonCDIBeanBatchlet")
+    @Disabled("https://github.com/jakartaee/batch-tck/issues/71")
     public void testCDILookup(String refName) throws Exception {
 
         String METHOD = "testCDILookup";
