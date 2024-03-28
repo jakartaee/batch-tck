@@ -1080,6 +1080,6 @@ Finally, note that the **java.util.ServiceLoader** mechanism is used to referenc
 
 * January 30, 2022
 
-=== Support for Java 21
+=== Add support for Java 21 (still against Jakarta Batch 2.1) for EE 11
 
-* March 2024
+* March/April 2024
