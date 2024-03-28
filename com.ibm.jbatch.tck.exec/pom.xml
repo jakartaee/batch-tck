@@ -132,7 +132,7 @@
                             <groupId>jakarta.batch</groupId>
                             <artifactId>com.ibm.jbatch.tck</artifactId>
                             <outputDirectory>${project.build.directory}/test-classes</outputDirectory>
-                            <includes>testprofiles/*</includes>
+                            <includes>testprofiles/*,test-summary-stylesheet.xsl</includes>
                         </artifactItem>
                     </artifactItems>
                 </configuration>
@@ -187,6 +187,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.ekryd.echo-maven-plugin</groupId>
+                <artifactId>echo-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-Copyright 2012, 2022 International Business Machines Corp. and others
+Copyright 2012, 2024 International Business Machines Corp. and others
 
   See the NOTICE file distributed with this work for additional information
   regarding copyright ownership. Licensed under the Apache License,
@@ -192,46 +192,6 @@ Copyright 2012, 2022 International Business Machines Corp. and others
                             <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
                         </systemPropertyVariables>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>xml-maven-plugin</artifactId>
-                    <version>1.0.2</version>
-                    <executions>
-                        <execution>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>transform</goal>
-                            </goals>
-                            <configuration>
-                                <transformationSets>
-                                    <transformationSet>
-                                        <dir>${project.build.directory}/failsafe-reports/</dir>
-                                        <outputDir>${project.build.directory}/generated</outputDir>
-                                        <stylesheet>${project.build.directory}/test-classes/test-summary-stylesheet.xsl</stylesheet>
-                                        <includes>failsafe-summary.xml</includes>
-                                    </transformationSet>
-                                </transformationSets>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>com.github.ekryd.echo-maven-plugin</groupId>
-                    <artifactId>echo-maven-plugin</artifactId>
-                    <version>1.3.2</version>
-                    <executions>
-                        <execution>
-                            <id>test-summary</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>echo</goal>
-                            </goals>
-                            <configuration>
-                                <fromFile>${project.build.directory}/generated/failsafe-summary.xml</fromFile>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
