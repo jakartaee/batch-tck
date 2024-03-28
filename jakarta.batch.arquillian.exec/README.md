@@ -1,5 +1,5 @@
 <!--- 
-Copyright (c) 2021-2022 Contributors to the Eclipse Foundation
+Copyright (c) 2021-2024 Contributors to the Eclipse Foundation
 
 See the NOTICE file distributed with this work for additional information regarding copyright 
 ownership. Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -20,10 +20,7 @@ This README contains examples on running against the Arquillian-based TCK tests 
 
 ## How to run the TCK against GlassFish
 
-NOTE: The TCK doesn't pass with any existing GlassFish release yet. 
-The work on GlassFish 7.x has only started and support for Batch 2.1 has not been implemented there yet.
-
-First, install GlassFish on the same machine and then start it with the default configuration:
+First, install GlassFish 7 on the same machine and then start it with the default configuration:
 
 ```
 asadmin start-domain domain1
