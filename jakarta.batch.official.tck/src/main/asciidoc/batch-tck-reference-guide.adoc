@@ -28,7 +28,7 @@ Building on the previous point, it is convenient to use, as shorthand, the term 
 
 Before reading this guide, you should familiarize yourself with the Jakarta Batch Version 2.1 specification, which can be found at https://jakarta.ee/specifications/batch/2.1/.
 
-Other useful information and links can be found on the eclipse.org project home page for the Jakarta Batch project [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home for the specification project [https://github.com/jakartaee/batch-api].
+Other useful information and links can be found on the eclipse.org project home page for the Jakarta Batch project [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home for the specification project [https://github.com/jakartaee/batch].
 
 
 === Terminology - "Standalone TCK"
@@ -998,9 +998,9 @@ Except from the *Jakarta EE TCK Process 1.1*:
 
 The challenge process is defined within the [underline]#Challenges# section within the *Jakarta EE TCK Process 1.1*.
 
-Challenges will be tracked via the https://github.com/jakartaee/batch-api/issues[issues] of the Jakarta Batch Specification repository.
+Challenges will be tracked via the https://github.com/jakartaee/batch/issues[issues] of the Jakarta Batch Specification repository.
 
-As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/jakartaee/batch-api/issues/new?labels=challenge[here], though it is recommended that you read through the challenge process to understand it in detail.
+As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/jakartaee/batch/issues/new?labels=challenge[here], though it is recommended that you read through the challenge process to understand it in detail.
 
 == Certification of Compatibility
 
@@ -1015,9 +1015,9 @@ If you wish to have your implementation listed on the official https://jakarta.e
 
 The certification of compatibility process is defined within the [underline]#Certification of Compatibility# section within the *Jakarta EE TCK Process 1.1*.
 
-Certifications will be tracked via the https://github.com/jakartaee/batch-api/issues[issues] of the Jakarta Batch Specification repository.
+Certifications will be tracked via the https://github.com/jakartaee/batch/issues[issues] of the Jakarta Batch Specification repository.
 
-As a shortcut through the certification of compatibility process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/jakartaee/batch-api/issues/new?labels=certification[here], though it is recommended that you read through the certification process to understand it in detail.
+As a shortcut through the certification of compatibility process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/jakartaee/batch/issues/new?labels=certification[here], though it is recommended that you read through the certification process to understand it in detail.
 
 
 == TCK SPI "Porting Package" in-depth (optional)
@@ -1060,7 +1060,7 @@ Finally, note that the **java.util.ServiceLoader** mechanism is used to referenc
 == Links
 
 * Jakarta Batch TCK repository - https://github.com/jakartaee/batch-tck
-* Jakarta Batch specification/API repository - https://github.com/jakartaee/batch-api
+* Jakarta Batch specification/API repository - https://github.com/jakartaee/batch
 * Jakarta Batch project home page - https://projects.eclipse.org/projects/ee4j.jakartabatch
 * In case there is some detail in the previous JSR 352 TCK reference guide not ported that could possibly be helpful, here is the https://github.com/WASdev/standards.jsr352.tck/blob/master/com.ibm.jbatch.tck/doc/jsr352-tck-reference-guide.pdf[former JSR 352 TCK reference guide].
 * The original JSR 352 page: https://www.jcp.org/en/jsr/detail?id=352[JSR 352: Batch Applications for the Java Platform]). 
