@@ -28,7 +28,7 @@ Building on the previous point, it is convenient to use, as shorthand, the term 
 
 Before reading this guide, you should familiarize yourself with the Jakarta Batch Version 2.1 specification, which can be found at https://jakarta.ee/specifications/batch/2.1/.
 
-Other useful information and links can be found on the eclipse.org project home page for the Jakarta Batch project [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home for the specification project [https://github.com/eclipse-ee4j/batch-api].
+Other useful information and links can be found on the eclipse.org project home page for the Jakarta Batch project [https://projects.eclipse.org/projects/ee4j.batch] and also at the GitHub repository home for the specification project [https://github.com/jakartaee/batch-api].
 
 
 === Terminology - "Standalone TCK"
@@ -61,11 +61,11 @@ By "runtime" tests we simply mean tests simulating Jakarta Batch applications ru
 
 The set of runtime tests required to use the TCK to certify the Batch portion of Jakarta EE Platform compatibility ("EE mode") is a superset of the set of runtime tests required to satisfy compatibility only with the Jakarta Batch specification ("SE mode").
 
-=== Java SE level - Java 11 or Java 17
+=== Java SE level - Java 11, 17, or 21
 
 The JDK used during test execution must be noted and listed as an important component of the certification request.   In particular, the Java SE version is important to note, and this version must be used consistently throughout both the JUnit 5 runtime and Signature tests for a given certification request.   
 
-For the current TCK version, this can be done with either Java SE Version 11 or Version 17.
+For the current TCK version, this can be done with either Java SE Version 11, Version 17, or Version 21.
 
 == Prerequisites
 
@@ -76,12 +76,7 @@ For the current TCK version, this can be done with either Java SE Version 11 or 
 
 === Other Dependencies
 3. **Arquillian** - Since the EE Platform TCK uses Arquillian to execute tests within an Arquillian "container" for certifying against the EE Platform, you must configure an Arquillian https://arquillian.org/guides/developing_a_container_adapter/[adapter] for your target runtime.
-4. **Signature Test Tool** - No action is needed here, but we note that the signature files were built and should be validated with the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**, as used by the sample sigtest runner included in the TCK zip. This is a more specific direction than in earlier releases, in which it was left more open for the user to use a compatible tool.  Since there are small differences in the various signature test tools, we standardize on this version.
-
-
-
-
-
+4. **Signature Test Tool** - No action is needed here, but we note that the Java 11 and 17 signature files were built with the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.  The Java 21 signature file was built with the newer plugin maintained by the EE4J organization, with coordinates:  **jakarta.tck:sigtest-maven-plugin:2.2**.  The sample sigtest runner included in the TCK zip also uses the EE4J plugin, which can be used to validate an implementation using one of the Java 11 or 17 signature files (built by the other plugin) as well as the newest Java 21 signature file.  Though there are other signature test tools available, the validation should be performed with one of these two plugins.  In addition, we expect that newer, future versions of **jakarta.tck:sigtest-maven-plugin** will also be usable for this task.
 
 == A Guide to the TCK Distribution
 
@@ -91,7 +86,7 @@ This section explains how to obtain the TCK and extract it on your system.
 
 The Jakarta Batch TCK is distributed as a zip file, which contains the TCK artifacts (the test suite binary and source, porting package SPI binary and source, the test suite XML definitions, and signature files) in
 `/artifacts`, the documentation in `/doc`, and some example Maven modules showing how to run the TCK in `/runners`.
-You can access the current source code from the Git repository: https://github.com/eclipse-ee4j/batch-tck.
+You can access the current source code from the Git repository: https://github.com/jakartaee/batch-tck.
 
 === The TCK Environment
 
@@ -156,10 +151,11 @@ Likewise, for the EE tests we have:
 
 ==== API Signature Files
 
-The two signature files, for Java 11 and 17, respectively:
+The three signature files, for Java 11, 17 and 21, respectively:
 
 1. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9`
 2. `artifacts/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot`
+3. `artifacts/jakarta.sigtest-2.2-batch.standalone.tck.sig-2.1-se21-Temurin`
 
 
 == Quick Start - Run the TCK against jbatch
@@ -426,9 +422,9 @@ Since the Apache Derby database uses 'app' as the default high-level qualifier (
 
 However, when setting up other databases not using 'app' as the default schema, additional step(s) may be needed.  This could involve modifying the setup DDL to set 'app' as the high-level qualifier and/or setting the current schema way when executing the database setup DDL, perhaps using a database-specific tool.
 
-In issue:  https://github.com/eclipse-ee4j/batch-tck/issues/51 a challenge was raised because the TCK seemed too dependent on the use of the Derby database.
+In issue:  https://github.com/jakartaee/batch-tck/issues/51 a challenge was raised because the TCK seemed too dependent on the use of the Derby database.
 
-The challenge was accepted but it was agreed to resolve this for the current TCK release by documenting the workaround (in the documentation section you are reading now) and opening an issue to enhance the TCK in a future release (that enhancement issue is: https://github.com/eclipse-ee4j/batch-tck/issues/55).  This future enhancement could either allow the schema to be parameterized or perhaps removed altogether.
+The challenge was accepted but it was agreed to resolve this for the current TCK release by documenting the workaround (in the documentation section you are reading now) and opening an issue to enhance the TCK in a future release (that enhancement issue is: https://github.com/jakartaee/batch-tck/issues/55).  This future enhancement could either allow the schema to be parameterized or perhaps removed altogether.
 
 ==== NOTE: any database with JDBC driver may be used
 
@@ -651,7 +647,7 @@ If you experienced a failure, it is possible that you experienced a timing issue
 
 The signature tests validate the integrity of the `jakarta.batch` Java "namespace" (or "package prefix") of the batch implementation.   This would be especially important for an implementation packaging its own API JAR in which the API must be validated in its entirety.  For implementations expecting their users to rely on the API released by the Jakarta Batch specification project (e.g. to Maven Central) the signature tests are also important to validate that improper (non-spec-defined) extensions have not been added to `jakarta.batch.*` packages/classes/etc.
 
-As mentioned in the prerequisite section the signature file formats across the various signature test tools have diverged and this test suite uses the Maven plugin with group:artifact:version coordinates: **org.netbeans.tools:sigtest-maven-plugin:1.6**.
+As mentioned in the <<Prerequisites>> section the signature tests must be run with one of the specified signature tests tools, since there are other Java tools available using somewhat different signature test formats.
 
 === sigtest runner
 
@@ -662,9 +658,9 @@ The 'sigtest' runner shows an execution of the signature tests against the 'jbat
 * Jakarta CDI 4.0 API
 
 
-=== Java 11 vs Java 17
+=== Java Version
 
-The TCK provides a distinct signature file depending on whether a Java 11 or a Java 17 JDK is used to certify.
+The TCK provides a distinct signature file depending on whether a Java 11, 17, or 21 JDK is used to certify.
 
 The runner provides a profile-based POM config which is automatically activated based on the Java SE level of the JDK used to run Maven.
 
@@ -712,7 +708,7 @@ In the runner, this is done during the integration-test phase (after the pre-int
 
 ```
 <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
     ...
    <executions>
@@ -733,7 +729,7 @@ In the runner, this is done during the integration-test phase (after the pre-int
 For Java 11, the corresponding Java 11 signature file must be configured, e.g. in the Java 11-activated profile:
 ```
 <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
     <configuration>
        <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9</sigfile>
@@ -744,13 +740,25 @@ For Java 11, the corresponding Java 11 signature file must be configured, e.g. i
 Likewise for Java 17, the corresponding Java 17 signature file must be configured, e.g. in the Java 17-activated profile:
 ```
 <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
     <configuration>
         <sigfile>${project.build.directory}/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot</sigfile>
     </configuration>
 </plugin>
 ```
+
+And for Java 21, the corresponding Java 21 signature file must be configured, e.g. in the Java 21-activated profile:
+```
+<plugin>
+    <groupId>jakarta.tck</groupId>
+    <artifactId>sigtest-maven-plugin</artifactId>
+    <configuration>
+        <sigfile>${project.build.directory}/sigtest-copy/sigtest/jakarta.sigtest-2.2-batch.standalone.tck.sig-2.1-se21-Temurin</sigfile>
+    </configuration>
+</plugin>
+```
+
 Note we construct our runner POM like this leveraging the standard Maven behavior for merging profile plugin configuration with non-profile plugin configuration.
 
 ==== Required Maven configuration - summarized
@@ -760,7 +768,7 @@ To summarize and say it another way, the **REQUIRED** config consists of these c
 * <action/>
 * <failOnError/>
 * <packages/>
-* <sigfile/>  (with value depending on Java 11 vs 17)
+* <sigfile/>  (with value depending on Java version: 11, 17, or 21)
 
 and additionally the `<classes/>` parameter **REQUIRED** to be set in such a way that the implementation is tested, (including any packaging of the Jakarta Batch API by the implementation).
 
@@ -776,19 +784,26 @@ $ mvn verify
  ...
  ...
 
-[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
-
+[INFO]
+[INFO] --- sigtest:2.2:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.**
+Mar 26, 2024 2:10:20 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
+INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9, -static, -ApiVersion, 2.2.0-SNAPSHOT, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes]
 [INFO] SignatureTest report
 Base version: 2.1.0
-Tested version: 2.1.0
+Tested version: 2.2.0-SNAPSHOT
 Check mode: src [throws normalized]
 Constant checking: on
 
-Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes (C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes). This directory or jar file will be ignored!
+Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes). This directory or jar file will be ignored!
 
-
-[INFO] /home/java_user/jkbatch/tckdir/jakarta.batch.official.tck-2.1.0/runners/sigtest/target/surefire-reports/sigtest/TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 0 failures in /home/java_user/jkbatch/tckdir/jakarta.batch.official.tck-2.1.0/runners/sigtest/target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
+[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.2.0-SNAPSHOT.xml: 0 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.905 s
+[INFO] Finished at: 2024-03-26T14:10:20-04:00
+[INFO] ------------------------------------------------------------------------
 ----
 
 **NOTE:** Also a '0' exit status should be returned from the `mvn verify` command line (shown by `echo $?`).
@@ -824,7 +839,7 @@ E.g.:
 ```
 
 
-This should produce output like:
+This should produce output like this, (e.g. here running with a Java 11 JDK but wrongly pointing to the Java 17 signature file):
 ----
 $ mvn verify
 [INFO] Scanning for projects...
@@ -832,15 +847,18 @@ $ mvn verify
 [INFO] -----------< jakarta.batch:com.ibm.jbatch.tck.sigtest.exec >------------
  ...
  ...
-[INFO] --- sigtest-maven-plugin:1.6:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
+[INFO]
+[INFO] --- sigtest:2.2:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.**
+Mar 26, 2024 2:15:04 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
+INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot, -static, -ApiVersion, 2.2.0-SNAPSHOT, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes]
 [ERROR] SignatureTest report
 Base version: 2.1.0
-Tested version: 2.1.0
+Tested version: 2.2.0-SNAPSHOT
 Check mode: src [throws normalized]
 Constant checking: on
 
-Warning: incorrect classpath parameter: C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes (C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\classes). This directory or jar file will be ignored!
+Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes). This directory or jar file will be ignored!
 
 Missing Nested Classes
 ----------------------
@@ -865,11 +883,13 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 
 
-[INFO] C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.0.xml: 1 failures in C:\git\jakarta\batch-tck\com.ibm.jbatch.tck.sigtest.exec\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
+[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.2.0-SNAPSHOT.xml: 1 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-
+[INFO] Total time:  22.597 s
+[INFO] Finished at: 2024-03-26T14:15:04-04:00
+[INFO] ------------------------------------------------------------------------
 ----
 
 and a non-zero exit status should be returned by `mvn verify` (shown by `echo $?`).
@@ -883,11 +903,10 @@ Of course, this is also necessary for producing the TCK in the first place, and 
 
 Simply run:
 ```bash
-$ mvn sigtest:generate
+$ mvn clean pre-integration-test sigtest:generate
 ```
 
 Since the main plugin configuration as well as the profile-based configuration (activated by current JDK level) is added at the plugin-level (rather than the execution-level), no additional configuration is required.   The plugin will generate to the same output locations used during the `check` goal, e.g. **target/sigtest-copy/sigtest/sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9** (possibly overwriting whatever was there).
-
 
 
 == JUnit test suite in detail (Optional)
@@ -979,9 +998,9 @@ Except from the *Jakarta EE TCK Process 1.1*:
 
 The challenge process is defined within the [underline]#Challenges# section within the *Jakarta EE TCK Process 1.1*.
 
-Challenges will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository.
+Challenges will be tracked via the https://github.com/jakartaee/batch-api/issues[issues] of the Jakarta Batch Specification repository.
 
-As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/eclipse-ee4j/batch-api/issues/new?labels=challenge[here], though it is recommended that you read through the challenge process to understand it in detail.
+As a shortcut through the challenge process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/jakartaee/batch-api/issues/new?labels=challenge[here], though it is recommended that you read through the challenge process to understand it in detail.
 
 == Certification of Compatibility
 
@@ -996,9 +1015,9 @@ If you wish to have your implementation listed on the official https://jakarta.e
 
 The certification of compatibility process is defined within the [underline]#Certification of Compatibility# section within the *Jakarta EE TCK Process 1.1*.
 
-Certifications will be tracked via the https://github.com/eclipse-ee4j/batch-api/issues[issues] of the Jakarta Batch Specification repository.
+Certifications will be tracked via the https://github.com/jakartaee/batch-api/issues[issues] of the Jakarta Batch Specification repository.
 
-As a shortcut through the certification of compatibility process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/eclipse-ee4j/batch-api/issues/new?labels=certification[here], though it is recommended that you read through the certification process to understand it in detail.
+As a shortcut through the certification of compatibility process mentioned in the *Jakarta EE TCK Process 1.1* you can click https://github.com/jakartaee/batch-api/issues/new?labels=certification[here], though it is recommended that you read through the certification process to understand it in detail.
 
 
 == TCK SPI "Porting Package" in-depth (optional)
@@ -1040,8 +1059,8 @@ Finally, note that the **java.util.ServiceLoader** mechanism is used to referenc
 
 == Links
 
-* Jakarta Batch TCK repository - https://github.com/eclipse-ee4j/batch-tck
-* Jakarta Batch specification/API repository - https://github.com/eclipse-ee4j/batch-api
+* Jakarta Batch TCK repository - https://github.com/jakartaee/batch-tck
+* Jakarta Batch specification/API repository - https://github.com/jakartaee/batch-api
 * Jakarta Batch project home page - https://projects.eclipse.org/projects/ee4j.jakartabatch
 * In case there is some detail in the previous JSR 352 TCK reference guide not ported that could possibly be helpful, here is the https://github.com/WASdev/standards.jsr352.tck/blob/master/com.ibm.jbatch.tck/doc/jsr352-tck-reference-guide.pdf[former JSR 352 TCK reference guide].
 * The original JSR 352 page: https://www.jcp.org/en/jsr/detail?id=352[JSR 352: Batch Applications for the Java Platform]). 
@@ -1061,3 +1080,6 @@ Finally, note that the **java.util.ServiceLoader** mechanism is used to referenc
 
 * January 30, 2022
 
+=== Support for Java 21
+
+* March 2024

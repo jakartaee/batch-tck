@@ -37,7 +37,7 @@ import jakarta.inject.Named;
 public class DependentScopedBatchletContexts implements Batchlet {
 
     //
-    // As mentioned in issue: https://github.com/eclipse-ee4j/batch-tck/issues/49
+    // As mentioned in issue: https://github.com/jakartaee/batch-tck/issues/49
     // the fields getting set via constructor/method parameter injection should not
     // themselves be annotated with "@Inject".
     //
@@ -79,7 +79,7 @@ public class DependentScopedBatchletContexts implements Batchlet {
         // Spec doesn't clearly specify precedence between exit status set into StepContext vs. exit status returned by Batchlet process().
         // To avoid ambiguity, ensure the same value is used by both mechanisms.
         //
-        // See: https://github.com/eclipse-ee4j/batch-tck/issues/49
+        // See: https://github.com/jakartaee/batch-tck/issues/49
         //
         return sm.getExitStatus();
     }
