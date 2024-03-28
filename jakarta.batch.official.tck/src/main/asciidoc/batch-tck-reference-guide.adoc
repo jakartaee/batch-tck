@@ -179,8 +179,8 @@ Because there is flexibility regarding how a user could use Maven to configure a
 
 For the runtime test (JUnit) component of the TCK: 
 
-* 178 tests must be passed to successfully execute the SE TCK suite
-* 374 tests must be passed to successfully execute the EE TCK suite
+* 177 tests must be passed to successfully execute the SE TCK suite
+* 372 tests must be passed to successfully execute the EE TCK suite
 
 === Signature tests
 
