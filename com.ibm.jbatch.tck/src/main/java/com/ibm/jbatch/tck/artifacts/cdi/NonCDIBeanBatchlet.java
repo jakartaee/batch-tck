@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 International Business Machines Corp. and others
+* Copyright 2021, 2024 International Business Machines Corp. and others
 *
 * See the NOTICE file distributed with this work for additional information
 * regarding copyright ownership. Licensed under the Apache License,
@@ -44,6 +44,15 @@ public class NonCDIBeanBatchlet implements Batchlet {
 
     @Override
     public String process() throws Exception {
+        //
+        // Note at the time of this writing the only TCK test using this class has been disabled from the TCK via challenge: 
+        // https://github.com/jakartaee/batch-tck/issues/71
+        //
+        // This is also the only TCK test using this particular API sequence, using `cdi.select(...)` to access a batch property.
+        //
+        // We note this to make sure someone looking at the TCK for Batch+CDI examples doesn't assume this is supported in the spec, at 
+        // least at this moment.
+        // 
         CDI<Object> cdi = CDI.current();
         
         JobContext jobCtx = cdi.select(JobContext.class).get();

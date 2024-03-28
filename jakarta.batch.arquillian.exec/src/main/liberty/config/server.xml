@@ -1,13 +1,13 @@
 <server description="Arquillian Server">
 
     <featureManager>
-        <feature>batch-2.0</feature>
-        <feature>pages-3.0</feature>
+        <feature>batch-2.1</feature>
+        <feature>pages-3.1</feature>
         <feature>localConnector-1.0</feature>
         <feature>enterpriseBeans-4.0</feature>
-        <feature>cdi-3.0</feature>
+        <feature>cdi-4.0</feature>
         <feature>jndi-1.0</feature>
-        <feature>servlet-5.0</feature>
+        <feature>servlet-6.0</feature>
     </featureManager>
 
     <!-- To access this server from a remote client add a host attribute 

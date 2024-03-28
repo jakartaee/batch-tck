@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-Copyright (c) 2022 Contributors to the Eclipse Foundation
+Copyright (c) 2022, 2024 Contributors to the Eclipse Foundation
 
   See the NOTICE file distributed with this work for additional information
   regarding copyright ownership. Licensed under the Apache License,
@@ -229,7 +229,7 @@ Copyright (c) 2022 Contributors to the Eclipse Foundation
                     <plugin>
                         <groupId>io.openliberty.tools</groupId>
                         <artifactId>liberty-maven-plugin</artifactId>
-                        <version>3.5.1</version>
+                        <version>3.10.2</version>
                         <configuration>
                             <copyDependencies>
                                 <dependency>
