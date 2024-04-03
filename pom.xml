@@ -477,6 +477,15 @@
                                         <includes>failsafe-summary.xml</includes>
                                     </transformationSet>
                                 </transformationSets>
+
+                                <!-- This is a bit unusual but the idea is to disable the transform and display of test results if we skip
+                                    running the tests, since this will fail if we never ran the tests.  It's not the only way to have done
+                                    it and some might prefer another way.  This way prevents someone from skipping with the
+                                    properties -Dxml.skip -Decho.skip. Also it might be more logical to do skipITs, since we're generally
+                                    using failsafe.  That all said, skipping is just a convenience and not part of a core flow, so
+                                    let's go with this and it can be revisited if needed. -->
+                                <skip>${skipTests}</skip>
+
                             </configuration>
                         </execution>
                     </executions>
@@ -494,6 +503,10 @@
                             </goals>
                             <configuration>
                                 <fromFile>${project.build.directory}/generated/failsafe-summary.xml</fromFile>
+
+                                <!-- See above comment in the xml-maven-plugin config -->
+                                <skip>${skipTests}</skip>
+
                             </configuration>
                         </execution>
                     </executions>
