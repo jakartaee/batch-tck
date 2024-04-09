@@ -63,17 +63,9 @@ If you need, configure Arquillian properties in the `src/test/resources/arquilli
 
 ## How to run the TCK against Open Liberty
 
-### prepare Arq env
-1. unset WLP_USER_DIR
-### Install Open Liberty - (Run tests expecting failure, with the side effect of installing Open Liberty, we can patch it)
-2. mvn clean verify   -Dit.test=CDITests -Pliberty-managed  
-### Manually patch 
-3. cp ..../com.ibm.ws.jbatch.cdi.jakarta_1.0.60.jar  ./target/liberty/wlp/lib   # from building https://github.com/scottkurz/open-liberty/tree/batch21-cdi-fixes  (simple, but not expecting anyone not working on Open Liberty will do this)
-### Clean so patch takes effect
-4. cd target/liberty/wlp/;  ./bin/server start --clean;  ./bin/server stop
-### Now ready to run for real... Don't do 'mvn clean' or you delete the applied patch!
-5. cd -; mvn verify -Dit.test=CDITests -Pliberty-managed 
+```
+mvn clean verify -Pliberty-managed  
+```
+If needed, configure Arquillian properties in the `src/test/resources/arquillian.xml` file, e.g. to attach a debugger to the tests running within the Liberty server.
 
-If you need, configure Arquillian properties in the `src/test/resources/arquillian.xml` file, e.g. to attach a debugger to the tests running within the Liberty server.
-
-**NOTE** :  There's nothing special about using the `CDITests.java` file.  We just pick one to simplify and shorten the initial execution so you can see things are set up correctly.  Once setup is confirmed you can run the whole suite.
+**Note**: The environment variable **WLP_USER_DIR** should not be set ( `unset WLP_USER_DIR` if necessary). 
