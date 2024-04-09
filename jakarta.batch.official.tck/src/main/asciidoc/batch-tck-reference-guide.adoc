@@ -788,16 +788,16 @@ $ mvn verify
 [INFO] --- sigtest:2.2:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.**
 Mar 26, 2024 2:10:20 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
-INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9, -static, -ApiVersion, 2.2.0-SNAPSHOT, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes]
+INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9, -static, -ApiVersion, 2.1.5, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\classes]
 [INFO] SignatureTest report
 Base version: 2.1.0
-Tested version: 2.2.0-SNAPSHOT
+Tested version: 2.1.5
 Check mode: src [throws normalized]
 Constant checking: on
 
-Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes). This directory or jar file will be ignored!
+Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\classes). This directory or jar file will be ignored!
 
-[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.2.0-SNAPSHOT.xml: 0 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
+[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.5.xml: 0 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se11-OpenJDK-J9
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -851,14 +851,14 @@ $ mvn verify
 [INFO] --- sigtest:2.2:check (default-cli) @ com.ibm.jbatch.tck.sigtest.exec ---
 [INFO] Packages: jakarta.batch.**
 Mar 26, 2024 2:15:04 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
-INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot, -static, -ApiVersion, 2.2.0-SNAPSHOT, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes]
+INFO: SignatureTest.args: [-FileName, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot, -static, -ApiVersion, 2.1.5, -Package, jakarta.batch, -BootCP, -Classpath, C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\dependency;C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\classes]
 [ERROR] SignatureTest report
 Base version: 2.1.0
-Tested version: 2.2.0-SNAPSHOT
+Tested version: 2.1.5
 Check mode: src [throws normalized]
 Constant checking: on
 
-Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\classes). This directory or jar file will be ignored!
+Warning: incorrect classpath parameter: C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\classes (C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\classes). This directory or jar file will be ignored!
 
 Missing Nested Classes
 ----------------------
@@ -883,7 +883,7 @@ jakarta.batch.runtime.Metric$MetricType:method public final java.util.Optional<j
 
 
 
-[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.2.0-SNAPSHOT.xml: 1 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.2.0-SNAPSHOT\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
+[INFO] C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\surefire-reports\sigtest\TEST-com.ibm.jbatch.tck.sigtest.exec-2.1.5.xml: 1 failures in C:\work\jkb-run\d5\jakarta.batch.official.tck-2.1.5\runners\sigtest\target\sigtest-copy\sigtest\sigtest-1.6-batch.standalone.tck.sig-2.1-se17-TemurinHotSpot
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
