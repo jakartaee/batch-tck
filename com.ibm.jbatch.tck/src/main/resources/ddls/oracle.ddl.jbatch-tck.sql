@@ -1,6 +1,7 @@
 DROP TABLE Numbers;
 DROP TABLE Orders;
 DROP TABLE Inventory;
+DROP SEQUENCE order_seq;
 
 CREATE TABLE Numbers
 (
@@ -43,6 +44,7 @@ INTO :new.orderID
 FROM DUAL;
 END IF;
 END;
+/
 
 INSERT INTO Inventory
 VALUES (1, 100);
@@ -106,3 +108,4 @@ VALUES (19, 10);
 
 INSERT INTO Numbers
 VALUES (20, 10);
+
